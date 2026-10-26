@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atul</title>
+<meta name="description" content="Atul — interaction designer & tinkerer. Portfolio arriving soon.">
+<style>
+  :root { --fg: #111; --bg: #fff; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #f2f2f2; --bg: #111; } }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    display: grid; place-items: center; padding: 24px;
+  }
+  main { max-width: 32rem; }
+  h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: .75rem; }
+  p { opacity: .75; }
+  a { color: inherit; }
+  .cursor { display: inline-block; width: .6em; background: var(--fg); animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  #egg { margin-top: 2rem; font-size: .8rem; opacity: 0; transition: opacity .4s; }
+  #egg.show { opacity: .6; }
+</style>
+</head>
+<body>
+<main>
+  <h1>atul<span class="cursor">&nbsp;</span></h1>
+  <p>Interaction designer from NID, Gandhinagar. Portfolio is being built right now.</p>
+  <p style="margin-top:1rem">Say hi: <a href="mailto:atul_s@nid.edu">atul_s@nid.edu</a></p>
+  <p id="egg">you clicked. you're my kind of person. come back soon.</p>
+</main>
+<script>
+  // tiny easter egg: click the name three times
+  let n = 0;
+  document.querySelector('h1').addEventListener('click', () => {
+    if (++n === 3) document.getElementById('egg').classList.add('show');
+  });
+</script>
+</body>
+</html>
