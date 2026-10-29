@@ -88,7 +88,7 @@
     60%  { transform: rotate(10deg); }
     72%, 100% { transform: rotate(0); }
   }
-  #name { font-weight: 700; cursor: default; }
+  #name { font-weight: 700; cursor: default; text-decoration: none; }
 
   /* the pronunciation appears like a genie: it springs out of thin air
      right after the name, overshoots a touch, then settles */
@@ -144,29 +144,38 @@
   :root:not([data-dark]) .bulb .glow { opacity: 1; }          /* lit while the lights are on */
 
   /* ---------- the thing in the dark ----------
-     Only visible when the lights are off. Every time the lights come back
-     on, it flickers into view for a split second, a little closer each time. */
-  #shadow {
-    position: fixed; right: 12vw; bottom: 0; z-index: 1; pointer-events: none;
-    height: 46vh; transform-origin: 50% 100%;
-    color: #121212; opacity: 0;          /* in the dark: barely lighter than the background */
+     Lights off: someone is standing there, barely visible.
+     Drag the bulb around like a torch to see who it is.
+     Lights on: you catch it for a blink, then it's gone. */
+  #thing { position: fixed; inset: 0; z-index: 1; pointer-events: none; --r: 15vmin; --tx: -100vw; --ty: -100vh; }
+  #thing .layer { position: absolute; inset: 0; opacity: 0; }
+  #thing .fig { position: absolute; right: 12vw; bottom: 0; height: 52vh; }
+  #thing svg { height: 100%; width: auto; display: block; overflow: visible; }
+  #thing .ring { fill: none; stroke: currentColor; stroke-width: 10; }
+  #thing .tag { font: 700 7.4px Inter, system-ui, sans-serif; letter-spacing: .12em; fill: var(--bg); }
+  /* dark: just an outline of someone, a hair lighter than the background */
+  :root[data-dark] #thing .dim { opacity: 1; color: #121212; }
+  /* torch: a soft circle of light around the dragged bulb shows the real thing */
+  #thing .lit {
+    color: #6a6a6a;
+    -webkit-mask-image: radial-gradient(circle var(--r) at var(--tx) var(--ty), #000 50%, transparent 100%);
+            mask-image: radial-gradient(circle var(--r) at var(--tx) var(--ty), #000 50%, transparent 100%);
   }
-  #shadow svg { height: 100%; width: auto; display: block; }
-  :root[data-dark] #shadow { opacity: 1; }
-  #shadow.flash { animation: flicker .42s steps(1) both; color: #eaeaea; }   /* in the light: barely darker than white */
-  @keyframes flicker {
-    0%   { opacity: 1; }
-    18%  { opacity: 0; }
-    32%  { opacity: 1; }
-    50%  { opacity: 0; }
-    62%  { opacity: .8; }
-    100% { opacity: 0; }
-  }
+  #thing .glow { background: radial-gradient(circle var(--r) at var(--tx) var(--ty), rgba(255,255,255,.045), transparent 100%); }
+  :root[data-dark] #thing.torch .lit, :root[data-dark] #thing.torch .glow { opacity: 1; }
+  /* lights on: a blink-and-you-miss-it glimpse, barely darker than white */
+  #thing.glimpse .lit { color: #e4e4e4; -webkit-mask-image: none; mask-image: none; animation: blink .07s steps(1) both; }
+  @keyframes blink { from { opacity: 1; } to { opacity: 0; } }
+
+  /* the bulb can be picked up and dragged; it springs home when let go */
+  .bulb { touch-action: none; transition: transform .5s var(--pop); }
+  #theme.dragging .bulb { transition: none; cursor: grabbing; }
+  #theme.dragging { color: var(--fg); }
   main { position: relative; z-index: 2; }
 
   @media (prefers-reduced-motion: reduce) {
     .hi, .name-line.show .say { animation: none; opacity: 1; }
-    #shadow.flash { animation: none; }
+    #thing.glimpse .lit { animation: none; }
   }
 </style>
 </head>
@@ -174,7 +183,7 @@
 
 <main>
   <p class="hello"><span class="hi">Hi,</span> I'm<br>
-    <span class="name-line"><b id="name">Atul Suresh</b><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
+    <span class="name-line"><a id="name" href="#how-white-people-pronounce-my-name">Atul Suresh</a><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
   </p>
   <span class="work" title="soon">work</span>
   <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
@@ -195,12 +204,22 @@
 
 <button id="theme" type="button"><svg class="bulb" viewBox="0 0 15 14" aria-hidden="true"><g fill="currentColor"><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="11" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="9" y="10" width="1" height="1"/><rect x="5" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="9" y="11" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="6" y="12" width="1" height="1"/><rect x="7" y="12" width="1" height="1"/><rect x="8" y="12" width="1" height="1"/><rect x="9" y="12" width="1" height="1"/><rect x="6" y="13" width="1" height="1"/><rect x="7" y="13" width="1" height="1"/><rect x="8" y="13" width="1" height="1"/></g><g class="glow"><rect x="7" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="13" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/></g></svg><span class="label"></span></button>
 
-<!-- something lives in the dark -->
-<div id="shadow" aria-hidden="true">
-  <svg viewBox="0 0 100 300"><g fill="currentColor">
-    <ellipse cx="50" cy="32" rx="16" ry="21"/>
-    <path d="M36 58 Q50 50 64 58 L79 70 Q86 78 87 100 L91 196 Q91 203 86 202 L81 122 L77 152 L75 300 L58 300 L52 192 L48 192 L42 300 L25 300 L23 152 L19 122 L14 202 Q9 203 9 196 L13 100 Q14 78 21 70 Z"/>
-  </g></svg>
+<!-- someone is standing in the dark -->
+<div id="thing" aria-hidden="true">
+  <div class="layer dim"><div class="fig"><svg viewBox="0 0 100 300"><g fill="currentColor">
+      <ellipse cx="50" cy="32" rx="16" ry="21"/>
+      <path d="M36 58 Q50 50 64 58 L79 70 Q86 78 87 100 L91 196 Q91 203 86 202 L81 122 L77 152 L75 300 L58 300 L52 192 L48 192 L42 300 L25 300 L23 152 L19 122 L14 202 Q9 203 9 196 L13 100 Q14 78 21 70 Z"/>
+  </g></svg></div></div>
+  <div class="layer glow"></div>
+  <div class="layer lit"><div class="fig"><svg viewBox="0 0 100 300">
+    <defs><path id="arc" d="M12 40 A38 38 0 0 0 88 40"/></defs>
+    <g fill="currentColor">
+      <ellipse cx="50" cy="32" rx="16" ry="21"/>
+      <path d="M36 58 Q50 50 64 58 L79 70 Q86 78 87 100 L91 196 Q91 203 86 202 L81 122 L77 152 L75 300 L58 300 L52 192 L48 192 L42 300 L25 300 L23 152 L19 122 L14 202 Q9 203 9 196 L13 100 Q14 78 21 70 Z"/>
+    </g>
+    <circle class="ring" cx="50" cy="40" r="38"/>
+    <text class="tag" dominant-baseline="middle"><textPath href="#arc" startOffset="50%" text-anchor="middle">#OPENTOWORK</textPath></text>
+  </svg></div></div>
 </div>
 
 <script>
@@ -258,7 +277,8 @@ line.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rese
 /* easter egg: click the name three times. A click also says the name
    straight away (and phones have no hover, so this is their way in). */
 let clicks = 0;
-document.getElementById('name').addEventListener('click', () => {
+document.getElementById('name').addEventListener('click', e => {
+  e.preventDefault();                       // the address is only there for the status-bar joke
   clearTimeout(wait);
   if (line.classList.contains('show')) play(); else reveal();
   if (++clicks === 3) document.getElementById('egg').classList.add('show');
@@ -313,12 +333,11 @@ document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e =>
   if (w) w.focus();
 }));
 
-/* ================= light / dark (and what lives in the dark) ================= */
+/* ================= light / dark (and who's in the dark) ================= */
 const btn = document.getElementById('theme');
+const bulb = btn.querySelector('.bulb');
 const root = document.documentElement;
-const shadow = document.getElementById('shadow');
-const NEAR = [.45, .62, .85, 1.15, 1.6, 2.3];   // how close it gets, step by step
-let seen = 0;
+const thing = document.getElementById('thing');
 
 const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark'
                                         : matchMedia('(prefers-color-scheme: dark)').matches;
@@ -326,25 +345,47 @@ function apply() {
   root.toggleAttribute('data-dark', isDark());
   btn.querySelector('.label').textContent = isDark() ? 'lights on' : 'lights off';
 }
-function nearer() {
-  const s = NEAR[Math.min(seen, NEAR.length - 1)];
-  shadow.style.transform =
-    `translate(${Math.max(0, s - 1) * 22}%, ${Math.max(0, s - 1) * 30}%) scale(${s})`;
-}
+function glimpse() { thing.classList.remove('glimpse'); void thing.offsetWidth; thing.classList.add('glimpse'); }
+
+let dragged = false;
 btn.addEventListener('click', () => {
+  if (dragged) { dragged = false; return; }        // that was a drag, not a click
   const wasDark = isDark();
   root.dataset.theme = wasDark ? 'light' : 'dark';
   try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
   apply();
-  if (!wasDark) shadow.classList.remove('flash');   // let it stand there in the dark
-  if (wasDark) {                        // lights just came back on: catch a glimpse
-    seen = seen >= NEAR.length - 1 ? 0 : seen + 1;   // after it's right up close, it starts over
-    nearer();
-    shadow.classList.remove('flash'); void shadow.offsetWidth; shadow.classList.add('flash');
-  }
+  if (wasDark) glimpse();                          // lights just came on: did you see that?
+});
+
+// pick up the bulb and drag it: in the dark it works as a torch
+bulb.addEventListener('pointerdown', e => {
+  const sx = e.clientX, sy = e.clientY;
+  let moving = false;
+  btn.setPointerCapture(e.pointerId);
+  const move = ev => {
+    const dx = ev.clientX - sx, dy = ev.clientY - sy;
+    if (!moving && Math.hypot(dx, dy) < 6) return;
+    moving = true; btn.classList.add('dragging'); thing.classList.add('torch');
+    bulb.style.transform = `translate(${dx}px, ${dy}px)`;
+    const r = bulb.getBoundingClientRect();
+    thing.style.setProperty('--tx', r.left + r.width / 2 + 'px');
+    thing.style.setProperty('--ty', r.top + r.height / 2 + 'px');
+  };
+  const up = () => {
+    btn.removeEventListener('pointermove', move);
+    btn.removeEventListener('pointerup', up);
+    btn.removeEventListener('pointercancel', up);
+    if (!moving) return;
+    dragged = true;
+    btn.classList.remove('dragging'); thing.classList.remove('torch');
+    bulb.style.transform = '';
+  };
+  btn.addEventListener('pointermove', move);
+  btn.addEventListener('pointerup', up);
+  btn.addEventListener('pointercancel', up);
 });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
-apply(); nearer();
+apply();
 </script>
 </body>
 </html>
