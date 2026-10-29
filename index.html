@@ -16,11 +16,14 @@
   /* ---------- tokens: one typeface, ONE size, colour does the hierarchy ---------- */
   :root {
     --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --line: #000;
-    --size: clamp(14px, 0.9vw + 9px, 19px);
-    --lh: 1.12;                       /* line height */
+    /* sizes taken from the Readymag page: it was laid out 1024px wide and
+       scaled with the window, so text = 14/1024 of the width (~19.7px on a
+       1440px screen). Never smaller than 14px. */
+    --size: max(14px, 1.367vw);
+    --lh: 1.02;                       /* tight, like Readymag */
     --step: calc(var(--size) * var(--lh) * 2);   /* vertical rhythm: 2 lines */
-    --gutter: clamp(20px, 3.5vw, 56px);
-    --gap: clamp(12px, 1.6vw, 24px);
+    --gutter: max(20px, 3.2vw);
+    --gap: max(12px, 1.6vw);
     --pop: cubic-bezier(.2, 1.35, .4, 1);        /* springy "dock" ease */
   }
   @media (prefers-color-scheme: dark) {
@@ -35,7 +38,7 @@
     font: 400 var(--size)/var(--lh) Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
     letter-spacing: -0.07em;
     min-height: 100vh;
-    padding: 22vh var(--gutter) calc(var(--step) * 2);
+    padding: 32vh var(--gutter) calc(var(--step) * 2);
     transition: background .3s, color .3s;
   }
   button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -74,7 +77,8 @@
   .name-line { position: relative; white-space: nowrap; }
 
   /* "Hi," waves once when the page loads */
-  .hi { display: inline-block; transform-origin: 70% 90%; animation: wave 1.6s ease-in-out .6s 1 both; }
+  .hi { display: inline-block; transform-origin: 70% 90%; }
+  .hi.wave { animation: wave 1.6s ease-in-out .35s 1 both; }
   @keyframes wave {
     0%   { transform: rotate(0); }
     12%  { transform: rotate(14deg); }
@@ -94,12 +98,15 @@
     opacity: 0; transform-origin: 0 80%;
     pointer-events: none;
   }
-  .name-line.show .say { animation: genie .55s cubic-bezier(.2, .9, .3, 1) both; }
-  @keyframes genie {
-    0%   { opacity: 0; transform: translateY(.2em) scale(.04, .35); }
-    40%  { opacity: 1; transform: translateY(-.1em) scale(1.14, 1.06); }
-    68%  { transform: translateY(0) scale(.96, .98); }
-    100% { opacity: 1; transform: none; }
+  /* POOF: out of a single point, bursts a bit too big with the letters
+     flung apart, snaps back smaller, settles. Fast, no smoke. */
+  .name-line.show .say { animation: poof .42s cubic-bezier(.15, .85, .25, 1) both; }
+  @keyframes poof {
+    0%   { opacity: 0; transform: scale(0);         letter-spacing: -.45em; }
+    30%  { opacity: 1; transform: scale(1.32, 1.24); letter-spacing: .04em; }
+    55%  {             transform: scale(.9, .93);    letter-spacing: -.09em; }
+    78%  {             transform: scale(1.04);       letter-spacing: -.065em; }
+    100% { opacity: 1; transform: none;              letter-spacing: -.07em; }
   }
   /* the fill: a sliding window. The box slides in from the left while the
      text inside slides the other way, so letters stay still and only the
@@ -111,6 +118,11 @@
   a.struck { text-decoration: line-through; }
   /* doors look exactly like plain words: no underline, no pointer, no hint */
   .door { text-decoration: none; cursor: text; }
+  /* the intro is two lines, unless the first line would have to wrap:
+     then it becomes one flowing sentence instead */
+  .intro .l1 { white-space: nowrap; }
+  .intro.flow .l1 { white-space: normal; }
+  .intro.flow br { display: none; }
 
   /* ---------- small print (same size, quieter colour) ---------- */
   .note { color: var(--mute); }
@@ -137,18 +149,17 @@
   #shadow {
     position: fixed; right: 12vw; bottom: 0; z-index: 1; pointer-events: none;
     height: 46vh; transform-origin: 50% 100%;
-    color: #000; opacity: 0;
-    transform: scale(var(--near, .5));
+    color: #121212; opacity: 0;          /* in the dark: barely lighter than the background */
   }
   #shadow svg { height: 100%; width: auto; display: block; }
-  :root[data-dark] #shadow { color: #000; opacity: .55; }
-  #shadow.flash { animation: flicker .42s steps(1) both; color: #000; }
+  :root[data-dark] #shadow { opacity: 1; }
+  #shadow.flash { animation: flicker .42s steps(1) both; color: #eaeaea; }   /* in the light: barely darker than white */
   @keyframes flicker {
-    0%   { opacity: .92; }
+    0%   { opacity: 1; }
     18%  { opacity: 0; }
-    32%  { opacity: .85; }
+    32%  { opacity: 1; }
     50%  { opacity: 0; }
-    62%  { opacity: .7; }
+    62%  { opacity: .8; }
     100% { opacity: 0; }
   }
   main { position: relative; z-index: 2; }
@@ -169,7 +180,7 @@
   <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 
   <p class="intro">
-    I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from NID,<br>
+    <span class="l1">I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from <a class="door" data-win="nid" href="#eventually-everything-connects">NID</a>,</span><br>
     trying to make the world a little bit easier to navigate
   </p>
 
@@ -253,12 +264,41 @@ document.getElementById('name').addEventListener('click', () => {
   if (++clicks === 3) document.getElementById('egg').classList.add('show');
 });
 
+/* ================= "Hi," waves =================
+   On load, and again every time it comes back into view: after scrolling
+   away, switching tabs, or coming back from another page. */
+const hi = document.querySelector('.hi');
+function wave() { hi.classList.remove('wave'); void hi.offsetWidth; hi.classList.add('wave'); }
+let hiVisible = false;
+new IntersectionObserver(([e]) => {
+  if (e.isIntersecting && !hiVisible) wave();
+  hiVisible = e.isIntersecting;
+}).observe(hi);
+document.addEventListener('visibilitychange', () => { if (!document.hidden && hiVisible) wave(); });
+addEventListener('pageshow', e => { if (e.persisted) wave(); });   // back-button returns
+addEventListener('focus', () => { if (hiVisible) wave(); });           // back from a pop-up window
+
+/* ================= intro: two lines, or one sentence =================
+   If the first line no longer fits on one line, drop the line break so
+   it reads as a single flowing sentence. */
+const intro = document.querySelector('.intro');
+const l1 = intro.querySelector('.l1');
+function fitIntro() {
+  intro.classList.remove('flow');
+  if (l1.getBoundingClientRect().width > intro.clientWidth + 0.5) intro.classList.add('flow');
+}
+new ResizeObserver(fitIntro).observe(intro);
+document.fonts && document.fonts.ready.then(fitIntro);
+
 /* ================= little windows =================
    A door opens a REAL small browser window with its own tiny page
    (e.g. fish.html), placed right next to the word you clicked.
    Browsers allow this because it happens straight after a click.
    (Phones have no floating windows, so there it opens as a tab.) */
-const WINS = { fish: { page: 'fish.html', w: 520, h: 240 } };
+const WINS = {
+  fish: { page: 'fish.html', w: 520, h: 240 },
+  nid:  { page: 'nid.html',  w: 560, h: 320 },
+};
 
 document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e => {
   e.preventDefault();                       // the link's address is only there for the status-bar joke

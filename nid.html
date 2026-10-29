@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eames_at_nid.png</title>
+<script>
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  // use exactly the same text size as the main page that opened this window
+  try { document.documentElement.style.setProperty('--size', getComputedStyle(opener.document.body).fontSize); } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { --fg: #000; --bg: #fff; --mute: #909090; --line: #000; --size: 15px; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --line: #f4f4f4; }
+  }
+  :root[data-theme="dark"] { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --line: #f4f4f4; }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg); color: var(--mute);
+    font: 400 var(--size)/1.02 Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.07em;
+    display: block;
+  }
+  img { display: block; width: 100%; height: auto; }
+  p { padding: .5em .6em; border-top: 1px solid var(--line); }
+  p.quote { color: var(--fg); }
+  p.quote + p { border-top: 0; padding-top: 0; }
+  a { color: inherit; }
+  a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+  <img src="https://www.nid.edu/public/img/nid_history_slider_images/pO9BSsgJq1.png" width="1520" height="700"
+       alt="Charles Eames with students at NID, in black and white">
+  <p class="quote">“Eventually, everything connects.”<br>Charles Eames, whose India Report (1958) led to NID being set up.</p>
+  <p>Photo: <a href="https://www.nid.edu" target="_blank" rel="noopener">NID</a></p>
+  <script>
+    addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    addEventListener('load', () => { try { resizeBy(0, document.documentElement.scrollHeight - innerHeight); } catch (e) {} });
+  </script>
+</body>
+</html>
