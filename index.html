@@ -146,15 +146,15 @@
   /* ---------- the thing in the dark ----------
      Lights off: someone is standing there, barely visible.
      Drag the bulb around like a torch to see who it is.
-     Lights on: you catch it for a blink, then it's gone. */
+     Lights on: a single-frame flash of it, a little closer every time. */
   #thing { position: fixed; inset: 0; z-index: 1; pointer-events: none; --r: 15vmin; --tx: -100vw; --ty: -100vh; }
   #thing .layer { position: absolute; inset: 0; opacity: 0; }
-  #thing .fig { position: absolute; right: 12vw; bottom: 0; height: 52vh; }
+  #thing .fig { position: absolute; right: 12vw; bottom: 0; height: 46vh; transform-origin: 50% 100%; }
   #thing svg { height: 100%; width: auto; display: block; overflow: visible; }
-  #thing .ring { fill: none; stroke: currentColor; stroke-width: 10; }
-  #thing .tag { font: 700 7.4px Inter, system-ui, sans-serif; letter-spacing: .12em; fill: var(--bg); }
+  #thing .ring { fill: none; stroke: #4c9a3f; stroke-width: 11; }
+  #thing .tag { font: 700 7.6px Inter, system-ui, sans-serif; letter-spacing: .1em; fill: #fff; }
   /* dark: just an outline of someone, a hair lighter than the background */
-  :root[data-dark] #thing .dim { opacity: 1; color: #121212; }
+  :root[data-dark] #thing .dim { opacity: 1; color: #0f0f0f; }          /* 2 shades off the background */
   /* torch: a soft circle of light around the dragged bulb shows the real thing */
   #thing .lit {
     color: #6a6a6a;
@@ -164,7 +164,8 @@
   #thing .glow { background: radial-gradient(circle var(--r) at var(--tx) var(--ty), rgba(255,255,255,.045), transparent 100%); }
   :root[data-dark] #thing.torch .lit, :root[data-dark] #thing.torch .glow { opacity: 1; }
   /* lights on: a blink-and-you-miss-it glimpse, barely darker than white */
-  #thing.glimpse .lit { color: #e4e4e4; -webkit-mask-image: none; mask-image: none; animation: blink .07s steps(1) both; }
+  #thing.glimpse .lit { color: #e4e4e4; -webkit-mask-image: none; mask-image: none; animation: blink .035s steps(1) both; }
+  #thing.glimpse .ring { opacity: .45; }
   @keyframes blink { from { opacity: 1; } to { opacity: 0; } }
 
   /* the bulb can be picked up and dragged; it springs home when let go */
@@ -345,6 +346,13 @@ function apply() {
   root.toggleAttribute('data-dark', isDark());
   btn.querySelector('.label').textContent = isDark() ? 'lights on' : 'lights off';
 }
+const figs = thing.querySelectorAll('.fig');
+const NEAR = [.45, .62, .85, 1.15, 1.6, 2.3];   // how close it gets, step by step
+let seen = 0;
+function nearer() {
+  const k = NEAR[seen], m = Math.max(0, k - 1);
+  figs.forEach(f => f.style.transform = `translate(${m * 22}%, ${m * 30}%) scale(${k})`);
+}
 function glimpse() { thing.classList.remove('glimpse'); void thing.offsetWidth; thing.classList.add('glimpse'); }
 
 let dragged = false;
@@ -354,7 +362,10 @@ btn.addEventListener('click', () => {
   root.dataset.theme = wasDark ? 'light' : 'dark';
   try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
   apply();
-  if (wasDark) glimpse();                          // lights just came on: did you see that?
+  if (wasDark) {                                   // lights just came on: did you see that?
+    seen = seen >= NEAR.length - 1 ? 0 : seen + 1;   // a step closer (and after right-up-close, back to far)
+    nearer(); glimpse();
+  }
 });
 
 // pick up the bulb and drag it: in the dark it works as a torch
@@ -385,7 +396,7 @@ bulb.addEventListener('pointerdown', e => {
   btn.addEventListener('pointercancel', up);
 });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
-apply();
+apply(); nearer();
 </script>
 </body>
 </html>
