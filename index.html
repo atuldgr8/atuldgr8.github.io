@@ -39,7 +39,6 @@
     letter-spacing: -0.07em;
     min-height: 100vh;
     padding: 32vh var(--gutter) calc(var(--step) * 2);
-    transition: background .3s, color .3s;
   }
   button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   a { color: inherit; }
@@ -147,25 +146,28 @@
      Lights off: someone is standing there, barely visible.
      Drag the bulb around like a torch to see who it is.
      Lights on: a single-frame flash of it, a little closer every time. */
-  #thing { position: fixed; inset: 0; z-index: 1; pointer-events: none; --r: 15vmin; --tx: -100vw; --ty: -100vh; }
+  #thing { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+           --r: 15vmin; --tx: -100vw; --ty: -100vh; --a: .045; --l: 32%; }
   #thing .layer { position: absolute; inset: 0; opacity: 0; }
-  #thing .fig { position: absolute; right: 12vw; bottom: 0; height: 46vh; transform-origin: 50% 100%; }
+  /* anchored at the middle of the ring (around the head), so it can grow into a giant head */
+  #thing .fig { position: absolute; right: 12vw; bottom: 0; height: 46vh; transform-origin: 50% 13.33%; }
   #thing svg { height: 100%; width: auto; display: block; overflow: visible; }
   #thing .ring { fill: none; stroke: #4c9a3f; stroke-width: 11; }
   #thing .tag { font: 700 7.6px Inter, system-ui, sans-serif; letter-spacing: .1em; fill: #fff; }
-  /* dark: just an outline of someone, a hair lighter than the background */
-  :root[data-dark] #thing .dim { opacity: 1; color: #0f0f0f; }          /* 2 shades off the background */
-  /* torch: a soft circle of light around the dragged bulb shows the real thing */
+  /* dark: one shade off the background, and it only fades in once your eyes "adjust" */
+  :root[data-dark] #thing .dim { opacity: 1; color: #0e0e0e; transition: opacity 2.5s .6s; }
+  /* torch: a circle of light around the dragged bulb shows the real thing.
+     The longer you hold it, the bigger and brighter it gets. */
   #thing .lit {
-    color: #6a6a6a;
+    color: hsl(0 0% var(--l));
     -webkit-mask-image: radial-gradient(circle var(--r) at var(--tx) var(--ty), #000 50%, transparent 100%);
             mask-image: radial-gradient(circle var(--r) at var(--tx) var(--ty), #000 50%, transparent 100%);
   }
-  #thing .glow { background: radial-gradient(circle var(--r) at var(--tx) var(--ty), rgba(255,255,255,.045), transparent 100%); }
+  #thing .glow { background: radial-gradient(circle var(--r) at var(--tx) var(--ty), rgba(255,255,255,var(--a)), transparent 100%); }
   :root[data-dark] #thing.torch .lit, :root[data-dark] #thing.torch .glow { opacity: 1; }
-  /* lights on: a blink-and-you-miss-it glimpse, barely darker than white */
-  #thing.glimpse .lit { color: #e4e4e4; -webkit-mask-image: none; mask-image: none; animation: blink .035s steps(1) both; }
-  #thing.glimpse .ring { opacity: .45; }
+  /* lights on: a one-frame glimpse, barely darker than white */
+  #thing.glimpse .lit { color: #ededed; -webkit-mask-image: none; mask-image: none; animation: blink .035s steps(1) both; }
+  #thing.glimpse .ring { opacity: .3; }
   @keyframes blink { from { opacity: 1; } to { opacity: 0; } }
 
   /* the bulb can be picked up and dragged; it springs home when let go */
@@ -191,7 +193,7 @@
 
   <p class="intro">
     <span class="l1">I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from <a class="door" data-win="nid" href="#eventually-everything-connects">NID</a>,</span><br>
-    trying to make the world a little bit easier to navigate
+    trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
   </p>
 
   <div class="note">
@@ -324,6 +326,7 @@ const WINS = {
 document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e => {
   e.preventDefault();                       // the link's address is only there for the status-bar joke
   const spec = WINS[d.dataset.win];
+  if (!spec) return;                        // a door that doesn't open anything (yet)
   const r = d.getBoundingClientRect();
   const x = e.clientX || r.left + r.width / 2, y = e.clientY || r.bottom;
   const chrome = Math.max(0, outerHeight - innerHeight);       // the browser's own bars
@@ -347,36 +350,72 @@ function apply() {
   btn.querySelector('.label').textContent = isDark() ? 'lights on' : 'lights off';
 }
 const figs = thing.querySelectorAll('.fig');
-const NEAR = [.45, .62, .85, 1.15, 1.6, 2.3];   // how close it gets, step by step
+// each time the lights come back on it's a step closer: [size, how far it has drifted to the middle]
+const STEPS = [[.45, 0], [.65, .08], [.95, .2], [1.4, .4], [2.1, .62], [3.1, .82], [4.4, 1]];
+const HEAD = 40 / 300;            // where the ring's centre sits, as a share of the figure's height
 let seen = 0;
 function nearer() {
-  const k = NEAR[seen], m = Math.max(0, k - 1);
-  figs.forEach(f => f.style.transform = `translate(${m * 22}%, ${m * 30}%) scale(${k})`);
+  const [k, t] = STEPS[seen];
+  figs.forEach(f => {
+    const H = f.offsetHeight;
+    const hx = f.offsetLeft + f.offsetWidth / 2, hy = f.offsetTop + H * HEAD;   // head, before moving
+    const groundY = innerHeight - H * (1 - HEAD) * k;    // head height if its feet were on the floor
+    const tx = hx + (innerWidth * .56 - hx) * t;         // drift towards the empty middle...
+    const ty = groundY + (innerHeight * .45 - groundY) * t;
+    f.style.transform = `translate(${tx - hx}px, ${ty - hy}px) scale(${k})`;
+  });
 }
+addEventListener('resize', nearer);
 function glimpse() { thing.classList.remove('glimpse'); void thing.offsetWidth; thing.classList.add('glimpse'); }
+// once the flash is over, clear it, or it keeps the torch from showing anything
+thing.addEventListener('animationend', () => thing.classList.remove('glimpse'));
+
+function lightsOn() {
+  root.dataset.theme = 'light';
+  try { localStorage.setItem('theme', 'light'); } catch (e) {}
+  apply();
+  seen = seen >= STEPS.length - 1 ? 0 : seen + 1;   // a step closer (after the giant head, back to far away)
+  nearer();
+}
 
 let dragged = false;
 btn.addEventListener('click', () => {
   if (dragged) { dragged = false; return; }        // that was a drag, not a click
-  const wasDark = isDark();
-  root.dataset.theme = wasDark ? 'light' : 'dark';
-  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  if (isDark()) { lightsOn(); glimpse(); return; } // lights just came on: did you see that?
+  root.dataset.theme = 'dark';
+  try { localStorage.setItem('theme', 'dark'); } catch (e) {}
   apply();
-  if (wasDark) {                                   // lights just came on: did you see that?
-    seen = seen >= NEAR.length - 1 ? 0 : seen + 1;   // a step closer (and after right-up-close, back to far)
-    nearer(); glimpse();
-  }
 });
 
-// pick up the bulb and drag it: in the dark it works as a torch
+// pick up the bulb and drag it: in the dark it's a torch that gets
+// bigger and brighter the longer you hold it, until the lights come on
+const FLOOD = 3500;               // ms of holding until it floods the room
 bulb.addEventListener('pointerdown', e => {
   const sx = e.clientX, sy = e.clientY;
-  let moving = false;
+  let moving = false, done = false, t0 = 0, raf;
   btn.setPointerCapture(e.pointerId);
+  const vmin = Math.min(innerWidth, innerHeight), vmax = Math.max(innerWidth, innerHeight);
+  const grow = now => {
+    if (done) return;
+    const p = Math.min(1, (now - t0) / FLOOD), q = p * p;       // slow at first, then faster
+    thing.style.setProperty('--r', vmin * .15 + q * vmax * 1.6 + 'px');
+    thing.style.setProperty('--a', .045 + q * .3);
+    thing.style.setProperty('--l', 32 + q * 45 + '%');
+    if (p < 1) { raf = requestAnimationFrame(grow); return; }
+    if (isDark()) lightsOn();                      // flooded: the lights are on now
+    finish();
+  };
+  const finish = () => {
+    done = true; cancelAnimationFrame(raf);
+    btn.classList.remove('dragging'); thing.classList.remove('torch');
+    bulb.style.transform = '';
+    ['--r', '--a', '--l'].forEach(v => thing.style.removeProperty(v));
+  };
   const move = ev => {
+    if (done) return;
     const dx = ev.clientX - sx, dy = ev.clientY - sy;
     if (!moving && Math.hypot(dx, dy) < 6) return;
-    moving = true; btn.classList.add('dragging'); thing.classList.add('torch');
+    if (!moving) { moving = true; btn.classList.add('dragging'); thing.classList.remove('glimpse'); thing.classList.add('torch'); t0 = performance.now(); raf = requestAnimationFrame(grow); }
     bulb.style.transform = `translate(${dx}px, ${dy}px)`;
     const r = bulb.getBoundingClientRect();
     thing.style.setProperty('--tx', r.left + r.width / 2 + 'px');
@@ -388,8 +427,7 @@ bulb.addEventListener('pointerdown', e => {
     btn.removeEventListener('pointercancel', up);
     if (!moving) return;
     dragged = true;
-    btn.classList.remove('dragging'); thing.classList.remove('torch');
-    bulb.style.transform = '';
+    if (!done) finish();
   };
   btn.addEventListener('pointermove', move);
   btn.addEventListener('pointerup', up);
