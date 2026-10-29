@@ -85,16 +85,9 @@
     72%, 100% { transform: rotate(0); }
   }
   #name { font-weight: 700; cursor: default; }
-  .cursor {
-    display: inline-block; width: .5em; height: .95em; margin-left: .12em;
-    vertical-align: -.1em; background: var(--fg);
-    animation: blink 1.06s steps(1) infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-  .name-line.show .cursor { display: none; }
 
-  /* the pronunciation appears like a genie: it springs out of the spot
-     where the cursor was blinking, overshoots a touch, then settles */
+  /* the pronunciation appears like a genie: it springs out of thin air
+     right after the name, overshoots a touch, then settles */
   .say {
     position: relative; display: inline-block; margin-left: .45em;
     color: var(--faint);
@@ -116,9 +109,8 @@
 
   /* ---------- intro + doors ---------- */
   a.struck { text-decoration: line-through; }
-  /* doors look like plain words, and the pointer doesn't give them away either */
+  /* doors look exactly like plain words: no underline, no pointer, no hint */
   .door { text-decoration: none; cursor: text; }
-  .door:hover, .door.open { text-decoration: underline dotted; text-underline-offset: 3px; }
 
   /* ---------- small print (same size, quieter colour) ---------- */
   .note { color: var(--mute); }
@@ -128,35 +120,42 @@
   #egg.show { opacity: 1; visibility: visible; }
 
   /* ---------- light/dark switch ---------- */
-  #theme { position: fixed; left: var(--gutter); bottom: 24px; color: var(--mute); }
+  #theme {
+    position: fixed; left: var(--gutter); bottom: 24px; z-index: 5;
+    display: flex; align-items: center; gap: .45em; color: var(--mute);
+  }
   #theme:hover { color: var(--fg); }
+  /* a little pixel bulb, drawn square by square like a 90s phone emoji */
+  .bulb { width: 1.05em; height: 1.25em; image-rendering: pixelated; shape-rendering: crispEdges; }
+  .bulb .glow { fill: currentColor; opacity: 0; }
+  .bulb .glass { fill: none; }
+  :root:not([data-dark]) .bulb .glow { opacity: 1; }          /* lit while the lights are on */
 
-  /* ---------- little windows ---------- */
-  .win {
-    position: fixed; z-index: 10;
-    width: min(24em, calc(100vw - 2 * var(--gutter)));
-    background: var(--bg); color: var(--fg);
-    border: 1px solid var(--line);
-    box-shadow: 0 1px 0 var(--line), 6px 6px 0 rgba(0,0,0,.06);
-    opacity: 0; transform: scale(.4);
-    transition: opacity .18s, transform .45s var(--pop);
+  /* ---------- the thing in the dark ----------
+     Only visible when the lights are off. Every time the lights come back
+     on, it flickers into view for a split second, a little closer each time. */
+  #shadow {
+    position: fixed; right: 12vw; bottom: 0; z-index: 1; pointer-events: none;
+    height: 46vh; transform-origin: 50% 100%;
+    color: #000; opacity: 0;
+    transform: scale(var(--near, .5));
   }
-  .win.on { opacity: 1; transform: none; }
-  .win.closing { opacity: 0; transform: scale(.6); transition: opacity .15s, transform .2s ease-in; }
-  .win .bar {
-    display: flex; justify-content: space-between; gap: 1em;
-    padding: .35em .55em; border-bottom: 1px solid var(--line);
-    cursor: grab; user-select: none; touch-action: none;
+  #shadow svg { height: 100%; width: auto; display: block; }
+  :root[data-dark] #shadow { color: #000; opacity: .55; }
+  #shadow.flash { animation: flicker .42s steps(1) both; color: #000; }
+  @keyframes flicker {
+    0%   { opacity: .92; }
+    18%  { opacity: 0; }
+    32%  { opacity: .85; }
+    50%  { opacity: 0; }
+    62%  { opacity: .7; }
+    100% { opacity: 0; }
   }
-  .win.dragging .bar { cursor: grabbing; }
-  .win .bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .win img { display: block; width: 100%; height: auto; }
-  .win .credit { padding: .35em .55em; color: var(--mute); border-top: 1px solid var(--line); }
+  main { position: relative; z-index: 2; }
 
   @media (prefers-reduced-motion: reduce) {
-    .cursor { animation: none; }
     .hi, .name-line.show .say { animation: none; opacity: 1; }
-    .win, .win.closing { transition: opacity .15s !important; transform: none !important; }
+    #shadow.flash { animation: none; }
   }
 </style>
 </head>
@@ -164,7 +163,7 @@
 
 <main>
   <p class="hello"><span class="hi">Hi,</span> I'm<br>
-    <span class="name-line"><b id="name">Atul Suresh</b><span class="cursor" aria-hidden="true"></span><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
+    <span class="name-line"><b id="name">Atul Suresh</b><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
   </p>
   <span class="work" title="soon">work</span>
   <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
@@ -183,15 +182,15 @@
   </div>
 </main>
 
-<button id="theme" type="button"></button>
+<button id="theme" type="button"><svg class="bulb" viewBox="0 0 15 14" aria-hidden="true"><g fill="currentColor"><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="11" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="9" y="10" width="1" height="1"/><rect x="5" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="9" y="11" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="6" y="12" width="1" height="1"/><rect x="7" y="12" width="1" height="1"/><rect x="8" y="12" width="1" height="1"/><rect x="9" y="12" width="1" height="1"/><rect x="6" y="13" width="1" height="1"/><rect x="7" y="13" width="1" height="1"/><rect x="8" y="13" width="1" height="1"/></g><g class="glow"><rect x="7" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="13" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/></g></svg><span class="label"></span></button>
 
-<!-- window contents live here until a door opens them -->
-<template id="win-fish">
-  <div class="bar"><span>fish_shaped_building.jpg</span><button class="x" aria-label="close">×</button></div>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Fish_shaped_building.jpg" width="1024" height="399"
-       alt="A four-storey building shaped like a giant silver fish: the National Fisheries Development Board, Hyderabad">
-  <div class="credit">NFDB, Hyderabad. Photo: <a href="https://commons.wikimedia.org/wiki/File:Fish_shaped_building.jpg" target="_blank" rel="noopener">Nagaraju Raveender</a>, CC BY-SA 3.0</div>
-</template>
+<!-- something lives in the dark -->
+<div id="shadow" aria-hidden="true">
+  <svg viewBox="0 0 100 300"><g fill="currentColor">
+    <ellipse cx="50" cy="32" rx="16" ry="21"/>
+    <path d="M36 58 Q50 50 64 58 L79 70 Q86 78 87 100 L91 196 Q91 203 86 202 L81 122 L77 152 L75 300 L58 300 L52 192 L48 192 L42 300 L25 300 L23 152 L19 122 L14 202 Q9 203 9 196 L13 100 Q14 78 21 70 Z"/>
+  </g></svg>
+</div>
 
 <script>
 /* ================= say my name =================
@@ -255,96 +254,57 @@ document.getElementById('name').addEventListener('click', () => {
 });
 
 /* ================= little windows =================
-   On a computer, a door opens a REAL small browser window (its own page,
-   e.g. fish.html), placed right next to the word you clicked. Browsers
-   allow this because it happens straight after a click.
-   On phones (where "windows" would just be a new tab), or if a browser
-   blocks it anyway, a look-alike window is drawn on top of the page
-   instead: it springs out of the word, drags by its top bar, and × or
-   Esc closes it. */
+   A door opens a REAL small browser window with its own tiny page
+   (e.g. fish.html), placed right next to the word you clicked.
+   Browsers allow this because it happens straight after a click.
+   (Phones have no floating windows, so there it opens as a tab.) */
 const WINS = { fish: { page: 'fish.html', w: 520, h: 240 } };
-const smallScreen = () => matchMedia('(pointer: coarse), (max-width: 700px)').matches;
 
-function openReal(door, x, y) {
-  const spec = WINS[door.dataset.win];
-  const chrome = Math.max(0, outerHeight - innerHeight);       // browser's own bars
-  const left = Math.round(screenX + Math.min(x + 16, innerWidth - spec.w - 24));
-  const topY = Math.round(screenY + chrome + Math.min(y + 20, innerHeight - spec.h - 24));
-  const w = open(spec.page, 'atul-' + door.dataset.win,
-    `popup,width=${spec.w},height=${spec.h},left=${left},top=${topY}`);
-  if (!w) return false;
-  w.focus();
-  door.classList.add('open');
-  const watch = setInterval(() => { if (w.closed) { door.classList.remove('open'); clearInterval(watch); } }, 400);
-  return true;
-}
-
-let zTop = 10;
-function openWin(door, x, y) {
-  const id = door.dataset.win;
-  const existing = document.querySelector(`.win[data-id="${id}"]`);
-  if (existing) { existing.style.zIndex = ++zTop; return; }
-
-  const w = document.createElement('div');
-  w.className = 'win'; w.dataset.id = id; w.setAttribute('role', 'dialog');
-  w.append(document.getElementById('win-' + id).content.cloneNode(true));
-  w.style.zIndex = ++zTop;
-  document.body.append(w);
-
-  // place it just below-right of the click, kept inside the screen
-  const g = parseFloat(getComputedStyle(document.body).paddingLeft) || 20;
-  const r = w.getBoundingClientRect();
-  const left = Math.max(g, Math.min(x + 16, innerWidth - r.width - g));
-  const topY = Math.max(g, Math.min(y + 20, innerHeight - r.height - g));
-  w.style.left = left + 'px'; w.style.top = topY + 'px';
-  w.style.transformOrigin = `${x - left}px ${y - topY}px`;   // grow out of the word
-  door.classList.add('open');
-  requestAnimationFrame(() => requestAnimationFrame(() => w.classList.add('on')));
-
-  const close = () => {
-    w.classList.add('closing'); door.classList.remove('open');
-    setTimeout(() => w.remove(), 220);
-  };
-  w.querySelector('.x').addEventListener('click', close);
-  w.addEventListener('pointerdown', () => { w.style.zIndex = ++zTop; });
-  w._close = close;
-
-  // drag by the bar
-  const bar = w.querySelector('.bar');
-  bar.addEventListener('pointerdown', e => {
-    if (e.target.closest('.x')) return;
-    const sx = e.clientX - w.offsetLeft, sy = e.clientY - w.offsetTop;
-    w.classList.add('dragging'); bar.setPointerCapture(e.pointerId);
-    const move = ev => { w.style.left = ev.clientX - sx + 'px'; w.style.top = ev.clientY - sy + 'px'; };
-    const up = () => { w.classList.remove('dragging'); bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); };
-    bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up);
-  });
-}
 document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e => {
   e.preventDefault();                       // the link's address is only there for the status-bar joke
+  const spec = WINS[d.dataset.win];
   const r = d.getBoundingClientRect();
   const x = e.clientX || r.left + r.width / 2, y = e.clientY || r.bottom;
-  if (smallScreen() || !openReal(d, x, y)) openWin(d, x, y);
+  const chrome = Math.max(0, outerHeight - innerHeight);       // the browser's own bars
+  const left = Math.round(screenX + Math.max(0, Math.min(x + 16, innerWidth - spec.w - 24)));
+  const topY = Math.round(screenY + chrome + Math.max(0, Math.min(y + 20, innerHeight - spec.h - 24)));
+  const w = open(spec.page, 'atul-' + d.dataset.win,
+    `popup,width=${spec.w},height=${spec.h},left=${left},top=${topY}`);
+  if (w) w.focus();
 }));
-addEventListener('keydown', e => {
-  if (e.key !== 'Escape') return;
-  const wins = [...document.querySelectorAll('.win.on:not(.closing)')];
-  const front = wins.sort((a, b) => b.style.zIndex - a.style.zIndex)[0];
-  if (front) front._close();
-});
 
-/* ================= light / dark ================= */
+/* ================= light / dark (and what lives in the dark) ================= */
 const btn = document.getElementById('theme');
 const root = document.documentElement;
+const shadow = document.getElementById('shadow');
+const NEAR = [.45, .62, .85, 1.15, 1.6, 2.3];   // how close it gets, step by step
+let seen = 0;
+
 const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark'
                                         : matchMedia('(prefers-color-scheme: dark)').matches;
-const label = () => { btn.textContent = isDark() ? 'lights on' : 'lights off'; };
+function apply() {
+  root.toggleAttribute('data-dark', isDark());
+  btn.querySelector('.label').textContent = isDark() ? 'lights on' : 'lights off';
+}
+function nearer() {
+  const s = NEAR[Math.min(seen, NEAR.length - 1)];
+  shadow.style.transform =
+    `translate(${Math.max(0, s - 1) * 22}%, ${Math.max(0, s - 1) * 30}%) scale(${s})`;
+}
 btn.addEventListener('click', () => {
-  root.dataset.theme = isDark() ? 'light' : 'dark';
+  const wasDark = isDark();
+  root.dataset.theme = wasDark ? 'light' : 'dark';
   try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
-  label();
+  apply();
+  if (!wasDark) shadow.classList.remove('flash');   // let it stand there in the dark
+  if (wasDark) {                        // lights just came back on: catch a glimpse
+    seen = seen >= NEAR.length - 1 ? 0 : seen + 1;   // after it's right up close, it starts over
+    nearer();
+    shadow.classList.remove('flash'); void shadow.offsetWidth; shadow.classList.add('flash');
+  }
 });
-label();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
+apply(); nearer();
 </script>
 </body>
 </html>
