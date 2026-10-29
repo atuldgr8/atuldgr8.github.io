@@ -3,42 +3,348 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Atul</title>
-<meta name="description" content="Atul — interaction designer & tinkerer. Portfolio arriving soon.">
+<title>Atul Suresh</title>
+<meta name="description" content="Atul Suresh: architect & designer from NID. Portfolio under construction.">
+<script>
+  // apply a saved light/dark choice before the page paints
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root { --fg: #111; --bg: #fff; }
-  @media (prefers-color-scheme: dark) { :root { --fg: #f2f2f2; --bg: #111; } }
+  /* ---------- tokens: one typeface, ONE size, colour does the hierarchy ---------- */
+  :root {
+    --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --line: #000;
+    --size: clamp(14px, 0.9vw + 9px, 19px);
+    --lh: 1.12;                       /* line height */
+    --step: calc(var(--size) * var(--lh) * 2);   /* vertical rhythm: 2 lines */
+    --gutter: clamp(20px, 3.5vw, 56px);
+    --gap: clamp(12px, 1.6vw, 24px);
+    --pop: cubic-bezier(.2, 1.35, .4, 1);        /* springy "dock" ease */
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --faint: #3a3a3a; --line: #f4f4f4; }
+  }
+  :root[data-theme="dark"] { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --faint: #3a3a3a; --line: #f4f4f4; }
+
   * { box-sizing: border-box; margin: 0; }
-  html, body { height: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
     background: var(--bg); color: var(--fg);
-    font: 16px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    display: grid; place-items: center; padding: 24px;
+    font: 400 var(--size)/var(--lh) Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.07em;
+    min-height: 100vh;
+    padding: 22vh var(--gutter) calc(var(--step) * 2);
+    transition: background .3s, color .3s;
   }
-  main { max-width: 32rem; }
-  h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: .75rem; }
-  p { opacity: .75; }
+  button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   a { color: inherit; }
-  .cursor { display: inline-block; width: .6em; background: var(--fg); animation: blink 1s steps(1) infinite; }
+
+  /* ---------- the grid ---------- */
+  main {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: var(--step);
+    align-items: end;
+  }
+  .hello  { grid-column: 1 / span 6; grid-row: 1; }
+  .work   { grid-column: 10;         grid-row: 1; }
+  .resume { grid-column: 12;         grid-row: 1; }
+  .intro, .note { grid-column: 1 / span 7; align-self: start; }
+
+  /* phones: 4 columns, nav still on the same line as the name */
+  @media (max-width: 700px) {
+    main { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .hello  { grid-column: 1 / span 2; }
+    .work   { grid-column: 3; }
+    .resume { grid-column: 4; }
+    .intro, .note { grid-column: 1 / -1; }
+    /* no room beside the name, so the pronunciation appears just below it */
+    .name-line .say { position: absolute; left: 0; top: 100%; margin: .35em 0 0; }
+  }
+
+  /* ---------- nav ---------- */
+  .work { color: var(--mute); text-decoration: line-through; cursor: default; }
+  .resume { text-decoration: none; }
+  .resume:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- name, cursor, pronunciation ---------- */
+  .name-line { position: relative; white-space: nowrap; }
+
+  /* "Hi," waves once when the page loads */
+  .hi { display: inline-block; transform-origin: 70% 90%; animation: wave 1.6s ease-in-out .6s 1 both; }
+  @keyframes wave {
+    0%   { transform: rotate(0); }
+    12%  { transform: rotate(14deg); }
+    24%  { transform: rotate(-8deg); }
+    36%  { transform: rotate(14deg); }
+    48%  { transform: rotate(-4deg); }
+    60%  { transform: rotate(10deg); }
+    72%, 100% { transform: rotate(0); }
+  }
+  #name { font-weight: 700; cursor: default; }
+  .cursor {
+    display: inline-block; width: .5em; height: .95em; margin-left: .12em;
+    vertical-align: -.1em; background: var(--fg);
+    animation: blink 1.06s steps(1) infinite;
+  }
   @keyframes blink { 50% { opacity: 0; } }
-  #egg { margin-top: 2rem; font-size: .8rem; opacity: 0; transition: opacity .4s; }
-  #egg.show { opacity: .6; }
+  .name-line.show .cursor { display: none; }
+
+  /* the pronunciation appears like a genie: it springs out of the spot
+     where the cursor was blinking, overshoots a touch, then settles */
+  .say {
+    position: relative; display: inline-block; margin-left: .45em;
+    color: var(--faint);
+    opacity: 0; transform-origin: 0 80%;
+    pointer-events: none;
+  }
+  .name-line.show .say { animation: genie .55s cubic-bezier(.2, .9, .3, 1) both; }
+  @keyframes genie {
+    0%   { opacity: 0; transform: translateY(.2em) scale(.04, .35); }
+    40%  { opacity: 1; transform: translateY(-.1em) scale(1.14, 1.06); }
+    68%  { transform: translateY(0) scale(.96, .98); }
+    100% { opacity: 1; transform: none; }
+  }
+  /* the fill: a sliding window. The box slides in from the left while the
+     text inside slides the other way, so letters stay still and only the
+     reveal moves. JS drives it in step with the audio. */
+  .say .fill { position: absolute; inset: 0; overflow: hidden; white-space: nowrap; color: var(--fg); transform: translateX(-100%); }
+  .say .fill > span { display: block; transform: translateX(100%); }
+
+  /* ---------- intro + doors ---------- */
+  a.struck { text-decoration: line-through; }
+  /* doors look like plain words, and the pointer doesn't give them away either */
+  .door { text-decoration: none; cursor: text; }
+  .door:hover, .door.open { text-decoration: underline dotted; text-underline-offset: 3px; }
+
+  /* ---------- small print (same size, quieter colour) ---------- */
+  .note { color: var(--mute); }
+  .note p + p { margin-top: calc(var(--step) / 2); }
+  .note a:hover, #egg a:hover { color: var(--fg); }
+  #egg { opacity: 0; visibility: hidden; transition: opacity .5s; }
+  #egg.show { opacity: 1; visibility: visible; }
+
+  /* ---------- light/dark switch ---------- */
+  #theme { position: fixed; left: var(--gutter); bottom: 24px; color: var(--mute); }
+  #theme:hover { color: var(--fg); }
+
+  /* ---------- little windows ---------- */
+  .win {
+    position: fixed; z-index: 10;
+    width: min(24em, calc(100vw - 2 * var(--gutter)));
+    background: var(--bg); color: var(--fg);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 0 var(--line), 6px 6px 0 rgba(0,0,0,.06);
+    opacity: 0; transform: scale(.4);
+    transition: opacity .18s, transform .45s var(--pop);
+  }
+  .win.on { opacity: 1; transform: none; }
+  .win.closing { opacity: 0; transform: scale(.6); transition: opacity .15s, transform .2s ease-in; }
+  .win .bar {
+    display: flex; justify-content: space-between; gap: 1em;
+    padding: .35em .55em; border-bottom: 1px solid var(--line);
+    cursor: grab; user-select: none; touch-action: none;
+  }
+  .win.dragging .bar { cursor: grabbing; }
+  .win .bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .win img { display: block; width: 100%; height: auto; }
+  .win .credit { padding: .35em .55em; color: var(--mute); border-top: 1px solid var(--line); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+    .hi, .name-line.show .say { animation: none; opacity: 1; }
+    .win, .win.closing { transition: opacity .15s !important; transform: none !important; }
+  }
 </style>
 </head>
 <body>
+
 <main>
-  <h1>atul<span class="cursor">&nbsp;</span></h1>
-  <p>"Multidisciplinary" Designer from NID.</p>
-  <p>Portfolio under construction, and like all good things, is taking time.</p>
-  <p style="margin-top:1rem">Say hi: <a href="mailto:atul_s@nid.edu">atul_s@nid.edu</a></p>
-  <p id="egg">you clicked. you're my kind of person. come back soon.</p>
+  <p class="hello"><span class="hi">Hi,</span> I'm<br>
+    <span class="name-line"><b id="name">Atul Suresh</b><span class="cursor" aria-hidden="true"></span><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
+  </p>
+  <span class="work" title="soon">work</span>
+  <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
+
+  <p class="intro">
+    I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from NID,<br>
+    trying to make the world a little bit easier to navigate
+  </p>
+
+  <div class="note">
+    <p>Portfolio under construction, and like all good things, is taking time.<br>
+      Say hi: <a href="mailto:atul_s@nid.edu">atul_s@nid.edu</a></p>
+    <p>if you're bored and still wanna hang around, click and hover away at stuff</p>
+    <p id="egg">you clicked. you're my kind of person. come back soon.<br>
+      for now, check out <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">this video</a>.</p>
+  </div>
 </main>
+
+<button id="theme" type="button"></button>
+
+<!-- window contents live here until a door opens them -->
+<template id="win-fish">
+  <div class="bar"><span>fish_shaped_building.jpg</span><button class="x" aria-label="close">×</button></div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Fish_shaped_building.jpg" width="1024" height="399"
+       alt="A four-storey building shaped like a giant silver fish: the National Fisheries Development Board, Hyderabad">
+  <div class="credit">NFDB, Hyderabad. Photo: <a href="https://commons.wikimedia.org/wiki/File:Fish_shaped_building.jpg" target="_blank" rel="noopener">Nagaraju Raveender</a>, CC BY-SA 3.0</div>
+</template>
+
 <script>
-  // tiny easter egg: click the name three times
-  let n = 0;
-  document.querySelector('h1').addEventListener('click', () => {
-    if (++n === 3) document.getElementById('egg').classList.add('show');
+/* ================= say my name =================
+   Hover the name for a second: the pronunciation pops up.
+   Then name.mp3 plays and the text fills in exactly as fast as the voice.
+   (If the browser won't play sound yet, because the visitor hasn't clicked
+   anything on the page, the fill still runs, just silently.) */
+const line  = document.querySelector('.name-line');
+const outer = line.querySelector('.fill');
+const inner = outer.firstElementChild;
+const voice = new Audio('name.mp3');
+voice.preload = 'auto';
+const FALLBACK = 1.75;                        // clip length in seconds
+
+function setFill(p) {
+  outer.style.transform = `translateX(${(p - 1) * 100}%)`;
+  inner.style.transform = `translateX(${(1 - p) * 100}%)`;
+}
+let wait, startT, raf, running = false;
+
+function reveal() {
+  line.classList.add('show');
+  clearTimeout(startT);
+  startT = setTimeout(play, 220);             // let the pop land first
+}
+function play() {
+  cancelAnimationFrame(raf);
+  running = true; setFill(0);
+  const D = isFinite(voice.duration) && voice.duration > 0 ? voice.duration : FALLBACK;
+  let silent = false, last = 0;
+  const t0 = performance.now();
+  try { voice.currentTime = 0; } catch (e) {}
+  voice.play().catch(() => { silent = true; });
+  const tick = () => {
+    const byClock = (performance.now() - t0) / 1000 / D;
+    const byVoice = !silent && !voice.paused ? voice.currentTime / D : byClock;
+    last = Math.max(last, Math.min(1, silent ? byClock : byVoice));
+    setFill(last);
+    if (last < 1 && running) raf = requestAnimationFrame(tick);
+    else running = false;
+  };
+  raf = requestAnimationFrame(tick);
+}
+function reset() {
+  clearTimeout(wait); clearTimeout(startT); cancelAnimationFrame(raf);
+  running = false; voice.pause();
+  line.classList.remove('show'); setFill(0);
+}
+setFill(0);
+// only a real mouse counts as hovering (taps on phones fire fake hover events)
+line.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') wait = setTimeout(reveal, 1000); });
+line.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') reset(); });
+
+/* easter egg: click the name three times. A click also says the name
+   straight away (and phones have no hover, so this is their way in). */
+let clicks = 0;
+document.getElementById('name').addEventListener('click', () => {
+  clearTimeout(wait);
+  if (line.classList.contains('show')) play(); else reveal();
+  if (++clicks === 3) document.getElementById('egg').classList.add('show');
+});
+
+/* ================= little windows =================
+   On a computer, a door opens a REAL small browser window (its own page,
+   e.g. fish.html), placed right next to the word you clicked. Browsers
+   allow this because it happens straight after a click.
+   On phones (where "windows" would just be a new tab), or if a browser
+   blocks it anyway, a look-alike window is drawn on top of the page
+   instead: it springs out of the word, drags by its top bar, and × or
+   Esc closes it. */
+const WINS = { fish: { page: 'fish.html', w: 520, h: 240 } };
+const smallScreen = () => matchMedia('(pointer: coarse), (max-width: 700px)').matches;
+
+function openReal(door, x, y) {
+  const spec = WINS[door.dataset.win];
+  const chrome = Math.max(0, outerHeight - innerHeight);       // browser's own bars
+  const left = Math.round(screenX + Math.min(x + 16, innerWidth - spec.w - 24));
+  const topY = Math.round(screenY + chrome + Math.min(y + 20, innerHeight - spec.h - 24));
+  const w = open(spec.page, 'atul-' + door.dataset.win,
+    `popup,width=${spec.w},height=${spec.h},left=${left},top=${topY}`);
+  if (!w) return false;
+  w.focus();
+  door.classList.add('open');
+  const watch = setInterval(() => { if (w.closed) { door.classList.remove('open'); clearInterval(watch); } }, 400);
+  return true;
+}
+
+let zTop = 10;
+function openWin(door, x, y) {
+  const id = door.dataset.win;
+  const existing = document.querySelector(`.win[data-id="${id}"]`);
+  if (existing) { existing.style.zIndex = ++zTop; return; }
+
+  const w = document.createElement('div');
+  w.className = 'win'; w.dataset.id = id; w.setAttribute('role', 'dialog');
+  w.append(document.getElementById('win-' + id).content.cloneNode(true));
+  w.style.zIndex = ++zTop;
+  document.body.append(w);
+
+  // place it just below-right of the click, kept inside the screen
+  const g = parseFloat(getComputedStyle(document.body).paddingLeft) || 20;
+  const r = w.getBoundingClientRect();
+  const left = Math.max(g, Math.min(x + 16, innerWidth - r.width - g));
+  const topY = Math.max(g, Math.min(y + 20, innerHeight - r.height - g));
+  w.style.left = left + 'px'; w.style.top = topY + 'px';
+  w.style.transformOrigin = `${x - left}px ${y - topY}px`;   // grow out of the word
+  door.classList.add('open');
+  requestAnimationFrame(() => requestAnimationFrame(() => w.classList.add('on')));
+
+  const close = () => {
+    w.classList.add('closing'); door.classList.remove('open');
+    setTimeout(() => w.remove(), 220);
+  };
+  w.querySelector('.x').addEventListener('click', close);
+  w.addEventListener('pointerdown', () => { w.style.zIndex = ++zTop; });
+  w._close = close;
+
+  // drag by the bar
+  const bar = w.querySelector('.bar');
+  bar.addEventListener('pointerdown', e => {
+    if (e.target.closest('.x')) return;
+    const sx = e.clientX - w.offsetLeft, sy = e.clientY - w.offsetTop;
+    w.classList.add('dragging'); bar.setPointerCapture(e.pointerId);
+    const move = ev => { w.style.left = ev.clientX - sx + 'px'; w.style.top = ev.clientY - sy + 'px'; };
+    const up = () => { w.classList.remove('dragging'); bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); };
+    bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up);
   });
+}
+document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e => {
+  e.preventDefault();                       // the link's address is only there for the status-bar joke
+  const r = d.getBoundingClientRect();
+  const x = e.clientX || r.left + r.width / 2, y = e.clientY || r.bottom;
+  if (smallScreen() || !openReal(d, x, y)) openWin(d, x, y);
+}));
+addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const wins = [...document.querySelectorAll('.win.on:not(.closing)')];
+  const front = wins.sort((a, b) => b.style.zIndex - a.style.zIndex)[0];
+  if (front) front._close();
+});
+
+/* ================= light / dark ================= */
+const btn = document.getElementById('theme');
+const root = document.documentElement;
+const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark'
+                                        : matchMedia('(prefers-color-scheme: dark)').matches;
+const label = () => { btn.textContent = isDark() ? 'lights on' : 'lights off'; };
+btn.addEventListener('click', () => {
+  root.dataset.theme = isDark() ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  label();
+});
+label();
 </script>
 </body>
 </html>
