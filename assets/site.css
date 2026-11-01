@@ -1,0 +1,130 @@
+/* shared by work.html and project.html: same tokens as the landing page.
+   one typeface, one size, colour does the hierarchy. */
+:root {
+  --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --ghost: #f2f2f2;
+  --size: max(14px, 1.367vw);
+  --lh: 1.02;
+  --step: calc(var(--size) * var(--lh) * 2);
+  --gutter: max(20px, 3.2vw);
+  --gap: max(12px, 1.6vw);
+  --pop: cubic-bezier(.2, 1.35, .4, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --faint: #3a3a3a; --ghost: #181818; }
+}
+:root[data-theme="dark"] { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --faint: #3a3a3a; --ghost: #181818; }
+
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 var(--size)/var(--lh) Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.07em;
+  min-height: 100vh;
+}
+a { color: inherit; }
+button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+/* ---------- header: the name is the home button, pinned top-left ---------- */
+.top {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+  padding: var(--gutter) var(--gutter) 0;
+  color: #fff; mix-blend-mode: difference;   /* stays readable over images, light or dark */
+  pointer-events: none;
+}
+.top a { pointer-events: auto; text-decoration: none; }
+.top a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.top .me { grid-column: 1 / span 6; font-weight: 700; }
+.top .me:hover { text-decoration: none; }
+.top .nav-work { grid-column: 10; }
+.top .nav-resume { grid-column: 12; }
+.top [aria-current] { text-decoration: line-through; }
+@media (max-width: 700px) {
+  .top { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .top .me { grid-column: 1 / span 2; }
+  .top .nav-work { grid-column: 3; }
+  .top .nav-resume { grid-column: 4; }
+}
+
+/* ---------- work list ---------- */
+.work-page { padding: 32vh var(--gutter) calc(var(--step) * 3); }
+.list { display: grid; }
+.row {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+  padding: calc(var(--step) / 4) 0; text-decoration: none; color: var(--fg);
+  transition: color .25s;
+}
+.row .t { grid-column: 1 / span 6; }
+.row .k { grid-column: 7 / span 4; color: var(--mute); transition: color .25s; }
+.row .y { grid-column: 12; color: var(--mute); transition: color .25s; }
+/* hovering one project quiets all the others */
+.list:hover .row { color: var(--faint); }
+.list:hover .row .k, .list:hover .row .y { color: var(--faint); }
+.list .row:hover, .list .row:hover .k, .list .row:hover .y { color: var(--fg); }
+.list .row:focus-visible { outline: none; color: var(--fg); }
+.empty { color: var(--mute); }
+@media (max-width: 700px) {
+  .row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .row .t { grid-column: 1 / span 3; }
+  .row .k { display: none; }
+  .row .y { grid-column: 4; }
+}
+/* the picture that trails the cursor over a project name */
+.peek {
+  position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none;
+  width: 22vw; aspect-ratio: 4 / 3; object-fit: cover;
+  opacity: 0; transform: translate(-200vw, 0) scale(.92);
+  transition: opacity .2s, scale .35s var(--pop);
+}
+.peek.on { opacity: 1; scale: 1.087; }
+@media (hover: none) { .peek { display: none; } }
+
+/* ---------- project canvas ----------
+   A page is laid out 1000 units wide and scales with the window,
+   like Readymag. --u is the size of one unit in pixels (set by JS). */
+.stage { position: relative; }
+.cv { position: relative; width: 100%; --u: 1.44px; overflow: clip; }
+.it { position: absolute; }
+.ly { width: 100%; height: 100%; transform-origin: 50% 50%; }
+.t-text .ly { height: auto; }
+.txt { font-size: max(14px, calc(var(--u) * 13.67)); line-height: var(--lh); overflow-wrap: break-word; }
+.txt.w-700 { font-weight: 700; }
+.txt.c-mute { color: var(--mute); }
+.txt.c-faint { color: var(--faint); }
+.txt.a-center { text-align: center; }
+.txt.a-right { text-align: right; }
+.txt a { text-decoration: underline; text-underline-offset: 2px; }
+.media { display: block; width: 100%; height: 100%; object-fit: cover; }
+.embed { display: block; width: 100%; height: 100%; border: 0; }
+.ph { width: 100%; height: 100%; background: var(--ghost); }
+.box { width: 100%; height: 100%; }
+.box.b-line  { border: 1px solid var(--fg); }
+.box.b-fill  { background: var(--fg); }
+.box.b-ghost { background: var(--ghost); }
+.box.b-faint { background: var(--faint); }
+.grp { position: relative; width: 100%; height: 100%; }
+a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decoration: none; }
+.t-text a.lnk { height: auto; }
+
+/* phones: no shrinking a desktop layout. Things stack in reading order
+   at full width; groups keep their own little composition. */
+.cv.flow { display: flex; flex-direction: column; gap: var(--step); padding: calc(var(--gutter) * 5) var(--gutter) var(--step); }
+.cv.flow > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; height: auto !important; }
+.cv.flow > .it:not(.t-text) { aspect-ratio: var(--ar); }
+.cv.flow > .it.t-group .it .txt { font-size: max(11px, calc(var(--u) * 13.67)); }
+
+/* ---------- next project ---------- */
+.next {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+  padding: calc(var(--step) * 3) var(--gutter) calc(var(--step) * 2);
+}
+.next[hidden] { display: none; }
+.next span { grid-column: 1 / span 2; color: var(--mute); }
+.next a { grid-column: 3 / span 6; text-decoration: none; }
+.next a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.missing { padding: 40vh var(--gutter); color: var(--mute); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ly { transition: none !important; }
+}

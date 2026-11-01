@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atul Suresh</title>
+<script>
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="me" href="./">Atul Suresh</a>
+  <a class="nav-work" href="work.html">work</a>
+  <a class="nav-resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
+</header>
+
+<div class="stage"><div class="cv"></div></div>
+<nav class="next" hidden><span>next</span><a href="#"></a></nav>
+
+<script src="assets/canvas.js"></script>
+<script src="assets/fs.js"></script>
+<script>
+/* A project page: projects/<slug>.json drawn on the canvas.
+   Add ?edit to the address to open the editor. */
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const slug = (q.get('p') || '').replace(/[^\w-]/g, '');
+  const cv = document.querySelector('.cv');
+
+  if (q.has('edit')) {
+    // the editor brings its own loading and saving
+    await FS.restore();
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'assets/editor.css';
+    document.head.appendChild(css);
+    const s = document.createElement('script'); s.src = 'assets/editor.js';
+    document.body.appendChild(s);
+    return;
+  }
+
+  const [doc, index] = await Promise.all([FS.json(`projects/${slug}.json`), FS.json('projects/index.json')]);
+  const list = (index && index.projects) || [];
+  const meta = list.find(p => p.slug === slug);
+  if (meta) document.title = `${meta.title} · Atul Suresh`;
+
+  if (!slug || !doc) {
+    cv.outerHTML = '<p class="missing">Nothing here (yet). <a href="work.html">Back to work</a></p>';
+    return;
+  }
+  Canvas.render(cv, doc);
+  Canvas.animate(cv);
+  let t; addEventListener('resize', () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => Canvas.layout(cv)); });
+  document.fonts && document.fonts.ready.then(() => Canvas.layout(cv));
+  cv.addEventListener('load', () => Canvas.layout(cv), true);
+
+  // next project, wrapping around to the first
+  const shown = list.filter(p => !p.hidden);
+  const i = shown.findIndex(p => p.slug === slug);
+  if (shown.length > 1 && i > -1) {
+    const n = shown[(i + 1) % shown.length];
+    const nav = document.querySelector('.next');
+    nav.querySelector('a').href = `project.html?p=${n.slug}`;
+    nav.querySelector('a').textContent = n.title;
+    nav.hidden = false;
+  }
+})();
+</script>
+</body>
+</html>

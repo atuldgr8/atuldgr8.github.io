@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work · Atul Suresh</title>
+<script>
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="work-page">
+
+<header class="top">
+  <a class="me" href="./">Atul Suresh</a>
+  <a class="nav-work" href="work.html" aria-current="page">work</a>
+  <a class="nav-resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
+</header>
+
+<main class="list"></main>
+<img class="peek" alt="" aria-hidden="true">
+
+<script src="assets/canvas.js"></script>
+<script src="assets/fs.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const list = document.querySelector('.list');
+  const peek = document.querySelector('.peek');
+
+  if (q.has('edit')) {
+    await FS.restore();
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'assets/editor.css';
+    document.head.appendChild(css);
+    const s = document.createElement('script'); s.src = 'assets/work-editor.js';
+    document.body.appendChild(s);
+    return;
+  }
+
+  const index = await FS.json('projects/index.json');
+  const projects = ((index && index.projects) || []).filter(p => !p.hidden);
+  if (!projects.length) { list.innerHTML = '<p class="empty">Nothing up yet. Soon.</p>'; return; }
+
+  for (const p of projects) {
+    const a = document.createElement('a');
+    a.className = 'row';
+    a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
+    a.innerHTML = '<span class="t"></span><span class="k"></span><span class="y"></span>';
+    a.querySelector('.t').textContent = p.title;
+    a.querySelector('.k').textContent = p.tags || '';
+    a.querySelector('.y').textContent = p.year || '';
+    if (p.thumb) { a.dataset.thumb = p.thumb; new Image().src = p.thumb; }
+    list.appendChild(a);
+  }
+
+  /* the thumbnail trails the cursor, a little behind it */
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0, on = false;
+  const loop = () => {
+    x += (tx - x) * .18; y += (ty - y) * .18;
+    peek.style.transform = `translate(${x}px, ${y}px)`;
+    raf = (on || Math.abs(tx - x) > .5) ? requestAnimationFrame(loop) : 0;
+  };
+  addEventListener('pointermove', e => {
+    tx = e.clientX + 24; ty = e.clientY - peek.offsetHeight / 2;
+    if (!on) { x = tx; y = ty; }
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+  list.addEventListener('pointerover', e => {
+    const row = e.target.closest('.row');
+    if (!row || !row.dataset.thumb) { on = false; peek.classList.remove('on'); return; }
+    if (peek.getAttribute('src') !== row.dataset.thumb) peek.src = row.dataset.thumb;
+    on = true; peek.classList.add('on');
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+  list.addEventListener('pointerleave', () => { on = false; peek.classList.remove('on'); });
+})();
+</script>
+</body>
+</html>

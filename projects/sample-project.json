@@ -1,0 +1,160 @@
+{
+  "v": 1,
+  "items": [
+    {
+      "id": "i1mg78",
+      "type": "text",
+      "x": 32,
+      "y": 210,
+      "w": 460,
+      "h": 14,
+      "text": "Project title",
+      "weight": 700
+    },
+    {
+      "id": "i2t105",
+      "type": "text",
+      "x": 32,
+      "y": 224,
+      "w": 460,
+      "h": 28,
+      "text": "One line on what this is, and why it matters.",
+      "color": "mute"
+    },
+    {
+      "id": "i3pckc",
+      "type": "text",
+      "x": 746.0000000000001,
+      "y": 210,
+      "w": 222,
+      "h": 42,
+      "text": "2026<br>Your role<br>With whom",
+      "color": "mute"
+    },
+    {
+      "id": "i4vlsu",
+      "type": "image",
+      "x": 32,
+      "y": 330,
+      "w": 936,
+      "h": 527,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "i5kaph",
+      "type": "text",
+      "x": 32,
+      "y": 930,
+      "w": 380.6666666666667,
+      "h": 70,
+      "text": "The problem. A few sentences about what you set out to do and what made it hard."
+    },
+    {
+      "id": "i6p484",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 930,
+      "w": 460,
+      "h": 345,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "i7vdnf",
+      "type": "image",
+      "x": 0,
+      "y": 1380,
+      "w": 1000,
+      "h": 560,
+      "src": "",
+      "anim": {
+        "scroll": {
+          "on": true,
+          "from": {
+            "scale": 1.12
+          },
+          "to": {
+            "scale": 1
+          },
+          "start": 100,
+          "end": 30,
+          "ease": "linear"
+        }
+      }
+    },
+    {
+      "id": "i80dwh",
+      "type": "image",
+      "x": 32,
+      "y": 2040,
+      "w": 460,
+      "h": 575,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "i99zcz",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 2040,
+      "w": 460,
+      "h": 575,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.12,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "ia6dme",
+      "type": "text",
+      "x": 270,
+      "y": 2720,
+      "w": 460,
+      "h": 42,
+      "text": "What happened in the end. What you learned, what you would do next."
+    }
+  ]
+}

@@ -68,9 +68,8 @@
   }
 
   /* ---------- nav ---------- */
-  .work { color: var(--mute); text-decoration: line-through; cursor: default; }
-  .resume { text-decoration: none; }
-  .resume:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .work, .resume { text-decoration: none; }
+  .work:hover, .resume:hover { text-decoration: underline; text-underline-offset: 2px; }
 
   /* ---------- name, cursor, pronunciation ---------- */
   .name-line { position: relative; white-space: nowrap; }
@@ -188,7 +187,7 @@
   <p class="hello"><span class="hi">Hi,</span> I'm<br>
     <span class="name-line"><a id="name" href="#how-white-people-pronounce-my-name">Atul Suresh</a><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
   </p>
-  <span class="work" title="soon">work</span>
+  <a class="work" href="work.html">work</a>
   <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 
   <p class="intro">

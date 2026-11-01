@@ -1,0 +1,13 @@
+{
+  "projects": [
+    {
+      "slug": "sample-project",
+      "title": "Sample project",
+      "year": "2026",
+      "tags": "template, delete me",
+      "summary": "",
+      "thumb": "",
+      "hidden": false
+    }
+  ]
+}
