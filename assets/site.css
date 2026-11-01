@@ -104,6 +104,23 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
 .box.b-ghost { background: var(--ghost); }
 .box.b-faint { background: var(--faint); }
 .grp { position: relative; width: 100%; height: 100%; }
+.inst { --u: calc(var(--pu) * var(--k)); }
+.btn { display: grid; place-items: center; width: 100%; height: 100%; padding: 0 .6em; text-align: center;
+       font-size: max(14px, calc(var(--u) * 13.67)); transition: background .25s, color .25s; }
+.btn.b-line { border: 1px solid currentColor; }
+.btn.b-fill { background: var(--fg); color: var(--bg); }
+.btn.b-text { text-decoration: underline; text-underline-offset: 2px; }
+a.lnk:hover .btn.b-line { background: var(--fg); color: var(--bg); }
+a.lnk:hover .btn.b-fill { background: var(--bg); color: var(--fg); outline: 1px solid var(--fg); outline-offset: -1px; }
+.sl { position: relative; width: 100%; height: 100%; overflow: hidden; user-select: none; }
+.sl > img { position: absolute; inset: 0; opacity: 0; }
+.sl > img.on { opacity: 1; }
+.sl-fade > img { transition: opacity .7s cubic-bezier(.2,.7,.2,1); }
+.sl-slide > img { opacity: 1; transition: transform .8s cubic-bezier(.65,0,.35,1); }
+.sl-slide > img.before { transform: translateX(-100%); }
+.sl-slide > img.after { transform: translateX(100%); }
+.sl-n { position: absolute; left: .7em; bottom: .7em; color: #fff; mix-blend-mode: difference;
+        font-size: max(14px, calc(var(--u) * 13.67)); pointer-events: none; }
 a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decoration: none; }
 .t-text a.lnk { height: auto; }
 
@@ -112,7 +129,7 @@ a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decorati
 .cv.flow { display: flex; flex-direction: column; gap: var(--step); padding: calc(var(--gutter) * 5) var(--gutter) var(--step); }
 .cv.flow > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; height: auto !important; }
 .cv.flow > .it:not(.t-text) { aspect-ratio: var(--ar); }
-.cv.flow > .it.t-group .it .txt { font-size: max(11px, calc(var(--u) * 13.67)); }
+.cv.flow > .it.t-group .it .txt, .cv.flow > .it.t-instance .it .txt { font-size: max(11px, calc(var(--u) * 13.67)); }
 
 /* ---------- next project ---------- */
 .next {

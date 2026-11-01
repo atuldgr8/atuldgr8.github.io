@@ -43,7 +43,7 @@
     return;
   }
 
-  const [doc, index] = await Promise.all([FS.json(`projects/${slug}.json`), FS.json('projects/index.json')]);
+  const [doc, index, lib] = await Promise.all([FS.json(`projects/${slug}.json`), FS.json('projects/index.json'), FS.json('projects/components.json')]);
   const list = (index && index.projects) || [];
   const meta = list.find(p => p.slug === slug);
   if (meta) document.title = `${meta.title} · Atul Suresh`;
@@ -52,7 +52,7 @@
     cv.outerHTML = '<p class="missing">Nothing here (yet). <a href="work.html">Back to work</a></p>';
     return;
   }
-  Canvas.render(cv, doc);
+  Canvas.render(cv, doc, { lib: Object.fromEntries(((lib && lib.components) || []).map(c => [c.id, c])) });
   Canvas.animate(cv);
   let t; addEventListener('resize', () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => Canvas.layout(cv)); });
   document.fonts && document.fonts.ready.then(() => Canvas.layout(cv));

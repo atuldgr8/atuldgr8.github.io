@@ -26,6 +26,15 @@ window.Canvas = (() => {
   const colX = i => M + i * (COLW + GAP);              // left edge of column i (0-11)
   const span = n => n * COLW + (n - 1) * GAP;          // width of n columns
   const NEUTRAL = { x: 0, y: 0, scale: 1, rotate: 0, opacity: 1, blur: 0 };
+  // a page can set its own grid; anything it leaves out falls back to these
+  const GRID = { cols: COLS, margin: M, gap: GAP, row: ROW };
+  function grid(doc) {
+    const g = { ...GRID, ...((doc && doc.grid) || {}) };
+    g.colW = (U - 2 * g.margin - (g.cols - 1) * g.gap) / g.cols;
+    g.colX = i => g.margin + i * (g.colW + g.gap);
+    g.span = n => n * g.colW + (n - 1) * g.gap;
+    return g;
+  }
 
   const EASE = {
     linear: t => t,
@@ -39,10 +48,11 @@ window.Canvas = (() => {
     inOut: 'cubic-bezier(.65,0,.35,1)', pop: 'cubic-bezier(.2,1.35,.4,1)',
   };
 
-  const h = (tag, cls, parent) => {
+  const h = (tag, cls, parent, text) => {
     const e = document.createElement(tag);
     if (cls) e.className = cls;
     if (parent) parent.appendChild(e);
+    if (text != null) e.textContent = text;
     return e;
   };
   const full = s => ({ ...NEUTRAL, ...(s || {}) });
@@ -73,7 +83,7 @@ window.Canvas = (() => {
     return u;
   }
 
-  function item(it, o) {
+  function item(it, o, depth = 0) {
     const pos = h('div', 'it t-' + it.type);
     pos.dataset.id = it.id;
     pos._item = it;
@@ -122,7 +132,38 @@ window.Canvas = (() => {
       case 'box': h('div', 'box b-' + (it.fill || 'line'), inner); break;
       case 'group': {
         const g = h('div', 'grp', inner);
-        for (const c of it.children || []) g.appendChild(item(c, o));
+        for (const c of it.children || []) g.appendChild(item(c, o, depth));
+        break;
+      }
+      case 'button': {
+        const b = h('div', 'btn b-' + (it.look || 'line'), inner);
+        h('span', '', b).innerHTML = it.text || 'Button';
+        break;
+      }
+      case 'slides': {
+        const list = it.slides || [];
+        if (!list.length) { const p = h('div', 'ph', inner); if (o.edit) p.dataset.label = 'slideshow'; break; }
+        const box = h('div', 'sl sl-' + (it.trans || 'fade'), inner);
+        const at = Math.min(list.length - 1, (o.slideAt && o.slideAt[it.id]) || 0);
+        list.forEach((sl, i) => {
+          const m = h('img', 'media', box);
+          m.alt = sl.alt || ''; m.draggable = false; m.decoding = 'async';
+          m.style.objectFit = it.fit || 'cover';
+          if (o.onMediaError) m.addEventListener('error', () => o.onMediaError(m, sl.src), { once: true });
+          m.src = o.src(sl.src);
+          m.classList.add(i === at ? 'on' : i < at ? 'before' : 'after');
+        });
+        if (it.counter !== false && list.length > 1) h('span', 'sl-n', box, `${at + 1} / ${list.length}`);
+        break;
+      }
+      case 'instance': {
+        // a linked copy of a saved component, scaled to fit its box
+        const c = o.lib && o.lib[it.ref];
+        if (!c || depth > 6) { const p = h('div', 'ph', inner); if (o.edit) p.dataset.label = 'missing component'; break; }
+        pos.style.setProperty('--pu', 'var(--u)');
+        pos.style.setProperty('--k', it.w / c.w);
+        const g = h('div', 'grp inst', inner);
+        for (const ch of c.children || []) g.appendChild(item(ch, o, depth + 1));
         break;
       }
     }
@@ -170,10 +211,17 @@ window.Canvas = (() => {
       const inner = cv.clientWidth - parseFloat(getComputedStyle(cv).paddingLeft) * 2;
       cv.style.setProperty('--u', inner / U + 'px');
       // a group keeps its composition: give it its own unit size so it fills the width
-      for (const c of kids) if (c._item.type === 'group') c.style.setProperty('--u', inner / c._item.w + 'px');
+      for (const c of kids) {
+        if (c._item.type === 'group') c.style.setProperty('--u', inner / c._item.w + 'px');
+        if (c._item.type === 'instance') c.style.setProperty('--pu', inner / c._item.w + 'px');
+      }
       return;
     }
-    for (const c of cv.children) if (c._item) c.style.order = '';
+    for (const c of cv.children) if (c._item) {
+      c.style.order = '';
+      if (c._item.type === 'group') c.style.removeProperty('--u');
+      if (c._item.type === 'instance') c.style.setProperty('--pu', 'var(--u)');
+    }
     const u = cv.clientWidth / U;
     cv.style.setProperty('--u', u + 'px');
     let bottom = 0;
@@ -215,6 +263,31 @@ window.Canvas = (() => {
       }
     }
 
+    // slideshows: click the right side for next, left side for previous; or they run on their own
+    const timers = [];
+    for (const p of all) {
+      if (p._item.type !== 'slides') continue;
+      const it = p._item, imgs = [...p.querySelectorAll('.sl > img')], n = p.querySelector('.sl-n');
+      if (imgs.length < 2) continue;
+      let at = 0;
+      const go = i => {
+        at = (i + imgs.length) % imgs.length;
+        imgs.forEach((m, j) => { m.classList.toggle('on', j === at); m.classList.toggle('before', j < at); m.classList.toggle('after', j > at); });
+        if (n) n.textContent = `${at + 1} / ${imgs.length}`;
+      };
+      const side = e => { const r = p.getBoundingClientRect(); return e.clientX - r.left < r.width / 3 ? -1 : 1; };
+      if (it.mode !== 'auto' || it.clickable !== false) {
+        p.addEventListener('click', e => { if (!e.target.closest('a')) go(at + side(e)); });
+        p.addEventListener('pointermove', e => { p.style.cursor = side(e) < 0 ? 'w-resize' : 'e-resize'; });
+      }
+      if (it.mode === 'auto') {
+        let paused = false;
+        p.addEventListener('pointerenter', () => paused = true);
+        p.addEventListener('pointerleave', () => paused = false);
+        timers.push(setInterval(() => { if (!paused && !document.hidden) go(at + 1); }, Math.max(1, it.every || 3) * 1000));
+      }
+    }
+
     // scroll: progress runs 0 -> 1 as the element's middle travels from
     // `start`% to `end`% of the screen height (100 = bottom edge, 0 = top)
     let raf = 0;
@@ -235,7 +308,7 @@ window.Canvas = (() => {
     if (scrollers.length) { addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); tick(); }
 
     return () => {
-      io.disconnect(); cancelAnimationFrame(raf);
+      io.disconnect(); cancelAnimationFrame(raf); timers.forEach(clearInterval);
       removeEventListener('scroll', req); removeEventListener('resize', req);
     };
   }
@@ -259,5 +332,5 @@ window.Canvas = (() => {
     ] };
   }
 
-  return { U, M, GAP, COLS, ROW, COLW, colX, span, NEUTRAL, EASE, render, layout, animate, setState, mix, timing, template, place };
+  return { U, M, GAP, COLS, ROW, COLW, colX, span, grid, NEUTRAL, EASE, render, layout, animate, setState, mix, timing, template, place };
 })();

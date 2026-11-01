@@ -6,5 +6,10 @@
 4. In the editor: drop pictures onto the grey placeholders, double-click text to type, drag things around (they snap to the 12 columns; hold Alt to break the grid). Press `?` for every shortcut.
 5. **save** (⌘S), then commit and push. That's publishing.
 
-Files: `projects/index.json` is the work list, `projects/<slug>.json` is each page, pictures go in `projects/media/<slug>/`.
+More in the editor:
+- **+ blocks** (B): ready-made layouts, buttons, slideshows, and your own components.
+- Select things and **make component** (⌥⌘K): copies stay linked. Double-click one to edit them all; **detach** to change one alone.
+- **Grid** (page panel, nothing selected): columns, gutter, margins, row height, per page. Snapping to columns, rows, other things and your guides can each be turned on or off. Drag from the top or left edge to make a guide.
+
+Files: `projects/components.json` holds your components, `projects/index.json` is the work list, `projects/<slug>.json` is each page, pictures go in `projects/media/<slug>/`.
 Nothing is lost if you close the tab: unsaved changes come back as a draft.

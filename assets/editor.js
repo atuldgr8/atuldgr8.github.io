@@ -1,11 +1,12 @@
 /* =====================================================================
    The editor. Opens on project.html?p=<slug>&edit
-   Same canvas as the live page, plus: select, drag, resize, snap to the
-   grid (hold Alt to break it), groups, text editing, drop in images,
-   animation settings, undo, preview, and saving into your site folder.
+   Same canvas as the live page, plus: select, drag, resize, snapping
+   (columns, rows, other things, your own guides; hold Alt to break it),
+   groups, linked components, a block library, text editing, pictures,
+   slideshows, buttons, animation, undo, preview, and saving into your folder.
    ===================================================================== */
 (async () => {
-  const C = Canvas, U = C.U, ROW = C.ROW;
+  const C = Canvas, U = C.U;
   const q = new URLSearchParams(location.search);
   const slug = (q.get('p') || '').replace(/[^\w-]/g, '');
   const stage = document.querySelector('.stage');
@@ -27,30 +28,45 @@
   if (!slug) { document.body.innerHTML = '<p class="missing">Which project? Open this from <a href="work.html?edit">work.html?edit</a></p>'; return; }
 
   /* ---------------- state ---------------- */
-  let doc, index, meta;
+  let doc, index, meta, lib;              // lib: saved components, shared by every page
   let sel = new Set();
-  let scope = [];                         // ids of the groups we've stepped into
+  let scope = [];                         // ids of the groups / components we've stepped into
   let undo = [], redo = [], last = null;
-  let dirty = false, snap = true, grid = true, previewing = false, stopAnim = null;
+  let dirty = false, previewing = false, stopAnim = null;
   let editing = null;                     // { el, it } while typing in a text box
+  let snapLines = [];                     // guide lines to draw while something snaps
+  const slideAt = {};                     // which slide each slideshow shows while editing
+  const gone = new Set();                 // components deleted here (so saving doesn't bring them back)
   const blobs = new Map();                // blob url -> File not yet saved to the folder
   const cache = new Map();                // folder path -> blob url (for showing files from the folder)
+
+  // editor-only settings, remembered in this browser
+  const PREF_DEFAULT = { grid: true, rows: false, guides: true, snap: true, sCols: true, sRows: true, sEls: true, sGuides: true };
+  let pref = { ...PREF_DEFAULT };
+  try { Object.assign(pref, JSON.parse(localStorage.getItem('editor-prefs') || '{}')); } catch (e) {}
+  const savePref = () => { try { localStorage.setItem('editor-prefs', JSON.stringify(pref)); } catch (e) {} };
 
   /* ---------------- load ---------------- */
   index = (await FS.json('projects/index.json')) || { projects: [] };
   meta = index.projects.find(p => p.slug === slug) || { slug, title: slug.replace(/-/g, ' '), year: String(new Date().getFullYear()), tags: '', summary: '', thumb: '', hidden: true };
   doc = (await FS.json(`projects/${slug}.json`)) || C.template();
+  lib = (await FS.json('projects/components.json')) || { components: [] };
   const fresh = !index.projects.some(p => p.slug === slug);
 
   try {
     const d = JSON.parse(localStorage.getItem('draft:' + slug) || 'null');
-    if (d && JSON.stringify(d.doc) !== JSON.stringify(doc) &&
+    if (d && (JSON.stringify(d.doc) !== JSON.stringify(doc) || (d.lib && JSON.stringify(d.lib) !== JSON.stringify(lib))) &&
         confirm(`There are unsaved changes to this page from ${new Date(d.t).toLocaleString()}. Bring them back?`)) {
-      doc = d.doc; meta = d.meta || meta; dirty = true;
+      doc = d.doc; meta = d.meta || meta; if (d.lib) lib = d.lib; dirty = true;
     }
   } catch (e) {}
+  doc.guides = doc.guides || { x: [], y: [] };
   last = snapshot();
   if (fresh) dirty = true;
+
+  const G = () => C.grid(doc);
+  const libMap = () => Object.fromEntries(lib.components.map(c => [c.id, c]));
+  const comp = id => lib.components.find(c => c.id === id);
 
   /* ---------------- tree helpers ---------------- */
   function walk(items, fn, parent = null) {
@@ -58,21 +74,34 @@
   }
   function find(id) {
     let r = null;
-    walk(doc.items, (it, arr, parent) => { if (it.id === id) r = { it, arr, parent }; });
+    walk(doc.items, (it, arr, parent) => { if (!r && it.id === id) r = { it, arr, parent }; });
+    if (!r) for (const c of lib.components) walk(c.children, (it, arr, parent) => { if (!r && it.id === id) r = { it, arr, parent, comp: c }; });
     return r;
   }
-  const scopeItems = () => scope.length ? find(scope[scope.length - 1]).it.children : doc.items;
-  function origin() {                     // where the current group sits on the page
-    let x = 0, y = 0;
-    for (const id of scope) { const g = find(id).it; x += g.x; y += g.y; }
-    return { x, y };
+  function kids(it) { return it.type === 'instance' ? (comp(it.ref) || { children: [] }).children : it.children; }
+  const scopeItem = () => scope.length ? find(scope[scope.length - 1]).it : null;
+  const scopeItems = () => scope.length ? kids(scopeItem()) : doc.items;
+  // where the current group/component sits on the page, and how much it's scaled
+  function origin() {
+    let x = 0, y = 0, k = 1;
+    for (const id of scope) {
+      const it = find(id).it;
+      x += it.x * k; y += it.y * k;
+      if (it.type === 'instance') { const c = comp(it.ref); if (c) k *= it.w / c.w; }
+    }
+    return { x, y, k };
   }
   const selected = () => [...sel].map(id => find(id)).filter(Boolean).map(f => f.it);
-  const elOf = id => cv.querySelector(`.it[data-id="${id}"]`);
+  function scopeEl() {
+    let el = cv;
+    for (const id of scope) el = el.querySelector(`.it[data-id="${id}"]`) || el;
+    return el;
+  }
+  const elOf = id => scopeEl().querySelector(`.it[data-id="${id}"]`) || cv.querySelector(`.it[data-id="${id}"]`);
   const uPx = () => cv.getBoundingClientRect().width / U;
   function toUnits(e) {
     const r = cv.getBoundingClientRect(), u = r.width / U, o = origin();
-    return { x: (e.clientX - r.left) / u - o.x, y: (e.clientY - r.top) / u - o.y };
+    return { x: ((e.clientX - r.left) / u - o.x) / o.k, y: ((e.clientY - r.top) / u - o.y) / o.k };
   }
   function bbox(items) {
     const x = Math.min(...items.map(i => i.x)), y = Math.min(...items.map(i => i.y));
@@ -80,31 +109,77 @@
     return { x, y, w: r - x, h: b - y };
   }
   function freshIds(it) { it.id = uid(); (it.children || []).forEach(freshIds); return it; }
+  function uses(compId, items = doc.items) {
+    let n = 0;
+    walk(items, it => { if (it.type === 'instance' && it.ref === compId) n++; });
+    for (const c of lib.components) if (c.id !== compId) walk(c.children, it => { if (it.type === 'instance' && it.ref === compId) n++; });
+    return n;
+  }
 
-  /* ---------------- snapping ---------------- */
-  const EDGES = [0, U, U / 2];
-  for (let i = 0; i < C.COLS; i++) EDGES.push(C.colX(i), C.colX(i) + C.COLW);
-  const near = 9;
-  function snapEdge(v) {                  // one edge to the nearest column line
-    const o = origin().x;
-    let best = null;
-    for (const E of EDGES) { const d = (E - o) - v; if (Math.abs(d) < near && (best === null || Math.abs(d) < Math.abs(best))) best = d; }
-    return best === null ? v : v + best;
-  }
-  function snapBox(x, w) {                // left or right edge, whichever is closer
-    const o = origin().x;
-    let best = null;
-    for (const E of EDGES) for (const edge of [x, x + w, x + w / 2]) {
-      const d = (E - o) - edge;
-      if (Math.abs(d) < near && (best === null || Math.abs(d) < Math.abs(best))) best = d;
+  /* ---------------- snapping ----------------
+     Everything here works in the current scope's own units. Things to snap
+     to: column edges, the page centre, rows, your guides, and the edges and
+     middles of everything else nearby. The closest one wins. */
+  function targets(skip) {
+    const o = origin(), g = G(), xs = [], ys = [];
+    const toX = v => (v - o.x) / o.k, toY = v => (v - o.y) / o.k;
+    if (pref.sCols) {
+      xs.push({ v: toX(0) }, { v: toX(U) }, { v: toX(U / 2), mid: 1 });
+      for (let i = 0; i < g.cols; i++) xs.push({ v: toX(g.colX(i)) }, { v: toX(g.colX(i) + g.colW) });
     }
-    return best === null ? x : x + best;
+    if (pref.sGuides && pref.guides) {
+      for (const v of doc.guides.x) xs.push({ v: toX(v), guide: 1 });
+      for (const v of doc.guides.y) ys.push({ v: toY(v), guide: 1 });
+    }
+    if (pref.sEls) for (const it of scopeItems()) {
+      if (skip.has(it.id)) continue;
+      xs.push({ v: it.x, el: 1 }, { v: it.x + it.w, el: 1 }, { v: it.x + it.w / 2, el: 1 });
+      ys.push({ v: it.y, el: 1 }, { v: it.y + it.h, el: 1 }, { v: it.y + it.h / 2, el: 1 });
+    }
+    return { xs, ys };
   }
-  const snapY = y => { const o = origin().y; return Math.round((y + o) / ROW) * ROW - o; };
+  function nearest(edges, cands) {
+    const thr = 7 / uPx() / origin().k;
+    let best = null;
+    for (const e of edges) for (const c of cands) {
+      const d = c.v - e;
+      if (Math.abs(d) <= thr && (!best || Math.abs(d) < Math.abs(best.d) - .01)) best = { d, v: c.v, c };
+    }
+    return best;
+  }
+  function rowSnap(v) {
+    const o = origin(), g = G();
+    if (!pref.sRows || !g.row) return null;
+    const page = v * o.k + o.y, s = Math.round(page / g.row) * g.row;
+    return (s - o.y) / o.k;
+  }
+  function addLine(axis, v) {           // remember a line to draw (scope units -> page units)
+    const o = origin();
+    snapLines.push({ axis, v: axis === 'x' ? v * o.k + o.x : v * o.k + o.y });
+  }
+  // snap a moving box; returns the corrected top-left
+  function snapMove(x, y, w, hh, skip) {
+    snapLines = [];
+    const T = targets(skip);
+    const bx = nearest([x, x + w, x + w / 2], T.xs);
+    if (bx) { x += bx.d; addLine('x', bx.v); }
+    const by = nearest([y, y + hh, y + hh / 2], T.ys);
+    if (by) { y += by.d; addLine('y', by.v); }
+    else { const r = rowSnap(y); if (r != null) y = r; }
+    return { x, y };
+  }
+  function snapOne(axis, v, skip) {     // one edge, for resizing
+    const T = targets(skip);
+    const b = nearest([v], axis === 'x' ? T.xs : T.ys);
+    if (b) { addLine(axis, b.v); return b.v; }
+    if (axis === 'y') { const r = rowSnap(v); if (r != null) return r; }
+    return v;
+  }
 
   /* ---------------- history ---------------- */
-  function snapshot() { return JSON.stringify({ doc, meta }); }
+  function snapshot() { return JSON.stringify({ doc, meta, lib }); }
   function commit(keepPanel) {
+    snapLines = [];
     const now = snapshot();
     if (now === last) { render(keepPanel); return; }
     undo.push(last); if (undo.length > 200) undo.shift();
@@ -112,7 +187,7 @@
     touch(); render(keepPanel);
   }
   function restore(s) {
-    const o = JSON.parse(s); doc = o.doc; meta = o.meta;
+    const o = JSON.parse(s); doc = o.doc; meta = o.meta; lib = o.lib || lib;
     sel = new Set([...sel].filter(id => find(id)));
     scope = scope.filter(id => find(id));
     touch(); render();
@@ -121,7 +196,7 @@
   function doRedo() { if (!redo.length) return; undo.push(last); last = redo.pop(); restore(last); }
   function touch() {
     dirty = true; paintSave();
-    try { localStorage.setItem('draft:' + slug, JSON.stringify({ t: Date.now(), doc, meta })); } catch (e) {}
+    try { localStorage.setItem('draft:' + slug, JSON.stringify({ t: Date.now(), doc, meta, lib })); } catch (e) {}
   }
   addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
 
@@ -141,15 +216,19 @@
   }
   async function persistMedia() {         // anything still only in memory goes into the folder
     if (!FS.root) return;
-    const todo = [];
-    walk(doc.items, it => { if (it.src && blobs.has(it.src)) todo.push(it); });
-    if (meta.thumb && blobs.has(meta.thumb)) todo.push(meta);
     const done = new Map();
-    for (const it of todo) {
-      const key = it.type ? it.src : it.thumb;
+    const keep = async key => {
       if (!done.has(key)) { const p = await keepFile(blobs.get(key)); cache.set(p, key); done.set(key, p); }
-      if (it.type) it.src = done.get(key); else it.thumb = done.get(key);
+      return done.get(key);
+    };
+    const all = [];
+    walk(doc.items, it => all.push(it));
+    for (const c of lib.components) walk(c.children, it => all.push(it));
+    for (const it of all) {
+      if (it.src && blobs.has(it.src)) it.src = await keep(it.src);
+      for (const s of it.slides || []) if (blobs.has(s.src)) s.src = await keep(s.src);
     }
+    if (meta.thumb && blobs.has(meta.thumb)) meta.thumb = await keep(meta.thumb);
     for (const k of done.keys()) blobs.delete(k);
   }
   function ratio(url, kind) {
@@ -162,34 +241,44 @@
       }
     });
   }
+  let warned = false;
   async function stash(file) {            // returns a src for this file
-    if (!FS.root && FS.supported) await FS.connect().then(paintFolder);
+    if (!FS.root && FS.supported && !warned) await FS.connect().then(paintFolder);
     const url = URL.createObjectURL(file);
     if (FS.root) { const p = await keepFile(file); cache.set(p, url); return { src: p, url }; }
     blobs.set(url, file);
-    toast('Connect your site folder or this picture will be lost on reload');
+    if (!warned) toast('Connect your site folder or new pictures are lost on reload', 4000);
+    warned = true;
     return { src: url, url };
   }
   async function addFiles(files, at, target) {
     files = [...files].filter(f => /^(image|video)\//.test(f.type));
     if (!files.length) return;
-    // dropped onto a picture or a placeholder: swap what's inside, keep the box
+    // onto a slideshow: they become more slides
+    if (target && target.type === 'slides') {
+      target.slides = target.slides || [];
+      for (const f of files.filter(f => f.type.startsWith('image'))) target.slides.push({ src: (await stash(f)).src, alt: '' });
+      slideAt[target.id] = target.slides.length - 1;
+      setSel([target.id]); commit(); return;
+    }
+    // onto a picture or a placeholder: swap what's inside, keep the box
     if (target && /image|video/.test(target.type) && files.length === 1) {
       const kind = files[0].type.startsWith('video') ? 'video' : 'image';
       const { src } = await stash(files[0]);
       target.type = kind; target.src = src;
       setSel([target.id]); commit(); return;
     }
-    const added = [];
+    const added = [], g = G();
     let y = at ? at.y : viewY();
     for (const f of files) {
       const kind = f.type.startsWith('video') ? 'video' : 'image';
       const { src, url } = await stash(f);
-      const w = C.span(6), hgt = w / await ratio(url, kind);
-      const x = at ? snapBox(at.x - w / 2, w) : C.colX(0) - origin().x;
-      const it = { id: uid(), type: kind, x: r1(x), y: r1(snap ? snapY(y) : y), w: r1(w), h: r1(hgt), src, fit: 'cover', alt: '' };
+      const w = g.span(Math.ceil(g.cols / 2)), hgt = w / await ratio(url, kind);
+      let x = at ? at.x - w / 2 : col0();
+      const p = pref.snap ? snapMove(x, y, w, hgt, new Set()) : { x, y };
+      const it = { id: uid(), type: kind, x: r1(p.x), y: r1(p.y), w: r1(w), h: r1(hgt), src, fit: 'cover', alt: '' };
       scopeItems().push(it); added.push(it.id);
-      y += hgt + ROW * 2;
+      y = p.y + hgt + g.row * 2;
     }
     setSel(added); commit();
   }
@@ -202,19 +291,22 @@
     });
   }
   function viewY() {                      // a spot near the top of what's on screen
-    const r = cv.getBoundingClientRect();
-    return (innerHeight * .3 - r.top) / uPx() - origin().y;
+    const r = cv.getBoundingClientRect(), o = origin();
+    const y = ((innerHeight * .3 - r.top) / uPx() - o.y) / o.k;
+    return rowSnap(y) ?? y;
   }
+  const col0 = () => { const o = origin(); return (G().colX(0) - o.x) / o.k; };
 
-  /* ---------------- chrome: panel, toolbar, overlay ---------------- */
-  const ov = h('div', 'ed-ov', stage);
+  /* ---------------- chrome: panel, toolbar, rulers, overlay ---------------- */
   const gridEl = h('div', 'ed-grid', stage);
-  for (let i = 0; i < C.COLS; i++) {
-    const c = h('i', '', gridEl);
-    c.style.left = `calc(var(--u) * ${C.colX(i)})`; c.style.width = `calc(var(--u) * ${C.COLW})`;
-  }
+  const guidesEl = h('div', 'ed-guides', stage);
+  const ov = h('div', 'ed-ov', stage);
+  const rulerX = h('div', 'ed-ruler ed-ruler-x', document.body);
+  const rulerY = h('div', 'ed-ruler ed-ruler-y', document.body);
+  rulerX.title = 'drag down for a horizontal guide'; rulerY.title = 'drag right for a vertical guide';
   const panel = h('aside', 'ed-panel', document.body);
   const bar = h('div', 'ed-bar', document.body);
+  const libEl = h('div', 'ed-lib', document.body);
   const toastEl = h('div', 'ed-toast', document.body);
   let toastT;
   function toast(msg, ms = 2600) { toastEl.textContent = msg; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('on'), ms); }
@@ -225,12 +317,11 @@
   sep();
   B('+ text', 'Add text (T)', () => addText());
   B('+ image', 'Add pictures (or drop / paste them anywhere)', async () => addFiles(await pickFiles('image/*')));
-  B('+ video', 'Add a video file', async () => addFiles(await pickFiles('video/*')));
-  B('+ embed', 'YouTube / Vimeo / any link', () => addEmbed());
-  B('+ box', 'A plain box: line or fill', () => addBox());
+  const libB = B('+ blocks', 'Ready-made blocks, buttons, slideshows and your own components (B)', () => toggleLib());
   sep();
-  const gridB = B('grid', 'Show the grid (G)', () => { grid = !grid; paintToggles(); });
-  const snapB = B('snap', 'Snap to the grid (S). Hold Alt while dragging to break it once.', () => { snap = !snap; paintToggles(); });
+  const gridB = B('grid', 'Show the grid (G)', () => { pref.grid = !pref.grid; paintToggles(); });
+  const snapB = B('snap', 'Snapping on/off (S). Hold Alt while dragging to break it once. Details in the page panel.', () => { pref.snap = !pref.snap; paintToggles(); });
+  const guidesB = B('guides', 'Show your guides (;). Drag from the rulers to make one.', () => { pref.guides = !pref.guides; paintToggles(); drawGuides(); });
   sep();
   B('undo', 'Undo (⌘Z)', doUndo);
   B('redo', 'Redo (⇧⌘Z)', doRedo);
@@ -241,8 +332,10 @@
   const folderB = B('', '', async () => { if (await FS.connect()) { paintFolder(); render(); toast('Connected. Saving goes straight into ' + FS.root.name); } });
   const saveB = B('save', 'Save into your site folder (⌘S)', () => save(), 'ed-save');
   function paintToggles() {
-    gridB.classList.toggle('on', grid); snapB.classList.toggle('on', snap);
-    stage.classList.toggle('show-grid', grid);
+    gridB.classList.toggle('on', pref.grid); snapB.classList.toggle('on', pref.snap); guidesB.classList.toggle('on', pref.guides);
+    stage.classList.toggle('show-grid', pref.grid);
+    stage.classList.toggle('show-rows', pref.grid && pref.rows);
+    savePref();
   }
   function paintFolder() {
     folderB.textContent = FS.root ? '▣ ' + FS.root.name : FS.needsClick ? '▢ reconnect ' + FS.name : '▢ connect folder';
@@ -253,36 +346,58 @@
 
   const help = h('div', 'ed-help', document.body);
   help.innerHTML = `<b>Shortcuts</b>
-  <p>drag · move &nbsp; <kbd>Alt</kbd> drag · break the grid &nbsp; <kbd>Shift</kbd> click · add to selection</p>
-  <p>double-click text · type &nbsp; double-click group · step inside &nbsp; <kbd>Esc</kbd> · step out</p>
-  <p><kbd>⌘G</kbd> group &nbsp; <kbd>⇧⌘G</kbd> ungroup &nbsp; <kbd>⌘D</kbd> duplicate &nbsp; <kbd>⌫</kbd> delete</p>
+  <p>drag · move &nbsp; <kbd>Alt</kbd> drag · no snapping &nbsp; <kbd>Shift</kbd> click · add to selection</p>
+  <p>double-click text · type &nbsp; double-click group or component · step inside &nbsp; <kbd>Esc</kbd> · step out</p>
+  <p><kbd>⌘G</kbd> group &nbsp; <kbd>⇧⌘G</kbd> ungroup &nbsp; <kbd>⌥⌘K</kbd> make component &nbsp; <kbd>⌘D</kbd> duplicate &nbsp; <kbd>⌫</kbd> delete</p>
   <p><kbd>⌘C</kbd>/<kbd>⌘V</kbd> copy, paste (pictures too) &nbsp; <kbd>]</kbd>/<kbd>[</kbd> front, back</p>
   <p>arrows · nudge &nbsp; <kbd>Shift</kbd>+arrows · one row / one column</p>
-  <p><kbd>T</kbd> text &nbsp; <kbd>G</kbd> grid &nbsp; <kbd>S</kbd> snap &nbsp; <kbd>P</kbd> preview &nbsp; <kbd>⌘S</kbd> save</p>
+  <p><kbd>T</kbd> text &nbsp; <kbd>B</kbd> blocks &nbsp; <kbd>G</kbd> grid &nbsp; <kbd>R</kbd> rows &nbsp; <kbd>;</kbd> guides &nbsp; <kbd>S</kbd> snap &nbsp; <kbd>P</kbd> preview &nbsp; <kbd>⌘S</kbd> save</p>
+  <p>Guides: drag from the ruler at the top or left edge. Drag one back onto the ruler to remove it.</p>
   <p>while typing: <kbd>⌘B</kbd> bold, <kbd>⌘K</kbd> link</p>
-  <p>Drop a picture on a grey placeholder to fill it.</p>`;
+  <p>Drop pictures on a grey placeholder to fill it, or on a slideshow to add slides.</p>`;
   help.onclick = () => help.classList.remove('on');
 
   /* ---------------- render ---------------- */
   function render(keepPanel) {
     if (previewing) return;
-    C.render(cv, doc, { edit: true, src: resolve, onMediaError });
-    stage.style.setProperty('--u', cv.style.getPropertyValue('--u'));
+    C.render(cv, doc, { edit: true, src: resolve, onMediaError, lib: libMap(), slideAt });
+    syncU();
     // remember how tall text boxes turned out, so groups and selections fit them
-    const u = uPx();
-    walk(doc.items, it => { if (it.type === 'text') { const e = elOf(it.id); if (e) it.h = r1(e.offsetHeight / u); } });
+    for (const el of cv.querySelectorAll('.it.t-text')) { const it = el._item, w = el.offsetWidth; if (w && it.w) it.h = r1(el.offsetHeight / (w / it.w)); }
+    // a component's box follows its own proportions
+    walk(doc.items, it => { if (it.type === 'instance') { const c = comp(it.ref); if (c) it.h = r1(c.h * it.w / c.w); } });
     if (editing) {                        // re-rendering mid-typing: pick the text box back up
       const e = elOf(editing.it.id);
       if (e) startText(e, editing.it, true);
     }
-    stage.classList.toggle('in-group', scope.length > 0);
-    drawOverlay();
+    drawGrid(); drawGuides(); drawOverlay();
     if (!keepPanel) inspector();
+    if (libEl.classList.contains('on')) drawLib();
   }
-  function lay() { C.layout(cv); stage.style.setProperty('--u', cv.style.getPropertyValue('--u')); }
+  function syncU() { stage.style.setProperty('--u', cv.style.getPropertyValue('--u')); }
+  function lay() { C.layout(cv); syncU(); }
   function relayout() { lay(); drawOverlay(); }
   let rz; addEventListener('resize', () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(relayout); });
   cv.addEventListener('load', () => lay(), true);
+
+  function drawGrid() {
+    const g = G();
+    gridEl.textContent = '';
+    for (let i = 0; i < g.cols; i++) {
+      const c = h('i', '', gridEl);
+      c.style.left = `calc(var(--u) * ${g.colX(i)})`; c.style.width = `calc(var(--u) * ${g.colW})`;
+    }
+    gridEl.style.setProperty('--row', g.row || 14);
+  }
+  function drawGuides() {
+    guidesEl.textContent = '';
+    if (!pref.guides || previewing) return;
+    for (const axis of ['x', 'y']) doc.guides[axis].forEach((v, i) => {
+      const g = h('div', 'ed-guide ed-guide-' + axis, guidesEl);
+      g.dataset.axis = axis; g.dataset.i = i;
+      if (axis === 'x') g.style.left = `calc(var(--u) * ${v})`; else g.style.top = `calc(var(--u) * ${v})`;
+    });
+  }
 
   function rectOf(el) {
     const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
@@ -296,46 +411,101 @@
   function drawOverlay() {
     ov.textContent = '';
     if (previewing) return;
-    if (scope.length) { const g = elOf(scope[scope.length - 1]); if (g) { const f = frame(rectOf(g), 'ed-scope'); h('span', '', f, 'inside group · Esc to step out'); } }
+    const u = uPx();
+    for (const l of snapLines) {
+      const d = h('div', 'ed-snap ed-snap-' + l.axis, ov);
+      if (l.axis === 'x') d.style.left = l.v * u + 'px'; else d.style.top = l.v * u + 'px';
+    }
+    if (scope.length) {
+      const it = scopeItem(), g = scopeEl();
+      if (g !== cv) {
+        const f = frame(rectOf(g), 'ed-scope' + (it.type === 'instance' ? ' is-comp' : ''));
+        h('span', '', f, it.type === 'instance'
+          ? `component “${(comp(it.ref) || {}).name}” · changes every copy · Esc to step out`
+          : 'inside group · Esc to step out');
+      }
+    }
     const its = selected();
-    for (const it of its) { const e = elOf(it.id); if (e) frame(rectOf(e), 'ed-sel'); }
+    for (const it of its) { const e = elOf(it.id); if (e) frame(rectOf(e), 'ed-sel' + (it.type === 'instance' ? ' is-comp' : '')); }
     if (its.length === 1 && !editing) {
       const it = its[0], e = elOf(it.id);
       if (!e) return;
       const r = rectOf(e), f = frame(r, 'ed-handles');
-      const dirs = it.type === 'text' ? ['e', 'w'] : ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
+      const dirs = it.type === 'text' ? ['e', 'w'] : it.type === 'instance' ? ['e', 'w', 'se', 'sw', 'ne', 'nw'] : ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
       for (const d of dirs) { const k = h('i', 'hd hd-' + d, f); k.dataset.h = d; }
-      const tag = h('span', 'ed-size', f, cols(it));
-      tag.title = 'size in grid columns';
+      h('span', 'ed-size', f, cols(it)).title = 'where it sits on the grid';
     }
   }
   function cols(it) {                     // "cols 3–8" when it sits on the grid, else units
-    const o = origin().x, L = it.x + o, R = it.x + it.w + o;
-    const li = EDGES_L.findIndex(v => Math.abs(v - L) < .6), ri = EDGES_R.findIndex(v => Math.abs(v - R) < .6);
-    return li > -1 && ri > -1 && ri >= li ? (li === ri ? `col ${li + 1}` : `cols ${li + 1}–${ri + 1}`) : `${Math.round(it.w)} × ${Math.round(it.h)}`;
+    const o = origin(), g = G();
+    if (o.k !== 1) return `${Math.round(it.w)} × ${Math.round(it.h)}`;
+    const L = it.x + o.x, R = it.x + it.w + o.x;
+    let li = -1, ri = -1;
+    for (let i = 0; i < g.cols; i++) { if (Math.abs(g.colX(i) - L) < .6) li = i; if (Math.abs(g.colX(i) + g.colW - R) < .6) ri = i; }
+    return li > -1 && ri >= li ? (li === ri ? `col ${li + 1}` : `cols ${li + 1}–${ri + 1}`) : `${Math.round(it.w)} × ${Math.round(it.h)}`;
   }
-  const EDGES_L = [...Array(C.COLS)].map((_, i) => C.colX(i));
-  const EDGES_R = EDGES_L.map(v => v + C.COLW);
 
   function setSel(ids) { sel = new Set(ids); drawOverlay(); inspector(); }
+
+  /* ---------------- guides ---------------- */
+  function guideDrag(e, axis, i) {
+    e.preventDefault(); e.stopPropagation();
+    if (!pref.guides) { pref.guides = true; paintToggles(); }
+    const list = doc.guides[axis];
+    if (i == null) { list.push(0); i = list.length - 1; }
+    const s = () => cv.getBoundingClientRect();
+    const mv = ev => {
+      const r = s(), u = r.width / U;
+      let v = axis === 'x' ? (ev.clientX - r.left) / u : (ev.clientY - r.top) / u;
+      if (!ev.altKey && pref.snap) {     // guides like to sit on column edges and rows
+        const g = G();
+        if (axis === 'x') { for (let c = 0; c < g.cols; c++) for (const E of [g.colX(c), g.colX(c) + g.colW]) if (Math.abs(E - v) * u < 6) v = E; }
+        else if (g.row) { const R = Math.round(v / g.row) * g.row; if (Math.abs(R - v) * u < 6) v = R; }
+      }
+      list[i] = r1(v); drawGuides();
+      const tip = guidesEl.children[[...guidesEl.children].findIndex(c => c.dataset.axis === axis && +c.dataset.i === i)];
+      if (tip) tip.dataset.v = Math.round(v);
+    };
+    const up = ev => {
+      removeEventListener('pointermove', mv); removeEventListener('pointerup', up);
+      const onRuler = axis === 'x' ? ev.clientX < 16 : ev.clientY < 16;
+      if (onRuler) list.splice(i, 1);
+      commit(true);
+    };
+    addEventListener('pointermove', mv); addEventListener('pointerup', up);
+    mv(e);
+  }
+  rulerX.addEventListener('pointerdown', e => guideDrag(e, 'y'));
+  rulerY.addEventListener('pointerdown', e => guideDrag(e, 'x'));
+  guidesEl.addEventListener('pointerdown', e => {
+    const g = e.target.closest('.ed-guide'); if (!g) return;
+    guideDrag(e, g.dataset.axis, +g.dataset.i);
+  });
+  guidesEl.addEventListener('dblclick', e => {
+    const g = e.target.closest('.ed-guide'); if (!g) return;
+    doc.guides[g.dataset.axis].splice(+g.dataset.i, 1); commit(true);
+  });
 
   /* ---------------- pointer: select, move, resize, marquee ---------------- */
   function pick(target) {
     const ids = new Set(scopeItems().map(i => i.id));
+    const root = scopeEl();
     let el = target.closest && target.closest('.it');
-    while (el && !ids.has(el.dataset.id)) el = el.parentElement && el.parentElement.closest('.it');
+    while (el && !(ids.has(el.dataset.id) && root.contains(el) && el !== root)) el = el.parentElement && el.parentElement.closest('.it');
     return el;
   }
 
   stage.addEventListener('pointerdown', e => {
     if (previewing || e.button !== 0) return;
+    if (e.target.closest('.ed-guide')) return;
     if (editing && editing.el.contains(e.target)) return;
     if (panel.contains(document.activeElement)) document.activeElement.blur();   // lets a half-typed number commit
+    closeLib();
     finishText();
     const hd = e.target.closest('.hd');
     if (hd) return startResize(e, hd.dataset.h);
     let el = pick(e.target);
-    if (!el && scope.length && e.target.closest('.it')) {   // clicked outside the group we're in
+    if (!el && scope.length && !scopeEl().contains(e.target)) {   // clicked outside the group we're in
       scope = []; render(); el = pick(e.target);
     }
     if (!el) { if (!e.shiftKey) setSel([]); return startMarquee(e); }
@@ -358,46 +528,48 @@
   function startMove(e) {
     const its = selected(); if (!its.length) return;
     const start = its.map(i => ({ i, x: i.x, y: i.y }));
-    const bb = bbox(its), p0 = toUnits(e);
+    const bb = bbox(its), p0 = toUnits(e), skip = new Set(its.map(i => i.id));
     let moved = false;
     drag(e, ev => {
       const p = toUnits(ev);
       let dx = p.x - p0.x, dy = p.y - p0.y;
       if (!moved && Math.hypot(dx, dy) * uPx() < 3) return;
       if (!moved) { moved = true; stage.classList.add('dragging'); }
-      if (snap && !ev.altKey) { dx = snapBox(bb.x + dx, bb.w) - bb.x; dy = snapY(bb.y + dy) - bb.y; }
+      snapLines = [];
+      if (pref.snap && !ev.altKey) { const s = snapMove(bb.x + dx, bb.y + dy, bb.w, bb.h, skip); dx = s.x - bb.x; dy = s.y - bb.y; }
       for (const s of start) { s.i.x = r1(s.x + dx); s.i.y = r1(s.y + dy); const el = elOf(s.i.id); if (el) C.place(el, s.i); }
       lay(); drawOverlay();
-    }, () => { if (moved) commit(true), inspector(); });
+    }, () => { snapLines = []; if (moved) { commit(true); inspector(); } else drawOverlay(); });
   }
 
   function startResize(e, dir) {
     e.stopPropagation();
     const it = selected()[0]; if (!it) return;
     const s0 = { x: it.x, y: it.y, w: it.w, h: it.h }, ar = s0.w / (s0.h || 1), p0 = toUnits(e);
-    const kids = it.children ? clone(it.children) : null;
+    const kidsSnap = it.children ? clone(it.children) : null, skip = new Set([it.id]);
     drag(e, ev => {
-      const p = toUnits(ev), dx = p.x - p0.x, dy = p.y - p0.y, free = !snap || ev.altKey;
+      const p = toUnits(ev), dx = p.x - p0.x, dy = p.y - p0.y, free = !pref.snap || ev.altKey;
+      snapLines = [];
       let { x, y, w, h: hh } = s0;
-      if (dir.includes('e')) { w = s0.w + dx; if (!free) w = snapEdge(x + w) - x; }
-      if (dir.includes('w')) { x = s0.x + dx; if (!free) x = snapEdge(x); w = s0.w + (s0.x - x); }
-      if (dir.includes('s')) { hh = s0.h + dy; if (!free) hh = snapY(y + hh) - y; }
-      if (dir.includes('n')) { y = s0.y + dy; if (!free) y = snapY(y); hh = s0.h + (s0.y - y); }
-      const keep = ev.shiftKey || (it.type === 'group' && dir.length === 2);
-      if (keep && dir.length === 2) { const nh = w / ar; if (dir.includes('n')) y += hh - nh; hh = nh; }
+      if (dir.includes('e')) { w = s0.w + dx; if (!free) w = snapOne('x', x + w, skip) - x; }
+      if (dir.includes('w')) { x = s0.x + dx; if (!free) x = snapOne('x', x, skip); w = s0.w + (s0.x - x); }
+      if (dir.includes('s')) { hh = s0.h + dy; if (!free) hh = snapOne('y', y + hh, skip) - y; }
+      if (dir.includes('n')) { y = s0.y + dy; if (!free) y = snapOne('y', y, skip); hh = s0.h + (s0.y - y); }
+      const keep = ev.shiftKey || it.type === 'instance' || (it.type === 'group' && dir.length === 2);
+      if (keep) { const nh = w / ar; if (dir.includes('n')) y += hh - nh; hh = nh; }
       if (w < 8) { if (dir.includes('w')) x -= 8 - w; w = 8; }
-      if (hh < 8) { if (dir.includes('n')) y -= 8 - hh; hh = 8; }
+      if (hh < 1) { if (dir.includes('n')) y -= 1 - hh; hh = 1; }
       Object.assign(it, { x: r1(x), y: r1(y), w: r1(w), h: r1(hh) });
-      if (kids) {                         // a group scales everything inside it
+      if (kidsSnap) {                     // a group scales everything inside it
         const sx = w / s0.w, sy = hh / s0.h;
         const scale = (src, dst) => src.forEach((c, i) => {
           Object.assign(dst[i], { x: r1(c.x * sx), y: r1(c.y * sy), w: r1(c.w * sx), h: r1(c.h * sy) });
           if (c.children) scale(c.children, dst[i].children);
         });
-        scale(kids, it.children);
+        scale(kidsSnap, it.children);
         render(true); return;
       }
-      const el = elOf(it.id); if (el) C.place(el, it);
+      const el = elOf(it.id); if (el) { C.place(el, it); if (it.type === 'instance') el.style.setProperty('--k', it.w / comp(it.ref).w); }
       lay(); drawOverlay();
     }, () => commit());
   }
@@ -421,16 +593,22 @@
     }, () => inspector());
   }
 
-  /* ---------------- double-click: type, step into groups, swap pictures ---------------- */
+  /* ---------------- double-click: type, step inside, swap pictures ---------------- */
+  function enter(it) {
+    scope.push(it.id); setSel([]); render();
+    toast(it.type === 'instance' ? 'Editing the component: every copy changes with it. Esc to step out.' : 'Inside the group. Esc to step out.', 3500);
+  }
   stage.addEventListener('dblclick', async e => {
-    if (previewing) return;
+    if (previewing || e.target.closest('.ed-guide')) return;
     const el = pick(e.target); if (!el) return;
     const it = find(el.dataset.id).it;
-    if (it.type === 'text') startText(el, it);
-    else if (it.type === 'group') { scope.push(it.id); setSel([]); render(); toast('Inside the group. Esc to step out.'); }
+    if (it.type === 'text' || it.type === 'button') startText(el, it);
+    else if (it.type === 'group' || it.type === 'instance') enter(it);
     else if (it.type === 'image' || it.type === 'video') {
       const f = await pickFiles(it.type === 'video' ? 'video/*' : 'image/*,video/*', false);
       if (f.length) addFiles(f, null, it);
+    } else if (it.type === 'slides') {
+      const f = await pickFiles('image/*'); if (f.length) addFiles(f, null, it);
     } else if (it.type === 'embed') {
       const u = prompt('Link to embed (YouTube, Vimeo, or any page)', it.src || '');
       if (u != null) { it.src = u.trim(); commit(); }
@@ -438,14 +616,14 @@
   });
 
   function startText(el, it, resume) {
-    const t = el.querySelector('.txt'); if (!t) return;
+    const t = el && el.querySelector(it.type === 'button' ? '.btn > span' : '.txt'); if (!t) return;
     editing = { el: t, it };
     t.contentEditable = 'true';
     t.spellcheck = true;
     if (!resume) {
       t.focus();
       const r = document.createRange(); r.selectNodeContents(t);
-      if (!/^(New text|Project title)$/.test(t.textContent)) r.collapse(false);
+      if (!/^(New text|Project title|Button|Say something.*)$/.test(t.textContent)) r.collapse(false);
       const s = getSelection(); s.removeAllRanges(); s.addRange(r);
     }
     el.classList.add('typing');
@@ -457,7 +635,7 @@
     editing = null;
     el.contentEditable = 'false';
     const html = clean(el.innerHTML);
-    if (!el.textContent.trim() && !html.includes('<br>')) { removeItems([it.id]); return; }
+    if (it.type === 'text' && !el.textContent.trim() && !html.includes('<br>')) { removeItems([it.id]); return; }
     if (html !== it.text) { it.text = html; commit(); } else render();
   }
   stage.addEventListener('paste', e => {
@@ -498,15 +676,100 @@
     if (text) { const el = elOf(it.id); if (el) startText(el, it); }
   }
   function addText() {
-    add({ id: uid(), type: 'text', x: C.colX(0) - origin().x, y: r1(snapY(viewY())), w: r1(C.span(4)), h: 14, text: 'New text' }, true);
+    add({ id: uid(), type: 'text', x: r1(col0()), y: r1(viewY()), w: r1(G().span(Math.max(1, Math.round(G().cols / 3)))), h: 14, text: 'New text' }, true);
   }
-  function addEmbed() {
-    const u = prompt('Link to embed (YouTube, Vimeo, Figma, any page)'); if (!u) return;
-    const w = C.span(8);
-    add({ id: uid(), type: 'embed', x: C.colX(0) - origin().x, y: r1(snapY(viewY())), w: r1(w), h: r1(w * 9 / 16), src: u.trim() });
+
+  /* ---------------- the block library ----------------
+     Ready-made layouts drop in as plain things you can change freely.
+     "Yours" are components: every copy stays linked to the original. */
+  function blocks() {
+    const g = G(), c = g.cols, x = i => g.colX(i), w = n => g.span(n);
+    const half = Math.floor(c / 2), third = Math.floor(c / 3);
+    const T = (o) => ({ type: 'text', h: 14, ...o });
+    const I = (o) => ({ type: 'image', src: '', fit: 'cover', ...o });
+    const rise = { enter: { on: true, from: { opacity: 0, y: 40 }, dur: .9, delay: 0, ease: 'out' } };
+    return {
+      'Layouts': {
+        'Text column': () => [T({ x: x(0), y: 0, w: w(Math.ceil(c / 2)), text: 'A paragraph of text. Say what happened, why it mattered, and what you did about it.' })],
+        'Heading + text': () => [T({ x: x(0), y: 0, w: w(third), text: 'A heading', weight: 700 }), T({ x: x(third), y: 0, w: w(half), text: 'The text that goes with it, sitting to the right, starting at the same line.' })],
+        'Picture + caption': () => [I({ x: x(0), y: 0, w: w(c - third), h: w(c - third) * .625, anim: rise }), T({ x: x(c - third), y: w(c - third) * .625 - 28, w: w(third), color: 'mute', text: 'Caption: what you are looking at.' })],
+        'Text + picture': () => [T({ x: x(0), y: 0, w: w(Math.max(1, half - 1)), text: 'Text on one side, the picture on the other.' }), I({ x: x(half), y: 0, w: w(c - half), h: w(c - half) * .75, anim: rise })],
+        'Two up': () => [I({ x: x(0), y: 0, w: w(half), h: w(half) * 1.25, anim: rise }), I({ x: x(c - half), y: 0, w: w(half), h: w(half) * 1.25, anim: { enter: { ...rise.enter, delay: .12 } } })],
+        'Three up': () => [0, 1, 2].map(i => I({ x: x(i * third), y: 0, w: w(third), h: w(third), anim: { enter: { ...rise.enter, delay: i * .1 } } })),
+        'Full bleed': () => [I({ x: 0, y: 0, w: U, h: U * .56, anim: { scroll: { on: true, from: { scale: 1.12 }, to: {}, start: 100, end: 30, ease: 'linear' } } })],
+        'Big quote': () => [T({ x: x(Math.floor(c / 6)), y: 0, w: w(c - 2 * Math.floor(c / 6)), weight: 700, text: '“Say something someone said, or something you believe.”' }), T({ x: x(Math.floor(c / 6)), y: 42, w: w(third), color: 'mute', text: '— who said it' })],
+        'Numbers': () => [0, 1, 2].flatMap(i => [T({ x: x(i * third), y: 0, w: w(third), weight: 700, text: ['3', '40+', '12'][i] }), T({ x: x(i * third), y: 14, w: w(third), color: 'mute', text: ['weeks', 'interviews', 'prototypes'][i] })]),
+        'Divider': () => [{ type: 'box', fill: 'faint', x: x(0), y: 0, w: g.span(c), h: 1 }],
+      },
+      'Elements': {
+        'Button': () => [{ type: 'button', look: 'line', text: 'Button', x: x(0), y: 0, w: w(Math.max(1, Math.round(c / 6))), h: 42, link: { href: '', newTab: true }, anim: { hover: { on: true, to: { scale: 1.03 }, dur: .4, ease: 'pop' } } }],
+        'Slideshow': () => [{ type: 'slides', slides: [], mode: 'click', every: 3, trans: 'fade', counter: true, fit: 'cover', x: x(0), y: 0, w: g.span(c), h: g.span(c) * .5625 }],
+        'Video embed': () => [{ type: 'embed', src: '', x: x(0), y: 0, w: g.span(c), h: g.span(c) * .5625 }],
+        'Video file': () => [{ type: 'video', src: '', fit: 'cover', x: x(0), y: 0, w: g.span(c), h: g.span(c) * .5625 }],
+        'Box': () => [{ type: 'box', fill: 'line', x: x(0), y: 0, w: w(third), h: w(third) }],
+      },
+    };
   }
-  function addBox() {
-    add({ id: uid(), type: 'box', x: C.colX(0) - origin().x, y: r1(snapY(viewY())), w: r1(C.span(3)), h: r1(C.span(3)), fill: 'line' });
+  function insert(list) {
+    const o = origin(), bb = bbox(list), y0 = viewY();
+    const items = list.map(i => ({ id: uid(), ...i, x: r1((i.x - o.x) / o.k), y: r1(i.y - bb.y + y0) }));
+    scopeItems().push(...items);
+    closeLib(); setSel(items.map(i => i.id)); commit();
+  }
+  function insertComp(c) {
+    const o = origin();
+    let w = c.w; if (w > U) w = U;
+    const it = { id: uid(), type: 'instance', ref: c.id, x: r1((G().colX(0) - o.x) / o.k), y: r1(viewY()), w: r1(w), h: r1(c.h * w / c.w) };
+    if (it.x + it.w > U) it.x = 0;
+    if (scope.some(id => { const s = find(id).it; return s.type === 'instance' && s.ref === c.id; })) return toast('A component can\'t go inside itself');
+    scopeItems().push(it); closeLib(); setSel([it.id]); commit();
+  }
+  function toggleLib() { libEl.classList.contains('on') ? closeLib() : (drawLib(), libEl.classList.add('on'), libB.classList.add('on')); }
+  function closeLib() { libEl.classList.remove('on'); libB.classList.remove('on'); }
+  function drawLib() {
+    libEl.textContent = '';
+    for (const [title, set] of Object.entries(blocks())) {
+      h('p', 'ed-lib-h', libEl, title);
+      const g = h('div', 'ed-lib-g', libEl);
+      for (const [name, make] of Object.entries(set)) {
+        const b = h('button', 'ed-tile', g); b.type = 'button';
+        drawThumb(h('span', 'ed-mini', b), make());
+        h('span', '', b, name);
+        b.onclick = () => insert(make());
+      }
+    }
+    h('p', 'ed-lib-h', libEl, 'Yours · linked: edit one, they all change');
+    if (!lib.components.length) h('p', 'ed-note', libEl, 'Nothing yet. Select some things and press “make component” (⌥⌘K).');
+    const g = h('div', 'ed-lib-g', libEl);
+    for (const c of lib.components) {
+      const b = h('div', 'ed-tile ed-own', g);
+      drawThumb(h('span', 'ed-mini', b), c.children, c);
+      const n = h('span', '', b, c.name);
+      n.title = `used ${uses(c.id)}× on this page`;
+      b.onclick = () => insertComp(c);
+      const tools = h('span', 'ed-own-tools', b);
+      const rn = h('button', '', tools, 'rename'); rn.type = 'button';
+      rn.onclick = ev => { ev.stopPropagation(); const v = prompt('Name', c.name); if (v) { c.name = v; commit(true); drawLib(); } };
+      const del = h('button', '', tools, '×'); del.type = 'button';
+      del.onclick = ev => {
+        ev.stopPropagation();
+        const n = uses(c.id);
+        if (!confirm(`Delete “${c.name}” from your library?${n ? ` It's used ${n}× on this page; those copies become ordinary groups.` : ''} Other pages using it will show an empty box.`)) return;
+        walk(doc.items, it => { if (it.type === 'instance' && it.ref === c.id) detachInto(it); });
+        lib.components.splice(lib.components.indexOf(c), 1); gone.add(c.id); commit(); drawLib();
+      };
+    }
+  }
+  function drawThumb(box, items, c) {     // a tiny schematic of a block
+    const b = c ? { x: 0, y: 0, w: c.w, h: c.h } : bbox(items);
+    const W = Math.max(b.w, 1), H = Math.max(b.h, 1), k = Math.min(1, 1.6 * W / H);
+    for (const it of items) {
+      const d = h('i', 'm-' + it.type, box);
+      Object.assign(d.style, {
+        left: (it.x - b.x) / W * 100 + '%', top: (it.y - b.y) / H * 100 * k + '%',
+        width: Math.max(2, it.w / W * 100) + '%', height: it.type === 'text' ? '3px' : Math.max(1, (it.h || 0) / H * 100 * k) + '%',
+      });
+    }
   }
 
   /* ---------------- arranging ---------------- */
@@ -517,7 +780,7 @@
   }
   function duplicate() {
     const its = selected(); if (!its.length) return;
-    const arr = scopeItems(), copies = its.map(i => { const c = freshIds(clone(i)); c.x += ROW; c.y += ROW; return c; });
+    const g = G(), arr = scopeItems(), copies = its.map(i => { const c = freshIds(clone(i)); c.x += g.row; c.y += g.row; return c; });
     arr.push(...copies); setSel(copies.map(c => c.id)); commit();
   }
   function group() {
@@ -538,6 +801,36 @@
     }
     if (out.length) { setSel(out); commit(); }
   }
+  function makeComponent() {
+    const its = selected(); if (!its.length) return toast('Select what should become a component');
+    if (its.length === 1 && its[0].type === 'instance') return toast('That is already a component');
+    const name = prompt('Name this component', its.length === 1 ? (its[0].type === 'button' ? 'Button' : 'Component') : 'Component');
+    if (!name) return;
+    const arr = scopeItems(), bb = bbox(its);
+    const at = Math.min(...its.map(i => arr.indexOf(i)));
+    const c = { id: 'c' + uid(), name, w: r1(bb.w), h: r1(Math.max(bb.h, 1)), children: [] };
+    for (const i of arr.filter(i => sel.has(i.id))) { arr.splice(arr.indexOf(i), 1); i.x = r1(i.x - bb.x); i.y = r1(i.y - bb.y); c.children.push(i); }
+    lib.components.push(c);
+    const inst = { id: uid(), type: 'instance', ref: c.id, x: r1(bb.x), y: r1(bb.y), w: c.w, h: c.h };
+    arr.splice(at, 0, inst);
+    setSel([inst.id]); commit();
+    toast(`“${name}” is in your blocks now. Copies stay linked.`, 3500);
+  }
+  function detachInto(it) {               // turn a linked copy into an ordinary group
+    const c = comp(it.ref); if (!c) return;
+    const k = it.w / c.w;
+    const scale = list => list.map(ch => {
+      const n = { ...clone(ch), x: r1(ch.x * k), y: r1(ch.y * k), w: r1(ch.w * k), h: r1((ch.h || 0) * k) };
+      if (n.children) n.children = scale(ch.children);
+      return n;
+    });
+    const kids = scale(c.children).map(freshIds);
+    Object.assign(it, { type: 'group', children: kids }); delete it.ref;
+  }
+  function detach() {
+    for (const it of selected().filter(i => i.type === 'instance')) detachInto(it);
+    commit(); toast('Detached: it is a plain group now');
+  }
   function order(front) {
     const arr = scopeItems();
     for (const it of selected()) { arr.splice(arr.indexOf(it), 1); front ? arr.push(it) : arr.unshift(it); }
@@ -556,49 +849,51 @@
     }
     commit();
   }
+  function distribute(axis) {
+    const its = selected(); if (its.length < 3) return toast('Pick three or more');
+    const k = axis === 'x' ? 'x' : 'y', s = axis === 'x' ? 'w' : 'h';
+    its.sort((a, b) => a[k] - b[k]);
+    const first = its[0], lastI = its[its.length - 1];
+    const total = its.reduce((n, i) => n + i[s], 0), gap = (lastI[k] + lastI[s] - first[k] - total) / (its.length - 1);
+    let p = first[k];
+    for (const i of its) { i[k] = r1(p); p += i[s] + gap; }
+    commit();
+  }
   function fitGrid(it) {                  // pull a box onto the nearest columns and rows
-    const o = origin().x;
-    const L = EDGES_L.reduce((a, v) => Math.abs(v - (it.x + o)) < Math.abs(a - (it.x + o)) ? v : a);
-    const R = EDGES_R.filter(v => v > L).reduce((a, v) => Math.abs(v - (it.x + it.w + o)) < Math.abs(a - (it.x + it.w + o)) ? v : a, EDGES_R[EDGES_R.length - 1]);
+    const o = origin(), g = G();
+    if (o.k !== 1) return;
+    const Ls = [...Array(g.cols)].map((_, i) => g.colX(i)), Rs = Ls.map(v => v + g.colW);
+    const L = Ls.reduce((a, v) => Math.abs(v - (it.x + o.x)) < Math.abs(a - (it.x + o.x)) ? v : a);
+    const R = Rs.filter(v => v > L).reduce((a, v) => Math.abs(v - (it.x + it.w + o.x)) < Math.abs(a - (it.x + it.w + o.x)) ? v : a, Rs[Rs.length - 1]);
     const nw = R - L;
-    if (it.type === 'image' || it.type === 'video' || it.type === 'embed') it.h = r1(it.h * nw / it.w);
-    it.x = r1(L - o); it.w = r1(nw); it.y = r1(snapY(it.y));
-    if (it.type !== 'text') it.h = r1(Math.max(ROW, Math.round(it.h / ROW) * ROW));
+    if (/image|video|embed|slides|instance/.test(it.type)) it.h = r1(it.h * nw / it.w);
+    it.x = r1(L - o.x); it.w = r1(nw);
+    if (g.row) { it.y = r1(Math.round((it.y + o.y) / g.row) * g.row - o.y); if (!/text|instance/.test(it.type)) it.h = r1(Math.max(g.row, Math.round(it.h / g.row) * g.row)); }
   }
 
   /* ---------------- clipboard and drops ---------------- */
-  let clip = null;
   const typingNow = () => editing || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '');
-  addEventListener('copy', e => {
-    if (typingNow() || !sel.size) return;
-    clip = clone(selected());
-    e.clipboardData.setData('text/plain', JSON.stringify({ atulEditor: 1, items: clip }));
-    e.preventDefault();
-  });
-  addEventListener('cut', e => {
-    if (typingNow() || !sel.size) return;
-    clip = clone(selected());
-    e.clipboardData.setData('text/plain', JSON.stringify({ atulEditor: 1, items: clip }));
-    e.preventDefault(); removeItems([...sel]);
-  });
+  const copyOut = e => e.clipboardData.setData('text/plain', JSON.stringify({ atulEditor: 1, items: clone(selected()) }));
+  addEventListener('copy', e => { if (typingNow() || !sel.size) return; copyOut(e); e.preventDefault(); });
+  addEventListener('cut', e => { if (typingNow() || !sel.size) return; copyOut(e); e.preventDefault(); removeItems([...sel]); });
   addEventListener('paste', e => {
     if (typingNow() || previewing) return;
     const files = [...e.clipboardData.files];
-    if (files.length) { e.preventDefault(); return addFiles(files); }
+    if (files.length) { e.preventDefault(); return addFiles(files, null, selected().length === 1 ? selected()[0] : null); }
     const text = e.clipboardData.getData('text/plain');
     let items = null;
     try { const o = JSON.parse(text); if (o && o.atulEditor) items = o.items; } catch (err) {}
     e.preventDefault();
     if (items) {
-      const copies = items.map(i => { const c = freshIds(clone(i)); c.x += ROW; c.y += ROW; return c; });
+      const g = G(), copies = items.map(i => { const c = freshIds(clone(i)); c.x += g.row; c.y += g.row; return c; });
       scopeItems().push(...copies); setSel(copies.map(c => c.id)); commit();
     } else if (text.trim()) {
       const esc = text.trim().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '<br>');
-      add({ id: uid(), type: 'text', x: C.colX(0) - origin().x, y: r1(snapY(viewY())), w: r1(C.span(5)), h: 14, text: esc });
+      add({ id: uid(), type: 'text', x: r1(col0()), y: r1(viewY()), w: r1(G().span(Math.ceil(G().cols / 2))), h: 14, text: esc });
     }
   });
   stage.addEventListener('dragover', e => { if (!previewing) { e.preventDefault(); stage.classList.add('drop'); } });
-  stage.addEventListener('dragleave', e => { if (e.target === stage || !stage.contains(e.relatedTarget)) stage.classList.remove('drop'); });
+  stage.addEventListener('dragleave', e => { if (!stage.contains(e.relatedTarget)) stage.classList.remove('drop'); });
   stage.addEventListener('drop', e => {
     e.preventDefault(); stage.classList.remove('drop');
     if (previewing) return;
@@ -607,12 +902,14 @@
   });
 
   /* ---------------- keys ---------------- */
+  let nudgeT;
   addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
     if (mod && k === 's') { e.preventDefault(); save(); return; }
     if (editing) {
       if (e.key === 'Escape') { e.preventDefault(); finishText(); }
       if (mod && k === 'k') { e.preventDefault(); const u = prompt('Link to'); if (u) document.execCommand('createLink', false, u); }
+      if (editing && editing.it.type === 'button' && e.key === 'Enter') { e.preventDefault(); finishText(); }
       return;
     }
     if (/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) {
@@ -620,6 +917,7 @@
       return;
     }
     if (previewing) { if (e.key === 'Escape' || k === 'p') togglePreview(); return; }
+    if (mod && e.altKey && (k === 'k' || e.code === 'KeyK')) { e.preventDefault(); makeComponent(); return; }
     if (mod && k === 'z') { e.preventDefault(); e.shiftKey ? doRedo() : doUndo(); return; }
     if (mod && k === 'y') { e.preventDefault(); doRedo(); return; }
     if (mod && k === 'd') { e.preventDefault(); duplicate(); return; }
@@ -627,37 +925,50 @@
     if (mod && k === 'a') { e.preventDefault(); setSel(scopeItems().map(i => i.id)); return; }
     if (mod) return;
     if (e.key === 'Backspace' || e.key === 'Delete') { if (sel.size) { e.preventDefault(); removeItems([...sel]); } return; }
-    if (e.key === 'Escape') { help.classList.remove('on'); if (sel.size) setSel([]); else if (scope.length) { const g = scope.pop(); setSel([g]); render(); } return; }
-    if (e.key === 'Enter') { const it = selected()[0]; if (it && it.type === 'text') { e.preventDefault(); startText(elOf(it.id), it); } else if (it && it.type === 'group') { scope.push(it.id); setSel([]); render(); } return; }
+    if (e.key === 'Escape') {
+      help.classList.remove('on');
+      if (libEl.classList.contains('on')) return closeLib();
+      if (sel.size) setSel([]); else if (scope.length) { const g = scope.pop(); render(); setSel([g]); }
+      return;
+    }
+    if (e.key === 'Enter') {
+      const it = selected()[0]; if (!it) return;
+      e.preventDefault();
+      if (it.type === 'text' || it.type === 'button') startText(elOf(it.id), it);
+      else if (it.type === 'group' || it.type === 'instance') enter(it);
+      return;
+    }
     if (e.key.startsWith('Arrow') && sel.size) {
       e.preventDefault();
-      const big = e.shiftKey, dx = { ArrowLeft: -1, ArrowRight: 1 }[e.key] || 0, dy = { ArrowUp: -1, ArrowDown: 1 }[e.key] || 0;
+      const g = G(), big = e.shiftKey, dx = { ArrowLeft: -1, ArrowRight: 1 }[e.key] || 0, dy = { ArrowUp: -1, ArrowDown: 1 }[e.key] || 0;
       for (const it of selected()) {
-        it.x = r1(it.x + dx * (big ? C.COLW + C.GAP : 1));
-        it.y = r1(it.y + dy * (big ? ROW : 1));
+        it.x = r1(it.x + dx * (big ? g.colW + g.gap : 1));
+        it.y = r1(it.y + dy * (big ? (g.row || 14) : 1));
+        const el = elOf(it.id); if (el) C.place(el, it);
       }
       clearTimeout(nudgeT); nudgeT = setTimeout(() => commit(), 400);
-      for (const it of selected()) { const el = elOf(it.id); if (el) C.place(el, it); }
       lay(); drawOverlay(); return;
     }
     if (k === ']') return order(true);
     if (k === '[') return order(false);
     if (k === 't') { e.preventDefault(); return addText(); }
-    if (k === 'g') { grid = !grid; return paintToggles(); }
-    if (k === 's') { snap = !snap; paintToggles(); return toast(snap ? 'snapping to the grid' : 'free placement'); }
+    if (k === 'b') { e.preventDefault(); return toggleLib(); }
+    if (k === 'g') { pref.grid = !pref.grid; return paintToggles(); }
+    if (k === 'r') { pref.rows = !pref.rows; if (pref.rows) pref.grid = true; paintToggles(); return inspector(); }
+    if (k === ';') { pref.guides = !pref.guides; paintToggles(); return drawGuides(); }
+    if (k === 's') { pref.snap = !pref.snap; paintToggles(); return toast(pref.snap ? 'snapping on' : 'free placement'); }
     if (k === 'p') return togglePreview();
     if (k === '?') return help.classList.toggle('on');
   });
-  let nudgeT;
 
   /* ---------------- preview ---------------- */
   function togglePreview() {
-    finishText();
+    finishText(); closeLib();
     previewing = !previewing;
     document.body.classList.toggle('previewing', previewing);
     if (previewing) {
-      ov.textContent = '';
-      C.render(cv, doc, { edit: false, src: resolve, onMediaError });
+      ov.textContent = ''; guidesEl.textContent = '';
+      C.render(cv, doc, { edit: false, src: resolve, onMediaError, lib: libMap() });
       cv.querySelectorAll('a').forEach(a => a.addEventListener('click', e => e.preventDefault()));
       stopAnim = C.animate(cv);
       toast('Preview. Scroll, hover, click. P or Esc to go back.');
@@ -670,7 +981,7 @@
   // play one animation on one element, right here in the editor
   function play(it, kind) {
     const el = elOf(it.id); if (!el) return;
-    const a = it.anim[kind], ly = el._ly[kind === 'scroll' ? 'scroll' : kind];
+    const a = it.anim[kind], ly = el._ly[kind];
     if (kind === 'enter') {
       C.setState(ly, a.from);
       requestAnimationFrame(() => requestAnimationFrame(() => C.setState(ly, null, C.timing(a.dur, a.ease, a.delay))));
@@ -720,10 +1031,10 @@
     return d;
   }
   function row(parent, label) { const r = h('label', 'ed-row', parent); h('span', 'ed-lab', r, label); return r; }
-  function num(parent, label, get, set, step = 1) {
+  function num(parent, label, get, set, step = 1, live = true) {
     const r = row(parent, label), i = h('input', '', r);
     i.type = 'number'; i.step = step; i.value = fmt(get());
-    i.oninput = () => { const v = parseFloat(i.value); if (!isNaN(v)) { set(v); render(true); } };
+    i.oninput = () => { const v = parseFloat(i.value); if (!isNaN(v)) { set(v); if (live) render(true); } };
     i.onchange = () => commit(true);
     return i;
   }
@@ -748,17 +1059,16 @@
       b.onclick = e => { e.preventDefault(); set(v); commit(); };
     }
   }
-  function check(parent, label, get, set) {
+  function check(parent, label, get, set, onlyPref) {
     const r = h('label', 'ed-row ed-check', parent), i = h('input', '', r);
     i.type = 'checkbox'; i.checked = !!get(); h('span', '', r, label);
-    i.onchange = () => { set(i.checked); commit(); };
+    i.onchange = () => { set(i.checked); onlyPref ? (paintToggles(), render()) : commit(); };
   }
   function actions(parent, list) {
     const r = h('div', 'ed-acts', parent);
     for (const [l, fn, title] of list) { const b = h('button', '', r, l); b.type = 'button'; if (title) b.title = title; b.onclick = fn; }
   }
   function stateFields(parent, label, obj, key) {
-    // the six things any animation can change
     const box = h('div', 'ed-state', parent);
     h('span', 'ed-lab', box, label);
     const st = () => (obj[key] = obj[key] || {});
@@ -787,6 +1097,13 @@
   const keyed = (d, k) => (d.dataset.k = k, d);
 
   function pagePanel() {
+    if (scope.length) {
+      const it = scopeItem();
+      h('p', 'ed-head', panel, it.type === 'instance' ? `Inside component “${(comp(it.ref) || {}).name}”` : 'Inside a group');
+      if (it.type === 'instance') h('p', 'ed-note', panel, 'Whatever you change here changes in every copy, on every page.');
+      actions(panel, [['step out  Esc', () => { const g = scope.pop(); render(); setSel([g]); }]]);
+      return;
+    }
     h('p', 'ed-head', panel, 'Page');
     const s = keyed(sec('This project, on the work list'), 'page');
     text(s, 'title', () => meta.title, v => meta.title = v);
@@ -794,17 +1111,38 @@
     text(s, 'tags', () => meta.tags, v => meta.tags = v, 'interaction, research');
     text(s, 'one-liner', () => meta.summary, v => meta.summary = v, 'optional');
     check(s, 'hidden from the work list', () => meta.hidden, v => meta.hidden = v);
+
+    const gr = keyed(sec('Grid'), 'grid');
+    const g = G(), setG = (k, v) => { doc.grid = { ...(doc.grid || {}), [k]: v }; drawGrid(); };
+    const presets = { '': 'presets…', '12': '12 columns', '6': '6 columns', '24': '24 columns, fine', '4': '4 columns, editorial', '8': '8 columns', '1': 'no columns' };
+    const pre = choose(gr, 'quick', presets, () => '', v => { if (v) doc.grid = { ...(doc.grid || {}), cols: +v }; });
+    pre.value = '';
+    const g4 = h('div', 'ed-4', gr);
+    num(g4, 'columns', () => g.cols, v => setG('cols', Math.max(1, Math.min(48, Math.round(v)))), 1, false);
+    num(g4, 'gutter', () => g.gap, v => setG('gap', Math.max(0, v)), 1, false);
+    num(g4, 'margins', () => g.margin, v => setG('margin', Math.max(0, v)), 1, false);
+    num(g4, 'row height', () => g.row, v => setG('row', Math.max(0, v)), 1, false).title = 'Spacing of the horizontal rows things snap to. 0 = no rows. 14 ≈ one line of text.';
+    h('p', 'ed-note', gr, `one column = ${fmt(g.colW)} units · the page is 1000 units wide`);
+    check(gr, 'show rows (R)', () => pref.rows, v => pref.rows = v, true);
+    actions(gr, [['reset to default', () => { delete doc.grid; commit(); }], ['clear guides', () => { doc.guides = { x: [], y: [] }; commit(); }]]);
+    const sn = keyed(sec('Snap to'), 'snapto');
+    check(sn, 'columns and page centre', () => pref.sCols, v => pref.sCols = v, true);
+    check(sn, 'rows', () => pref.sRows, v => pref.sRows = v, true);
+    check(sn, 'edges and middles of other things', () => pref.sEls, v => pref.sEls = v, true);
+    check(sn, 'your guides', () => pref.sGuides, v => pref.sGuides = v, true);
+    h('p', 'ed-note', sn, 'Hold Alt while dragging to ignore all of it. Drag from the top or left edge of the page to make a guide.');
+
     const t = keyed(sec('Thumbnail (shows on hover)'), 'thumb');
-    const pics = []; walk(doc.items, it => { if (it.type === 'image' && it.src) pics.push(it.src); });
+    const pics = []; walk(doc.items, it => { if (it.type === 'image' && it.src) pics.push(it.src); if (it.type === 'slides') (it.slides || []).forEach(s => pics.push(s.src)); });
     const opts = { '': 'none' }; pics.forEach((p, i) => opts[p] = `picture ${i + 1} · ${p.split('/').pop().slice(0, 24)}`);
     if (meta.thumb && !(meta.thumb in opts)) opts[meta.thumb] = meta.thumb.split('/').pop().slice(0, 30);
     choose(t, 'use', opts, () => meta.thumb || '', v => meta.thumb = v);
     if (meta.thumb) { const im = h('img', 'ed-thumb', t); im.src = resolve(meta.thumb); im.onerror = () => onMediaError(im, meta.thumb); }
     actions(t, [['upload a different one', async () => { const [f] = await pickFiles('image/*', false); if (f) { const { src } = await stash(f); meta.thumb = src; commit(); } }]]);
-    const g = keyed(sec('How this works', panel, false), 'how');
-    h('p', 'ed-note', g).innerHTML = `Click to select. Drag to move: it snaps to the 12 columns. Hold <kbd>Alt</kbd> to break the grid.<br><br>
-      Drop pictures anywhere, or onto a grey placeholder to fill it.<br><br>
-      Everything you do is kept as a draft in this browser. <b>Save</b> writes <code>projects/${slug}.json</code> into your site folder; then commit and push to publish.`;
+    const how = keyed(sec('How this works', panel, false), 'how');
+    h('p', 'ed-note', how).innerHTML = `Click to select. Drag to move: it snaps to columns, rows, guides and other things. Hold <kbd>Alt</kbd> to break the grid.<br><br>
+      <b>+ blocks</b> (B) has ready-made layouts, buttons and slideshows, and the components you make yourself.<br><br>
+      Everything you do is kept as a draft in this browser. <b>Save</b> writes <code>projects/${slug}.json</code> (and your components) into your site folder; then commit and push to publish.`;
   }
 
   function multiPanel(its) {
@@ -812,27 +1150,33 @@
     const s = keyed(sec('Line them up'), 'align');
     actions(s, [['left', () => align('left')], ['centre', () => align('center')], ['right', () => align('right')]]);
     actions(s, [['top', () => align('top')], ['middle', () => align('middle')], ['bottom', () => align('bottom')]]);
-    actions(sec('Together'), [['group  ⌘G', group], ['snap all to grid', () => { its.forEach(fitGrid); commit(); }], ['duplicate', duplicate], ['delete', () => removeItems([...sel])]]);
+    actions(s, [['space evenly ↔', () => distribute('x')], ['space evenly ↕', () => distribute('y')]]);
+    actions(sec('Together'), [['group  ⌘G', group], ['make component  ⌥⌘K', makeComponent], ['snap all to grid', () => { its.forEach(fitGrid); commit(); }], ['duplicate', duplicate], ['delete', () => removeItems([...sel])]]);
   }
 
-  const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group' };
+  const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group', button: 'Button', slides: 'Slideshow', instance: 'Component' };
   function itemPanel(it) {
-    h('p', 'ed-head', panel, NAMES[it.type] + (scope.length ? ' · in group' : ''));
+    const c = it.type === 'instance' && comp(it.ref);
+    h('p', 'ed-head', panel, (c ? `Component · ${c.name}` : NAMES[it.type]) + (scope.length ? ' · inside' : ''));
 
     const L = keyed(sec('Position'), 'pos');
     const grid4 = h('div', 'ed-4', L);
     num(grid4, 'x', () => it.x, v => it.x = v);
     num(grid4, 'y', () => it.y, v => it.y = v);
     num(grid4, 'w', () => it.w, v => it.w = v);
-    if (it.type !== 'text') num(grid4, 'h', () => it.h, v => it.h = v);
-    actions(L, [['snap to grid', () => { fitGrid(it); commit(); }, 'Pull onto the nearest columns'], ['front', () => order(true), ']'], ['back', () => order(false), '[']]);
+    if (it.type !== 'text' && it.type !== 'instance') num(grid4, 'h', () => it.h, v => it.h = v);
+    actions(L, [['snap to grid', () => { fitGrid(it); commit(); }, 'Pull onto the nearest columns and rows'], ['front', () => order(true), ']'], ['back', () => order(false), '[']]);
 
-    const S = keyed(sec(NAMES[it.type]), 'kind');
+    const S = keyed(sec(c ? 'Component' : NAMES[it.type]), 'kind');
     if (it.type === 'text') {
       seg(S, 'weight', { 400: 'regular', 700: 'bold' }, () => it.weight || 400, v => it.weight = +v);
       seg(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint' }, () => it.color || 'fg', v => it.color = v);
       seg(S, 'align', { left: 'left', center: 'centre', right: 'right' }, () => it.align || 'left', v => it.align = v);
       actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)]]);
+    }
+    if (it.type === 'button') {
+      seg(S, 'look', { line: 'outline', fill: 'filled', text: 'just text' }, () => it.look || 'line', v => it.look = v);
+      actions(S, [['edit label  ↵', () => startText(elOf(it.id), it)]]);
     }
     if (it.type === 'image' || it.type === 'video') {
       seg(S, 'fit', { cover: 'fill box', contain: 'whole picture' }, () => it.fit || 'cover', v => it.fit = v);
@@ -844,16 +1188,21 @@
       ]);
       if (it.src) h('p', 'ed-note', S, it.src.startsWith('blob:') ? 'not saved into the folder yet' : it.src);
     }
+    if (it.type === 'slides') slidesPanel(it, S);
     if (it.type === 'embed') {
       text(S, 'link', () => it.src, v => it.src = v, 'youtube / vimeo / any url');
       actions(S, [['16 : 9', () => { it.h = r1(it.w * 9 / 16); commit(); }], ['4 : 3', () => { it.h = r1(it.w * 3 / 4); commit(); }], ['square', () => { it.h = it.w; commit(); }]]);
     }
     if (it.type === 'box') seg(S, 'look', { line: 'line', fill: 'ink', ghost: 'ghost', faint: 'grey' }, () => it.fill || 'line', v => it.fill = v);
-    if (it.type === 'group') actions(S, [['step inside  ↵', () => { scope.push(it.id); setSel([]); render(); }], ['ungroup  ⇧⌘G', ungroup]]);
-
-    if (it.type !== 'text') {
-      const K = keyed(sec('Link', panel, !!(it.link && it.link.href)), 'link');
-      text(K, 'goes to', () => it.link && it.link.href, v => { it.link = it.link || {}; it.link.href = v.trim(); if (!v.trim()) delete it.link; }, 'https://… or another page');
+    if (it.type === 'group') actions(S, [['step inside  ↵', () => enter(it)], ['ungroup  ⇧⌘G', ungroup], ['make component', makeComponent]]);
+    if (it.type === 'instance') {
+      if (c) h('p', 'ed-note', S, `Linked: used ${uses(c.id)}× on this page. Step inside to change every copy at once, or detach this one to change it alone.`);
+      actions(S, [['edit component  ↵', () => enter(it)], ['detach', detach], ['natural size', () => { if (c) { it.w = c.w; commit(); } }]]);
+      if (c) text(S, 'name', () => c.name, v => c.name = v);
+    }
+    if (it.type !== 'text' && it.type !== 'group') {
+      const K = keyed(sec('Link', panel, !!(it.link && it.link.href) || it.type === 'button'), 'link');
+      text(K, 'goes to', () => it.link && it.link.href, v => { it.link = it.link || {}; it.link.href = v.trim(); if (!v.trim() && !it.link.newTab) delete it.link; }, 'https://… or project.html?p=…');
       check(K, 'open in a new tab', () => it.link && it.link.newTab, v => { it.link = it.link || { href: '' }; it.link.newTab = v; });
     }
 
@@ -861,23 +1210,45 @@
     actions(panel, [['duplicate  ⌘D', duplicate], ['delete  ⌫', () => removeItems([it.id])]]);
   }
 
+  function slidesPanel(it, S) {
+    const list = it.slides = it.slides || [];
+    seg(S, 'changes', { click: 'on click', auto: 'by itself' }, () => it.mode || 'click', v => it.mode = v);
+    if (it.mode === 'auto') num(S, 'every (s)', () => it.every || 3, v => it.every = v, .5, false);
+    seg(S, 'transition', { fade: 'fade', slide: 'slide', cut: 'cut' }, () => it.trans || 'fade', v => it.trans = v);
+    seg(S, 'fit', { cover: 'fill box', contain: 'whole picture' }, () => it.fit || 'cover', v => it.fit = v);
+    check(S, 'show 1 / 5 counter', () => it.counter !== false, v => it.counter = v);
+    const strip = h('div', 'ed-slides', S);
+    list.forEach((sl, i) => {
+      const t = h('div', 'ed-slide' + (i === (slideAt[it.id] || 0) ? ' on' : ''), strip);
+      const im = h('img', '', t); im.src = resolve(sl.src); im.onerror = () => onMediaError(im, sl.src);
+      t.title = 'click to show this one while editing';
+      t.onclick = () => { slideAt[it.id] = i; render(); };
+      const tools = h('span', '', t);
+      const mk = (l, fn, title) => { const b = h('button', '', tools, l); b.type = 'button'; b.title = title; b.onclick = ev => { ev.stopPropagation(); fn(); }; };
+      if (i > 0) mk('←', () => { list.splice(i - 1, 0, list.splice(i, 1)[0]); slideAt[it.id] = i - 1; commit(); }, 'earlier');
+      if (i < list.length - 1) mk('→', () => { list.splice(i + 1, 0, list.splice(i, 1)[0]); slideAt[it.id] = i + 1; commit(); }, 'later');
+      mk('×', () => { list.splice(i, 1); slideAt[it.id] = Math.max(0, i - 1); commit(); }, 'remove');
+    });
+    actions(S, [['+ add pictures', async () => { const f = await pickFiles('image/*'); if (f.length) addFiles(f, null, it); }]]);
+    h('p', 'ed-note', S, 'Or drop pictures onto the slideshow. Visitors click the right side for next, left for previous.');
+  }
+
   function animPanel(it) {
     it.anim = it.anim || {};
     const A = it.anim;
-    const blocks = [
+    const blocksA = [
       ['enter', 'When it scrolls into view', 'Plays once, the first time it appears.'],
       ['scroll', 'While scrolling', 'Scroll is the playhead: it moves from "from" to "to" as it travels up the screen.'],
       ['hover', 'On hover', 'Changes while the mouse is over it.'],
       ['click', 'On click', 'Each click switches it to the new state and back.'],
     ];
-    for (const [k, title, note] of blocks) {
+    for (const [k, title, note] of blocksA) {
       const on = !!(A[k] && A[k].on);
       const d = keyed(sec((on ? '● ' : '○ ') + title, panel, on), 'a-' + k + (on ? 1 : 0));
       d.classList.add('ed-anim');
       check(d, 'on', () => on, v => { if (v) A[k] = A[k] && Object.keys(A[k]).length > 1 ? { ...A[k], on: true } : DEFAULTS[k](); else if (A[k]) A[k].on = false; });
       if (!on) { h('p', 'ed-note', d, note); continue; }
-      const a = A[k];
-      const P = PRESETS[k];
+      const a = A[k], P = PRESETS[k];
       const opts = { '': 'pick a preset…' }; for (const n in P) opts[n] = n;
       const s = choose(d, 'preset', opts, () => '', v => {
         if (!v) return;
@@ -889,15 +1260,13 @@
       if (k === 'enter') stateFields(d, 'starts as', a, 'from');
       if (k === 'scroll') { stateFields(d, 'from', a, 'from'); stateFields(d, 'to', a, 'to'); }
       if (k === 'hover' || k === 'click') stateFields(d, 'becomes', a, 'to');
+      const g = h('div', 'ed-4', d);
       if (k === 'scroll') {
-        const g = h('div', 'ed-4', d);
-        num(g, 'starts at', () => a.start ?? 100, v => a.start = v, 5).title = '% of screen height where it begins (100 = bottom edge)';
-        num(g, 'ends at', () => a.end ?? 0, v => a.end = v, 5).title = '% of screen height where it finishes (0 = top edge)';
-        h('p', 'ed-note', d, 'measured from the middle of the element: 100 = bottom of the screen, 0 = top');
+        num(g, 'starts at %', () => a.start ?? 100, v => a.start = v, 5, false).title = 'where its middle is on screen when it begins (100 = bottom edge)';
+        num(g, 'ends at %', () => a.end ?? 0, v => a.end = v, 5, false).title = 'where its middle is on screen when it finishes (0 = top edge)';
       } else {
-        const g = h('div', 'ed-4', d);
-        num(g, 'seconds', () => a.dur ?? .6, v => a.dur = v, .1);
-        if (k === 'enter') num(g, 'delay', () => a.delay ?? 0, v => a.delay = v, .05);
+        num(g, 'seconds', () => a.dur ?? .6, v => a.dur = v, .1, false);
+        if (k === 'enter') num(g, 'delay', () => a.delay ?? 0, v => a.delay = v, .05, false);
       }
       choose(d, 'easing', EASES, () => a.ease || (k === 'scroll' ? 'linear' : 'out'), v => a.ease = v);
       actions(d, [['▶ play', () => play(it, k)]]);
@@ -916,19 +1285,24 @@
       i > -1 ? idx.projects[i] = meta : idx.projects.push(meta);
       FS.download(`${slug}.json`, JSON.stringify(doc, null, 2));
       setTimeout(() => FS.download('index.json', JSON.stringify(idx, null, 2)), 400);
-      if (blobs.size) toast('Downloaded. Pictures added in this browser are NOT in those files. Use Chrome to save them.', 6000);
-      else toast('Downloaded both files: put them in projects/', 4000);
+      setTimeout(() => FS.download('components.json', JSON.stringify(lib, null, 2)), 800);
+      toast(blobs.size ? 'Downloaded. Pictures added in this browser are NOT in those files. Use Chrome to save them.' : 'Downloaded three files: put them in projects/', 6000);
       return;
     }
     try {
       saveB.textContent = 'saving…';
       await persistMedia();
-      const fresh = (await FS.json('projects/index.json')) || { projects: [] };   // someone may have edited the list meanwhile
-      const i = fresh.projects.findIndex(p => p.slug === slug);
-      i > -1 ? fresh.projects[i] = meta : fresh.projects.push(meta);
+      const latest = (await FS.json('projects/index.json')) || { projects: [] };   // the list may have changed meanwhile
+      const i = latest.projects.findIndex(p => p.slug === slug);
+      i > -1 ? latest.projects[i] = meta : latest.projects.push(meta);
       await FS.write(`projects/${slug}.json`, JSON.stringify(doc, null, 2));
-      await FS.write('projects/index.json', JSON.stringify(fresh, null, 2));
-      index = fresh;
+      await FS.write('projects/index.json', JSON.stringify(latest, null, 2));
+      // other pages may have added components meanwhile: keep theirs, ours win on conflicts
+      const theirs = (await FS.json('projects/components.json')) || { components: [] };
+      const mine = new Set(lib.components.map(c => c.id));
+      for (const c of theirs.components) if (!mine.has(c.id) && !gone.has(c.id)) lib.components.push(c);
+      await FS.write('projects/components.json', JSON.stringify(lib, null, 2));
+      index = latest;
       dirty = false; paintSave(); last = snapshot();
       try { localStorage.removeItem('draft:' + slug); } catch (e) {}
       render();

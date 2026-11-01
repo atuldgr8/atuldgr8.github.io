@@ -128,3 +128,65 @@ kbd { font: inherit; padding: 0 4px; border: 1px solid var(--faint); color: var(
 .wk-tools button, .wk-tools a { padding: 2px 6px; color: var(--mute); text-decoration: none; }
 .wk-tools button:hover, .wk-tools a:hover { color: var(--fg); }
 body.is-editing.work-page .ed-bar, body.is-editing.work-page .ed-toast, body.is-editing.work-page .ed-help { left: 50%; }
+
+/* ---------- rows, rulers, guides, snap lines ---------- */
+.stage.show-rows .ed-grid::after {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--u) * var(--row) - 1px),
+              color-mix(in srgb, var(--hi) 16%, transparent) calc(var(--u) * var(--row) - 1px) calc(var(--u) * var(--row)));
+}
+.ed-ruler { position: fixed; z-index: 58; background: color-mix(in srgb, var(--bg) 85%, transparent); }
+.ed-ruler-x { top: 0; left: 0; right: var(--panel); height: 10px; cursor: row-resize; border-bottom: 1px solid var(--faint); }
+.ed-ruler-y { top: 0; left: 0; bottom: 0; width: 10px; cursor: col-resize; border-right: 1px solid var(--faint); }
+.ed-ruler:hover { background: color-mix(in srgb, var(--hi) 12%, var(--bg)); }
+.previewing .ed-ruler { display: none; }
+.ed-guides { position: absolute; inset: 0; pointer-events: none; z-index: 24; }
+.ed-guide { position: absolute; pointer-events: auto; }
+.ed-guide::after { content: ""; position: absolute; background: #ff2e88; }
+.ed-guide-x { top: 0; bottom: 0; width: 9px; margin-left: -4px; cursor: col-resize; }
+.ed-guide-x::after { left: 4px; top: 0; bottom: 0; width: 1px; }
+.ed-guide-y { left: 0; right: 0; height: 9px; margin-top: -4px; cursor: row-resize; }
+.ed-guide-y::after { top: 4px; left: 0; right: 0; height: 1px; }
+.ed-guide[data-v]::before { content: attr(data-v); position: absolute; left: 8px; top: 8px; font: 400 11px Inter, sans-serif; color: #ff2e88; }
+.ed-snap { position: absolute; background: #ff2e88; }
+.ed-snap-x { top: 0; bottom: 0; width: 1px; }
+.ed-snap-y { left: 0; right: 0; height: 1px; }
+
+/* components are purple, like in other tools */
+.ed-sel.is-comp, .ed-scope.is-comp { outline-color: #8a3ffc; }
+.ed-scope.is-comp span { color: #8a3ffc; }
+
+/* ---------- block library ---------- */
+.ed-lib {
+  position: fixed; z-index: 65; left: calc((100vw - var(--panel)) / 2); bottom: 62px; transform: translateX(-50%);
+  width: min(640px, calc(100vw - var(--panel) - 32px)); max-height: 64vh; overflow-y: auto;
+  padding: 12px 14px 16px; background: var(--bg); color: var(--fg); border: 1px solid var(--fg);
+  font: 400 var(--ed)/1.35 Inter, system-ui, sans-serif; letter-spacing: -0.01em;
+  display: none;
+}
+.ed-lib.on { display: block; }
+.ed-lib-h { color: var(--mute); margin: 10px 0 6px; }
+.ed-lib-h:first-child { margin-top: 0; }
+.ed-lib-g { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; }
+.ed-tile { position: relative; display: grid; gap: 5px; padding: 6px; text-align: left; border: 1px solid var(--faint); cursor: pointer; font: inherit; color: inherit; background: none; }
+.ed-tile:hover { border-color: var(--fg); }
+.ed-own { border-color: color-mix(in srgb, #8a3ffc 45%, transparent); }
+.ed-mini { position: relative; display: block; height: 52px; overflow: hidden; background: var(--ghost); }
+.ed-mini i { position: absolute; display: block; }
+.ed-mini .m-image, .ed-mini .m-video, .ed-mini .m-embed, .ed-mini .m-slides { background: var(--faint); }
+.ed-mini .m-text { background: var(--mute); }
+.ed-mini .m-button, .ed-mini .m-box { border: 1px solid var(--mute); }
+.ed-mini .m-group, .ed-mini .m-instance { outline: 1px dashed var(--mute); }
+.ed-own-tools { position: absolute; top: 4px; right: 4px; display: none; gap: 2px; }
+.ed-own:hover .ed-own-tools { display: flex; }
+.ed-own-tools button { padding: 1px 5px; background: var(--bg); border: 1px solid var(--faint); font: inherit; color: inherit; cursor: pointer; }
+.previewing .ed-lib { display: none; }
+
+/* slideshow strip in the panel */
+.ed-slides { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 8px 0; }
+.ed-slide { position: relative; aspect-ratio: 4 / 3; background: var(--ghost); cursor: pointer; outline: 1px solid transparent; }
+.ed-slide.on { outline-color: var(--hi); }
+.ed-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ed-slide span { position: absolute; right: 2px; bottom: 2px; display: none; gap: 1px; }
+.ed-slide:hover span { display: flex; }
+.ed-slide button { padding: 0 4px; background: var(--bg); border: 1px solid var(--faint); font: 400 11px Inter, sans-serif; cursor: pointer; color: var(--fg); }
