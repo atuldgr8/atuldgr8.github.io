@@ -127,6 +127,8 @@ kbd { font: inherit; padding: 0 4px; border: 1px solid var(--faint); color: var(
 .wk-tools { grid-column: 14; display: flex; justify-content: flex-end; align-items: center; gap: 2px; font: 400 var(--ed) Inter, sans-serif; letter-spacing: 0; }
 .wk-tools button, .wk-tools a { padding: 2px 6px; color: var(--mute); text-decoration: none; }
 .wk-tools button:hover, .wk-tools a:hover { color: var(--fg); }
+.wk-tools button.on { color: var(--fg); }
+.wk-row.is-fun .t::after { content: " *"; color: var(--mute); }
 body.is-editing.work-page .ed-bar, body.is-editing.work-page .ed-toast, body.is-editing.work-page .ed-help { left: 50%; }
 
 /* ---------- rows, rulers, guides, snap lines ---------- */

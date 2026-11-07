@@ -29,6 +29,7 @@ window.Home = (() => {
   addEventListener('touchstart', stop, { passive: true });
   const topOf = el => el.getBoundingClientRect().top + scrollY;
   document.addEventListener('click', e => {
+    if (e.target.closest('.star')) { e.preventDefault(); return openFun(true); }
     const a = e.target.closest('a[href="#work"], a[href="#tldr"]');
     if (!a) return;
     e.preventDefault();
@@ -55,40 +56,62 @@ window.Home = (() => {
   } catch (e) {}
   window.SITE = index || {};
   const all = (index && index.projects) || [];
-  const projects = all.filter(p => !p.hidden);
+  const projects = all.filter(p => !p.hidden && !p.fun);
+  const funs = all.filter(p => !p.hidden && p.fun);           // the not-work: behind the asterisk
   const colour = c => !c ? '' : c[0] === '#' ? c : `var(--${c})`;
 
-  if (!projects.length) list.innerHTML = '<p class="empty">Nothing up yet. Soon.</p>';
-  for (const p of projects) {
-    const a = document.createElement('a');
-    a.className = 'wk';
-    a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
-    a.dataset.dock = '';
-    a.textContent = p.title;
-    if (p.color) a.style.setProperty('--c', colour(p.color));
-    if (p.thumb) {
-      const i = document.createElement('img');
-      i.src = p.thumb; i.alt = ''; i.decoding = 'async'; i.loading = 'lazy';
-      pic.appendChild(i); a._pic = i;
+  function fill(box, arr) {
+    for (const p of arr) {
+      const a = document.createElement('a');
+      a.className = 'wk';
+      a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
+      a.dataset.dock = '';
+      a.textContent = p.title;
+      if (p.color) a.style.setProperty('--c', colour(p.color));
+      if (p.thumb) {
+        const i = document.createElement('img');
+        i.src = p.thumb; i.alt = ''; i.decoding = 'async'; i.loading = 'lazy';
+        pic.appendChild(i); a._pic = i;
+      }
+      box.appendChild(a);
     }
-    list.appendChild(a);
+    if (window.Dock) Dock(box, { max: .12, reach: 2.2 });
+    // the hovered project's picture, beside the list
+    const place = () => {
+      const r = box.getBoundingClientRect();
+      const left = r.right + innerWidth * .06, room = innerWidth - left - innerWidth * .04;
+      pic.style.left = left + 'px';
+      pic.style.width = Math.min(room, innerWidth * .34) + 'px';
+      pic.classList.toggle('none', room < 160);
+    };
+    box.addEventListener('pointerover', e => {
+      const a = e.target.closest('.wk');
+      if (a) place();
+      for (const i of pic.children) i.classList.toggle('on', !!a && i === a._pic);
+    });
+    box.addEventListener('pointerleave', () => { for (const i of pic.children) i.classList.remove('on'); });
   }
-  if (window.Dock) Dock(list, { max: .12, reach: 2.2 });
+  if (!projects.length) list.innerHTML = '<p class="empty">Nothing up yet. Soon.</p>';
+  fill(list, projects);
 
-  // the hovered project's picture, beside the list
-  const place = () => {
-    const r = list.getBoundingClientRect();
-    const left = r.right + innerWidth * .06, room = innerWidth - left - innerWidth * .04;
-    pic.style.left = left + 'px';
-    pic.style.width = Math.min(room, innerWidth * .34) + 'px';
-    pic.classList.toggle('none', room < 160);
-  };
-  list.addEventListener('pointerover', e => {
-    const a = e.target.closest('.wk');
-    if (a) place();
-    for (const i of pic.children) i.classList.toggle('on', !!a && i === a._pic);
-  });
-  list.addEventListener('pointerleave', () => { for (const i of pic.children) i.classList.remove('on'); });
+  /* ---------- the asterisk ----------
+     "work*" in the bar, and a footnote under the list that opens the fun stuff */
+  const funBtn = $('.fun-open'), funList = $('.list.fun');
+  function openFun(go) {
+    if (!funs.length) return;
+    funList.hidden = false; funBtn.classList.add('open');
+    if (go) glide(topOf(funBtn) - innerHeight * .3);
+  }
+  if (funs.length) {
+    const star = document.createElement('span'); star.className = 'star'; star.textContent = '*';
+    star.title = (index && index.funLabel) || 'and some not-work';
+    const w = bar.querySelector('.work'); if (w) w.appendChild(star);
+    funBtn.textContent = '*' + ((index && index.funLabel) || 'and some not-work');
+    funBtn.hidden = false;
+    fill(funList, funs);
+    funBtn.addEventListener('click', () => { if (funList.hidden) openFun(false); else { funList.hidden = true; funBtn.classList.remove('open'); } });
+    if (location.hash === '#fun') addEventListener('load', () => openFun(true));
+  }
 
   /* ---------- TL;DR ----------
      Your own TL;DR pictures if you've added some (work-list editor), otherwise

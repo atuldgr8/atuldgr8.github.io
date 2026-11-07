@@ -192,6 +192,17 @@
   .bulb { touch-action: none; transition: transform .5s var(--pop); }
   #theme.dragging .bulb { transition: none; cursor: grabbing; }
   #theme.dragging { color: var(--fg); }
+  /* in the dark, pointing at the bulb warms it up a little: it can light up */
+  .bulb { transition: transform .5s var(--pop), filter .4s; }
+  :root[data-dark] #theme:hover .bulb .glow { opacity: .45; transition: opacity .4s; }
+  :root[data-dark] #theme:hover .bulb { filter: drop-shadow(0 0 .35em rgba(255, 240, 200, .35)); }
+  /* once, if nobody's touched anything for a bit: the bulb flickers, like it's trying */
+  #theme.flicker .bulb { animation: flick 1.1s steps(1) both; }
+  #theme.flicker .bulb .glow { animation: flickglow 1.1s steps(1) both; }
+  @keyframes flick { 0%, 100% { color: inherit; } 8%, 22%, 40% { color: var(--fg); } 14%, 30% { color: inherit; } }
+  @keyframes flickglow { 0%, 100% { opacity: var(--g0); } 8%, 22%, 40%, 55% { opacity: 1; } 14%, 30%, 48% { opacity: var(--g0); } }
+  :root[data-dark] #theme { --g0: 0; }
+  :root:not([data-dark]) #theme { --g0: 1; }
   main { position: relative; z-index: 2; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -228,6 +239,9 @@
 <!-- keep scrolling: the work, then the TL;DR. Same page, all of it. -->
 <section id="work" class="wk-sec" aria-label="Work">
   <div class="list" aria-label="Projects"></div>
+  <!-- the asterisk: "work*" in the bar leads here. Opens the fun list, right under the work -->
+  <button class="fun-open" id="fun" type="button" hidden></button>
+  <div class="list fun" aria-label="Not-work" hidden></div>
   <a class="tldr-open" href="#tldr" hidden>TL;DR</a>
 </section>
 <div class="wk-pic" aria-hidden="true"></div>
@@ -420,8 +434,8 @@ btn.addEventListener('click', () => {
 });
 
 // pick up the bulb and drag it: in the dark it's a torch that gets
-// bigger and brighter the longer you hold it, until the lights come on
-const FLOOD = 3500;               // ms of holding until it floods the room
+// a little bigger and brighter the longer you hold it (only so much, it never floods the room)
+const FLOOD = 2600;               // ms of holding until it's as big as it gets
 bulb.addEventListener('pointerdown', e => {
   const sx = e.clientX, sy = e.clientY;
   let moving = false, done = false, t0 = 0, raf;
@@ -430,12 +444,10 @@ bulb.addEventListener('pointerdown', e => {
   const grow = now => {
     if (done) return;
     const p = Math.min(1, (now - t0) / FLOOD), q = p * p;       // slow at first, then faster
-    thing.style.setProperty('--r', vmin * .15 + q * vmax * 1.6 + 'px');
-    thing.style.setProperty('--a', .045 + q * .3);
-    thing.style.setProperty('--l', 32 + q * 45 + '%');
-    if (p < 1) { raf = requestAnimationFrame(grow); return; }
-    if (isDark()) lightsOn();                      // flooded: the lights are on now
-    finish();
+    thing.style.setProperty('--r', vmin * .15 + q * vmin * .22 + 'px');
+    thing.style.setProperty('--a', .045 + q * .1);
+    thing.style.setProperty('--l', 32 + q * 16 + '%');
+    if (p < 1) raf = requestAnimationFrame(grow);
   };
   const finish = () => {
     done = true; cancelAnimationFrame(raf);
@@ -467,6 +479,23 @@ bulb.addEventListener('pointerdown', e => {
 });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
 apply(); nearer();
+
+// once per visit: if nobody has touched anything for a few seconds, the bulb flickers
+(() => {
+  try { if (sessionStorage.getItem('flickered')) return; } catch (e) {}
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let t;
+  const wait = () => { clearTimeout(t); t = setTimeout(go, 7000); };
+  const go = () => {
+    if (scrollY > innerHeight * .3) return wait();          // only while the bulb is on screen
+    btn.classList.add('flicker');
+    btn.addEventListener('animationend', () => btn.classList.remove('flicker'), { once: true });
+    try { sessionStorage.setItem('flickered', '1'); } catch (e) {}
+    ['pointermove', 'keydown', 'scroll', 'touchstart'].forEach(ev => removeEventListener(ev, wait));
+  };
+  ['pointermove', 'keydown', 'scroll', 'touchstart'].forEach(ev => addEventListener(ev, wait, { passive: true }));
+  wait();
+})();
 </script>
 <script src="assets/side.js"></script>
 <script src="assets/home.js"></script>

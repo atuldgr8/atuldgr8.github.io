@@ -86,6 +86,8 @@ window.Canvas = (() => {
     if (m) return `https://www.youtube-nocookie.com/embed/${m[1]}`;
     m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
     if (m) return `https://player.vimeo.com/video/${m[1]}`;
+    m = u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/);
+    if (m) return `https://drive.google.com/file/d/${m[1]}/preview`;
     return u;
   }
 
@@ -110,12 +112,18 @@ window.Canvas = (() => {
       if (!it.src) { const p = h('div', 'ph', inner); if (o.edit) p.dataset.label = label; return; }
       const m = h(tag, 'media', inner);
       m.style.objectFit = it.fit || 'cover';
-      if (tag === 'img') { m.alt = it.alt || ''; m.decoding = 'async'; m.draggable = false; if (!o.edit) m.loading = 'lazy'; }
+      if (tag === 'img') { m.alt = it.alt || it.caption || ''; m.decoding = 'async'; m.draggable = false; if (!o.edit) m.loading = 'lazy'; }
       else { m.muted = true; m.loop = true; m.autoplay = true; m.playsInline = true; m.setAttribute('muted', ''); m.setAttribute('playsinline', ''); }
       if (o.onMediaError) m.addEventListener('error', () => o.onMediaError(m, it.src), { once: true });
       m.src = o.src(it.src);
       if (it.round) m.style.borderRadius = `calc(var(--u) * ${it.round})`;
     };
+
+    // a caption under pictures, videos and embeds: always there, or only when you point at it
+    if (it.caption && /^(image|video|embed|slides)$/.test(it.type)) {
+      const c = h('div', 'cap' + (it.capShow ? ' always' : ''), pos);
+      c.textContent = it.caption;
+    }
 
     switch (it.type) {
       case 'text': {

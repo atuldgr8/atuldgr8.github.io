@@ -19,6 +19,13 @@ main { position: relative; z-index: 2; }
 .wk.near, .wk:focus-visible { color: var(--c, var(--fg)); outline: none; }
 .list.has-near .wk:not(.near) { opacity: .4; }
 .empty { color: var(--mute); }
+/* the asterisk: a footnote under the work, opening the not-work */
+.star { color: var(--mute); cursor: pointer; padding-left: .05em; }
+.star:hover { color: var(--hc, var(--fg)); }
+.fun-open { display: block; margin-top: calc(var(--step) * 1.2); padding: 0; color: var(--mute); text-align: left; cursor: pointer; }
+.fun-open:hover, .fun-open.open { color: var(--fg); }
+.fun-open[hidden], .list.fun[hidden] { display: none; }
+.list.fun { margin-top: calc(var(--step) / 2); }
 .tldr-open { position: absolute; left: 0; bottom: var(--gutter); color: var(--mute); text-decoration: none; }
 .tldr-open[hidden] { display: none; }
 

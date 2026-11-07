@@ -376,6 +376,14 @@
   sep();
   B('+ text', 'Add text (T)', () => addText());
   B('+ image', 'Add pictures (or drop / paste them anywhere)', async () => addFiles(await pickFiles('image/*')));
+  B('+ video', 'A YouTube, Vimeo or Google Drive link, or a video file', async () => {
+    const url = prompt('Paste a YouTube, Vimeo or Google Drive link.\n(Leave it empty to pick a video file from your laptop instead.)');
+    if (url == null) return;
+    if (!url.trim()) return addFiles(await pickFiles('video/*'));
+    const w = r1(G().span(G().cols));
+    add({ id: uid(), type: 'embed', x: r1(col0()), y: r1(viewY()), w, h: r1(w * 9 / 16), src: url.trim() });
+    if (/drive\.google/.test(url)) toast('Google Drive: the video must be shared as “Anyone with the link”, or visitors see a sign-in box.', 6000);
+  });
   const libB = B('+ blocks', 'Ready-made blocks, buttons, slideshows and your own components (B)', () => toggleLib());
   sep();
   const gridB = B('grid', 'Show the grid (G)', () => { pref.grid = !pref.grid; paintToggles(); });
@@ -1446,7 +1454,6 @@
     }
     if (it.type === 'image' || it.type === 'video') {
       seg(S, 'fit', { cover: 'fill box', contain: 'whole picture' }, () => it.fit || 'cover', v => it.fit = v);
-      if (it.type === 'image') text(S, 'alt text', () => it.alt, v => it.alt = v, 'what is in the picture');
       num(S, 'round corners', () => it.round || 0, v => { if (v > 0) it.round = v; else delete it.round; }, 1);
       actions(S, [
         [it.src ? 'replace' : 'choose file', async () => { const f = await pickFiles('image/*,video/*', false); if (f.length) addFiles(f, null, it); }],
@@ -1456,8 +1463,14 @@
       if (it.src) h('p', 'ed-note', S, it.src.startsWith('blob:') ? 'not saved into the folder yet' : it.src);
     }
     if (it.type === 'slides') slidesPanel(it, S);
+    if (/^(image|video|embed|slides)$/.test(it.type)) {
+      const Cp = keyed(sec('Caption', panel, !!it.caption), 'caption');
+      text(Cp, 'caption', () => it.caption, v => { if (v.trim()) it.caption = v.trim(); else delete it.caption; }, 'a few quiet words under it');
+      check(Cp, 'always show it', () => !!it.capShow, v => { if (v) it.capShow = true; else delete it.capShow; });
+      h('p', 'ed-note', Cp, 'Off: it appears only when someone points at it (on phones it always shows). It also describes the picture for screen readers and Google. Leave room under the thing for it.');
+    }
     if (it.type === 'embed') {
-      text(S, 'link', () => it.src, v => it.src = v, 'youtube / vimeo / any url');
+      text(S, 'link', () => it.src, v => it.src = v, 'youtube / vimeo / google drive link');
       actions(S, [['16 : 9', () => { it.h = r1(it.w * 9 / 16); commit(); }], ['4 : 3', () => { it.h = r1(it.w * 3 / 4); commit(); }], ['square', () => { it.h = it.w; commit(); }]]);
     }
     if (it.type === 'box') {

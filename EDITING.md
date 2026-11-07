@@ -63,6 +63,19 @@ When Claude says it's pushed, press **Fetch**, then **Pull**. This stops the two
 - Pictures over about 500 KB are shrunk automatically when you add them (max 2400px, saved as .webp).
   GIFs and small pictures are left alone.
 
+## Captions and video
+
+- Select a picture, video or embed: its **Caption** part has the words and an **always show** switch.
+  Off: the caption appears when someone points at it (phones always show it). Leave a little room under it.
+- **+ video** in the bottom bar: paste a YouTube, Vimeo or Google Drive link, or leave it empty to pick a video file.
+  Google Drive videos must be shared as "Anyone with the link".
+
+## Fun (behind the asterisk)
+
+- In the work-list editor, press **fun** on a project to move it out of the work list.
+- Once there's one, "work" in the top bar becomes **work*** and a footnote under the list opens them.
+  Change the footnote's words in the **Fun** box below the list.
+
 ## If you don't see a change after pulling
 
 Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That makes Chrome forget its old copy.

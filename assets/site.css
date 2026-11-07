@@ -214,3 +214,12 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
 /* in the top bar, over a picture, the hover colour comes out inverted (the bar
    inverts what's under it), so it gets the opposite colour to start with */
 .top.blend a.hc { color: var(--hci) !important; }
+
+/* captions: quiet, under the thing. Either always there, or they appear when you point at it */
+.it > .cap { position: absolute; left: 0; right: 0; top: 100%; padding-top: .45em; color: var(--mute); line-height: 1.3; pointer-events: none; }
+.it > .cap:not(.always) { opacity: 0; transform: translateY(-3px); transition: opacity .25s, transform .35s var(--pop, ease); }
+.it:hover > .cap { opacity: 1; transform: none; }
+@media (hover: none) { .it > .cap:not(.always) { opacity: 1; transform: none; } }   /* phones can't point: show them all */
+.cv.flow > .it > .cap { position: static; padding-top: .45em; }
+.top .star { color: var(--mute); padding-left: .05em; cursor: pointer; }
+.top .star:hover { color: var(--fg); }

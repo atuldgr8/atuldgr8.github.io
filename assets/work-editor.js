@@ -51,7 +51,7 @@
     list.textContent = '';
     if (!index.projects.length) h('p', 'empty', list, 'No projects yet. Start one with “+ new project”.');
     index.projects.forEach((p, i) => {
-      const r = h('div', 'wk-row' + (p.hidden ? ' hidden' : ''), list);
+      const r = h('div', 'wk-row' + (p.hidden ? ' hidden' : '') + (p.fun ? ' is-fun' : ''), list);
       const grab = h('span', 'grab', r, '⠿'); grab.title = 'drag to reorder';
       r.draggable = false;
       grab.onpointerdown = () => { r.draggable = true; };
@@ -89,6 +89,9 @@
       const vw = h('button', '', tools, p.hidden ? 'show' : 'hide'); vw.type = 'button';
       vw.title = p.hidden ? 'Hidden from visitors' : 'Visible to visitors';
       vw.onclick = () => { p.hidden = !p.hidden; mark(p, 'hidden'); touch(); draw(); };
+      const fn = h('button', p.fun ? 'on' : '', tools, p.fun ? 'fun ✓' : 'fun'); fn.type = 'button';
+      fn.title = p.fun ? 'In the fun list (behind the asterisk)' : 'Move it to the fun list, behind “work*”';
+      fn.onclick = () => { if (p.fun) delete p.fun; else p.fun = true; mark(p, 'fun'); touch(); draw(); };
       const del = h('button', '', tools, '×'); del.type = 'button'; del.title = 'Remove from the list (the page file stays in your folder)';
       del.onclick = () => { if (confirm(`Take “${p.title}” off the list? Its page file stays in projects/.`)) { index.projects.splice(i, 1); removed.add(p.slug); touch(); draw(); } };
     });
@@ -150,6 +153,15 @@
   /* ---------- below the list: TL;DR and site colours ---------- */
   function extras() {
     const box = h('div', 'wk-extra', list);
+
+    // the asterisk
+    const F = h('section', 'wk-box', box);
+    h('h3', '', F, 'Fun (behind the asterisk)');
+    const fl = h('p', 'wk-line', F); h('span', '', fl, 'the footnote reads: *');
+    const ft = h('span', 'wk-edit', fl, index.funLabel || 'and some not-work');
+    ft.contentEditable = 'plaintext-only'; ft.spellcheck = false;
+    ft.oninput = () => { index.funLabel = ft.textContent.trim() || 'and some not-work'; setTop('funLabel'); };
+    h('p', 'wk-hint', F, 'Press “fun” on a project to move it here. Once there’s at least one, “work” in the top bar becomes “work*”, and the footnote under the list opens them.');
 
     // TL;DR
     const T = h('section', 'wk-box', box);

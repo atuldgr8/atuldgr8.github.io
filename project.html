@@ -50,6 +50,12 @@
   const list = (index && index.projects) || [];
   const meta = list.find(p => p.slug === slug);
   if (meta) document.title = `${meta.title} · Atul Suresh`;
+  if (list.some(p => p.fun && !p.hidden)) {      // "work*": the asterisk leads to the fun list on the home page
+    const st = document.createElement('span'); st.className = 'star'; st.textContent = '*';
+    st.title = index.funLabel || 'and some not-work';
+    st.addEventListener('click', e => { e.preventDefault(); location.href = './#fun'; });
+    document.querySelector('.top .nav-work').appendChild(st);
+  }
 
   if (!slug || !doc) {
     cv.outerHTML = '<p class="missing">Nothing here (yet). <a href="./#work">Back to work</a></p>';
