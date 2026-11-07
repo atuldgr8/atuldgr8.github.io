@@ -1,13 +1,33 @@
 {
   "projects": [
     {
+      "slug": "test2",
+      "title": "Blah Blah",
+      "year": "2026",
+      "tags": "",
+      "summary": "",
+      "thumb": "",
+      "hidden": true
+    },
+    {
       "slug": "sample-project",
       "title": "Sample project",
       "year": "2026",
       "tags": "template, delete me",
       "summary": "",
       "thumb": "",
-      "hidden": false
+      "hidden": false,
+      "color": "#db0007"
+    },
+    {
+      "slug": "design-process",
+      "title": "Collaborative by Design",
+      "year": "2026",
+      "tags": "",
+      "summary": "",
+      "thumb": "projects/media/design-process/noon-rest-from-work-van-gogh.jpeg",
+      "hidden": false,
+      "color": "#b8b100"
     }
   ]
 }

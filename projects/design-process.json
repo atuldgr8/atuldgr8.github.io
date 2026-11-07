@@ -1,0 +1,358 @@
+{
+  "v": 1,
+  "items": [
+    {
+      "id": "i1d96n",
+      "type": "text",
+      "x": 32,
+      "y": 192.2,
+      "w": 460,
+      "h": 17.8,
+      "text": "Collaborative by Design",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "i21o4f",
+      "type": "text",
+      "x": 32,
+      "y": 224,
+      "w": 460,
+      "h": 53.4,
+      "text": "Exploring how different modes of expression shape collaboration, and imagining more inclusive ways of learning together at NID in 2030",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "i3vexc",
+      "type": "text",
+      "x": 746,
+      "y": 210,
+      "w": 222,
+      "h": 53.5,
+      "text": "2025<br>Your role<br>With whom",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "i4bkwi",
+      "type": "image",
+      "x": 32,
+      "y": 330,
+      "w": 936,
+      "h": 527,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "i5od5h",
+      "type": "text",
+      "x": 32,
+      "y": 930,
+      "w": 380.6666666666667,
+      "h": 35.6,
+      "text": "The problem. A few sentences about what you set out to do and what made it hard.",
+      "anim": {}
+    },
+    {
+      "id": "i6ukfc",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 930,
+      "w": 460,
+      "h": 345,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "i7zcyy",
+      "type": "image",
+      "x": 32,
+      "y": 1380,
+      "w": 936,
+      "h": 566,
+      "src": "",
+      "anim": {
+        "scroll": {
+          "on": true,
+          "keys": [
+            {
+              "at": 100,
+              "s": {
+                "scale": 1.12
+              },
+              "ease": "linear"
+            },
+            {
+              "at": 30,
+              "s": {
+                "scale": 1
+              },
+              "ease": "linear"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i83fph",
+      "type": "image",
+      "x": 32,
+      "y": 2040,
+      "w": 460,
+      "h": 575,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "i95f4p",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 2040,
+      "w": 460,
+      "h": 575,
+      "src": "",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.12,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "iarg7u",
+      "type": "text",
+      "x": 270,
+      "y": 2720,
+      "w": 460,
+      "h": 35.6,
+      "text": "What happened in the end. What you learned, what you would do next."
+    },
+    {
+      "type": "text",
+      "h": 17.8,
+      "x": 32,
+      "y": 3028,
+      "w": 777.3333333333334,
+      "weight": 700,
+      "text": "One bold sentence that sums the whole thing up.",
+      "id": "i2ekyr5p",
+      "anim": {}
+    },
+    {
+      "type": "text",
+      "h": 17.8,
+      "x": 32,
+      "y": 3154,
+      "w": 222,
+      "color": "mute",
+      "text": "intro",
+      "nav": "intro",
+      "id": "i4scngam"
+    },
+    {
+      "type": "text",
+      "h": 17.8,
+      "x": 270,
+      "y": 3154,
+      "w": 539.3333333333334,
+      "weight": 700,
+      "text": "The one sentence someone should remember from this part.",
+      "id": "i4tp2v6w"
+    },
+    {
+      "type": "text",
+      "h": 35.6,
+      "x": 270,
+      "y": 3190,
+      "w": 539.3333333333334,
+      "text": "A few lines of story. What was going on, what you noticed, what you decided to do about it. Keep it short: the pictures do the rest.",
+      "id": "i4utqurs"
+    },
+    {
+      "id": "it4bnylr1",
+      "type": "image",
+      "x": -3.3,
+      "y": 1904,
+      "w": 292.7,
+      "h": 252,
+      "src": "projects/media/design-process/517c89d185a340ee9f3076a1eb07a67b.webp",
+      "fit": "cover",
+      "alt": "",
+      "anim": {}
+    },
+    {
+      "type": "box",
+      "fill": "faint",
+      "x": 32,
+      "y": 2828,
+      "w": 936,
+      "h": 1,
+      "id": "i2e82g06",
+      "anim": {}
+    },
+    {
+      "type": "group",
+      "x": 32,
+      "y": 2844,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "role",
+          "id": "i2grg7a5",
+          "anim": {}
+        },
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "What you did",
+          "id": "i2hwpu7h",
+          "anim": {}
+        }
+      ],
+      "id": "i2fwj5fp",
+      "anim": {}
+    },
+    {
+      "type": "group",
+      "x": 270,
+      "y": 2844,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "when",
+          "id": "i2jtc8aj"
+        },
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "8 weeks, 2026",
+          "id": "i2kukulj"
+        }
+      ],
+      "id": "i2ijyvdo"
+    },
+    {
+      "type": "group",
+      "x": 508,
+      "y": 2844,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "with",
+          "id": "i2mfhcvq"
+        },
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "Who you worked with",
+          "id": "i2nppafb"
+        }
+      ],
+      "id": "i2l7cm9p"
+    },
+    {
+      "type": "group",
+      "x": 746,
+      "y": 2844,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "tools",
+          "id": "i2poqij8"
+        },
+        {
+          "type": "text",
+          "h": 17.8,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "Figma, p5.js, a lot of paper",
+          "id": "i2q8wrcg"
+        }
+      ],
+      "id": "i2oggeap",
+      "anim": {}
+    }
+  ],
+  "guides": {
+    "x": [],
+    "y": []
+  }
+}
