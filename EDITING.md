@@ -1,6 +1,6 @@
 # Editing the site
 
-1. In the site folder, run `python3 -m http.server` and open http://localhost:8000/work.html?edit in Chrome, Edge or Arc.
+1. Double-click **start-editor.command** (Mac) or **start-editor.bat** (Windows) in this folder. It starts the site and opens the editor in Chrome. Keep its window open while you work. (By hand: `python3 -m http.server 8000` here, then open http://localhost:8000/work.html?edit.) On your laptop every page also shows a small blue **edit** link in the corner.
 2. Press **connect folder** once and pick this folder (the one with index.html). Saving now writes straight into it.
 3. **+ new project** makes a page from the template. **edit page** opens the editor.
 4. In the editor: drop pictures onto the grey placeholders, double-click text to type, drag things around (they snap to the 12 columns; hold Alt to break the grid). Press `?` for every shortcut.
