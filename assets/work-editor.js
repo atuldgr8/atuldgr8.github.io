@@ -62,9 +62,14 @@
         s.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); s.blur(); } };
       };
       field('t', 'title', 'title');
+      if (p.color) r.style.setProperty('--c', p.color);
       field('k', 'tags', 'tags');
       field('y', 'year', 'year');
       const tools = h('span', 'wk-tools', r);
+      const col = h('input', '', tools); col.type = 'color'; col.title = 'Colour of this name on the work page and in the side nav';
+      col.value = p.color || '#000000';
+      col.oninput = () => { p.color = col.value; r.style.setProperty('--c', col.value); touch(); };
+      if (p.color) { const clr = h('button', '', tools, '⌫'); clr.type = 'button'; clr.title = 'back to black'; clr.onclick = () => { delete p.color; touch(); draw(); }; }
       const ed = h('a', '', tools, 'edit page'); ed.href = `project.html?p=${encodeURIComponent(p.slug)}&edit`;
       const vw = h('button', '', tools, p.hidden ? 'show' : 'hide'); vw.type = 'button';
       vw.title = p.hidden ? 'Hidden from visitors' : 'Visible to visitors';
@@ -72,6 +77,15 @@
       const del = h('button', '', tools, '×'); del.type = 'button'; del.title = 'Remove from the list (the page file stays in your folder)';
       del.onclick = () => { if (confirm(`Take “${p.title}” off the list? Its page file stays in projects/.`)) { index.projects.splice(i, 1); touch(); draw(); } };
     });
+  }
+
+  function tldr() {
+    const w = h('div', 'wk-tldr', list);
+    h('span', '', w, 'link at the bottom of the work page:');
+    const t = h('span', '', w, index.tldr || 'TL;DR');
+    t.contentEditable = 'plaintext-only'; t.spellcheck = false;
+    t.oninput = () => { index.tldr = t.textContent.trim() || 'TL;DR'; touch(); };
+    h('span', '', w, '· opens a slideshow: one picture per project (its thumbnail)');
   }
 
   async function add() {
@@ -99,5 +113,7 @@
     } catch (e) { toast('Could not save: ' + e.message, 5000); }
   }
 
+  const draw0 = draw;
+  draw = () => { draw0(); tldr(); };
   paint(); draw();
 })();

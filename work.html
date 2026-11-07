@@ -20,11 +20,18 @@
   <a class="nav-resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 </header>
 
-<main class="list"></main>
+<main class="list" aria-label="Projects"></main>
+<button class="tldr-open" type="button" hidden>TL;DR</button>
+<div class="tldr" role="dialog" aria-modal="true" aria-label="All projects, in short">
+  <div class="tldr-top"><span class="lbl"></span><button type="button" class="x">close</button></div>
+  <div class="tldr-stage"></div>
+  <div class="tldr-cap"><a href="#"></a><span class="sum"></span><span class="n"></span></div>
+</div>
 <img class="peek" alt="" aria-hidden="true">
 
 <script src="assets/canvas.js"></script>
 <script src="assets/fs.js"></script>
+<script src="assets/side.js"></script>
 <script>
 (async () => {
   const q = new URLSearchParams(location.search);
@@ -35,8 +42,9 @@
     await FS.restore();
     const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'assets/editor.css';
     document.head.appendChild(css);
-    const s = document.createElement('script'); s.src = 'assets/work-editor.js';
-    document.body.appendChild(s);
+    const b = document.createElement('script'); b.src = 'assets/blocks.js';
+    b.onload = () => { const s = document.createElement('script'); s.src = 'assets/work-editor.js'; document.body.appendChild(s); };
+    document.body.appendChild(b);
     return;
   }
 
@@ -46,36 +54,72 @@
 
   for (const p of projects) {
     const a = document.createElement('a');
-    a.className = 'row';
+    a.className = 'wk';
     a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
-    a.innerHTML = '<span class="t"></span><span class="k"></span><span class="y"></span>';
+    a.dataset.dock = '';
+    a.innerHTML = '<span class="t"></span><span class="y"></span>';
     a.querySelector('.t').textContent = p.title;
-    a.querySelector('.k').textContent = p.tags || '';
     a.querySelector('.y').textContent = p.year || '';
+    if (p.color) a.style.setProperty('--c', p.color);
     if (p.thumb) { a.dataset.thumb = p.thumb; new Image().src = p.thumb; }
     list.appendChild(a);
   }
+  Dock(list, { max: .45, reach: 2.4 });
 
   /* the thumbnail trails the cursor, a little behind it */
-  let tx = 0, ty = 0, x = 0, y = 0, raf = 0, on = false;
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0, on = false, rowRight = 0;
   const loop = () => {
     x += (tx - x) * .18; y += (ty - y) * .18;
     peek.style.transform = `translate(${x}px, ${y}px)`;
     raf = (on || Math.abs(tx - x) > .5) ? requestAnimationFrame(loop) : 0;
   };
   addEventListener('pointermove', e => {
-    tx = e.clientX + 24; ty = e.clientY - peek.offsetHeight / 2;
+    tx = Math.max(e.clientX + 32, rowRight + 40); ty = e.clientY - peek.offsetHeight / 2;
     if (!on) { x = tx; y = ty; }
     if (!raf) raf = requestAnimationFrame(loop);
   });
   list.addEventListener('pointerover', e => {
-    const row = e.target.closest('.row');
+    const row = e.target.closest('.wk');
     if (!row || !row.dataset.thumb) { on = false; peek.classList.remove('on'); return; }
     if (peek.getAttribute('src') !== row.dataset.thumb) peek.src = row.dataset.thumb;
+    rowRight = row.querySelector('.t').getBoundingClientRect().right;
     on = true; peek.classList.add('on');
     if (!raf) raf = requestAnimationFrame(loop);
   });
   list.addEventListener('pointerleave', () => { on = false; peek.classList.remove('on'); });
+
+  /* TL;DR: one slide per project. Click (or →) for the next one, ← for the last, Esc to close. */
+  const open = document.querySelector('.tldr-open'), box = document.querySelector('.tldr');
+  const stage = box.querySelector('.tldr-stage'), cap = box.querySelector('.tldr-cap');
+  const label = (index && index.tldr) || 'TL;DR';
+  open.textContent = label; box.querySelector('.lbl').textContent = label; open.hidden = false;
+  const slides = projects.map(p => {
+    const d = document.createElement('div'); d.className = 'tldr-slide';
+    if (p.thumb) { const i = document.createElement('img'); i.src = p.thumb; i.alt = p.title; i.loading = 'lazy'; d.appendChild(i); }
+    else { const n = document.createElement('div'); n.className = 'noimg'; d.appendChild(n); }
+    stage.appendChild(d); return d;
+  });
+  let at = 0;
+  const show = i => {
+    at = (i + projects.length) % projects.length;
+    slides.forEach((s, j) => s.classList.toggle('on', j === at));
+    const p = projects[at], a = cap.querySelector('a');
+    a.textContent = p.title; a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
+    p.color ? a.style.setProperty('--c', p.color) : a.style.removeProperty('--c');
+    cap.querySelector('.sum').textContent = [p.summary, p.year].filter(Boolean).join(' · ');
+    cap.querySelector('.n').textContent = `${at + 1} / ${projects.length}`;
+  };
+  const close = () => { box.classList.remove('on'); open.focus(); };
+  open.addEventListener('click', () => { show(0); box.classList.add('on'); box.querySelector('.x').focus(); });
+  box.querySelector('.x').addEventListener('click', close);
+  stage.addEventListener('click', e => { const r = stage.getBoundingClientRect(); show(at + (e.clientX - r.left < r.width / 3 ? -1 : 1)); });
+  stage.addEventListener('pointermove', e => { const r = stage.getBoundingClientRect(); stage.style.cursor = e.clientX - r.left < r.width / 3 ? 'w-resize' : 'e-resize'; });
+  addEventListener('keydown', e => {
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(at + 1); }
+    if (e.key === 'ArrowLeft') show(at - 1);
+  });
 })();
 </script>
 <script src="assets/local.js"></script>

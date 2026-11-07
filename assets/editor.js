@@ -360,8 +360,10 @@
   /* ---------------- render ---------------- */
   function render(keepPanel) {
     if (previewing) return;
+    document.body.classList.toggle('has-side', (doc.side || 'projects') !== 'off');
     C.render(cv, doc, { edit: true, src: resolve, onMediaError, lib: libMap(), slideAt });
-    syncU();
+    mountSide(true);
+    lay();
     // remember how tall text boxes turned out, so groups and selections fit them
     for (const el of cv.querySelectorAll('.it.t-text')) { const it = el._item, w = el.offsetWidth; if (w && it.w) it.h = r1(el.offsetHeight / (w / it.w)); }
     // a component's box follows its own proportions
@@ -373,6 +375,11 @@
     drawGrid(); drawGuides(); drawOverlay();
     if (!keepPanel) inspector();
     if (libEl.classList.contains('on')) drawLib();
+  }
+  function mountSide(edit) {
+    const list = index.projects.map(p => p.slug === slug ? meta : p);
+    if (!list.some(p => p.slug === slug)) list.push(meta);
+    SideNav.mount({ mode: doc.side || 'projects', projects: list, current: slug, cv, edit });
   }
   function syncU() { stage.style.setProperty('--u', cv.style.getPropertyValue('--u')); }
   function lay() { C.layout(cv); syncU(); }
@@ -411,6 +418,7 @@
   function drawOverlay() {
     ov.textContent = '';
     if (previewing) return;
+    preview();
     const u = uPx();
     for (const l of snapLines) {
       const d = h('div', 'ed-snap ed-snap-' + l.axis, ov);
@@ -434,6 +442,7 @@
       const dirs = it.type === 'text' ? ['e', 'w'] : it.type === 'instance' ? ['e', 'w', 'se', 'sw', 'ne', 'nw'] : ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
       for (const d of dirs) { const k = h('i', 'hd hd-' + d, f); k.dataset.h = d; }
       h('span', 'ed-size', f, cols(it)).title = 'where it sits on the grid';
+      if (poseKey()) { const pf = frame(rectOf(e._ly.scroll), 'ed-pose'); h('span', '', pf, 'posing keyframe · drag to move it'); }
     }
   }
   function cols(it) {                     // "cols 3–8" when it sits on the grid, else units
@@ -527,6 +536,17 @@
 
   function startMove(e) {
     const its = selected(); if (!its.length) return;
+    const pk = poseKey();
+    if (pk) {                             // a keyframe is selected: dragging poses it, the element itself stays put
+      const s0 = { x: pk.s.x || 0, y: pk.s.y || 0 }, q0 = toUnits(e);
+      drag(e, ev => {
+        const q = toUnits(ev);
+        pk.s.x = r1(s0.x + q.x - q0.x); pk.s.y = r1(s0.y + q.y - q0.y);
+        if (!pk.s.x) delete pk.s.x; if (!pk.s.y) delete pk.s.y;
+        drawOverlay();
+      }, () => { commit(true); inspector(); });
+      return;
+    }
     const start = its.map(i => ({ i, x: i.x, y: i.y }));
     const bb = bbox(its), p0 = toUnits(e), skip = new Set(its.map(i => i.id));
     let moved = false;
@@ -680,62 +700,61 @@
   }
 
   /* ---------------- the block library ----------------
-     Ready-made layouts drop in as plain things you can change freely.
+     Ready-made blocks (assets/blocks.js) drop in as plain things you can
+     change freely. They go below whatever is selected (or where you are),
+     and everything underneath moves down to make room.
      "Yours" are components: every copy stays linked to the original. */
-  function blocks() {
-    const g = G(), c = g.cols, x = i => g.colX(i), w = n => g.span(n);
-    const half = Math.floor(c / 2), third = Math.floor(c / 3);
-    const T = (o) => ({ type: 'text', h: 14, ...o });
-    const I = (o) => ({ type: 'image', src: '', fit: 'cover', ...o });
-    const rise = { enter: { on: true, from: { opacity: 0, y: 40 }, dur: .9, delay: 0, ease: 'out' } };
-    return {
-      'Layouts': {
-        'Text column': () => [T({ x: x(0), y: 0, w: w(Math.ceil(c / 2)), text: 'A paragraph of text. Say what happened, why it mattered, and what you did about it.' })],
-        'Heading + text': () => [T({ x: x(0), y: 0, w: w(third), text: 'A heading', weight: 700 }), T({ x: x(third), y: 0, w: w(half), text: 'The text that goes with it, sitting to the right, starting at the same line.' })],
-        'Picture + caption': () => [I({ x: x(0), y: 0, w: w(c - third), h: w(c - third) * .625, anim: rise }), T({ x: x(c - third), y: w(c - third) * .625 - 28, w: w(third), color: 'mute', text: 'Caption: what you are looking at.' })],
-        'Text + picture': () => [T({ x: x(0), y: 0, w: w(Math.max(1, half - 1)), text: 'Text on one side, the picture on the other.' }), I({ x: x(half), y: 0, w: w(c - half), h: w(c - half) * .75, anim: rise })],
-        'Two up': () => [I({ x: x(0), y: 0, w: w(half), h: w(half) * 1.25, anim: rise }), I({ x: x(c - half), y: 0, w: w(half), h: w(half) * 1.25, anim: { enter: { ...rise.enter, delay: .12 } } })],
-        'Three up': () => [0, 1, 2].map(i => I({ x: x(i * third), y: 0, w: w(third), h: w(third), anim: { enter: { ...rise.enter, delay: i * .1 } } })),
-        'Full bleed': () => [I({ x: 0, y: 0, w: U, h: U * .56, anim: { scroll: { on: true, from: { scale: 1.12 }, to: {}, start: 100, end: 30, ease: 'linear' } } })],
-        'Big quote': () => [T({ x: x(Math.floor(c / 6)), y: 0, w: w(c - 2 * Math.floor(c / 6)), weight: 700, text: '“Say something someone said, or something you believe.”' }), T({ x: x(Math.floor(c / 6)), y: 42, w: w(third), color: 'mute', text: '— who said it' })],
-        'Numbers': () => [0, 1, 2].flatMap(i => [T({ x: x(i * third), y: 0, w: w(third), weight: 700, text: ['3', '40+', '12'][i] }), T({ x: x(i * third), y: 14, w: w(third), color: 'mute', text: ['weeks', 'interviews', 'prototypes'][i] })]),
-        'Divider': () => [{ type: 'box', fill: 'faint', x: x(0), y: 0, w: g.span(c), h: 1 }],
-      },
-      'Elements': {
-        'Button': () => [{ type: 'button', look: 'line', text: 'Button', x: x(0), y: 0, w: w(Math.max(1, Math.round(c / 6))), h: 42, link: { href: '', newTab: true }, anim: { hover: { on: true, to: { scale: 1.03 }, dur: .4, ease: 'pop' } } }],
-        'Slideshow': () => [{ type: 'slides', slides: [], mode: 'click', every: 3, trans: 'fade', counter: true, fit: 'cover', x: x(0), y: 0, w: g.span(c), h: g.span(c) * .5625 }],
-        'Video embed': () => [{ type: 'embed', src: '', x: x(0), y: 0, w: g.span(c), h: g.span(c) * .5625 }],
-        'Video file': () => [{ type: 'video', src: '', fit: 'cover', x: x(0), y: 0, w: g.span(c), h: g.span(c) * .5625 }],
-        'Box': () => [{ type: 'box', fill: 'line', x: x(0), y: 0, w: w(third), h: w(third) }],
-      },
-    };
+  const GAP_Y = 112;                      // breathing room between blocks, in units
+  function placeY(h) {
+    const top = !scope.length;
+    const its = selected().filter(i => scopeItems().includes(i));
+    let y = its.length ? Math.max(...its.map(i => i.y + (i.h || 14))) + GAP_Y : viewY();
+    if (top) for (let n = 0; n < 12; n++) {          // don't land in the middle of something
+      const hit = doc.items.find(i => i.y < y - 1 && i.y + (i.h || 14) > y + 1);
+      if (!hit) break;
+      y = hit.y + (hit.h || 14) + GAP_Y;
+    }
+    y = rowSnap(y) ?? y;
+    if (top) for (const i of doc.items) if (i.y >= y - 1) i.y = r1(i.y + h + GAP_Y);   // make room
+    return y;
   }
   function insert(list) {
-    const o = origin(), bb = bbox(list), y0 = viewY();
-    const items = list.map(i => ({ id: uid(), ...i, x: r1((i.x - o.x) / o.k), y: r1(i.y - bb.y + y0) }));
+    const o = origin(), bb = bbox(list), hgt = Blocks.height(list.map(i => ({ ...i, y: i.y - bb.y })));
+    const y0 = placeY(hgt);
+    const items = list.map(i => ({ ...i, id: i.id || uid(), x: r1((i.x - o.x) / o.k), y: r1(i.y - bb.y + y0) }));
     scopeItems().push(...items);
     closeLib(); setSel(items.map(i => i.id)); commit();
+    toast(scope.length ? 'Added' : 'Added. Everything below moved down to make room.');
   }
   function insertComp(c) {
-    const o = origin();
-    let w = c.w; if (w > U) w = U;
-    const it = { id: uid(), type: 'instance', ref: c.id, x: r1((G().colX(0) - o.x) / o.k), y: r1(viewY()), w: r1(w), h: r1(c.h * w / c.w) };
-    if (it.x + it.w > U) it.x = 0;
     if (scope.some(id => { const s = find(id).it; return s.type === 'instance' && s.ref === c.id; })) return toast('A component can\'t go inside itself');
+    const o = origin();
+    let w = Math.min(c.w, U);
+    const it = { id: uid(), type: 'instance', ref: c.id, x: r1((G().colX(0) - o.x) / o.k), y: 0, w: r1(w), h: r1(c.h * w / c.w) };
+    if (it.x + it.w > U) it.x = 0;
+    it.y = r1(placeY(it.h));
     scopeItems().push(it); closeLib(); setSel([it.id]); commit();
+  }
+  function moveBelow(it, dy) {            // more or less space under something
+    const b = it.y + (it.h || 14);
+    for (const i of scopeItems()) if (i !== it && i.y >= b - 1) i.y = r1(Math.max(b, i.y + dy));
+    commit(true);
   }
   function toggleLib() { libEl.classList.contains('on') ? closeLib() : (drawLib(), libEl.classList.add('on'), libB.classList.add('on')); }
   function closeLib() { libEl.classList.remove('on'); libB.classList.remove('on'); }
   function drawLib() {
     libEl.textContent = '';
-    for (const [title, set] of Object.entries(blocks())) {
+    const g0 = G(), cats = {};
+    for (const b of Blocks.LIB) (cats[b.cat] = cats[b.cat] || []).push(b);
+    for (const [title, set] of Object.entries(cats)) {
       h('p', 'ed-lib-h', libEl, title);
       const g = h('div', 'ed-lib-g', libEl);
-      for (const [name, make] of Object.entries(set)) {
+      for (const blk of set) {
         const b = h('button', 'ed-tile', g); b.type = 'button';
-        drawThumb(h('span', 'ed-mini', b), make());
-        h('span', '', b, name);
-        b.onclick = () => insert(make());
+        drawThumb(h('span', 'ed-mini', b), Blocks.make(blk, g0));
+        h('span', '', b, blk.name);
+        if (blk.note) h('small', '', b, blk.note);
+        b.onclick = () => insert(Blocks.make(blk, G()));
       }
     }
     h('p', 'ed-lib-h', libEl, 'Yours · linked: edit one, they all change');
@@ -763,13 +782,17 @@
   function drawThumb(box, items, c) {     // a tiny schematic of a block
     const b = c ? { x: 0, y: 0, w: c.w, h: c.h } : bbox(items);
     const W = Math.max(b.w, 1), H = Math.max(b.h, 1), k = Math.min(1, 1.6 * W / H);
-    for (const it of items) {
+    const one = (it, ox, oy) => {
+      if (it.type === 'group') { for (const ch of it.children || []) one(ch, ox + it.x, oy + it.y); return; }
       const d = h('i', 'm-' + it.type, box);
       Object.assign(d.style, {
-        left: (it.x - b.x) / W * 100 + '%', top: (it.y - b.y) / H * 100 * k + '%',
+        left: (ox + it.x - b.x) / W * 100 + '%', top: (oy + it.y - b.y) / H * 100 * k + '%',
         width: Math.max(2, it.w / W * 100) + '%', height: it.type === 'text' ? '3px' : Math.max(1, (it.h || 0) / H * 100 * k) + '%',
       });
-    }
+      const col = it.type === 'box' ? it.fill : it.color;
+      if (col && col[0] === '#') d.style.background = col;
+    };
+    for (const it of items) one(it, 0, 0);
   }
 
   /* ---------------- arranging ---------------- */
@@ -969,13 +992,129 @@
     if (previewing) {
       ov.textContent = ''; guidesEl.textContent = '';
       C.render(cv, doc, { edit: false, src: resolve, onMediaError, lib: libMap() });
+      mountSide(false); lay();
       cv.querySelectorAll('a').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+      document.querySelectorAll('nav.side a[href*="project.html"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
       stopAnim = C.animate(cv);
       toast('Preview. Scroll, hover, click. P or Esc to go back.');
     } else {
       stopAnim && stopAnim(); stopAnim = null;
       render();
     }
+  }
+
+  /* ---------------- scroll keyframes ----------------
+     The timeline for "while scrolling" is the element's trip up the screen:
+     left end = its middle at the bottom edge (just arriving),
+     right end = its middle at the top edge (about to leave).
+     The playhead follows the page as you scroll, so you can scroll to a
+     spot, pose the element (fields, or just drag it), and add a keyframe. */
+  let kf = { id: null, sel: -1, play: 50, follow: true, pose: true };
+  let trackRefs = null;
+  const scrollAnim = it => it && it.anim && it.anim.scroll && it.anim.scroll.on ? it.anim.scroll : null;
+  function toKeys(a) {
+    if (!a.keys || !a.keys.length) {
+      a.keys = C.keysOf(a).map(k => ({ at: k.at, s: { ...k.s }, ease: k.ease || a.ease || 'linear' }));
+      delete a.from; delete a.to; delete a.start; delete a.end; delete a.ease;
+    }
+    return a.keys;
+  }
+  const screenAt = el => { const r = el.getBoundingClientRect(); return (r.top + r.height / 2) / innerHeight * 100; };
+  const clampAt = v => Math.max(-20, Math.min(120, v));
+  function poseKey() {
+    if (!kf.pose || kf.sel < 0 || sel.size !== 1 || !sel.has(kf.id) || !trackRefs) return null;
+    const f = find(kf.id), a = f && scrollAnim(f.it);
+    return a && a.keys && a.keys[kf.sel] ? a.keys[kf.sel] : null;
+  }
+  function preview() {                    // show the selected element as it looks at the playhead
+    for (const l of cv.querySelectorAll('.ly-scroll')) if (l.style.transform || l.style.opacity) C.setState(l, null);
+    if (sel.size !== 1 || !sel.has(kf.id) || !trackRefs) return;
+    const f = find(kf.id), a = f && scrollAnim(f.it), el = elOf(kf.id);
+    if (!a || !el) return;
+    C.setState(el._ly.scroll, C.scrollState(a, kf.play));
+    paintTrack();
+  }
+  const pct = at => Math.max(0, Math.min(100, 100 - at));
+  function paintTrack() {
+    if (!trackRefs || !document.contains(trackRefs.rail)) return;
+    const f = find(kf.id), a = f && scrollAnim(f.it); if (!a) return;
+    trackRefs.ph.style.left = pct(kf.play) + '%';
+    trackRefs.read.textContent = kf.follow ? `playhead ${Math.round(kf.play)}% · following the page` : `playhead ${Math.round(kf.play)}%`;
+    trackRefs.rail.querySelectorAll('.ed-key').forEach(k => k.remove());
+    (a.keys || []).forEach((k, i) => {
+      const d = h('b', 'ed-key' + (i === kf.sel ? ' on' : ''), trackRefs.rail);
+      d.style.left = pct(k.at) + '%'; d.dataset.i = i; d.title = `keyframe at ${Math.round(k.at)}%`;
+    });
+  }
+  addEventListener('scroll', () => {
+    if (previewing || !kf.follow || !trackRefs || sel.size !== 1 || !sel.has(kf.id)) return;
+    const el = elOf(kf.id); if (!el) return;
+    kf.play = clampAt(screenAt(el)); preview();
+  }, { passive: true });
+
+  function scrollPanel(it, d, a) {
+    const keys = toKeys(a);
+    const el = elOf(it.id);
+    if (kf.id !== it.id) kf = { id: it.id, sel: -1, play: el ? clampAt(screenAt(el)) : 50, follow: true, pose: true };
+    if (kf.sel >= keys.length) kf.sel = -1;
+
+    const tr = h('div', 'ed-track', d);
+    const lab = h('div', 'ed-track-lab', tr); h('span', '', lab, 'arrives (bottom)'); h('span', '', lab, 'leaves (top)');
+    const rail = h('div', 'ed-rail', tr);
+    const ph = h('i', 'ed-ph', rail);
+    const read = h('p', 'ed-note', d);
+    trackRefs = { rail, ph, read };
+    const atFromX = x => { const r = rail.getBoundingClientRect(); return Math.round(100 - Math.max(0, Math.min(1, (x - r.left) / r.width)) * 100); };
+    rail.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      const key = e.target.closest('.ed-key');
+      kf.follow = false;
+      if (key) {                            // grab a keyframe: select it, drag to move it in time
+        const i = +key.dataset.i; kf.sel = i; kf.play = keys[i].at;
+        let moved = false;
+        const mv = ev => { moved = true; keys[i].at = atFromX(ev.clientX); kf.play = keys[i].at; preview(); };
+        const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); if (moved) commit(true); inspector(); drawOverlay(); };
+        addEventListener('pointermove', mv); addEventListener('pointerup', up);
+        preview(); return;
+      }
+      kf.sel = -1;                          // anywhere else: scrub the playhead
+      const mv = ev => { kf.play = atFromX(ev.clientX); preview(); };
+      const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); inspector(); drawOverlay(); };
+      addEventListener('pointermove', mv); addEventListener('pointerup', up); mv(e);
+    });
+    rail.addEventListener('dblclick', e => { if (!e.target.closest('.ed-key')) addKey(atFromX(e.clientX)); });
+
+    function addKey(at) {
+      const now = C.scrollState(a, at), st = {};
+      for (const k in C.NEUTRAL) { const v = Math.round(now[k] * 100) / 100; if (v !== C.NEUTRAL[k]) st[k] = v; }
+      keys.push({ at: Math.round(at), s: st, ease: 'linear' });
+      kf.sel = keys.length - 1; kf.play = Math.round(at); kf.follow = false;
+      commit(true); inspector(); drawOverlay();
+      toast('Keyframe added. Drag the element on the page to pose it, or type values below.', 3500);
+    }
+    actions(d, [
+      ['◆ add keyframe here', () => addKey(kf.play), 'Adds a keyframe where the playhead is, double-click the timeline works too'],
+      ['▶ play', () => play(it, 'scroll')],
+    ]);
+    check(d, 'playhead follows the page as I scroll', () => kf.follow, v => { kf.follow = v; if (v && el) kf.play = clampAt(screenAt(elOf(it.id))); }, true);
+
+    const k = keys[kf.sel];
+    if (k) {
+      const box = h('div', 'ed-keybox', d);
+      h('p', 'ed-sub', box, `Keyframe ${kf.sel + 1} of ${keys.length}`);
+      const g = h('div', 'ed-4', box);
+      num(g, 'at % of screen', () => k.at, v => { k.at = v; kf.play = v; preview(); }, 1, false).title = '100 = its middle at the bottom edge, 0 = at the top edge';
+      stateFields(box, 'how it looks here', k, 's', () => preview());
+      choose(box, 'easing to next', EASES, () => k.ease || 'linear', v => k.ease = v);
+      check(box, 'dragging on the page poses this keyframe', () => kf.pose, v => { kf.pose = v; drawOverlay(); }, true);
+      actions(box, [
+        ['delete keyframe', () => { if (keys.length <= 1) return toast('Keep at least one, or switch scrolling off'); keys.splice(kf.sel, 1); kf.sel = -1; commit(); }],
+        ['done', () => { kf.sel = -1; kf.follow = true; inspector(); drawOverlay(); }],
+      ]);
+    } else {
+      h('p', 'ed-note', d, `${keys.length} keyframe${keys.length === 1 ? '' : 's'}. Click a ◆ to edit or pose it, drag it to change when it happens. Scroll the page or drag on the timeline to move the playhead.`);
+    }
+    preview();
   }
 
   // play one animation on one element, right here in the editor
@@ -986,8 +1125,14 @@
       C.setState(ly, a.from);
       requestAnimationFrame(() => requestAnimationFrame(() => C.setState(ly, null, C.timing(a.dur, a.ease, a.delay))));
     } else if (kind === 'scroll') {
-      const t0 = performance.now(), D = 1600;
-      const step = now => { const t = Math.min(1, (now - t0) / D); C.setState(ly, C.mix(a.from, a.to, (C.EASE[a.ease] || C.EASE.linear)(t))); if (t < 1) requestAnimationFrame(step); else setTimeout(() => C.setState(ly, null, 'all .4s'), 500); };
+      // sweep the playhead from the bottom of the screen to the top
+      const t0 = performance.now(), D = 2200, keep = { ...kf };
+      kf.follow = false; kf.sel = -1;
+      const step = now => {
+        const t = Math.min(1, (now - t0) / D);
+        kf.play = 110 - 120 * t; preview();
+        if (t < 1) requestAnimationFrame(step); else setTimeout(() => { Object.assign(kf, keep); preview(); }, 400);
+      };
       requestAnimationFrame(step);
     } else {
       C.setState(ly, a.to, C.timing(a.dur, a.ease));
@@ -1018,7 +1163,7 @@
   };
   const DEFAULTS = {
     enter: () => ({ on: true, from: { ...PRESETS.enter.rise }, dur: .9, delay: 0, ease: 'out' }),
-    scroll: () => ({ on: true, ...clone(PRESETS.scroll['drift (slower)']), ease: 'linear' }),
+    scroll: () => ({ on: true, keys: [{ at: 100, s: { y: -80 }, ease: 'linear' }, { at: 0, s: { y: 80 } }] }),
     hover: () => ({ on: true, to: { ...PRESETS.hover.grow }, dur: .4, ease: 'pop' }),
     click: () => ({ on: true, to: { ...PRESETS.click.zoom }, dur: .6, ease: 'pop' }),
   };
@@ -1068,7 +1213,29 @@
     const r = h('div', 'ed-acts', parent);
     for (const [l, fn, title] of list) { const b = h('button', '', r, l); b.type = 'button'; if (title) b.title = title; b.onclick = fn; }
   }
-  function stateFields(parent, label, obj, key) {
+  const SWATCHES = ['#db0007', '#1f3a93', '#0a7d4f', '#f2a900', '#7b2ff7', '#ff5a1f', '#ffffff', '#000000'];
+  // named colours (ink, grey…) plus any colour at all
+  function colourField(parent, label, tokens, get, set) {
+    const r = row(parent, label), g = h('span', 'ed-seg ed-col', r);
+    const cur = get();
+    for (const [v, l] of Object.entries(tokens)) {
+      const b = h('button', cur == v ? 'on' : '', g, l); b.type = 'button';
+      b.onclick = e => { e.preventDefault(); set(v); commit(); };
+    }
+    const pick = h('input', cur && cur[0] === '#' ? 'on' : '', g);
+    pick.type = 'color'; pick.title = 'any colour';
+    pick.value = cur && cur[0] === '#' ? cur : '#db0007';
+    pick.oninput = () => { set(pick.value); render(true); };
+    pick.onchange = () => commit();
+    const sw = h('div', 'ed-sw', parent);
+    for (const c of SWATCHES) {
+      const b = h('button', cur === c ? 'on' : '', sw); b.type = 'button'; b.title = c; b.style.background = c;
+      b.onclick = e => { e.preventDefault(); set(c); commit(); };
+    }
+  }
+  const plainText = html => { const d = document.createElement('div'); d.innerHTML = html || ''; return d.textContent.trim(); };
+
+  function stateFields(parent, label, obj, key, onEdit) {
     const box = h('div', 'ed-state', parent);
     h('span', 'ed-lab', box, label);
     const st = () => (obj[key] = obj[key] || {});
@@ -1077,7 +1244,7 @@
       const c = h('label', '', box); h('span', '', c, l);
       const i = h('input', '', c); i.type = 'number'; i.step = step;
       i.placeholder = fmt(C.NEUTRAL[k]); i.value = fmt(st()[k]);
-      i.oninput = () => { const v = parseFloat(i.value); if (isNaN(v) || v === C.NEUTRAL[k]) delete st()[k]; else st()[k] = v; touch(); };
+      i.oninput = () => { const v = parseFloat(i.value); if (isNaN(v) || v === C.NEUTRAL[k]) delete st()[k]; else st()[k] = v; touch(); onEdit && onEdit(); };
       i.onchange = () => commit(true);
     }
   }
@@ -1087,6 +1254,7 @@
     const keepScroll = panel.scrollTop;
     const open = {}; panel.querySelectorAll('details').forEach(d => open[d.dataset.k] = d.open);
     panel.textContent = '';
+    trackRefs = null;
     const its = selected();
     if (!its.length) pagePanel();
     else if (its.length > 1) multiPanel(its);
@@ -1111,6 +1279,12 @@
     text(s, 'tags', () => meta.tags, v => meta.tags = v, 'interaction, research');
     text(s, 'one-liner', () => meta.summary, v => meta.summary = v, 'optional');
     check(s, 'hidden from the work list', () => meta.hidden, v => meta.hidden = v);
+
+    const sd = keyed(sec('Side nav'), 'side');
+    seg(sd, 'lists', { projects: 'projects', sections: 'sections', off: 'off' }, () => doc.side || 'projects', v => doc.side = v);
+    h('p', 'ed-note', sd, (doc.side || 'projects') === 'sections'
+      ? 'Lists the texts on this page that have “show in side nav” ticked (every Section block does).'
+      : (doc.side === 'off' ? 'No side nav: the page uses the full width.' : 'Lists all your projects, this one highlighted. Each name shows in its own colour on hover (set colours on the work list).'));
 
     const gr = keyed(sec('Grid'), 'grid');
     const g = G(), setG = (k, v) => { doc.grid = { ...(doc.grid || {}), [k]: v }; drawGrid(); };
@@ -1166,21 +1340,29 @@
     num(grid4, 'w', () => it.w, v => it.w = v);
     if (it.type !== 'text' && it.type !== 'instance') num(grid4, 'h', () => it.h, v => it.h = v);
     actions(L, [['snap to grid', () => { fitGrid(it); commit(); }, 'Pull onto the nearest columns and rows'], ['front', () => order(true), ']'], ['back', () => order(false), '[']]);
+    actions(L, [['more space below', () => moveBelow(it, 56), 'Push everything underneath down'], ['less space below', () => moveBelow(it, -56), 'Pull everything underneath up']]);
 
     const S = keyed(sec(c ? 'Component' : NAMES[it.type]), 'kind');
     if (it.type === 'text') {
       seg(S, 'weight', { 400: 'regular', 700: 'bold' }, () => it.weight || 400, v => it.weight = +v);
-      seg(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint' }, () => it.color || 'fg', v => it.color = v);
+      colourField(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint' }, () => it.color || 'fg', v => it.color = v);
       seg(S, 'align', { left: 'left', center: 'centre', right: 'right' }, () => it.align || 'left', v => it.align = v);
       actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)]]);
+      check(S, 'show in side nav', () => !!it.nav, v => { if (v) it.nav = plainText(it.text).slice(0, 40) || 'section'; else delete it.nav; });
+      if (it.nav) {
+        text(S, 'nav label', () => it.nav === true ? '' : it.nav, v => it.nav = v.trim() || plainText(it.text).slice(0, 40));
+        if ((doc.side || 'projects') !== 'sections') actions(S, [['make the side nav list sections', () => { doc.side = 'sections'; commit(); }]]);
+      }
     }
     if (it.type === 'button') {
       seg(S, 'look', { line: 'outline', fill: 'filled', text: 'just text' }, () => it.look || 'line', v => it.look = v);
+      colourField(S, 'colour', { fg: 'ink' }, () => it.color || 'fg', v => { if (v === 'fg') delete it.color; else it.color = v; });
       actions(S, [['edit label  ↵', () => startText(elOf(it.id), it)]]);
     }
     if (it.type === 'image' || it.type === 'video') {
       seg(S, 'fit', { cover: 'fill box', contain: 'whole picture' }, () => it.fit || 'cover', v => it.fit = v);
       if (it.type === 'image') text(S, 'alt text', () => it.alt, v => it.alt = v, 'what is in the picture');
+      num(S, 'round corners', () => it.round || 0, v => { if (v > 0) it.round = v; else delete it.round; }, 1);
       actions(S, [
         [it.src ? 'replace' : 'choose file', async () => { const f = await pickFiles('image/*,video/*', false); if (f.length) addFiles(f, null, it); }],
         ['use as thumbnail', () => { meta.thumb = it.src; commit(true); toast('Thumbnail set'); }],
@@ -1193,7 +1375,10 @@
       text(S, 'link', () => it.src, v => it.src = v, 'youtube / vimeo / any url');
       actions(S, [['16 : 9', () => { it.h = r1(it.w * 9 / 16); commit(); }], ['4 : 3', () => { it.h = r1(it.w * 3 / 4); commit(); }], ['square', () => { it.h = it.w; commit(); }]]);
     }
-    if (it.type === 'box') seg(S, 'look', { line: 'line', fill: 'ink', ghost: 'ghost', faint: 'grey' }, () => it.fill || 'line', v => it.fill = v);
+    if (it.type === 'box') {
+      colourField(S, 'look', { line: 'line', fill: 'ink', ghost: 'tint', faint: 'grey' }, () => it.fill || 'line', v => it.fill = v);
+      num(S, 'round corners', () => it.round || 0, v => { if (v > 0) it.round = v; else delete it.round; }, 1);
+    }
     if (it.type === 'group') actions(S, [['step inside  ↵', () => enter(it)], ['ungroup  ⇧⌘G', ungroup], ['make component', makeComponent]]);
     if (it.type === 'instance') {
       if (c) h('p', 'ed-note', S, `Linked: used ${uses(c.id)}× on this page. Step inside to change every copy at once, or detach this one to change it alone.`);
@@ -1238,7 +1423,7 @@
     const A = it.anim;
     const blocksA = [
       ['enter', 'When it scrolls into view', 'Plays once, the first time it appears.'],
-      ['scroll', 'While scrolling', 'Scroll is the playhead: it moves from "from" to "to" as it travels up the screen.'],
+      ['scroll', 'While scrolling', 'Keyframes along the trip up the screen: scroll to a spot, pose it, add a keyframe.'],
       ['hover', 'On hover', 'Changes while the mouse is over it.'],
       ['click', 'On click', 'Each click switches it to the new state and back.'],
     ];
@@ -1253,22 +1438,17 @@
       const s = choose(d, 'preset', opts, () => '', v => {
         if (!v) return;
         if (k === 'enter') a.from = { ...P[v] };
-        else if (k === 'scroll') Object.assign(a, clone(P[v]));
+        else if (k === 'scroll') { const p = P[v]; a.keys = [{ at: p.start, s: { ...p.from }, ease: 'linear' }, { at: p.end, s: { ...p.to } }]; kf.sel = -1; }
         else a.to = { ...P[v] };
       });
       s.value = '';
+      if (k === 'scroll') { scrollPanel(it, d, a); continue; }
       if (k === 'enter') stateFields(d, 'starts as', a, 'from');
-      if (k === 'scroll') { stateFields(d, 'from', a, 'from'); stateFields(d, 'to', a, 'to'); }
       if (k === 'hover' || k === 'click') stateFields(d, 'becomes', a, 'to');
       const g = h('div', 'ed-4', d);
-      if (k === 'scroll') {
-        num(g, 'starts at %', () => a.start ?? 100, v => a.start = v, 5, false).title = 'where its middle is on screen when it begins (100 = bottom edge)';
-        num(g, 'ends at %', () => a.end ?? 0, v => a.end = v, 5, false).title = 'where its middle is on screen when it finishes (0 = top edge)';
-      } else {
-        num(g, 'seconds', () => a.dur ?? .6, v => a.dur = v, .1, false);
-        if (k === 'enter') num(g, 'delay', () => a.delay ?? 0, v => a.delay = v, .05, false);
-      }
-      choose(d, 'easing', EASES, () => a.ease || (k === 'scroll' ? 'linear' : 'out'), v => a.ease = v);
+      num(g, 'seconds', () => a.dur ?? .6, v => a.dur = v, .1, false);
+      if (k === 'enter') num(g, 'delay', () => a.delay ?? 0, v => a.delay = v, .05, false);
+      choose(d, 'easing', EASES, () => a.ease || 'out', v => a.ease = v);
       actions(d, [['▶ play', () => play(it, k)]]);
     }
   }

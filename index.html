@@ -8,6 +8,8 @@
 <script>
   // apply a saved light/dark choice before the page paints
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  // arriving back here from another page: run the slide the other way (like scrolling up)
+  addEventListener('pagereveal', e => { if (e.viewTransition) e.viewTransition.types.add('down'); });
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,8 +54,8 @@
     align-items: end;
   }
   .hello  { grid-column: 1 / span 6; grid-row: 1; }
-  .work   { grid-column: 10;         grid-row: 1; }
-  .resume { grid-column: 12;         grid-row: 1; }
+  .work   { grid-column: 10;         grid-row: 1; justify-self: start; }
+  .resume { grid-column: 12;         grid-row: 1; justify-self: start; }
   .intro, .note { grid-column: 1 / span 7; align-self: start; }
 
   /* phones: 4 columns, nav still on the same line as the name */
@@ -175,7 +177,24 @@
   #theme.dragging { color: var(--fg); }
   main { position: relative; z-index: 2; }
 
+  /* ---------- going to work: the page slides up like a scroll, and
+     name / work / resume glide into the bar at the top of the next page ---------- */
+  @view-transition { navigation: auto; }
+  #name { view-transition-name: me; }
+  .work { view-transition-name: nav-work; }
+  .resume { view-transition-name: nav-resume; }
+  ::view-transition-group(*) { animation-duration: .75s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  ::view-transition-old(root) { animation: vt-up-out .75s cubic-bezier(.65, 0, .35, 1) both; }
+  ::view-transition-new(root) { animation: vt-up-in .75s cubic-bezier(.65, 0, .35, 1) both; }
+  :root:active-view-transition-type(down)::view-transition-old(root) { animation-name: vt-down-out; }
+  :root:active-view-transition-type(down)::view-transition-new(root) { animation-name: vt-down-in; }
+  @keyframes vt-up-out   { to   { transform: translateY(-30vh); opacity: 0; } }
+  @keyframes vt-up-in    { from { transform: translateY(45vh);  opacity: 0; } }
+  @keyframes vt-down-out { to   { transform: translateY(45vh);  opacity: 0; } }
+  @keyframes vt-down-in  { from { transform: translateY(-30vh); opacity: 0; } }
+
   @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
     .hi, .name-line.show .say { animation: none; opacity: 1; }
     #thing.glimpse .lit { animation: none; }
   }

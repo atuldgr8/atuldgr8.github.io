@@ -35,10 +35,10 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
 }
 .top a { pointer-events: auto; text-decoration: none; }
 .top a:hover { text-decoration: underline; text-underline-offset: 2px; }
-.top .me { grid-column: 1 / span 6; font-weight: 700; }
+.top .me { grid-column: 1 / span 6; justify-self: start; font-weight: 700; }
 .top .me:hover { text-decoration: none; }
-.top .nav-work { grid-column: 10; }
-.top .nav-resume { grid-column: 12; }
+.top .nav-work { grid-column: 10; justify-self: start; }
+.top .nav-resume { grid-column: 12; justify-self: start; }
 .top [aria-current] { text-decoration: line-through; }
 @media (max-width: 700px) {
   .top { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -47,29 +47,48 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
   .top .nav-resume { grid-column: 4; }
 }
 
-/* ---------- work list ---------- */
+/* ---------- work list: centred, one colour per project ---------- */
 .work-page { padding: 32vh var(--gutter) calc(var(--step) * 3); }
-.list { display: grid; }
-.row {
-  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
-  padding: calc(var(--step) / 4) 0; text-decoration: none; color: var(--fg);
-  transition: color .25s;
+.list { position: relative; display: flex; flex-direction: column; align-items: center; gap: calc(var(--step) / 4); }
+.wk {
+  display: block; text-align: center; text-decoration: none;
+  color: var(--c, var(--fg));
+  transform: translateY(var(--dy, 0px)) scale(var(--s, 1)); transform-origin: 50% 50%;
+  transition: opacity .3s;
 }
-.row .t { grid-column: 1 / span 6; }
-.row .k { grid-column: 7 / span 4; color: var(--mute); transition: color .25s; }
-.row .y { grid-column: 12; color: var(--mute); transition: color .25s; }
-/* hovering one project quiets all the others */
-.list:hover .row { color: var(--faint); }
-.list:hover .row .k, .list:hover .row .y { color: var(--faint); }
-.list .row:hover, .list .row:hover .k, .list .row:hover .y { color: var(--fg); }
-.list .row:focus-visible { outline: none; color: var(--fg); }
+.wk .y { color: var(--mute); margin-left: .4em; opacity: 0; transition: opacity .25s; }
+.list:hover .wk { opacity: .32; }
+.list:hover .wk.near, .list .wk:hover, .list .wk:focus-visible { opacity: 1; outline: none; }
+.wk.near .y, .wk:hover .y { opacity: 1; }
 .empty { color: var(--mute); }
-@media (max-width: 700px) {
-  .row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .row .t { grid-column: 1 / span 3; }
-  .row .k { display: none; }
-  .row .y { grid-column: 4; }
+.tldr-open[hidden] { display: none; }
+.tldr-open { display: block; margin: calc(var(--step) * 3) auto 0; color: var(--mute); }
+.tldr-open:hover { color: var(--fg); }
+
+/* TL;DR: every project, one picture each, click through */
+.tldr {
+  position: fixed; inset: 0; z-index: 70; background: var(--bg); color: var(--fg);
+  display: grid; grid-template-rows: auto 1fr auto; padding: var(--gutter);
+  opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s;
 }
+.tldr.on { opacity: 1; visibility: visible; }
+.tldr-top { display: flex; justify-content: space-between; color: var(--mute); }
+.tldr-top button:hover { color: var(--fg); }
+.tldr-stage { position: relative; min-height: 0; margin: var(--step) 0; cursor: e-resize; user-select: none; }
+.tldr-slide { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity .5s; pointer-events: none; }
+.tldr-slide.on { opacity: 1; }
+.tldr-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.tldr-slide .noimg { width: min(60vw, 900px); aspect-ratio: 16 / 10; background: var(--ghost); }
+.tldr-cap { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: end; }
+.tldr-cap a { grid-column: 1 / span 6; text-decoration: none; color: var(--c, var(--fg)); }
+.tldr-cap a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.tldr-cap .sum { grid-column: 7 / span 5; color: var(--mute); }
+.tldr-cap .n { grid-column: 12; text-align: right; color: var(--mute); }
+@media (max-width: 700px) {
+  .tldr-cap { grid-template-columns: 1fr auto; }
+  .tldr-cap a { grid-column: 1; } .tldr-cap .sum { display: none; } .tldr-cap .n { grid-column: 2; }
+}
+
 /* the picture that trails the cursor over a project name */
 .peek {
   position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none;
@@ -88,7 +107,7 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
 .it { position: absolute; }
 .ly { width: 100%; height: 100%; transform-origin: 50% 50%; }
 .t-text .ly { height: auto; }
-.txt { font-size: max(14px, calc(var(--u) * 13.67)); line-height: var(--lh); overflow-wrap: break-word; }
+.txt { font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); line-height: var(--lh); overflow-wrap: break-word; }
 .txt.w-700 { font-weight: 700; }
 .txt.c-mute { color: var(--mute); }
 .txt.c-faint { color: var(--faint); }
@@ -106,7 +125,7 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
 .grp { position: relative; width: 100%; height: 100%; }
 .inst { --u: calc(var(--pu) * var(--k)); }
 .btn { display: grid; place-items: center; width: 100%; height: 100%; padding: 0 .6em; text-align: center;
-       font-size: max(14px, calc(var(--u) * 13.67)); transition: background .25s, color .25s; }
+       font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); transition: background .25s, color .25s; }
 .btn.b-line { border: 1px solid currentColor; }
 .btn.b-fill { background: var(--fg); color: var(--bg); }
 .btn.b-text { text-decoration: underline; text-underline-offset: 2px; }
@@ -120,16 +139,45 @@ a.lnk:hover .btn.b-fill { background: var(--bg); color: var(--fg); outline: 1px 
 .sl-slide > img.before { transform: translateX(-100%); }
 .sl-slide > img.after { transform: translateX(100%); }
 .sl-n { position: absolute; left: .7em; bottom: .7em; color: #fff; mix-blend-mode: difference;
-        font-size: max(14px, calc(var(--u) * 13.67)); pointer-events: none; }
+        font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); pointer-events: none; }
 a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decoration: none; }
 .t-text a.lnk { height: auto; }
 
 /* phones: no shrinking a desktop layout. Things stack in reading order
    at full width; groups keep their own little composition. */
-.cv.flow { display: flex; flex-direction: column; gap: var(--step); padding: calc(var(--gutter) * 5) var(--gutter) var(--step); }
+.cv.flow { --tk: 1; display: flex; flex-direction: column; gap: var(--step); padding: calc(var(--gutter) * 5) var(--gutter) var(--step); }
 .cv.flow > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; height: auto !important; }
-.cv.flow > .it:not(.t-text) { aspect-ratio: var(--ar); }
+.cv.flow > .it:not(.t-text):not(.textonly) { aspect-ratio: var(--ar); }
+/* a group of only words (a fact, a number, a step) just stacks, at the normal size */
+.cv.flow > .it.textonly .grp { display: flex; flex-direction: column; gap: .25em; height: auto; }
+.cv.flow > .it.textonly .grp > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; }
+.cv.flow > .it.textonly .txt { font-size: var(--size) !important; }
 .cv.flow > .it.t-group .it .txt, .cv.flow > .it.t-instance .it .txt { font-size: max(11px, calc(var(--u) * 13.67)); }
+
+/* ---------- side nav (project pages) ----------
+   Fixed in the bottom-left corner. The page keeps that strip free, so
+   nothing ever slides under it. Text inside the page stays the same size
+   as everywhere else (--tk makes up for the page being narrower). */
+:root { --side-w: 22vw; }
+body.has-side .stage, body.has-side .next { margin-left: var(--side-w); }
+body.has-side .cv { --tk: calc(1 / (1 - .22)); }
+nav.side {
+  position: fixed; left: var(--gutter); bottom: var(--gutter); z-index: 45;
+  width: calc(var(--side-w) - var(--gutter) - var(--gap));
+}
+nav.side ul { list-style: none; padding: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .18em; }
+nav.side a {
+  display: inline-block; text-decoration: none; color: var(--mute);
+  line-height: var(--lh);
+  transform: translateY(var(--dy, 0px)) scale(var(--s, 1)); transform-origin: 0 50%; transition: color .2s;
+}
+nav.side a.on { color: var(--fg); }
+nav.side a.near, nav.side a:hover { color: var(--c, var(--fg)); }
+nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; }
+@media (max-width: 700px) {
+  nav.side { display: none; }
+  body.has-side .stage, body.has-side .next { margin-left: 0; }
+}
 
 /* ---------- next project ---------- */
 .next {
@@ -144,4 +192,26 @@ a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decorati
 
 @media (prefers-reduced-motion: reduce) {
   .ly { transition: none !important; }
+}
+
+/* ---------- moving between pages ----------
+   Going from the landing page to work feels like scrolling down: the page
+   slides up, and name / work / resume glide into the bar at the top.
+   Coming back to the landing page runs it the other way. (Browsers without
+   this feature just change page, as before.) */
+@view-transition { navigation: auto; }
+.top .me { view-transition-name: me; }
+.top .nav-work { view-transition-name: nav-work; }
+.top .nav-resume { view-transition-name: nav-resume; }
+::view-transition-group(*) { animation-duration: .75s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+::view-transition-old(root) { animation: vt-up-out .75s cubic-bezier(.65, 0, .35, 1) both; }
+::view-transition-new(root) { animation: vt-up-in .75s cubic-bezier(.65, 0, .35, 1) both; }
+:root:active-view-transition-type(down)::view-transition-old(root) { animation-name: vt-down-out; }
+:root:active-view-transition-type(down)::view-transition-new(root) { animation-name: vt-down-in; }
+@keyframes vt-up-out   { to   { transform: translateY(-30vh); opacity: 0; } }
+@keyframes vt-up-in    { from { transform: translateY(45vh);  opacity: 0; } }
+@keyframes vt-down-out { to   { transform: translateY(45vh);  opacity: 0; } }
+@keyframes vt-down-in  { from { transform: translateY(-30vh); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

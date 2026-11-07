@@ -1,15 +1,35 @@
-# Editing the site
+# Editing the site, in plain steps
 
-1. Double-click **start-editor.command** (Mac) or **start-editor.bat** (Windows) in this folder. It starts the site and opens the editor in Chrome. Keep its window open while you work. (By hand: `python3 -m http.server 8000` here, then open http://localhost:8000/work.html?edit.) On your laptop every page also shows a small blue **edit** link in the corner.
-2. Press **connect folder** once and pick this folder (the one with index.html). Saving now writes straight into it.
-3. **+ new project** makes a page from the template. **edit page** opens the editor.
-4. In the editor: drop pictures onto the grey placeholders, double-click text to type, drag things around (they snap to the 12 columns; hold Alt to break the grid). Press `?` for every shortcut.
-5. **save** (⌘S), then commit and push. That's publishing.
+## Every time you want to edit
 
-More in the editor:
-- **+ blocks** (B): ready-made layouts, buttons, slideshows, and your own components.
-- Select things and **make component** (⌥⌘K): copies stay linked. Double-click one to edit them all; **detach** to change one alone.
-- **Grid** (page panel, nothing selected): columns, gutter, margins, row height, per page. Snapping to columns, rows, other things and your guides can each be turned on or off. Drag from the top or left edge to make a guide.
+1. Open **GitHub Desktop**. Check the top bar says **Current branch: editor-preview**.
+2. Press **Fetch origin** (and **Pull origin** if it appears). That brings down anything new.
+3. In the site folder, double-click **start-editor.bat** (Windows) or **start-editor.command** (Mac).
+   A black window opens and Chrome opens the editor. Leave the black window open while you work.
+4. First time only: press **connect folder** in the editor and pick the site folder (the one with index.html).
 
-Files: `projects/components.json` holds your components, `projects/index.json` is the work list, `projects/<slug>.json` is each page, pictures go in `projects/media/<slug>/`.
-Nothing is lost if you close the tab: unsaved changes come back as a draft.
+## While editing
+
+- Work list: `work.html?edit` (it opens there). Add projects, set each name's colour, reorder, hide/show.
+- A project: press **edit page** next to it.
+- **Save** (or Ctrl/⌘ + S) writes your changes into the site folder on your laptop. Nothing goes online yet.
+- To look at it like a visitor: **preview** (P), or the small blue **edit** link on any page takes you back.
+
+## Putting it online
+
+1. **Save** in the editor.
+2. In GitHub Desktop you'll see your changed files on the left. Type a short summary (e.g. "Narayanpet page"), press **Commit to editor-preview**, then **Push origin**.
+   Your work is now backed up on GitHub, but **not live yet**.
+3. When you're happy and want it live: in GitHub Desktop, switch the branch to **main**, then
+   **Branch → Merge into current branch… → editor-preview → Merge**, then **Push origin**.
+   About a minute later it's on atuldgr8.github.io.
+4. Switch back to **editor-preview** before you edit again.
+
+## Good to know
+
+- Close the tab without saving? Your changes come back as a draft next time.
+- Pictures you drop in are copied into `projects/media/<project>/`.
+- Files: `projects/index.json` is the work list, `projects/<project>.json` is each page,
+  `projects/components.json` holds your saved components.
+- Press `?` in the editor for every shortcut. **B** opens the blocks.
+- Delete the "Sample project" before the first time you go live.

@@ -25,6 +25,7 @@
 
 <script src="assets/canvas.js"></script>
 <script src="assets/fs.js"></script>
+<script src="assets/side.js"></script>
 <script>
 /* A project page: projects/<slug>.json drawn on the canvas.
    Add ?edit to the address to open the editor. */
@@ -38,8 +39,9 @@
     await FS.restore();
     const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'assets/editor.css';
     document.head.appendChild(css);
-    const s = document.createElement('script'); s.src = 'assets/editor.js';
-    document.body.appendChild(s);
+    const b = document.createElement('script'); b.src = 'assets/blocks.js';
+    b.onload = () => { const s = document.createElement('script'); s.src = 'assets/editor.js'; document.body.appendChild(s); };
+    document.body.appendChild(b);
     return;
   }
 
@@ -53,6 +55,8 @@
     return;
   }
   Canvas.render(cv, doc, { lib: Object.fromEntries(((lib && lib.components) || []).map(c => [c.id, c])) });
+  SideNav.mount({ mode: doc.side || 'projects', projects: list, current: slug, cv });
+  Canvas.layout(cv);
   Canvas.animate(cv);
   let t; addEventListener('resize', () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => Canvas.layout(cv)); });
   document.fonts && document.fonts.ready.then(() => Canvas.layout(cv));

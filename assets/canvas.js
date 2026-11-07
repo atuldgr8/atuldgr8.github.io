@@ -14,7 +14,10 @@
      children: [...],                  // group
      anim: {
        enter:  { on, from:{...}, dur, delay, ease },   // plays once when it scrolls into view
-       scroll: { on, from:{...}, to:{...}, start, end, ease },  // scroll is the playhead
+       scroll: { on, keys:[{ at, s:{...}, ease }] },   // scroll is the playhead:
+                                        //   at = where the element's middle is on screen,
+                                        //   100 = bottom edge, 0 = top edge
+                                        //   (older pages: from/to/start/end, still read)
        hover:  { on, to:{...}, dur, ease },
        click:  { on, to:{...}, dur, ease }             // toggles
      } }
@@ -87,6 +90,7 @@ window.Canvas = (() => {
     const pos = h('div', 'it t-' + it.type);
     pos.dataset.id = it.id;
     pos._item = it;
+    if (it.nav) pos.id = 'sec-' + it.id;
     place(pos, it);
     pos._ly = {};
     let inner = pos;
@@ -107,13 +111,15 @@ window.Canvas = (() => {
       else { m.muted = true; m.loop = true; m.autoplay = true; m.playsInline = true; m.setAttribute('muted', ''); m.setAttribute('playsinline', ''); }
       if (o.onMediaError) m.addEventListener('error', () => o.onMediaError(m, it.src), { once: true });
       m.src = o.src(it.src);
+      if (it.round) m.style.borderRadius = `calc(var(--u) * ${it.round})`;
     };
 
     switch (it.type) {
       case 'text': {
         const t = h('div', 'txt', inner);
         if (it.weight == 700) t.classList.add('w-700');
-        if (it.color && it.color !== 'fg') t.classList.add('c-' + it.color);
+        if (it.color && it.color[0] === '#') t.style.color = it.color;
+        else if (it.color && it.color !== 'fg') t.classList.add('c-' + it.color);
         if (it.align && it.align !== 'left') t.classList.add('a-' + it.align);
         t.innerHTML = it.text || '';
         break;
@@ -129,14 +135,22 @@ window.Canvas = (() => {
         if (!o.edit) f.loading = 'lazy';
         break;
       }
-      case 'box': h('div', 'box b-' + (it.fill || 'line'), inner); break;
+      case 'box': {
+        const b = h('div', 'box', inner);
+        if (it.fill && it.fill[0] === '#') b.style.background = it.fill;
+        else b.classList.add('b-' + (it.fill || 'line'));
+        if (it.round) b.style.borderRadius = `calc(var(--u) * ${it.round})`;
+        break;
+      }
       case 'group': {
+        if ((it.children || []).length && it.children.every(c => c.type === 'text')) pos.classList.add('textonly');
         const g = h('div', 'grp', inner);
         for (const c of it.children || []) g.appendChild(item(c, o, depth));
         break;
       }
       case 'button': {
         const b = h('div', 'btn b-' + (it.look || 'line'), inner);
+        if (it.color && it.color[0] === '#') b.style.color = it.color;
         h('span', '', b).innerHTML = it.text || 'Button';
         break;
       }
@@ -295,13 +309,9 @@ window.Canvas = (() => {
       raf = 0;
       const vh = innerHeight;
       for (const p of scrollers) {
-        const s = p._item.anim.scroll;
         const r = p.getBoundingClientRect();
-        const mid = r.top + r.height / 2;
-        const a = vh * (s.start ?? 100) / 100, b = vh * (s.end ?? 0) / 100;
-        let t = a === b ? (mid <= a ? 1 : 0) : (a - mid) / (a - b);
-        t = Math.max(0, Math.min(1, t));
-        setState(p._ly.scroll, mix(s.from, s.to, (EASE[s.ease] || EASE.linear)(t)));
+        const at = (r.top + r.height / 2) / vh * 100;
+        setState(p._ly.scroll, scrollState(p._item.anim.scroll, at));
       }
     };
     const req = () => { if (!raf) raf = requestAnimationFrame(tick); };
@@ -313,8 +323,29 @@ window.Canvas = (() => {
     };
   }
 
+  // keyframes for a scroll animation, oldest format included, sorted bottom -> top of screen
+  function keysOf(s) {
+    if (s.keys && s.keys.length) return [...s.keys].sort((a, b) => b.at - a.at);
+    return [{ at: s.start ?? 100, s: s.from || {}, ease: s.ease || 'linear' }, { at: s.end ?? 0, s: s.to || {} }];
+  }
+  // the state at a screen position (100 = element's middle at the bottom edge, 0 = top edge)
+  function scrollState(s, at) {
+    const k = keysOf(s);
+    if (at >= k[0].at) return full(k[0].s);
+    if (at <= k[k.length - 1].at) return full(k[k.length - 1].s);
+    for (let i = 0; i < k.length - 1; i++) {
+      const a = k[i], b = k[i + 1];
+      if (at <= a.at && at >= b.at) {
+        const t = a.at === b.at ? 1 : (a.at - at) / (a.at - b.at);
+        return mix(a.s, b.s, (EASE[a.ease] || EASE.linear)(t));
+      }
+    }
+    return full(null);
+  }
+
   /* ---------- a fresh project page ---------- */
   function template() {
+    if (window.Blocks) return window.Blocks.template(grid(null));
     let n = 0;
     const id = () => 'i' + (++n).toString(36) + Math.random().toString(36).slice(2, 6);
     const rise = { on: true, from: { opacity: 0, y: 40 }, dur: .9, delay: 0, ease: 'out' };
@@ -332,5 +363,5 @@ window.Canvas = (() => {
     ] };
   }
 
-  return { U, M, GAP, COLS, ROW, COLW, colX, span, grid, NEUTRAL, EASE, render, layout, animate, setState, mix, timing, template, place };
+  return { U, M, GAP, COLS, ROW, COLW, colX, span, grid, NEUTRAL, EASE, EASE_CSS, render, layout, animate, setState, mix, timing, template, place, keysOf, scrollState, full };
 })();
