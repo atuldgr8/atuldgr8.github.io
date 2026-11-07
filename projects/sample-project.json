@@ -173,6 +173,15 @@
       "h": 35.6,
       "text": "What happened in the end. What you learned, what you would do next.",
       "anim": {}
+    },
+    {
+      "id": "i3n2l7eo8",
+      "type": "marker",
+      "x": 8,
+      "y": 929,
+      "w": 1000,
+      "h": 1,
+      "nav": "section"
     }
   ],
   "guides": {
