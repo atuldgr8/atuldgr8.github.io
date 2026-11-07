@@ -25,6 +25,30 @@
    About a minute later it's on atuldgr8.github.io.
 4. Switch back to **editor-preview** before you edit again.
 
+## The whole loop, in one picture
+
+`editor-preview` is your sketchbook. `main` is the published site. Merging is the only moment anything goes live.
+
+1. Fetch + Pull (so you have everything)
+2. Edit in the editor, press **Save**
+3. Commit + Push (to editor-preview)
+4. Happy? Merge into main + Push (now it's live)
+5. Back to **editor-preview**, repeat
+
+## Before you ask Claude for changes
+
+Claude pushes to the same branch you work on. So first **Save, Commit and Push** your own work, then ask.
+When Claude says it's pushed, press **Fetch**, then **Pull**. This stops the two of you overwriting each other
+(the likeliest clash is `projects/index.json`).
+
+## After you've gone live and want to edit again
+
+- Switch back to **editor-preview**. It is never deleted by merging in GitHub Desktop, so it's always there.
+- Keep editing on it as before. Don't edit while on **main**: anything pushed from main goes live immediately.
+- Only if you ever merged on **github.com** (a pull request) instead of in GitHub Desktop: then also use
+  **Branch → Update from main** once, so the two branches match. And on github.com, never press
+  **Delete branch** after merging, since that removes editor-preview.
+
 ## Good to know
 
 - Close the tab without saving? Your changes come back as a draft next time.
