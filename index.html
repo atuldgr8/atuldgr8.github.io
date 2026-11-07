@@ -107,23 +107,20 @@
   }
   #name { font-weight: 700; cursor: default; text-decoration: none; }
 
-  /* the pronunciation appears like a genie: it springs out of thin air
-     right after the name, overshoots a touch, then settles */
+  /* the pronunciation appears like a ghost: out of thin air, no bounce */
   .say {
     position: relative; display: inline-block; margin-left: .45em;
     color: var(--faint);
     opacity: 0; transform-origin: 0 80%;
     pointer-events: none;
   }
-  /* POOF: out of a single point, bursts a bit too big with the letters
-     flung apart, snaps back smaller, settles. Fast, no smoke. */
-  .name-line.show .say { animation: poof .42s cubic-bezier(.15, .85, .25, 1) both; }
+  /* POOF: a haze that pulls itself together into letters. Blur clears,
+     the spread-out letters gather in, it's just there. Nothing bounces. */
+  .name-line.show .say { animation: poof .55s cubic-bezier(.2, .7, .2, 1) both; }
   @keyframes poof {
-    0%   { opacity: 0; transform: scale(0);         letter-spacing: -.45em; }
-    30%  { opacity: 1; transform: scale(1.32, 1.24); letter-spacing: .04em; }
-    55%  {             transform: scale(.9, .93);    letter-spacing: -.09em; }
-    78%  {             transform: scale(1.04);       letter-spacing: -.065em; }
-    100% { opacity: 1; transform: none;              letter-spacing: -.07em; }
+    0%   { opacity: 0; filter: blur(9px); letter-spacing: .25em; transform: scale(1.04); }
+    35%  { opacity: .8; }
+    100% { opacity: 1; filter: blur(0);   letter-spacing: -.07em; transform: none; }
   }
   /* the fill: a sliding window. The box slides in from the left while the
      text inside slides the other way, so letters stay still and only the
@@ -144,9 +141,7 @@
   /* ---------- small print (same size, quieter colour) ---------- */
   .note { color: var(--mute); }
   .note p + p { margin-top: calc(var(--step) / 2); }
-  .note a:hover, #egg a:hover { color: var(--fg); }
-  #egg { opacity: 0; visibility: hidden; transition: opacity .5s; }
-  #egg.show { opacity: 1; visibility: visible; }
+  .note a:hover { color: var(--fg); }
 
   /* ---------- light/dark switch ---------- */
   #theme {
@@ -199,7 +194,14 @@
   /* once, if nobody's touched anything for a bit: the bulb flickers, like it's trying */
   #theme.flicker .bulb { animation: flick 1.1s steps(1) both; }
   #theme.flicker .bulb .glow { animation: flickglow 1.1s steps(1) both; }
-  @keyframes flick { 0%, 100% { color: inherit; } 8%, 22%, 40% { color: var(--fg); } 14%, 30% { color: inherit; } }
+  @keyframes flick { 0%, 100% { color: inherit; } 8%, 22%, 40%, 55% { color: #f5c518; } 14%, 30%, 48% { color: inherit; } }
+  /* the room dips with it, like the power stuttered */
+  #dip { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0; background: #000; }
+  :root[data-dark] #dip { background: #fff3cf; }
+  #dip.on { animation: dip 1.1s steps(1) both; }
+  @keyframes dip { 0%, 100% { opacity: 0; } 8%, 22%, 40% { opacity: var(--dip); } 14%, 30%, 48% { opacity: 0; } }
+  :root:not([data-dark]) #dip { --dip: .55; }
+  :root[data-dark] #dip { --dip: .06; }
   @keyframes flickglow { 0%, 100% { opacity: var(--g0); } 8%, 22%, 40%, 55% { opacity: 1; } 14%, 30%, 48% { opacity: var(--g0); } }
   :root[data-dark] #theme { --g0: 0; }
   :root:not([data-dark]) #theme { --g0: 1; }
@@ -231,8 +233,6 @@
     <p>Portfolio under construction, and like all good things, is taking time.<br>
       Say hi: <a href="mailto:atul_s@nid.edu">atul_s@nid.edu</a></p>
     <p>if you're bored and still wanna hang around, click and hover away at stuff</p>
-    <p id="egg">you clicked. you're my kind of person. come back soon.<br>
-      for now, check out <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">this video</a>.</p>
   </div>
 </main>
 
@@ -319,18 +319,16 @@ function reset() {
 }
 setFill(0);
 // only a real mouse counts as hovering (taps on phones fire fake hover events)
-line.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') wait = setTimeout(reveal, 1000); });
+line.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') wait = setTimeout(reveal, 600); });
 line.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') reset(); });
 
-/* easter egg: click the name three times. A click also says the name
-   straight away (and phones have no hover, so this is their way in). */
-let clicks = 0;
+/* the name: on a laptop, only hovering says it. Phones can't hover, so a tap does. */
 document.getElementById('name').addEventListener('click', e => {
   e.preventDefault();                       // the address is only there for the status-bar joke
   if (scrollY > 40) { window.Home && Home.home(); return; }   // scrolled down: the name takes you home
+  if (matchMedia('(hover: hover)').matches) return;
   clearTimeout(wait);
   if (line.classList.contains('show')) play(); else reveal();
-  if (++clicks === 3) document.getElementById('egg').classList.add('show');
 });
 
 /* ================= "Hi," waves =================
@@ -485,10 +483,13 @@ apply(); nearer();
   try { if (sessionStorage.getItem('flickered')) return; } catch (e) {}
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let t;
-  const wait = () => { clearTimeout(t); t = setTimeout(go, 7000); };
+  const wait = () => { clearTimeout(t); t = setTimeout(go, 4000); };
   const go = () => {
     if (scrollY > innerHeight * .3) return wait();          // only while the bulb is on screen
     btn.classList.add('flicker');
+    let dip = document.getElementById('dip');
+    if (!dip) { dip = document.createElement('div'); dip.id = 'dip'; document.body.appendChild(dip); }
+    dip.classList.add('on'); dip.addEventListener('animationend', () => dip.classList.remove('on'), { once: true });
     btn.addEventListener('animationend', () => btn.classList.remove('flicker'), { once: true });
     try { sessionStorage.setItem('flickered', '1'); } catch (e) {}
     ['pointermove', 'keydown', 'scroll', 'touchstart'].forEach(ev => removeEventListener(ev, wait));
