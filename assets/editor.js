@@ -360,7 +360,7 @@
   /* ---------------- render ---------------- */
   function render(keepPanel) {
     if (previewing) return;
-    document.body.classList.toggle('has-side', (doc.side || 'projects') !== 'off');
+    document.body.classList.toggle('has-side', (doc.side || 'sections') !== 'off');
     C.render(cv, doc, { edit: true, src: resolve, onMediaError, lib: libMap(), slideAt });
     mountSide(true);
     lay();
@@ -379,7 +379,7 @@
   function mountSide(edit) {
     const list = index.projects.map(p => p.slug === slug ? meta : p);
     if (!list.some(p => p.slug === slug)) list.push(meta);
-    SideNav.mount({ mode: doc.side || 'projects', projects: list, current: slug, cv, edit });
+    SideNav.mount({ mode: doc.side || 'sections', projects: list, current: slug, cv, edit });
   }
   function syncU() { stage.style.setProperty('--u', cv.style.getPropertyValue('--u')); }
   function lay() { C.layout(cv); syncU(); }
@@ -1281,8 +1281,8 @@
     check(s, 'hidden from the work list', () => meta.hidden, v => meta.hidden = v);
 
     const sd = keyed(sec('Side nav'), 'side');
-    seg(sd, 'lists', { projects: 'projects', sections: 'sections', off: 'off' }, () => doc.side || 'projects', v => doc.side = v);
-    h('p', 'ed-note', sd, (doc.side || 'projects') === 'sections'
+    seg(sd, 'lists', { sections: 'sections', projects: 'projects', off: 'off' }, () => doc.side || 'sections', v => doc.side = v);
+    h('p', 'ed-note', sd, (doc.side || 'sections') === 'sections'
       ? 'Lists the texts on this page that have “show in side nav” ticked (every Section block does).'
       : (doc.side === 'off' ? 'No side nav: the page uses the full width.' : 'Lists all your projects, this one highlighted. Each name shows in its own colour on hover (set colours on the work list).'));
 
@@ -1306,7 +1306,7 @@
     check(sn, 'your guides', () => pref.sGuides, v => pref.sGuides = v, true);
     h('p', 'ed-note', sn, 'Hold Alt while dragging to ignore all of it. Drag from the top or left edge of the page to make a guide.');
 
-    const t = keyed(sec('Thumbnail (shows on hover)'), 'thumb');
+    const t = keyed(sec('Hover picture (work page + TL;DR)'), 'thumb');
     const pics = []; walk(doc.items, it => { if (it.type === 'image' && it.src) pics.push(it.src); if (it.type === 'slides') (it.slides || []).forEach(s => pics.push(s.src)); });
     const opts = { '': 'none' }; pics.forEach((p, i) => opts[p] = `picture ${i + 1} · ${p.split('/').pop().slice(0, 24)}`);
     if (meta.thumb && !(meta.thumb in opts)) opts[meta.thumb] = meta.thumb.split('/').pop().slice(0, 30);
@@ -1351,7 +1351,7 @@
       check(S, 'show in side nav', () => !!it.nav, v => { if (v) it.nav = plainText(it.text).slice(0, 40) || 'section'; else delete it.nav; });
       if (it.nav) {
         text(S, 'nav label', () => it.nav === true ? '' : it.nav, v => it.nav = v.trim() || plainText(it.text).slice(0, 40));
-        if ((doc.side || 'projects') !== 'sections') actions(S, [['make the side nav list sections', () => { doc.side = 'sections'; commit(); }]]);
+        if ((doc.side || 'sections') !== 'sections') actions(S, [['make the side nav list sections', () => { doc.side = 'sections'; commit(); }]]);
       }
     }
     if (it.type === 'button') {
@@ -1365,7 +1365,7 @@
       num(S, 'round corners', () => it.round || 0, v => { if (v > 0) it.round = v; else delete it.round; }, 1);
       actions(S, [
         [it.src ? 'replace' : 'choose file', async () => { const f = await pickFiles('image/*,video/*', false); if (f.length) addFiles(f, null, it); }],
-        ['use as thumbnail', () => { meta.thumb = it.src; commit(true); toast('Thumbnail set'); }],
+        ['use as hover picture', () => { meta.thumb = it.src; commit(true); toast('This is now the hover picture on the work page'); }],
         ['true proportions', async () => { if (!it.src) return; it.h = r1(it.w / await ratio(resolve(it.src), it.type)); commit(); }],
       ]);
       if (it.src) h('p', 'ed-note', S, it.src.startsWith('blob:') ? 'not saved into the folder yet' : it.src);
@@ -1474,7 +1474,9 @@
       await persistMedia();
       const latest = (await FS.json('projects/index.json')) || { projects: [] };   // the list may have changed meanwhile
       const i = latest.projects.findIndex(p => p.slug === slug);
-      i > -1 ? latest.projects[i] = meta : latest.projects.push(meta);
+      // only the things this page's panel edits; colour and order belong to the work list
+      const own = { slug, title: meta.title, year: meta.year, tags: meta.tags, summary: meta.summary, thumb: meta.thumb, hidden: meta.hidden };
+      i > -1 ? latest.projects[i] = { ...latest.projects[i], ...own } : latest.projects.push({ ...meta, ...own });
       await FS.write(`projects/${slug}.json`, JSON.stringify(doc, null, 2));
       await FS.write('projects/index.json', JSON.stringify(latest, null, 2));
       // other pages may have added components meanwhile: keep theirs, ours win on conflicts

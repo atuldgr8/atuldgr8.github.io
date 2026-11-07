@@ -181,7 +181,7 @@ window.Blocks = (() => {
       items.push(...part);
       y += height(part.map(i => ({ ...i, y: i.y - y }))) + (name === 'Facts' ? 112 : 140);
     }
-    return { v: 2, side: 'projects', items };
+    return { v: 2, side: 'sections', items };
   }
 
   return { LIB, make, height, template, kit };

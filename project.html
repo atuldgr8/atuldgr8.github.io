@@ -55,7 +55,7 @@
     return;
   }
   Canvas.render(cv, doc, { lib: Object.fromEntries(((lib && lib.components) || []).map(c => [c.id, c])) });
-  SideNav.mount({ mode: doc.side || 'projects', projects: list, current: slug, cv });
+  SideNav.mount({ mode: doc.side || 'sections', projects: list, current: slug, cv });
   Canvas.layout(cv);
   Canvas.animate(cv);
   let t; addEventListener('resize', () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => Canvas.layout(cv)); });
@@ -74,6 +74,7 @@
   }
 })();
 </script>
+<script src="assets/hover.js"></script>
 <script src="assets/local.js"></script>
 </body>
 </html>

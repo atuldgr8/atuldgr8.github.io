@@ -9,7 +9,7 @@
   // apply a saved light/dark choice before the page paints
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
   // arriving back here from another page: run the slide the other way (like scrolling up)
-  addEventListener('pagereveal', e => { if (e.viewTransition) e.viewTransition.types.add('down'); });
+  addEventListener('pagereveal', e => { if (e.viewTransition) e.viewTransition.types.add('tolanding'); });
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -177,21 +177,37 @@
   #theme.dragging { color: var(--fg); }
   main { position: relative; z-index: 2; }
 
-  /* ---------- going to work: the page slides up like a scroll, and
-     name / work / resume glide into the bar at the top of the next page ---------- */
+  /* ---------- going to work: one long page scrolling down. Everything
+     travels up together and name / work / resume settle into the bar at
+     the top of the next page. Coming back runs it the other way. ---------- */
   @view-transition { navigation: auto; }
   #name { view-transition-name: me; }
   .work { view-transition-name: nav-work; }
   .resume { view-transition-name: nav-resume; }
-  ::view-transition-group(*) { animation-duration: .75s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-  ::view-transition-old(root) { animation: vt-up-out .75s cubic-bezier(.65, 0, .35, 1) both; }
-  ::view-transition-new(root) { animation: vt-up-in .75s cubic-bezier(.65, 0, .35, 1) both; }
-  :root:active-view-transition-type(down)::view-transition-old(root) { animation-name: vt-down-out; }
-  :root:active-view-transition-type(down)::view-transition-new(root) { animation-name: vt-down-in; }
-  @keyframes vt-up-out   { to   { transform: translateY(-30vh); opacity: 0; } }
-  @keyframes vt-up-in    { from { transform: translateY(45vh);  opacity: 0; } }
-  @keyframes vt-down-out { to   { transform: translateY(45vh);  opacity: 0; } }
-  @keyframes vt-down-in  { from { transform: translateY(-30vh); opacity: 0; } }
+  :root { --scroll-d: calc(32vh - 2vw); }
+  ::view-transition-group(*) { animation-duration: .9s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  ::view-transition-old(root) { animation: vt-scroll-up-out .9s cubic-bezier(.65, 0, .35, 1) both; }
+  ::view-transition-new(root) { animation: vt-scroll-up-in .9s cubic-bezier(.65, 0, .35, 1) both; }
+  :root:active-view-transition-type(tolanding)::view-transition-old(root) { animation-name: vt-scroll-down-out; }
+  :root:active-view-transition-type(tolanding)::view-transition-new(root) { animation-name: vt-scroll-down-in; }
+  @keyframes vt-scroll-up-out   { 55% { opacity: 1; } to { transform: translateY(calc(var(--scroll-d) * -1)); opacity: 0; } }
+  @keyframes vt-scroll-up-in    { from { transform: translateY(var(--scroll-d)); } }
+  @keyframes vt-scroll-down-out { 55% { opacity: 1; } to { transform: translateY(var(--scroll-d)); opacity: 0; } }
+  @keyframes vt-scroll-down-in  { from { transform: translateY(calc(var(--scroll-d) * -1)); } }
+
+  /* both pages are visible at once while they slide, like one long sheet:
+     let the incoming page's empty background show what's behind it */
+  :root:active-view-transition-type(fromlanding)::view-transition-new(root),
+  :root:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: multiply; }
+  :root[data-theme="dark"]:active-view-transition-type(fromlanding)::view-transition-new(root),
+  :root[data-theme="dark"]:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):active-view-transition-type(fromlanding)::view-transition-new(root),
+    :root:not([data-theme="light"]):active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
+  }
+
+  /* anything you can click turns a colour on hover (assets/hover.js picks it) */
+  .hc { color: var(--hc) !important; transition: color .2s; }
 
   @media (prefers-reduced-motion: reduce) {
     ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
@@ -454,6 +470,7 @@ bulb.addEventListener('pointerdown', e => {
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
 apply(); nearer();
 </script>
+<script src="assets/hover.js"></script>
 <script src="assets/local.js"></script>
 </body>
 </html>

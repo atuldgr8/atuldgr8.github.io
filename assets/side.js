@@ -6,7 +6,7 @@
    Used by the side nav on project pages and the list on the work page.
 
    Side nav: fixed in the bottom-left corner of project pages.
-   It lists either all projects, or the sections of the page you're on.
+   It lists the sections of the page you're on (or, if you choose, all projects).
    ===================================================================== */
 window.Dock = function Dock(box, { max = .6, reach = 2.6 } = {}) {
   // Words scale where they stand (layout never moves, so the maths stays steady),
@@ -35,7 +35,7 @@ window.Dock = function Dock(box, { max = .6, reach = 2.6 } = {}) {
     els.forEach((el, i) => {
       now[i] = now[i] || 1;
       const d = target[i] - now[i];
-      now[i] += d * .2;
+      now[i] += d * .14;
       if (Math.abs(d) > .002) moving = true; else now[i] = target[i];
     });
     // spread: everything below the nearest word moves down by the growth in between, everything above moves up
@@ -49,6 +49,7 @@ window.Dock = function Dock(box, { max = .6, reach = 2.6 } = {}) {
       el.style.setProperty('--dy', dy.toFixed(2) + 'px');
       el.classList.toggle('near', py != null && i === near);
     });
+    box.classList.toggle('has-near', py != null && near >= 0);
     raf = moving ? requestAnimationFrame(frame) : 0;
   }
   const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
@@ -76,9 +77,10 @@ window.SideNav = (() => {
 
   // mode: 'projects' | 'sections' | 'off'
   let unspy = null;
-  function mount({ mode = 'projects', projects = [], current = '', cv, edit = false }) {
+  function mount({ mode = 'sections', projects = [], current = '', cv, edit = false }) {
     document.querySelectorAll('nav.side').forEach(n => n.remove());
     if (unspy) { unspy(); unspy = null; }
+    if (mode === 'sections' && !edit && cv && !cv.querySelector('.it[id^="sec-"]')) mode = 'off';
     document.body.classList.toggle('has-side', mode !== 'off');
     if (mode === 'off') return null;
     const nav = h('nav', 'side', document.body);
@@ -119,7 +121,7 @@ window.SideNav = (() => {
       if (secs.length) { addEventListener('scroll', spy, { passive: true }); spy(); unspy = () => removeEventListener('scroll', spy); }
       else if (edit) h('li', 'side-empty', list, 'Tick “show in side nav” on a text to list it here');
     }
-    Dock(nav, { max: .4, reach: 1.8 });
+    Dock(nav, { max: .14, reach: 2 });
     return nav;
   }
   return { mount };

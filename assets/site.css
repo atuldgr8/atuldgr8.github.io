@@ -47,23 +47,31 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
   .top .nav-resume { grid-column: 4; }
 }
 
-/* ---------- work list: centred, one colour per project ---------- */
-.work-page { padding: 32vh var(--gutter) calc(var(--step) * 3); }
-.list { position: relative; display: flex; flex-direction: column; align-items: center; gap: calc(var(--step) / 4); }
+/* ---------- work list: a left-justified block in the middle of the screen ---------- */
+.work-page { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column;
+             padding: calc(var(--gutter) * 3) var(--gutter) var(--gutter); }
+.wk-wrap { flex: 1; display: flex; align-items: center; justify-content: center; }
+.list { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--step) / 4); }
 .wk {
-  display: block; text-align: center; text-decoration: none;
+  display: block; text-decoration: none;
   color: var(--c, var(--fg));
-  transform: translateY(var(--dy, 0px)) scale(var(--s, 1)); transform-origin: 50% 50%;
-  transition: opacity .3s;
+  transform: translateY(var(--dy, 0px)) scale(var(--s, 1)); transform-origin: 0 50%;
+  transition: opacity .35s;
 }
-.wk .y { color: var(--mute); margin-left: .4em; opacity: 0; transition: opacity .25s; }
-.list:hover .wk { opacity: .32; }
-.list:hover .wk.near, .list .wk:hover, .list .wk:focus-visible { opacity: 1; outline: none; }
-.wk.near .y, .wk:hover .y { opacity: 1; }
+/* while one name is under the mouse, the others step back a little */
+.list.has-near .wk:not(.near) { opacity: .4; }
+/* its picture fades in beside the list, in a fixed spot (like the Readymag site) */
+.wk-pic { position: fixed; top: 50%; height: 56vh; transform: translateY(-50%); pointer-events: none; z-index: 1; }
+.wk-pic.none { display: none; }
+.wk-pic img {
+  position: absolute; left: 0; top: 50%; max-width: 100%; max-height: 100%;
+  opacity: 0; transform: translateY(-50%) scale(.97); transition: opacity .3s, transform .45s var(--pop);
+}
+.wk-pic img.on { opacity: 1; transform: translateY(-50%) scale(1); }
+@media (hover: none) { .wk-pic { display: none; } }
 .empty { color: var(--mute); }
 .tldr-open[hidden] { display: none; }
-.tldr-open { display: block; margin: calc(var(--step) * 3) auto 0; color: var(--mute); }
-.tldr-open:hover { color: var(--fg); }
+.tldr-open { display: block; margin: var(--step) auto 0; color: var(--mute); transition: color .2s; }
 
 /* TL;DR: every project, one picture each, click through */
 .tldr {
@@ -172,7 +180,7 @@ nav.side a {
   transform: translateY(var(--dy, 0px)) scale(var(--s, 1)); transform-origin: 0 50%; transition: color .2s;
 }
 nav.side a.on { color: var(--fg); }
-nav.side a.near, nav.side a:hover { color: var(--c, var(--fg)); }
+nav.side a.near { color: var(--c, var(--hc, var(--fg))); }
 nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; }
 @media (max-width: 700px) {
   nav.side { display: none; }
@@ -195,23 +203,44 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
 }
 
 /* ---------- moving between pages ----------
-   Going from the landing page to work feels like scrolling down: the page
-   slides up, and name / work / resume glide into the bar at the top.
-   Coming back to the landing page runs it the other way. (Browsers without
-   this feature just change page, as before.) */
+   Landing -> work feels like one long page scrolling down: everything
+   travels up together, and name / work / resume settle into the top bar.
+   Work -> landing runs it back up. Other pages just crossfade.
+   (Browsers without this feature simply change page.) */
 @view-transition { navigation: auto; }
 .top .me { view-transition-name: me; }
 .top .nav-work { view-transition-name: nav-work; }
 .top .nav-resume { view-transition-name: nav-resume; }
-::view-transition-group(*) { animation-duration: .75s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-::view-transition-old(root) { animation: vt-up-out .75s cubic-bezier(.65, 0, .35, 1) both; }
-::view-transition-new(root) { animation: vt-up-in .75s cubic-bezier(.65, 0, .35, 1) both; }
-:root:active-view-transition-type(down)::view-transition-old(root) { animation-name: vt-down-out; }
-:root:active-view-transition-type(down)::view-transition-new(root) { animation-name: vt-down-in; }
-@keyframes vt-up-out   { to   { transform: translateY(-30vh); opacity: 0; } }
-@keyframes vt-up-in    { from { transform: translateY(45vh);  opacity: 0; } }
-@keyframes vt-down-out { to   { transform: translateY(45vh);  opacity: 0; } }
-@keyframes vt-down-in  { from { transform: translateY(-30vh); opacity: 0; } }
+:root { --scroll-d: calc(32vh - 2vw); }
+::view-transition-group(*) { animation-duration: .35s; }
+::view-transition-old(root) { animation: vt-fade-out .3s ease both; }
+::view-transition-new(root) { animation: vt-fade-in .35s ease both; }
+:root:active-view-transition-type(fromlanding)::view-transition-group(*),
+:root:active-view-transition-type(tolanding)::view-transition-group(*) { animation-duration: .9s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+:root:active-view-transition-type(fromlanding)::view-transition-old(root) { animation: vt-scroll-up-out .9s cubic-bezier(.65, 0, .35, 1) both; }
+:root:active-view-transition-type(fromlanding)::view-transition-new(root) { animation: vt-scroll-up-in .9s cubic-bezier(.65, 0, .35, 1) both; }
+:root:active-view-transition-type(tolanding)::view-transition-old(root) { animation: vt-scroll-down-out .9s cubic-bezier(.65, 0, .35, 1) both; }
+:root:active-view-transition-type(tolanding)::view-transition-new(root) { animation: vt-scroll-down-in .9s cubic-bezier(.65, 0, .35, 1) both; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
+@keyframes vt-scroll-up-out   { 55% { opacity: 1; } to { transform: translateY(calc(var(--scroll-d) * -1)); opacity: 0; } }
+@keyframes vt-scroll-up-in    { from { transform: translateY(var(--scroll-d)); } }
+@keyframes vt-scroll-down-out { 55% { opacity: 1; } to { transform: translateY(var(--scroll-d)); opacity: 0; } }
+@keyframes vt-scroll-down-in  { from { transform: translateY(calc(var(--scroll-d) * -1)); } }
+/* both pages are visible at once while they slide, like one long sheet:
+   let the incoming page's empty background show what's behind it */
+:root:active-view-transition-type(fromlanding)::view-transition-new(root),
+:root:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: multiply; }
+:root[data-theme="dark"]:active-view-transition-type(fromlanding)::view-transition-new(root),
+:root[data-theme="dark"]:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):active-view-transition-type(fromlanding)::view-transition-new(root),
+  :root:not([data-theme="light"]):active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
+}
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+
+/* ---------- anything you can click turns a colour on hover ---------- */
+.hc { color: var(--hc) !important; transition: color .2s; }
+.top a.hc { color: var(--hci) !important; }   /* the top bar inverts what's under it, so give it the opposite colour */
