@@ -89,32 +89,45 @@
     const m = { bar: true, intro: true, ...((site && site.motion) || {}) };
     try { const o = localStorage.getItem('swell-override'); if (o) m.bar = m.intro = o === 'on'; } catch (e) {}
     if (m.bar) {
+      // grows from its bottom-left corner, up and to the right
       const bar = [...document.querySelectorAll('#name, .bar .work, .bar .resume, .top .me, .top .nav-work, .top .nav-resume')];
-      bar.forEach(el => { el.style.display = 'inline-block'; el.style.transformOrigin = '50% 60%'; });
+      bar.forEach(el => { el.style.display = 'inline-block'; el.style.transformOrigin = '0 100%'; });
       Swell(bar, { max: .16, reach: 90 });
     }
     const intro = document.querySelector('.intro');
-    if (m.intro && intro) {
-      // wrap every word, links included, so each can move on its own
-      const words = [];
-      const walk = n => {
-        for (const c of [...n.childNodes]) {
-          if (c.nodeType === 1) { walk(c); continue; }
-          if (c.nodeType !== 3 || !c.textContent.trim()) continue;
-          const frag = document.createDocumentFragment();
-          for (const part of c.textContent.split(/(\s+)/)) {
-            if (!part) continue;
-            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); continue; }
-            const w = document.createElement('span'); w.className = 'sw'; w.textContent = part;
-            w.style.display = 'inline-block'; w.style.transformOrigin = '50% 60%';
-            frag.appendChild(w); words.push(w);
-          }
-          c.replaceWith(frag);
+    if (m.intro && intro) Grow([...intro.querySelectorAll('a')], { max: .3, reach: 90 });
+  }
+  /* Grow: only the words you can point at or click get bigger, for real (their
+     text size changes), so the rest of the paragraph moves along to make room.
+     They grow from the bottom-left, up and to the right, like the bar. */
+  function Grow(els, { max = .3, reach = 90 } = {}) {
+    if (!els.length) return;
+    const st = els.map(() => ({ s: 1, t: 1 }));
+    let px = null, py = null, raf = 0;
+    const frame = () => {
+      let moving = false;
+      els.forEach((el, i) => {
+        const o = st[i];
+        if (px == null) o.t = 1;
+        else {
+          // distance to the nearest edge of the word, so long words don't need a direct hit
+          const r = el.getBoundingClientRect();
+          const dx = Math.max(r.left - px, 0, px - r.right), dy = Math.max(r.top - py, 0, py - r.bottom) * 1.4;
+          const k = Math.max(0, 1 - Math.hypot(dx, dy) / reach);
+          o.t = 1 + max * (1 - Math.cos(k * Math.PI)) / 2;
         }
-      };
-      walk(intro);
-      Swell(words, { max: .22, reach: 80, push: 7 });
-    }
+        o.s += (o.t - o.s) * .16;
+        if (Math.abs(o.t - o.s) > .002) moving = true; else o.s = o.t;
+        el.style.fontSize = o.s === 1 ? '' : o.s.toFixed(4) + 'em';
+      });
+      raf = moving ? requestAnimationFrame(frame) : 0;
+    };
+    addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      px = e.clientX; py = e.clientY;
+      if (!raf) raf = requestAnimationFrame(frame);
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => { px = py = null; if (!raf) raf = requestAnimationFrame(frame); });
   }
 
   if (!matchMedia('(hover: hover)').matches) return;
