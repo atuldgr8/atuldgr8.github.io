@@ -29,6 +29,9 @@ window.Canvas = (() => {
   const colX = i => M + i * (COLW + GAP);              // left edge of column i (0-11)
   const span = n => n * COLW + (n - 1) * GAP;          // width of n columns
   const NEUTRAL = { x: 0, y: 0, scale: 1, rotate: 0, opacity: 1, blur: 0 };
+  // palette colours (light/dark versions live in shared.css), plus "bg" = the page background
+  const PAL = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'teal', 'bg'];
+  const palCss = v => v && v[0] === '#' ? v : PAL.includes(v) ? `var(--${v})` : null;
   // a page can set its own grid; anything it leaves out falls back to these
   const GRID = { cols: COLS, margin: M, gap: GAP, row: ROW };
   function grid(doc) {
@@ -118,7 +121,7 @@ window.Canvas = (() => {
       case 'text': {
         const t = h('div', 'txt', inner);
         if (it.weight == 700) t.classList.add('w-700');
-        if (it.color && it.color[0] === '#') t.style.color = it.color;
+        if (palCss(it.color)) t.style.color = palCss(it.color);
         else if (it.color && it.color !== 'fg') t.classList.add('c-' + it.color);
         if (it.align && it.align !== 'left') t.classList.add('a-' + it.align);
         t.innerHTML = it.text || '';
@@ -137,9 +140,16 @@ window.Canvas = (() => {
       }
       case 'box': {
         const b = h('div', 'box', inner);
-        if (it.fill && it.fill[0] === '#') b.style.background = it.fill;
+        if (palCss(it.fill)) b.style.background = palCss(it.fill);
         else b.classList.add('b-' + (it.fill || 'line'));
         if (it.round) b.style.borderRadius = `calc(var(--u) * ${it.round})`;
+        if (it.text != null) {                // a box with words in it (a callout): it grows to fit them
+          b.classList.add('has-text');
+          const t = h('div', 'txt', b);
+          if (palCss(it.color)) t.style.color = palCss(it.color);
+          if (it.weight == 700) t.classList.add('w-700');
+          t.innerHTML = it.text;
+        }
         break;
       }
       case 'group': {
@@ -150,7 +160,7 @@ window.Canvas = (() => {
       }
       case 'button': {
         const b = h('div', 'btn b-' + (it.look || 'line'), inner);
-        if (it.color && it.color[0] === '#') b.style.color = it.color;
+        if (palCss(it.color)) b.style.color = palCss(it.color);
         h('span', '', b).innerHTML = it.text || 'Button';
         break;
       }
@@ -189,7 +199,9 @@ window.Canvas = (() => {
     s.left = `calc(var(--u) * ${it.x})`;
     s.top = `calc(var(--u) * ${it.y})`;
     s.width = `calc(var(--u) * ${it.w})`;
-    s.height = it.type === 'text' ? '' : `calc(var(--u) * ${it.h})`;
+    const grows = it.type === 'box' && it.text != null;
+    s.height = it.type === 'text' || grows ? '' : `calc(var(--u) * ${it.h})`;
+    s.minHeight = grows ? `calc(var(--u) * ${it.h})` : '';
     if (it.type !== 'text' && it.w && it.h) s.setProperty('--ar', `${it.w} / ${it.h}`);
   }
 

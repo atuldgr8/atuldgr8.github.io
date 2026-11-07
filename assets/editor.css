@@ -238,3 +238,30 @@ body.is-editing:not(.previewing) .ed-ruler-y { width: 10px; }
 .wk-pop p { width: 100%; color: var(--mute); margin: 0; }
 .wk-tldr { margin-top: calc(var(--step) * 2); display: flex; gap: 12px; align-items: baseline; color: var(--mute); }
 .wk-tldr [contenteditable] { color: var(--fg); outline: none; min-width: 2em; box-shadow: 0 1px 0 var(--faint); }
+
+/* ---------- work-list editor: TL;DR pictures + site colours ---------- */
+.wk-extra { display: grid; gap: calc(var(--step) * 1.5); margin-top: calc(var(--step) * 2); font: 400 13px/1.35 Inter, system-ui, sans-serif; letter-spacing: 0; }
+.wk-box { border-top: 1px solid var(--fg); padding-top: 12px; }
+.wk-box h3 { font: 700 13px/1.3 Inter, system-ui, sans-serif; margin-bottom: 8px; }
+.wk-line { display: flex; gap: 8px; align-items: baseline; }
+.wk-edit { outline: none; box-shadow: 0 1px 0 var(--faint); min-width: 2em; }
+.wk-hint { color: var(--mute); margin: 6px 0 10px; max-width: 60ch; }
+.wk-slides { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.wk-slide { position: relative; display: grid; gap: 4px; }
+.wk-slide img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--ghost); display: block; }
+.wk-slide-tools { position: absolute; top: 4px; right: 4px; display: flex; gap: 2px; }
+.wk-slide-tools button { padding: 1px 6px; background: var(--bg); border: 1px solid var(--faint); cursor: pointer; font: inherit; color: var(--fg); }
+.wk-slide select, .wk-slide input { width: 100%; padding: 3px 5px; border: 1px solid var(--faint); background: var(--bg); color: var(--fg); font: inherit; }
+.wk-add { margin-top: 10px; padding: 5px 10px; border: 1px solid var(--fg) !important; }
+.wk-roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 18px; }
+.wk-role { display: flex; align-items: center; gap: 8px; }
+.wk-role .wk-chip i { width: 16px; height: 16px; }
+.wk-role small { color: var(--mute); margin-left: auto; }
+.wk-palette { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+.wk-tok { display: flex; align-items: center; gap: 2px; }
+.wk-tok input { width: 26px; height: 22px; padding: 0; border: 1px solid var(--faint); background: none; cursor: pointer; }
+.wk-tok input.dark { border-color: #000; background: #0d0d0d; }
+.wk-tok span { margin-left: 4px; color: var(--mute); }
+.wk-pop .wk-none { background: linear-gradient(135deg, var(--bg) 45%, var(--mute) 47% 53%, var(--bg) 55%); }
+.wk-random { width: 100%; text-align: left; padding: 4px 0; color: var(--fg); }
+.work-page.is-editing { padding-bottom: 140px; }

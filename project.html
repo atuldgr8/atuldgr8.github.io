@@ -11,12 +11,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/shared.css">
 </head>
 <body>
 
 <header class="top">
   <a class="me" href="./">Atul Suresh</a>
-  <a class="nav-work" href="work.html">work</a>
+  <a class="nav-work" href="./#work">work</a>
   <a class="nav-resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 </header>
 
@@ -51,9 +52,12 @@
   if (meta) document.title = `${meta.title} · Atul Suresh`;
 
   if (!slug || !doc) {
-    cv.outerHTML = '<p class="missing">Nothing here (yet). <a href="work.html">Back to work</a></p>';
+    cv.outerHTML = '<p class="missing">Nothing here (yet). <a href="./#work">Back to work</a></p>';
     return;
   }
+  const top = document.querySelector('.top');
+  const blend = () => top.classList.toggle('blend', scrollY > 8);
+  addEventListener('scroll', blend, { passive: true }); blend();
   Canvas.render(cv, doc, { lib: Object.fromEntries(((lib && lib.components) || []).map(c => [c.id, c])) });
   SideNav.mount({ mode: doc.side || 'sections', projects: list, current: slug, cv });
   Canvas.layout(cv);

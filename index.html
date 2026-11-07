@@ -8,9 +8,11 @@
 <script>
   // apply a saved light/dark choice before the page paints
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
-  // arriving back here from another page: run the slide the other way (like scrolling up)
-  addEventListener('pagereveal', e => { if (e.viewTransition) e.viewTransition.types.add('tolanding'); });
 </script>
+<!-- don't draw the page until the work list further down exists -->
+<link rel="expect" href="#home-ready" blocking="render">
+<link rel="stylesheet" href="assets/shared.css">
+<link rel="stylesheet" href="assets/home.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -40,19 +42,34 @@
     font: 400 var(--size)/var(--lh) Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
     letter-spacing: -0.07em;
     min-height: 100vh;
-    padding: 32vh var(--gutter) calc(var(--step) * 2);
+    padding: 0 var(--gutter);
   }
   button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   a { color: inherit; }
 
-  /* ---------- the grid ---------- */
-  main {
+  /* ---------- the grid ----------
+     The name row (Hi, I'm / Atul Suresh · work · resume) is its own bar.
+     It starts a third of the way down, scrolls up with the page, and stays
+     pinned at the top once it gets there: the same place it sits on every
+     other page. "Hi, I'm" tucks away as it pins. */
+  .bar, main {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--gap);
     row-gap: var(--step);
     align-items: end;
   }
+  .bar { position: sticky; z-index: 10; top: calc(var(--gutter) - var(--size) * var(--lh)); margin-top: 32vh; row-gap: 0; }
+  main { margin-top: var(--step); min-height: calc(100vh - 32vh - var(--step) * 3); align-content: start; }
+  /* whatever scrolls up past the pinned bar slides under it, not through it */
+  .bar::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    left: calc(var(--gutter) * -1); right: calc(var(--gutter) * -1);
+    top: -100vh; bottom: calc(var(--size) * -.6);
+    background: var(--bg);
+  }
+  .hi-line { display: inline-block; transition: opacity .35s; }
+  .bar.stuck .hi-line { opacity: 0; }
   .hello  { grid-column: 1 / span 6; grid-row: 1; }
   .work   { grid-column: 10;         grid-row: 1; justify-self: start; }
   .resume { grid-column: 12;         grid-row: 1; justify-self: start; }
@@ -60,7 +77,7 @@
 
   /* phones: 4 columns, nav still on the same line as the name */
   @media (max-width: 700px) {
-    main { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .bar, main { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .hello  { grid-column: 1 / span 2; }
     .work   { grid-column: 3; }
     .resume { grid-column: 4; }
@@ -71,7 +88,7 @@
 
   /* ---------- nav ---------- */
   .work, .resume { text-decoration: none; }
-  .work:hover, .resume:hover { text-decoration: underline; text-underline-offset: 2px; }
+
 
   /* ---------- name, cursor, pronunciation ---------- */
   .name-line { position: relative; white-space: nowrap; }
@@ -177,40 +194,7 @@
   #theme.dragging { color: var(--fg); }
   main { position: relative; z-index: 2; }
 
-  /* ---------- going to work: one long page scrolling down. Everything
-     travels up together and name / work / resume settle into the bar at
-     the top of the next page. Coming back runs it the other way. ---------- */
-  @view-transition { navigation: auto; }
-  #name { view-transition-name: me; }
-  .work { view-transition-name: nav-work; }
-  .resume { view-transition-name: nav-resume; }
-  :root { --scroll-d: calc(32vh - 2vw); }
-  ::view-transition-group(*) { animation-duration: .9s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-  ::view-transition-old(root) { animation: vt-scroll-up-out .9s cubic-bezier(.65, 0, .35, 1) both; }
-  ::view-transition-new(root) { animation: vt-scroll-up-in .9s cubic-bezier(.65, 0, .35, 1) both; }
-  :root:active-view-transition-type(tolanding)::view-transition-old(root) { animation-name: vt-scroll-down-out; }
-  :root:active-view-transition-type(tolanding)::view-transition-new(root) { animation-name: vt-scroll-down-in; }
-  @keyframes vt-scroll-up-out   { 55% { opacity: 1; } to { transform: translateY(calc(var(--scroll-d) * -1)); opacity: 0; } }
-  @keyframes vt-scroll-up-in    { from { transform: translateY(var(--scroll-d)); } }
-  @keyframes vt-scroll-down-out { 55% { opacity: 1; } to { transform: translateY(var(--scroll-d)); opacity: 0; } }
-  @keyframes vt-scroll-down-in  { from { transform: translateY(calc(var(--scroll-d) * -1)); } }
-
-  /* both pages are visible at once while they slide, like one long sheet:
-     let the incoming page's empty background show what's behind it */
-  :root:active-view-transition-type(fromlanding)::view-transition-new(root),
-  :root:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: multiply; }
-  :root[data-theme="dark"]:active-view-transition-type(fromlanding)::view-transition-new(root),
-  :root[data-theme="dark"]:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):active-view-transition-type(fromlanding)::view-transition-new(root),
-    :root:not([data-theme="light"]):active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
-  }
-
-  /* anything you can click turns a colour on hover (assets/hover.js picks it) */
-  .hc { color: var(--hc) !important; transition: color .2s; }
-
   @media (prefers-reduced-motion: reduce) {
-    ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
     .hi, .name-line.show .say { animation: none; opacity: 1; }
     #thing.glimpse .lit { animation: none; }
   }
@@ -218,13 +202,15 @@
 </head>
 <body>
 
-<main>
-  <p class="hello"><span class="hi">Hi,</span> I'm<br>
+<header class="bar">
+  <p class="hello"><span class="hi-line"><span class="hi">Hi,</span> I'm</span><br>
     <span class="name-line"><a id="name" href="#how-white-people-pronounce-my-name">Atul Suresh</a><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
   </p>
-  <a class="work" href="work.html">work</a>
+  <a class="work" href="#work">work</a>
   <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
+</header>
 
+<main>
   <p class="intro">
     <span class="l1">I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from <a class="door" data-win="nid" href="#eventually-everything-connects">NID</a>,</span><br>
     trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
@@ -238,6 +224,17 @@
       for now, check out <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">this video</a>.</p>
   </div>
 </main>
+
+<!-- keep scrolling: the work, then the TL;DR. Same page, all of it. -->
+<section id="work" class="wk-sec" aria-label="Work">
+  <div class="list" aria-label="Projects"></div>
+  <a class="tldr-open" href="#tldr" hidden>TL;DR</a>
+</section>
+<div class="wk-pic" aria-hidden="true"></div>
+<section id="tldr" class="tl-sec" aria-label="TL;DR">
+  <div class="tl-stage"></div>
+  <div class="tl-cap"><a class="t"></a><span class="sum"></span><span class="n"></span></div>
+</section>
 
 <button id="theme" type="button"><svg class="bulb" viewBox="0 0 15 14" aria-hidden="true"><g fill="currentColor"><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="11" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="9" y="10" width="1" height="1"/><rect x="5" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="9" y="11" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="6" y="12" width="1" height="1"/><rect x="7" y="12" width="1" height="1"/><rect x="8" y="12" width="1" height="1"/><rect x="9" y="12" width="1" height="1"/><rect x="6" y="13" width="1" height="1"/><rect x="7" y="13" width="1" height="1"/><rect x="8" y="13" width="1" height="1"/></g><g class="glow"><rect x="7" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="13" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/></g></svg><span class="label"></span></button>
 
@@ -316,6 +313,7 @@ line.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rese
 let clicks = 0;
 document.getElementById('name').addEventListener('click', e => {
   e.preventDefault();                       // the address is only there for the status-bar joke
+  if (scrollY > 40) { window.Home && Home.home(); return; }   // scrolled down: the name takes you home
   clearTimeout(wait);
   if (line.classList.contains('show')) play(); else reveal();
   if (++clicks === 3) document.getElementById('egg').classList.add('show');
@@ -470,6 +468,9 @@ bulb.addEventListener('pointerdown', e => {
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
 apply(); nearer();
 </script>
+<script src="assets/side.js"></script>
+<script src="assets/home.js"></script>
+<i id="home-ready" hidden></i>
 <script src="assets/hover.js"></script>
 <script src="assets/local.js"></script>
 </body>

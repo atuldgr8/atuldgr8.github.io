@@ -71,11 +71,9 @@ window.Blocks = (() => {
     { cat: 'Story', name: 'Big line', make: k => [
       k.T({ x: k.x(0), y: 0, w: k.w(10), weight: 700, text: 'One bold sentence that sums the whole thing up.' }),
     ] },
-    { cat: 'Story', name: 'Callout', note: 'pick the colour', make: k => [{
-      type: 'group', x: k.read.x, y: 0, w: k.read.w, h: 104, children: [
-        { id: id(), type: 'box', fill: '#1f3a93', round: 8, x: 0, y: 0, w: k.read.w, h: 104 },
-        { id: id(), type: 'text', x: 24, y: 24, w: k.read.w - 48, h: 42, weight: 700, color: '#ffffff', text: 'The result, in numbers if you can. 33% → 60%, three cities, one very happy client.' },
-      ] }] },
+    { cat: 'Story', name: 'Callout', note: 'a coloured box with words in it', make: k => [{
+      type: 'box', fill: 'blue', round: 8, x: k.read.x, y: 0, w: k.read.w, h: 104, weight: 700, color: 'bg',
+      text: 'The result, in numbers if you can. 33% → 60%, three cities, one very happy client.' }] },
     { cat: 'Story', name: 'Quote', make: k => [
       k.T({ x: k.read.x, y: 0, w: k.read.w, weight: 700, text: '“Something someone said that made it all click.”' }),
       k.T({ x: k.read.x, y: 36, w: k.read.w, color: 'mute', text: '— who said it, and who they are' }),

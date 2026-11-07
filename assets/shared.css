@@ -1,0 +1,45 @@
+/* =====================================================================
+   Shared by every page.
+
+   1. The colour palette. Everything is black and white until you touch it;
+      then things take one of these colours. Each colour has a light-mode
+      and a dark-mode version, so it stays readable either way.
+      (You can change the values in the work-list editor → Site colours.)
+   2. Moving between pages.
+   ===================================================================== */
+:root {
+  --red: #d40000;  --blue: #1f3a93;  --green: #0a7d4f; --yellow: #a86f00;
+  --purple: #6a1fd6; --orange: #e04a0b; --pink: #c8246a; --teal: #00727a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --red: #ff5a52;  --blue: #7ea6ff;  --green: #43d99a; --yellow: #ffd23f;
+    --purple: #b892ff; --orange: #ff8c4f; --pink: #ff7cab; --teal: #3fd3dd;
+  }
+}
+:root[data-theme="dark"] {
+  --red: #ff5a52;  --blue: #7ea6ff;  --green: #43d99a; --yellow: #ffd23f;
+  --purple: #b892ff; --orange: #ff8c4f; --pink: #ff7cab; --teal: #3fd3dd;
+}
+
+/* anything you can click: its colour, while the mouse is on it (assets/hover.js) */
+.hc { color: var(--hc) !important; transition: color .2s; }
+
+/* ---------- moving between pages ----------
+   Name / work / resume sit in exactly the same spot on every page, so
+   between pages they simply stay put: no fade, no flicker. The rest of the
+   page crossfades underneath. (Home → work → TL;DR is one page: it scrolls.) */
+@view-transition { navigation: auto; }
+#name, .top .me { view-transition-name: me; }
+.bar .work, .top .nav-work { view-transition-name: nav-work; }
+.bar .resume, .top .nav-resume { view-transition-name: nav-resume; }
+::view-transition-old(me), ::view-transition-old(nav-work), ::view-transition-old(nav-resume) { display: none; }
+::view-transition-new(me), ::view-transition-new(nav-work), ::view-transition-new(nav-resume) { animation: none; }
+::view-transition-group(*) { animation-duration: .35s; }
+::view-transition-old(root) { animation: vt-fade-out .25s ease both; }
+::view-transition-new(root) { animation: vt-fade-in .35s ease both; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

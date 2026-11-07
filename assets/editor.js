@@ -622,7 +622,7 @@
     if (previewing || e.target.closest('.ed-guide')) return;
     const el = pick(e.target); if (!el) return;
     const it = find(el.dataset.id).it;
-    if (it.type === 'text' || it.type === 'button') startText(el, it);
+    if (it.type === 'text' || it.type === 'button' || (it.type === 'box' && it.text != null)) startText(el, it);
     else if (it.type === 'group' || it.type === 'instance') enter(it);
     else if (it.type === 'image' || it.type === 'video') {
       const f = await pickFiles(it.type === 'video' ? 'video/*' : 'image/*,video/*', false);
@@ -636,7 +636,7 @@
   });
 
   function startText(el, it, resume) {
-    const t = el && el.querySelector(it.type === 'button' ? '.btn > span' : '.txt'); if (!t) return;
+    const t = el && el.querySelector(it.type === 'button' ? '.btn > span' : it.type === 'box' ? '.box > .txt' : '.txt'); if (!t) return;
     editing = { el: t, it };
     t.contentEditable = 'true';
     t.spellcheck = true;
@@ -957,7 +957,7 @@
     if (e.key === 'Enter') {
       const it = selected()[0]; if (!it) return;
       e.preventDefault();
-      if (it.type === 'text' || it.type === 'button') startText(elOf(it.id), it);
+      if (it.type === 'text' || it.type === 'button' || (it.type === 'box' && it.text != null)) startText(elOf(it.id), it);
       else if (it.type === 'group' || it.type === 'instance') enter(it);
       return;
     }
@@ -1213,7 +1213,8 @@
     const r = h('div', 'ed-acts', parent);
     for (const [l, fn, title] of list) { const b = h('button', '', r, l); b.type = 'button'; if (title) b.title = title; b.onclick = fn; }
   }
-  const SWATCHES = ['#db0007', '#1f3a93', '#0a7d4f', '#f2a900', '#7b2ff7', '#ff5a1f', '#ffffff', '#000000'];
+  // palette names: each has a light- and a dark-mode version (shared.css); "bg" is the page background
+  const SWATCHES = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'teal', 'bg'];
   // named colours (ink, grey…) plus any colour at all
   function colourField(parent, label, tokens, get, set) {
     const r = row(parent, label), g = h('span', 'ed-seg ed-col', r);
@@ -1229,7 +1230,7 @@
     pick.onchange = () => commit();
     const sw = h('div', 'ed-sw', parent);
     for (const c of SWATCHES) {
-      const b = h('button', cur === c ? 'on' : '', sw); b.type = 'button'; b.title = c; b.style.background = c;
+      const b = h('button', cur === c ? 'on' : '', sw); b.type = 'button'; b.title = c === 'bg' ? 'page background (white / black)' : c; b.style.background = `var(--${c})`;
       b.onclick = e => { e.preventDefault(); set(c); commit(); };
     }
   }
@@ -1378,6 +1379,11 @@
     if (it.type === 'box') {
       colourField(S, 'look', { line: 'line', fill: 'ink', ghost: 'tint', faint: 'grey' }, () => it.fill || 'line', v => it.fill = v);
       num(S, 'round corners', () => it.round || 0, v => { if (v > 0) it.round = v; else delete it.round; }, 1);
+      if (it.text != null) {
+        colourField(S, 'text colour', { fg: 'ink', bg: 'page bg' }, () => it.color || 'fg', v => { if (v === 'fg') delete it.color; else it.color = v; });
+        seg(S, 'weight', { 400: 'regular', 700: 'bold' }, () => it.weight || 400, v => it.weight = +v);
+        actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)], ['remove text', () => { delete it.text; commit(); }]]);
+      } else actions(S, [['put text inside', () => { it.text = 'Words inside the box'; commit(); startText(elOf(it.id), it); }]]);
     }
     if (it.type === 'group') actions(S, [['step inside  ↵', () => enter(it)], ['ungroup  ⇧⌘G', ungroup], ['make component', makeComponent]]);
     if (it.type === 'instance') {

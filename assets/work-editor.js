@@ -19,8 +19,12 @@
   // remember exactly what changed here, so saving never undoes what the page editor saved meanwhile
   const changed = {}, removed = new Set();
   let reordered = false, tldrChanged = false;
+  const topChanged = new Set();            // site-wide settings changed here: hover colours, palette, TL;DR pictures
+  const setTop = k => { topChanged.add(k); touch(); };
+  const TOKENS = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'teal'];
+  const cssCol = c => !c ? 'var(--fg)' : c[0] === '#' ? c : `var(--${c})`;
   const mark = (p, k) => { (changed[p.slug] = changed[p.slug] || new Set()).add(k); };
-  const SWATCHES = ['#000000', '#db0007', '#1f3a93', '#0a7d4f', '#e8a400', '#7b2ff7', '#ff5a1f', '#909090'];
+
 
   const bar = h('div', 'ed-bar', document.body);
   const toastEl = h('div', 'ed-toast', document.body);
@@ -67,13 +71,13 @@
         s.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); s.blur(); } };
       };
       field('t', 'title', 'title');
-      if (p.color) r.style.setProperty('--c', p.color);
+      if (p.color) r.style.setProperty('--c', cssCol(p.color));
       field('k', 'tags', 'tags');
       field('y', 'year', 'year');
       const tools = h('span', 'wk-tools', r);
       // colour: a chip that opens a little palette
       const chip = h('button', 'wk-chip', tools); chip.type = 'button'; chip.title = 'Colour of this name';
-      h('i', '', chip).style.background = p.color || 'var(--fg)'; h('span', '', chip, 'colour');
+      h('i', '', chip).style.background = cssCol(p.color); h('span', '', chip, p.color && p.color[0] !== '#' ? p.color : 'colour');
       chip.onclick = ev => { ev.stopPropagation(); palette(chip, p, r); };
       // picture shown when someone hovers the name (and in the TL;DR)
       const pic = h('button', 'wk-picb', tools); pic.type = 'button';
@@ -91,26 +95,35 @@
   }
 
   let pop = null;
-  function palette(anchor, p, row) {
-    if (pop) pop.remove();
+  function closePop() { if (pop) { pop.remove(); pop = null; } }
+  // pick a colour from the palette (they adapt to dark mode), or any colour at all
+  function picker(anchor, current, set, { allowNone = true, note = 'Press save when you’re done.' } = {}) {
+    closePop();
     pop = h('div', 'wk-pop', document.body);
     const r = anchor.getBoundingClientRect();
-    pop.style.left = Math.min(innerWidth - 230, r.left) + 'px'; pop.style.top = (r.bottom + 6) + 'px';
-    const set = c => {
+    pop.style.left = Math.min(innerWidth - 250, r.left) + 'px'; pop.style.top = Math.min(innerHeight - 200, r.bottom + 6) + 'px';
+    if (allowNone) {
+      const b = h('button', 'wk-none' + (!current ? ' on' : ''), pop); b.type = 'button'; b.title = 'none: stays black / white';
+      b.onclick = () => { set(null); closePop(); };
+    }
+    for (const t of TOKENS) {
+      const b = h('button', current === t ? 'on' : '', pop); b.type = 'button'; b.title = t; b.style.background = `var(--${t})`;
+      b.onclick = () => { set(t); closePop(); };
+    }
+    const any = h('label', 'wk-any', pop); h('span', '', any, 'any colour:');
+    const inp = h('input', '', any); inp.type = 'color'; inp.value = current && current[0] === '#' ? current : '#d40000';
+    inp.oninput = () => set(inp.value);
+    h('p', '', pop, 'Palette colours switch to a brighter version in dark mode. “Any colour” stays the same in both. ' + note);
+    setTimeout(() => addEventListener('click', function off(e) { if (pop && !pop.contains(e.target)) { closePop(); removeEventListener('click', off); } }), 0);
+  }
+  function palette(anchor, p, row) {
+    picker(anchor, p.color, c => {
       if (c) p.color = c; else delete p.color;
       mark(p, 'color'); touch();
-      c ? row.style.setProperty('--c', c) : row.style.removeProperty('--c');
-      anchor.querySelector('i').style.background = c || 'var(--fg)';
-    };
-    for (const c of SWATCHES) {
-      const b = h('button', p.color === c ? 'on' : '', pop); b.type = 'button'; b.style.background = c; b.title = c;
-      b.onclick = () => { set(c === '#000000' ? null : c); pop.remove(); pop = null; };
-    }
-    const any = h('label', 'wk-any', pop); h('span', '', any, 'any:');
-    const inp = h('input', '', any); inp.type = 'color'; inp.value = p.color || '#db0007';
-    inp.oninput = () => set(inp.value);
-    h('p', '', pop, 'Press save when you’re done.');
-    setTimeout(() => addEventListener('click', function off(e) { if (pop && !pop.contains(e.target)) { pop.remove(); pop = null; removeEventListener('click', off); } }), 0);
+      c ? row.style.setProperty('--c', cssCol(c)) : row.style.removeProperty('--c');
+      anchor.querySelector('i').style.background = cssCol(c);
+      anchor.querySelector('span').textContent = c && c[0] !== '#' ? c : 'colour';
+    });
   }
 
   async function showLocal(img, path) {
@@ -134,13 +147,111 @@
     i.click();
   }
 
-  function tldr() {
-    const w = h('div', 'wk-tldr', list);
-    h('span', '', w, 'link at the bottom of the work page:');
-    const t = h('span', '', w, index.tldr || 'TL;DR');
+  /* ---------- below the list: TL;DR and site colours ---------- */
+  function extras() {
+    const box = h('div', 'wk-extra', list);
+
+    // TL;DR
+    const T = h('section', 'wk-box', box);
+    h('h3', '', T, 'TL;DR');
+    const lr = h('p', 'wk-line', T); h('span', '', lr, 'the link reads:');
+    const t = h('span', 'wk-edit', lr, index.tldr || 'TL;DR');
     t.contentEditable = 'plaintext-only'; t.spellcheck = false;
     t.oninput = () => { index.tldr = t.textContent.trim() || 'TL;DR'; tldrChanged = true; touch(); };
-    h('span', '', w, '· opens a slideshow: one picture per project (the hover picture)');
+    const slides = index.tldrSlides = index.tldrSlides || [];
+    h('p', 'wk-hint', T, slides.length
+      ? 'These pictures play in the TL;DR, in this order. Tie one to a project and its name links there.'
+      : 'No pictures of its own yet, so the TL;DR shows each project’s hover picture. Add pictures to make it your own set.');
+    const grid = h('div', 'wk-slides', T);
+    slides.forEach((sl, i) => {
+      const c = h('div', 'wk-slide', grid);
+      const im = h('img', '', c); im.src = sl.src; im.alt = ''; im.onerror = () => showLocal(im, sl.src);
+      const tools = h('div', 'wk-slide-tools', c);
+      const mk = (l, title, fn) => { const b = h('button', '', tools, l); b.type = 'button'; b.title = title; b.onclick = fn; };
+      if (i > 0) mk('←', 'earlier', () => { slides.splice(i - 1, 0, slides.splice(i, 1)[0]); setTop('tldrSlides'); draw(); });
+      if (i < slides.length - 1) mk('→', 'later', () => { slides.splice(i + 1, 0, slides.splice(i, 1)[0]); setTop('tldrSlides'); draw(); });
+      mk('×', 'remove', () => { slides.splice(i, 1); setTop('tldrSlides'); draw(); });
+      const sel = h('select', '', c);
+      h('option', '', sel, 'no project').value = '';
+      for (const p of index.projects) { const o = h('option', '', sel, p.title); o.value = p.slug; }
+      sel.value = sl.slug || '';
+      sel.onchange = () => { if (sel.value) sl.slug = sel.value; else delete sl.slug; setTop('tldrSlides'); };
+      const cap = h('input', '', c); cap.type = 'text'; cap.placeholder = 'caption (optional)'; cap.value = sl.caption || '';
+      cap.oninput = () => { if (cap.value.trim()) sl.caption = cap.value.trim(); else delete sl.caption; setTop('tldrSlides'); };
+    });
+    const add = h('button', 'wk-add', T, '+ add pictures (pick one or many)'); add.type = 'button';
+    add.onclick = () => {
+      const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.multiple = true;
+      i.onchange = async () => {
+        const files = [...i.files]; if (!files.length) return;
+        if (!FS.root && FS.supported) { await FS.connect(); paint(); }
+        if (!FS.root) return toast('Connect your site folder first, so the pictures can be copied into it', 4000);
+        for (const f of files) slides.push({ src: await copyIn(f, 'tldr') });
+        setTop('tldrSlides'); draw();
+        toast(`${files.length} picture${files.length > 1 ? 's' : ''} added. Press save.`);
+      };
+      i.click();
+    };
+
+    // site colours
+    const S = h('section', 'wk-box', box);
+    h('h3', '', S, 'Site colours');
+    h('p', 'wk-hint', S, 'Everything is black and white until someone points at it. Pick what each thing turns. (Project names use the colour on their row above.)');
+    const hov = index.hover = index.hover || {};
+    const D = (window.SiteColours && SiteColours.DEFAULT) || {};
+    const NAMES = { name: 'your name', work: 'work', resume: 'resume', intro: 'links in the intro', doors: 'hidden doors (landing)',
+                    notes: 'email + small print', tldr: 'TL;DR link', sections: 'side nav (project pages)', next: '“next” project link', other: 'anything else' };
+    const rows = h('div', 'wk-roles', S);
+    for (const [k, label] of Object.entries(NAMES)) {
+      const r = h('div', 'wk-role', rows);
+      const v = hov[k] || D[k];
+      const chip = h('button', 'wk-chip', r); chip.type = 'button';
+      h('i', '', chip).style.background = v === 'random' ? 'conic-gradient(var(--red),var(--yellow),var(--green),var(--blue),var(--purple),var(--red))' : cssCol(v);
+      h('span', '', r, label);
+      h('small', '', r, v || '');
+      chip.onclick = ev => {
+        ev.stopPropagation();
+        picker(chip, v, c => { if (c) hov[k] = c; else hov[k] = 'none'; setTop('hover'); draw(); });
+        const rnd = h('button', 'wk-random', pop, 'surprise me (a different one each time)'); rnd.type = 'button';
+        rnd.onclick = () => { hov[k] = 'random'; setTop('hover'); closePop(); draw(); };
+      };
+    }
+    // the palette itself: light and dark version of each colour
+    h('p', 'wk-hint', S, 'The palette: the left swatch is for light mode, the right one for dark mode. Keep dark-mode ones brighter so they read on black.');
+    const pal = index.palette = index.palette || {};
+    const pg = h('div', 'wk-palette', S);
+    const probe = document.createElement('i'); document.body.appendChild(probe);
+    const now = (t, mode) => {
+      if (pal[t] && pal[t][mode]) return pal[t][mode];
+      const root = document.documentElement, prev = root.dataset.theme;
+      root.dataset.theme = mode; probe.style.color = `var(--${t})`;
+      const m = getComputedStyle(probe).color.match(/\d+/g);
+      if (prev) root.dataset.theme = prev; else delete root.dataset.theme;
+      return m ? '#' + m.slice(0, 3).map(n => (+n).toString(16).padStart(2, '0')).join('') : '#000000';
+    };
+    for (const tk of TOKENS) {
+      const c = h('label', 'wk-tok', pg);
+      for (const mode of ['light', 'dark']) {
+        const inp = h('input', mode, c); inp.type = 'color'; inp.value = now(tk, mode); inp.title = `${tk} in ${mode} mode`;
+        inp.oninput = () => {
+          pal[tk] = { ...(pal[tk] || {}), [mode]: inp.value }; setTop('palette');
+          window.SiteColours && SiteColours.apply(index);
+        };
+      }
+      h('span', '', c, tk);
+    }
+    const rs = h('button', 'wk-add', S, 'reset palette'); rs.type = 'button';
+    rs.onclick = () => { index.palette = {}; setTop('palette'); window.SiteColours && SiteColours.apply(index); draw(); };
+    probe.remove();
+  }
+
+  async function copyIn(f, folder) {        // copy a picture into projects/media/<folder>/, return its path
+    const ext = (f.name.match(/\.[^.]+$/) || ['.jpg'])[0].toLowerCase();
+    const base = f.name.toLowerCase().replace(/\.[^.]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'picture';
+    let path, n = 0;
+    do { path = `projects/media/${folder}/${base}${n ? '-' + n : ''}${ext}`; n++; } while (await FS.exists(path));
+    await FS.write(path, f);
+    return path;
   }
 
   async function add() {
@@ -178,13 +289,15 @@
       for (const d of disk.projects) if (!merged.some(p => p.slug === d.slug) && !removed.has(d.slug)) merged.push(d);
       const out = { ...disk, projects: merged };
       if (tldrChanged || index.tldr) out.tldr = index.tldr || out.tldr;
+      for (const k of topChanged) out[k] = index[k];
       await FS.write('projects/index.json', JSON.stringify(out, null, 2));
-      index = out; for (const k in changed) delete changed[k]; removed.clear(); reordered = tldrChanged = false;
+      index = out; for (const k in changed) delete changed[k]; removed.clear(); topChanged.clear(); reordered = tldrChanged = false;
       dirty = false; paint(); draw(); toast(`Saved into ${FS.root.name}. Commit and push to publish.`);
     } catch (e) { toast('Could not save: ' + e.message, 5000); }
   }
 
   const draw0 = draw;
-  draw = () => { draw0(); tldr(); };
+  draw = () => { draw0(); extras(); };
+  if (window.SiteColours) SiteColours.apply(index);
   paint(); draw();
 })();

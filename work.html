@@ -12,6 +12,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <script>
+  // the work list lives on the home page now (scroll down from the landing).
+  // This page is only for editing the list: work.html?edit
+  if (!/[?&]edit(=|&|$)/.test(location.search)) location.replace('./#work');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/shared.css">
+<script>
   // arriving from the landing page: slide in like the page scrolled down
   addEventListener('pagereveal', e => {
     if (!e.viewTransition) return;
@@ -22,123 +32,29 @@
   });
 </script>
 <!-- don't draw the page until the list below exists, so the slide-in has it -->
-<link rel="expect" href="#wk-ready" blocking="render">
 </head>
 <body class="work-page">
 
 <header class="top">
   <a class="me" href="./">Atul Suresh</a>
-  <a class="nav-work" href="work.html" aria-current="page">work</a>
+  <a class="nav-work" href="./#work">work</a>
   <a class="nav-resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 </header>
 
-<main class="wk-wrap"><div class="list" aria-label="Projects"></div></main>
-<div class="wk-pic" aria-hidden="true"></div>
-<button class="tldr-open" type="button" hidden>TL;DR</button>
-<div class="tldr" role="dialog" aria-modal="true" aria-label="All projects, in short">
-  <div class="tldr-top"><span class="lbl"></span><button type="button" class="x">close</button></div>
-  <div class="tldr-stage"></div>
-  <div class="tldr-cap"><a href="#"></a><span class="sum"></span><span class="n"></span></div>
-</div>
+<main class="list" aria-label="Projects"></main>
 
 <script src="assets/canvas.js"></script>
 <script src="assets/fs.js"></script>
-<script src="assets/side.js"></script>
 <script>
-(() => {
-  const q = new URLSearchParams(location.search);
-  const list = document.querySelector('.list');
-
-  if (q.has('edit')) {
-    (async () => {
-      await FS.restore();
-      const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'assets/editor.css';
-      document.head.appendChild(css);
-      const b = document.createElement('script'); b.src = 'assets/blocks.js';
-      b.onload = () => { const s = document.createElement('script'); s.src = 'assets/work-editor.js'; document.body.appendChild(s); };
-      document.body.appendChild(b);
-    })();
-    return;
-  }
-
-  // read the list right away (it's a tiny file), so it's on the page from the very first frame
-  let index = null;
-  try {
-    const x = new XMLHttpRequest();
-    x.open('GET', 'projects/index.json?' + Date.now(), false);
-    x.send();
-    if (x.status === 200) index = JSON.parse(x.responseText);
-  } catch (e) {}
-  const projects = ((index && index.projects) || []).filter(p => !p.hidden);
-  if (!projects.length) { list.innerHTML = '<p class="empty">Nothing up yet. Soon.</p>'; return; }
-
-  const pic = document.querySelector('.wk-pic');
-  for (const p of projects) {
-    const a = document.createElement('a');
-    a.className = 'wk';
-    a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
-    a.dataset.dock = '';
-    a.textContent = p.title;
-    if (p.color) a.style.setProperty('--c', p.color);
-    if (p.thumb) {
-      const i = document.createElement('img');
-      i.src = p.thumb; i.alt = ''; i.decoding = 'async';
-      pic.appendChild(i); a._pic = i;
-    }
-    list.appendChild(a);
-  }
-  Dock(list, { max: .12, reach: 2.2 });
-
-  /* hovering a name shows its picture, in a fixed spot beside the list */
-  const place = () => {
-    const r = list.getBoundingClientRect();
-    const left = r.right + innerWidth * .05, room = innerWidth - left - innerWidth * .04;
-    pic.style.left = left + 'px';
-    pic.style.width = Math.min(room, innerWidth * .3) + 'px';
-    pic.classList.toggle('none', room < 160);
-  };
-  place(); addEventListener('resize', place);
-  list.addEventListener('pointerover', e => {
-    const a = e.target.closest('.wk');
-    for (const i of pic.children) i.classList.toggle('on', !!a && i === a._pic);
-  });
-  list.addEventListener('pointerleave', () => { for (const i of pic.children) i.classList.remove('on'); });
-
-  /* TL;DR: one slide per project. Click (or →) for the next one, ← for the last, Esc to close. */
-  const open = document.querySelector('.tldr-open'), box = document.querySelector('.tldr');
-  const stage = box.querySelector('.tldr-stage'), cap = box.querySelector('.tldr-cap');
-  const label = (index && index.tldr) || 'TL;DR';
-  open.textContent = label; box.querySelector('.lbl').textContent = label; open.hidden = false;
-  const slides = projects.map(p => {
-    const d = document.createElement('div'); d.className = 'tldr-slide';
-    if (p.thumb) { const i = document.createElement('img'); i.src = p.thumb; i.alt = p.title; i.loading = 'lazy'; d.appendChild(i); }
-    else { const n = document.createElement('div'); n.className = 'noimg'; d.appendChild(n); }
-    stage.appendChild(d); return d;
-  });
-  let at = 0;
-  const show = i => {
-    at = (i + projects.length) % projects.length;
-    slides.forEach((s, j) => s.classList.toggle('on', j === at));
-    const p = projects[at], a = cap.querySelector('a');
-    a.textContent = p.title; a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
-    p.color ? a.style.setProperty('--c', p.color) : a.style.removeProperty('--c');
-    cap.querySelector('.sum').textContent = [p.summary, p.year].filter(Boolean).join(' · ');
-    cap.querySelector('.n').textContent = `${at + 1} / ${projects.length}`;
-  };
-  const close = () => { box.classList.remove('on'); open.focus(); };
-  open.addEventListener('click', () => { show(0); box.classList.add('on'); box.querySelector('.x').focus(); });
-  box.querySelector('.x').addEventListener('click', close);
-  stage.addEventListener('click', e => { const r = stage.getBoundingClientRect(); show(at + (e.clientX - r.left < r.width / 3 ? -1 : 1)); });
-  stage.addEventListener('pointermove', e => { const r = stage.getBoundingClientRect(); stage.style.cursor = e.clientX - r.left < r.width / 3 ? 'w-resize' : 'e-resize'; });
-  addEventListener('keydown', e => {
-    if (!box.classList.contains('on')) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(at + 1); }
-    if (e.key === 'ArrowLeft') show(at - 1);
-  });
+(async () => {
+  await FS.restore();
+  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'assets/editor.css';
+  document.head.appendChild(css);
+  const b = document.createElement('script'); b.src = 'assets/blocks.js';
+  b.onload = () => { const s = document.createElement('script'); s.src = 'assets/work-editor.js'; document.body.appendChild(s); };
+  document.body.appendChild(b);
 })();
 </script>
-<i id="wk-ready" hidden></i>
 <script src="assets/hover.js"></script>
 <script src="assets/local.js"></script>
 </body>

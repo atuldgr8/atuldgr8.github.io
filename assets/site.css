@@ -30,11 +30,12 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
   position: fixed; inset: 0 0 auto 0; z-index: 50;
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
   padding: var(--gutter) var(--gutter) 0;
-  color: #fff; mix-blend-mode: difference;   /* stays readable over images, light or dark */
+  color: var(--fg);
   pointer-events: none;
 }
 .top a { pointer-events: auto; text-decoration: none; }
-.top a:hover { text-decoration: underline; text-underline-offset: 2px; }
+/* once you scroll, the bar inverts whatever passes under it, so it stays readable over pictures */
+.top.blend { color: #fff; mix-blend-mode: difference; }
 .top .me { grid-column: 1 / span 6; justify-self: start; font-weight: 700; }
 .top .me:hover { text-decoration: none; }
 .top .nav-work { grid-column: 10; justify-self: start; }
@@ -130,6 +131,9 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
 .box.b-fill  { background: var(--fg); }
 .box.b-ghost { background: var(--ghost); }
 .box.b-faint { background: var(--faint); }
+.box.has-text { height: auto; min-height: 100%; padding: calc(var(--u) * 24); }
+.cv.flow > .it.t-box:has(.has-text) { aspect-ratio: auto; }
+.cv.flow .box.has-text { padding: 1.1em 1.2em; }
 .grp { position: relative; width: 100%; height: 100%; }
 .inst { --u: calc(var(--pu) * var(--k)); }
 .btn { display: grid; place-items: center; width: 100%; height: 100%; padding: 0 .6em; text-align: center;
@@ -202,45 +206,6 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
   .ly { transition: none !important; }
 }
 
-/* ---------- moving between pages ----------
-   Landing -> work feels like one long page scrolling down: everything
-   travels up together, and name / work / resume settle into the top bar.
-   Work -> landing runs it back up. Other pages just crossfade.
-   (Browsers without this feature simply change page.) */
-@view-transition { navigation: auto; }
-.top .me { view-transition-name: me; }
-.top .nav-work { view-transition-name: nav-work; }
-.top .nav-resume { view-transition-name: nav-resume; }
-:root { --scroll-d: calc(32vh - 2vw); }
-::view-transition-group(*) { animation-duration: .35s; }
-::view-transition-old(root) { animation: vt-fade-out .3s ease both; }
-::view-transition-new(root) { animation: vt-fade-in .35s ease both; }
-:root:active-view-transition-type(fromlanding)::view-transition-group(*),
-:root:active-view-transition-type(tolanding)::view-transition-group(*) { animation-duration: .9s; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-:root:active-view-transition-type(fromlanding)::view-transition-old(root) { animation: vt-scroll-up-out .9s cubic-bezier(.65, 0, .35, 1) both; }
-:root:active-view-transition-type(fromlanding)::view-transition-new(root) { animation: vt-scroll-up-in .9s cubic-bezier(.65, 0, .35, 1) both; }
-:root:active-view-transition-type(tolanding)::view-transition-old(root) { animation: vt-scroll-down-out .9s cubic-bezier(.65, 0, .35, 1) both; }
-:root:active-view-transition-type(tolanding)::view-transition-new(root) { animation: vt-scroll-down-in .9s cubic-bezier(.65, 0, .35, 1) both; }
-@keyframes vt-fade-out { to { opacity: 0; } }
-@keyframes vt-fade-in { from { opacity: 0; } }
-@keyframes vt-scroll-up-out   { 55% { opacity: 1; } to { transform: translateY(calc(var(--scroll-d) * -1)); opacity: 0; } }
-@keyframes vt-scroll-up-in    { from { transform: translateY(var(--scroll-d)); } }
-@keyframes vt-scroll-down-out { 55% { opacity: 1; } to { transform: translateY(var(--scroll-d)); opacity: 0; } }
-@keyframes vt-scroll-down-in  { from { transform: translateY(calc(var(--scroll-d) * -1)); } }
-/* both pages are visible at once while they slide, like one long sheet:
-   let the incoming page's empty background show what's behind it */
-:root:active-view-transition-type(fromlanding)::view-transition-new(root),
-:root:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: multiply; }
-:root[data-theme="dark"]:active-view-transition-type(fromlanding)::view-transition-new(root),
-:root[data-theme="dark"]:active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):active-view-transition-type(fromlanding)::view-transition-new(root),
-  :root:not([data-theme="light"]):active-view-transition-type(tolanding)::view-transition-new(root) { mix-blend-mode: screen; }
-}
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
-}
-
-/* ---------- anything you can click turns a colour on hover ---------- */
-.hc { color: var(--hc) !important; transition: color .2s; }
-.top a.hc { color: var(--hci) !important; }   /* the top bar inverts what's under it, so give it the opposite colour */
+/* in the top bar, over a picture, the hover colour comes out inverted (the bar
+   inverts what's under it), so it gets the opposite colour to start with */
+.top.blend a.hc { color: var(--hci) !important; }
