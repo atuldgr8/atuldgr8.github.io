@@ -79,8 +79,39 @@ window.FS = (() => {
     setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   }
 
+  // Pictures over ~500 KB get shrunk before they're saved: at most 2400px on the long side,
+  // re-saved as WebP (keeps transparency), quality stepped down until it fits.
+  // GIFs, SVGs and small pictures are left exactly as they are.
+  const LIMIT = 500 * 1024, LONG = 2400;
+  async function shrink(file) {
+    if (!/^image\/(jpeg|png|webp|bmp|avif)$/.test(file.type)) return file;
+    let bmp;
+    try { bmp = await createImageBitmap(file); } catch (e) { return file; }
+    if (file.size <= LIMIT && Math.max(bmp.width, bmp.height) <= LONG) { bmp.close && bmp.close(); return file; }
+    let k = Math.min(1, LONG / Math.max(bmp.width, bmp.height)), best = null, small = null;
+    for (let round = 0; round < 4 && !best; round++, k *= .8) {
+      const c = document.createElement('canvas');
+      c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+      for (const q of [.86, .78, .7, .6]) {
+        const b = await new Promise(r => c.toBlob(r, 'image/webp', q));
+        if (!b) break;
+        if (!small || b.size < small.size) small = b;
+        if (b.size <= LIMIT) { best = b; break; }
+      }
+    }
+    bmp.close && bmp.close();
+    best = best || small;                  // a very detailed picture: the smallest try is still far better
+    if (!best || best.size >= file.size) return file;
+    const name = file.name.replace(/\.[^.]+$/, '') + (best.type === 'image/webp' ? '.webp' : '.jpg');
+    const out = new File([best], name, { type: best.type });
+    out.shrunkFrom = file.size;
+    return out;
+  }
+  const kb = n => n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.round(n / 1024) + ' KB';
+
   return {
-    supported, restore, connect, write, read, exists, json, download,
+    supported, restore, connect, write, read, exists, json, download, shrink, kb,
     get root() { return root; },
     get name() { return (root || pending) ? (root || pending).name : null; },
     get needsClick() { return !root && !!pending; },

@@ -75,55 +75,56 @@ window.SideNav = (() => {
   };
   const plain = html => { const d = document.createElement('div'); d.innerHTML = html || ''; return d.textContent.trim(); };
 
-  // mode: 'projects' | 'sections' | 'off'
+  // The side nav lists the sections of the page. A section starts at anything marked
+  // "starts a section" (or an invisible section marker) and runs until the next one.
+  // Everything above the first one is the first section, "intro" unless renamed.
+  // It only shows once a page has two or more sections.
   let unspy = null;
-  function mount({ mode = 'sections', projects = [], current = '', cv, edit = false }) {
+  function mount({ cv, edit = false, mode } = {}) {
     document.querySelectorAll('nav.side').forEach(n => n.remove());
     if (unspy) { unspy(); unspy = null; }
-    if (mode === 'sections' && !edit && cv && !cv.querySelector('.it[id^="sec-"]')) mode = 'off';
-    document.body.classList.toggle('has-side', mode !== 'off');
-    if (mode === 'off') return null;
+    const secs = cv ? list(cv) : [];
+    const show = mode !== 'off' && (edit || secs.length > 1);
+    document.body.classList.toggle('has-side', show);
+    if (!show) return null;
     const nav = h('nav', 'side', document.body);
-    nav.setAttribute('aria-label', mode === 'sections' ? 'Sections of this page' : 'Projects');
-    const list = h('ul', '', nav);
-
-    if (mode === 'projects') {
-      const shown = projects.filter(p => !p.hidden || p.slug === current);
-      for (const p of shown) {
-        const li = h('li', '', list), a = h('a', '', li, p.title || p.slug);
-        a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
-        a.dataset.dock = '';
-        if (p.color) a.style.setProperty('--c', p.color);
-        if (p.slug === current) { a.classList.add('on'); a.setAttribute('aria-current', 'page'); }
-        if (edit) a.addEventListener('click', e => e.preventDefault());
-      }
-    } else {
-      const secs = [...cv.querySelectorAll('.it[id^="sec-"]')]
-        .map(el => ({ el, label: el._item.nav === true ? plain(el._item.text) : el._item.nav }))
-        .filter(s => s.label)
-        .sort((a, b) => a.el.getBoundingClientRect().top - b.el.getBoundingClientRect().top);   // in page order
-      for (const s of secs) {
-        const li = h('li', '', list), a = h('a', '', li, s.label);
-        a.href = '#' + s.el.id; a.dataset.dock = '';
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          if (edit) return;
-          const y = s.el.getBoundingClientRect().top + scrollY - innerHeight * .2;
-          scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-        });
-        s.a = a;
-      }
-      // which section are we in: the last one whose top has passed 40% of the screen
-      const spy = () => {
-        let at = 0;
-        secs.forEach((s, i) => { if (s.el.getBoundingClientRect().top < innerHeight * .4) at = i; });
-        secs.forEach((s, i) => s.a.classList.toggle('on', i === at));
-      };
-      if (secs.length) { addEventListener('scroll', spy, { passive: true }); spy(); unspy = () => removeEventListener('scroll', spy); }
-      else if (edit) h('li', 'side-empty', list, 'Tick “show in side nav” on a text to list it here');
+    nav.setAttribute('aria-label', 'Sections of this page');
+    const ul = h('ul', '', nav);
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    for (const s of secs) {
+      const li = h('li', '', ul), a = h('a', '', li, s.label);
+      a.href = s.el ? '#' + s.el.id : '#'; a.dataset.dock = '';
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        if (edit) return;
+        const y = s.el ? s.el.getBoundingClientRect().top + scrollY - innerHeight * .2 : 0;
+        scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+      });
+      s.a = a;
     }
+    // which section are we in: the last one whose top has passed 40% of the screen
+    const spy = () => {
+      let at = 0;
+      secs.forEach((s, i) => { if (s.el && s.el.getBoundingClientRect().top < innerHeight * .4) at = i; });
+      secs.forEach((s, i) => s.a.classList.toggle('on', i === at));
+    };
+    if (secs.length) { addEventListener('scroll', spy, { passive: true }); spy(); unspy = () => removeEventListener('scroll', spy); }
     Dock(nav, { max: .14, reach: 2 });
     return nav;
   }
-  return { mount };
+  // the sections, in page order: [{ el, label }] (el is null for the unnamed first one)
+  function list(cv) {
+    const top = el => el.getBoundingClientRect().top;
+    const secs = [...cv.querySelectorAll('.it[id^="sec-"]')]
+      .map(el => ({ el, label: el._item.nav === true ? plain(el._item.text) : el._item.nav }))
+      .filter(s => s.label)
+      .sort((a, b) => top(a.el) - top(b.el));
+    const first = secs.length ? top(secs[0].el) : Infinity;
+    const above = [...cv.children].some(el => el.classList.contains('it') && !el.id.startsWith('sec-') && top(el) < first - 2);
+    const intro = cv.dataset.intro || 'intro';
+    // stuff above the first named section is the first section, unless that one already has the same name
+    if (above && !(secs[0] && secs[0].label.trim().toLowerCase() === intro.toLowerCase())) secs.unshift({ el: null, label: intro });
+    return secs;
+  }
+  return { mount, list };
 })();

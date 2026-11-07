@@ -12,5 +12,4 @@ if ! command -v python3 >/dev/null 2>&1; then
   read -r -p "Press Enter to close."; exit 1
 fi
 (sleep 1; openit) &
-echo "Site running at http://localhost:8000  (close this window to stop it)"
-python3 -m http.server 8000
+python3 serve.py 8000

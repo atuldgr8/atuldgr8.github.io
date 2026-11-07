@@ -59,7 +59,7 @@
   const blend = () => top.classList.toggle('blend', scrollY > 8);
   addEventListener('scroll', blend, { passive: true }); blend();
   Canvas.render(cv, doc, { lib: Object.fromEntries(((lib && lib.components) || []).map(c => [c.id, c])) });
-  SideNav.mount({ mode: doc.side || 'sections', projects: list, current: slug, cv });
+  SideNav.mount({ cv });
   Canvas.layout(cv);
   Canvas.animate(cv);
   let t; addEventListener('resize', () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => Canvas.layout(cv)); });

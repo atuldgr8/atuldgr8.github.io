@@ -49,6 +49,25 @@ When Claude says it's pushed, press **Fetch**, then **Pull**. This stops the two
   **Branch → Update from main** once, so the two branches match. And on github.com, never press
   **Delete branch** after merging, since that removes editor-preview.
 
+## Sections (the side nav on project pages)
+
+- Every page starts as one section, **intro**. Everything belongs to the section above it, until the next one starts.
+- Start a new section: select anything and tick **a new section starts here** (in its panel), or press
+  **+ new section here** in the page panel (an invisible marker at what you've selected, or where you are).
+- Pink dashed lines on the page show where each section starts. The section you're in is tinted pink.
+- In the page panel: rename sections, and **↑ ↓** move a whole section with everything in it.
+- The side nav only appears once a page has two or more sections.
+
+## Pictures
+
+- Pictures over about 500 KB are shrunk automatically when you add them (max 2400px, saved as .webp).
+  GIFs and small pictures are left alone.
+
+## If you don't see a change after pulling
+
+Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That makes Chrome forget its old copy.
+(start-editor now tells Chrome not to keep old copies, so this should rarely be needed.)
+
 ## Good to know
 
 - Close the tab without saving? Your changes come back as a draft next time.
@@ -57,3 +76,5 @@ When Claude says it's pushed, press **Fetch**, then **Pull**. This stops the two
   `projects/components.json` holds your saved components.
 - Press `?` in the editor for every shortcut. **B** opens the blocks.
 - Delete the "Sample project" before the first time you go live.
+- Motion (the swell on/off) is at the very bottom of the work-list editor. The blue **swell** button
+  (next to **edit**) shows on the visitor pages on your laptop, not inside the editor.

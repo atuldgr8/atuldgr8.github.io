@@ -61,6 +61,7 @@
     }
   } catch (e) {}
   doc.guides = doc.guides || { x: [], y: [] };
+  delete doc.side;                        // old pages could list projects or switch it off; now it's always sections
   last = snapshot();
   if (fresh) dirty = true;
 
@@ -176,6 +177,61 @@
     return v;
   }
 
+  /* ---------------- sections ----------------
+     A section starts at anything marked "starts a section" (or an invisible
+     section marker) and holds everything below it, until the next one.
+     Everything above the first one is the first section: "intro" unless renamed. */
+  function absY(it) { let y = it.y, f = find(it.id); while (f && f.parent) { y += f.parent.y; f = find(f.parent.id); } return y; }
+  function sections() {
+    const out = [];
+    walk(doc.items, it => { if (it.nav) out.push({ it, y: absY(it), label: it.nav === true ? plainText(it.text) : it.nav }); });
+    out.sort((a, b) => a.y - b.y);
+    const first = out.length ? out[0].y : Infinity;
+    const intro = doc.intro || 'intro', same = out[0] && out[0].label.trim().toLowerCase() === intro.toLowerCase();
+    if (!out.length || (!same && doc.items.some(it => !it.nav && it.y < first - .5))) out.unshift({ it: null, y: 0, label: intro });
+    return out;
+  }
+  const pageEnd = () => Math.max(0, ...doc.items.map(it => it.y + (it.h || 0)));
+  function sectionOf(y, secs = sections()) { let k = 0; secs.forEach((s, i) => { if (s.y <= y + .5) k = i; }); return k; }
+  let focusSec = -1;
+  // swap section i with the one above (dir -1) or below (+1): everything in both moves together
+  function moveSection(i, dir) {
+    const secs = sections(), a = Math.min(i, i + dir), b = a + 1;
+    if (a < 0 || b >= secs.length) return;
+    const sA = a === 0 ? Math.min(secs[0].y, ...doc.items.map(it => it.y)) : secs[a].y, sB = secs[b].y, eB = b + 1 < secs.length ? secs[b + 1].y : Math.max(pageEnd(), sB) + 60;   // the last one gets some room after it
+    const hA = sB - sA, hB = eB - sB;
+    for (const it of doc.items) {
+      const k = sectionOf(it.y, secs);
+      if (k === a) it.y = r1(it.y + hB); else if (k === b) it.y = r1(it.y - hA);
+    }
+    // the unnamed first section needs a marker of its own once something else goes above it
+    if (!secs[a].it) { doc.items.push({ id: uid(), type: 'marker', x: 0, y: r1(sA + hB), w: U, h: 1, nav: doc.intro || 'intro' }); delete doc.intro; }
+    focusSec = i + dir;
+    commit();
+    const s = sections()[focusSec]; if (s) scrollToY(s.y);
+  }
+  function scrollToY(y) {
+    const r = cv.getBoundingClientRect();
+    scrollTo({ top: Math.max(0, r.top + scrollY + y * uPx() - innerHeight * .3), behavior: 'smooth' });
+  }
+  function drawSecs() {
+    secsEl.textContent = '';
+    if (previewing) return;
+    const secs = sections(), end = pageEnd();
+    let f = focusSec;
+    if (sel.size) { const r = find([...sel][0]); if (r) { let t = r.it; let q = r; while (q && q.parent) { t = q.parent; q = find(t.id); } f = sectionOf(t.y, secs); } }
+    secs.forEach((s, i) => {
+      if (i === f) {
+        const band = h('div', 'ed-secband', secsEl);
+        const to = i + 1 < secs.length ? secs[i + 1].y : end;
+        band.style.top = `calc(var(--u) * ${s.y})`; band.style.height = `calc(var(--u) * ${Math.max(0, to - s.y)})`;
+      }
+      const l = h('div', 'ed-secline' + (i === f ? ' on' : ''), secsEl);
+      l.style.top = `calc(var(--u) * ${s.y})`;
+      h('span', '', l, '§ ' + s.label);
+    });
+  }
+
   /* ---------------- history ---------------- */
   function snapshot() { return JSON.stringify({ doc, meta, lib }); }
   function commit(keepPanel) {
@@ -244,6 +300,8 @@
   let warned = false;
   async function stash(file) {            // returns a src for this file
     if (!FS.root && FS.supported && !warned) await FS.connect().then(paintFolder);
+    file = await FS.shrink(file);
+    if (file.shrunkFrom) toast(`${file.name}: shrunk from ${FS.kb(file.shrunkFrom)} to ${FS.kb(file.size)}`, 3500);
     const url = URL.createObjectURL(file);
     if (FS.root) { const p = await keepFile(file); cache.set(p, url); return { src: p, url }; }
     blobs.set(url, file);
@@ -300,6 +358,7 @@
   /* ---------------- chrome: panel, toolbar, rulers, overlay ---------------- */
   const gridEl = h('div', 'ed-grid', stage);
   const guidesEl = h('div', 'ed-guides', stage);
+  const secsEl = h('div', 'ed-seclines', stage);    // where each section starts: a pink dashed line, always shown
   const ov = h('div', 'ed-ov', stage);
   const rulerX = h('div', 'ed-ruler ed-ruler-x', document.body);
   const rulerY = h('div', 'ed-ruler ed-ruler-y', document.body);
@@ -360,7 +419,6 @@
   /* ---------------- render ---------------- */
   function render(keepPanel) {
     if (previewing) return;
-    document.body.classList.toggle('has-side', (doc.side || 'sections') !== 'off');
     C.render(cv, doc, { edit: true, src: resolve, onMediaError, lib: libMap(), slideAt });
     mountSide(true);
     lay();
@@ -377,9 +435,7 @@
     if (libEl.classList.contains('on')) drawLib();
   }
   function mountSide(edit) {
-    const list = index.projects.map(p => p.slug === slug ? meta : p);
-    if (!list.some(p => p.slug === slug)) list.push(meta);
-    SideNav.mount({ mode: doc.side || 'sections', projects: list, current: slug, cv, edit });
+    SideNav.mount({ cv, edit });
   }
   function syncU() {
     stage.style.setProperty('--u', cv.style.getPropertyValue('--u'));
@@ -425,6 +481,7 @@
   }
   function drawOverlay() {
     ov.textContent = '';
+    drawSecs();
     if (previewing) return;
     preview();
     const u = uPx();
@@ -1291,33 +1348,33 @@
     text(s, 'one-liner', () => meta.summary, v => meta.summary = v, 'optional');
     check(s, 'hidden from the work list', () => meta.hidden, v => meta.hidden = v);
 
-    const sd = keyed(sec('Side nav'), 'side');
-    seg(sd, 'lists', { sections: 'sections', projects: 'projects', off: 'off' }, () => doc.side || 'sections', v => doc.side = v);
-    if ((doc.side || 'sections') === 'sections') {
-      h('p', 'ed-note', sd, 'Each section is a name in the side nav, tied to something on the page: click it there and the page goes to that thing. Everything below it, up to the next one, belongs to it.');
-      const anchors = [];
-      walk(doc.items, (it, arr, parent) => { if (it.nav) anchors.push(it); });
-      const absY = it => { let y = it.y, f = find(it.id); while (f && f.parent) { y += f.parent.y; f = find(f.parent.id); } return y; };
-      anchors.sort((a, b) => absY(a) - absY(b));
-      const list = h('div', 'ed-secs', sd);
-      for (const it of anchors) {
-        const r = h('div', 'ed-sec-row', list);
-        const inp = h('input', '', r); inp.value = it.nav === true ? plainText(it.text) : it.nav;
-        inp.oninput = () => { it.nav = inp.value || 'section'; touch(); mountSide(true); };
-        inp.onchange = () => commit(true);
-        h('small', '', r, (NAMES[it.type] || 'marker').toLowerCase());
-        const go = h('button', '', r, '→'); go.type = 'button'; go.title = 'go to it';
-        go.onclick = () => { const el = cv.querySelector(`.it[data-id="${it.id}"]`); if (el) el.scrollIntoView({ block: 'center' }); setSel([it.id]); };
-        const x = h('button', '', r, '×'); x.type = 'button'; x.title = 'take it out of the side nav';
-        x.onclick = () => { if (it.type === 'marker') removeItems([it.id]); else { delete it.nav; commit(); } };
-      }
-      if (!anchors.length) h('p', 'ed-note', sd, 'No sections yet.');
-      actions(sd, [['+ new section here', () => {
-        const label = prompt('Section name', 'section'); if (!label) return;
-        add({ id: uid(), type: 'marker', x: 0, y: r1(viewY()), w: U, h: 1, nav: label });
-        toast('Section added where you are. Drag its pink line up or down to move it. Or select anything on the page and tick “in the side nav”.', 5000);
-      }, 'An invisible marker at this spot on the page, with a name in the side nav']]);
-    } else h('p', 'ed-note', sd, doc.side === 'off' ? 'No side nav: the page uses the full width.' : 'Lists all your projects, this one highlighted.');
+    const sd = keyed(sec('Sections (the side nav)'), 'side');
+    h('p', 'ed-note', sd, 'Everything belongs to the section above it, until the next one starts. The pink dashed lines on the page show where each one starts. ↑ ↓ move a whole section, with everything in it.');
+    const secs = sections();
+    const list = h('div', 'ed-secs', sd);
+    secs.forEach((s, i) => {
+      const r = h('div', 'ed-sec-row' + (i === focusSec ? ' on' : ''), list);
+      const up = h('button', '', r, '↑'); up.type = 'button'; up.title = 'move this section (and everything in it) up'; up.disabled = i === 0;
+      up.onclick = () => moveSection(i, -1);
+      const dn = h('button', '', r, '↓'); dn.type = 'button'; dn.title = 'move this section (and everything in it) down'; dn.disabled = i === secs.length - 1;
+      dn.onclick = () => moveSection(i, 1);
+      const inp = h('input', '', r); inp.value = s.label;
+      inp.onfocus = () => { focusSec = i; if (s.it) { sel = new Set(); drawOverlay(); } drawSecs(); scrollToY(s.y); };
+      inp.oninput = () => { const v = inp.value.trim() || 'section'; if (s.it) s.it.nav = v; else doc.intro = v === 'intro' ? undefined : v; if (!doc.intro) delete doc.intro; touch(); mountSide(true); drawSecs(); };
+      inp.onchange = () => commit(true);
+      h('small', '', r, s.it ? (s.it.type === 'marker' ? 'marker' : (NAMES[s.it.type] || '').toLowerCase()) : 'top');
+      const x = h('button', '', r, '×'); x.type = 'button';
+      if (!s.it) { x.disabled = true; x.title = 'the first section is always there'; }
+      else { x.title = 'stop this being a section (the things in it join the section above)'; x.onclick = () => { if (s.it.type === 'marker') removeItems([s.it.id]); else { delete s.it.nav; commit(); } }; }
+    });
+    actions(sd, [['+ new section here', () => {
+      const n = sections().length + 1;
+      const label = prompt('Name of the new section', 'section ' + n); if (!label) return;
+      const y = sel.size ? Math.min(...[...sel].map(id => { const r = find(id); return r ? absY(r.it) : Infinity; })) : viewY();
+      add({ id: uid(), type: 'marker', x: 0, y: r1(isFinite(y) ? y : viewY()), w: U, h: 1, nav: label });
+      focusSec = -1;
+      toast('New section starts at the pink line. Drag the line to move where it starts.', 4000);
+    }, 'Starts a new section at what you have selected (or where you are), with an invisible marker']]);
 
     const gr = keyed(sec('Grid'), 'grid');
     const g = G(), setG = (k, v) => { doc.grid = { ...(doc.grid || {}), [k]: v }; drawGrid(); };
@@ -1431,11 +1488,9 @@
     // side nav: any object can start a section
     const N = keyed(sec('Side nav', panel, !!it.nav || it.type === 'marker'), 'nav');
     const guess = () => it.type === 'text' ? plainText(it.text).slice(0, 40) : (it.alt || NAMES[it.type] || 'section').toLowerCase();
-    check(N, 'in the side nav, as a section', () => !!it.nav, v => { if (v) it.nav = guess() || 'section'; else delete it.nav; });
-    if (it.nav) {
-      text(N, 'called', () => it.nav === true ? '' : it.nav, v => it.nav = v.trim() || guess());
-      if ((doc.side || 'sections') !== 'sections') actions(N, [['make the side nav list sections', () => { doc.side = 'sections'; commit(); }]]);
-    }
+    check(N, 'a new section starts here', () => !!it.nav, v => { if (v) it.nav = guess() || 'section'; else delete it.nav; });
+    if (it.nav) text(N, 'section name', () => it.nav === true ? '' : it.nav, v => it.nav = v.trim() || guess());
+    else { const secs = sections(); let t = it, q = find(it.id); while (q && q.parent) { t = q.parent; q = find(t.id); } h('p', 'ed-note', N, `In the section “${secs[sectionOf(t.y, secs)].label}”.`); }
 
     if (it.type !== 'marker') animPanel(it);
     actions(panel, [['duplicate  ⌘D', duplicate], ['delete  ⌫', () => removeItems([it.id])]]);

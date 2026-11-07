@@ -213,6 +213,7 @@ window.Canvas = (() => {
     cv._opts = o;
     cv.textContent = '';
     cv.classList.toggle('editing', !!o.edit);
+    cv.dataset.intro = doc.intro || 'intro';     // the name of the first section (everything above the first named one)
     for (const it of doc.items) cv.appendChild(item(it, o));
     layout(cv);
     return cv;

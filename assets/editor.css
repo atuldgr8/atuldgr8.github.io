@@ -271,8 +271,14 @@ body.is-editing:not(.previewing) .ed-ruler-y { width: 10px; }
 .cv.editing [contenteditable="true"], .cv.editing [contenteditable="true"] * { -webkit-user-select: text; user-select: text; }
 
 /* section markers: invisible on the site, a dashed line while editing */
-.cv.editing .marker { border-top: 1px dashed #ff2e88; position: relative; }
-.cv.editing .marker::after { content: "§ " attr(data-label); position: absolute; left: 0; top: 2px; color: #ff2e88; font: 400 11px Inter, sans-serif; letter-spacing: 0; white-space: nowrap; }
+.cv.editing .it.t-marker { cursor: ns-resize; }
+.cv.editing .it.t-marker:hover { background: color-mix(in srgb, #ff2e88 10%, transparent); outline: none; }
+.ed-seclines { position: absolute; inset: 0; pointer-events: none; z-index: 23; }
+.ed-secline { position: absolute; left: -14px; right: 0; border-top: 1px dashed #ff2e88; }
+.ed-secline span { position: absolute; right: calc(100% + 4px); top: -7px; max-width: 18vw; overflow: hidden; text-overflow: ellipsis; color: #ff2e88; font: 400 11px/1 Inter, system-ui, sans-serif; letter-spacing: 0; white-space: nowrap; background: var(--bg); padding: 1px 3px; }
+.ed-secline.on { border-top-style: solid; }
+.ed-secband { position: absolute; left: 0; right: 0; background: color-mix(in srgb, #ff2e88 6%, transparent); }
+.previewing .ed-seclines { display: none; }
 .ed-secs { display: grid; gap: 4px; margin: 6px 0; }
 .ed-secs .ed-sec-row { display: flex; gap: 4px; align-items: center; }
 .ed-secs input { flex: 1; min-width: 0; padding: 3px 5px; border: 1px solid var(--faint); background: var(--bg); color: var(--fg); }
@@ -280,6 +286,8 @@ body.is-editing:not(.previewing) .ed-ruler-y { width: 10px; }
 .ed-secs button { padding: 2px 6px; border: 1px solid var(--faint); }
 .cv.editing .it.t-marker { min-height: 12px; }
 .previewing .stage .ed-grid, .previewing .stage .ed-guides { display: none !important; }
-.ed-secs .ed-sec-row { display: grid; grid-template-columns: minmax(0, 1fr) 40px 24px 24px; gap: 4px; }
+.ed-secs .ed-sec-row { display: grid; grid-template-columns: 22px 22px minmax(0, 1fr) 40px 22px; gap: 4px; }
+.ed-secs .ed-sec-row.on input { border-color: #ff2e88; }
+.ed-secs button:disabled { opacity: .3; cursor: default; }
 .ed-secs small { width: auto; font-size: 10px; line-height: 1.1; }
 .ed-secs button { padding: 2px 0; }

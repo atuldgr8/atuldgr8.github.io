@@ -256,6 +256,7 @@
   }
 
   async function copyIn(f, folder) {        // copy a picture into projects/media/<folder>/, return its path
+    f = await FS.shrink(f);                  // big pictures get shrunk to under ~500 KB first
     const ext = (f.name.match(/\.[^.]+$/) || ['.jpg'])[0].toLowerCase();
     const base = f.name.toLowerCase().replace(/\.[^.]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'picture';
     let path, n = 0;
