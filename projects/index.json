@@ -17,7 +17,8 @@
       "summary": "",
       "thumb": "",
       "hidden": false,
-      "color": "#db0007"
+      "color": "#db0007",
+      "fun": true
     },
     {
       "slug": "design-process",
@@ -29,5 +30,6 @@
       "hidden": false,
       "color": "#b8b100"
     }
-  ]
+  ],
+  "funLabel": "and some work-adjacent fun"
 }
