@@ -112,7 +112,12 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
    A page is laid out 1000 units wide and scales with the window,
    like Readymag. --u is the size of one unit in pixels (set by JS). */
 .stage { position: relative; }
-.cv { position: relative; width: 100%; --u: 1.44px; overflow: clip; }
+html, body { overflow-x: clip; }
+.cv { position: relative; width: 100%; --u: 1.44px; }
+.it.bleed { z-index: 46; }      /* over the side nav, under the top bar */
+.marker { width: 100%; height: 100%; }
+.cv.flow > .it.bleed { margin-inline: calc(var(--gutter) * -1); }
+.cv.flow > .it.t-marker { display: none; }
 .it { position: absolute; }
 .ly { width: 100%; height: 100%; transform-origin: 50% 50%; }
 .t-text .ly { height: auto; }

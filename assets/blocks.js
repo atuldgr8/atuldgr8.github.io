@@ -134,7 +134,7 @@ window.Blocks = (() => {
       return [{ type: 'box', fill: 'ghost', x: k.x(0), y: 0, w: k.full, h: bh },
         ...[0, 1, 2].map(i => k.I({ x: Math.round(x0 + i * (sw + gap)), y: 60, w: sw, h: sh, round: 10, anim: k.rise(i * .1) }))];
     } },
-    { cat: 'Pictures', name: 'Full bleed', make: k => [k.I({ x: 0, y: 0, w: U, h: 560, anim: { scroll: { on: true, keys: [{ at: 100, s: { scale: 1.12 }, ease: 'linear' }, { at: 30, s: {} }] } } })] },
+    { cat: 'Pictures', name: 'Full bleed', note: 'edge to edge, over the side nav', make: k => [k.I({ x: 0, y: 0, w: U, h: 560, bleed: true, anim: { scroll: { on: true, keys: [{ at: 100, s: { scale: 1.12 }, ease: 'linear' }, { at: 30, s: {} }] } } })] },
     { cat: 'Pictures', name: 'Slideshow', make: k => [{ type: 'slides', slides: [], mode: 'click', every: 3, trans: 'fade', counter: true, fit: 'cover', x: k.x(0), y: 0, w: k.full, h: Math.round(k.full * .5625) }] },
 
     /* ---------------- media ---------------- */

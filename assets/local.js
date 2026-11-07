@@ -15,4 +15,17 @@
     'font:400 12px/1.2 Inter,system-ui,sans-serif;letter-spacing:0;text-decoration:none;' +
     'background:#0a66ff;color:#fff;border-radius:0';
   document.body.appendChild(a);
+
+  // try the swell on and off without saving anything (only you see this button)
+  let o = null; try { o = localStorage.getItem('swell-override'); } catch (e) {}
+  const t = document.createElement('button');
+  t.textContent = 'swell: ' + (o || 'as saved');
+  t.title = 'Flip the swell on the top bar and intro on/off, just in this browser, to compare';
+  t.style.cssText = a.style.cssText.replace('right:12px', 'right:62px') + ';border:0;cursor:pointer';
+  t.onclick = () => {
+    const next = o === 'on' ? 'off' : o === 'off' ? null : 'on';
+    try { next ? localStorage.setItem('swell-override', next) : localStorage.removeItem('swell-override'); } catch (e) {}
+    location.reload();
+  };
+  document.body.appendChild(t);
 })();

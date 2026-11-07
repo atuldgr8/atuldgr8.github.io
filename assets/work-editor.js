@@ -240,6 +240,16 @@
       }
       h('span', '', c, tk);
     }
+    // motion
+    const M = h('section', 'wk-box', box);
+    h('h3', '', M, 'Motion');
+    h('p', 'wk-hint', M, 'The swell: words grow a little as the mouse comes near and the ones around lean away. On your laptop, the “swell” button in the corner flips it on/off just for you, to compare.');
+    const mo = index.motion = index.motion || {};
+    for (const [k, label] of [['bar', 'swell on your name, work and resume'], ['intro', 'swell on the intro paragraph']]) {
+      const l = h('label', 'wk-line', M); const c = h('input', '', l); c.type = 'checkbox';
+      c.checked = mo[k] !== false; h('span', '', l, label);
+      c.onchange = () => { mo[k] = c.checked; setTop('motion'); };
+    }
     const rs = h('button', 'wk-add', S, 'reset palette'); rs.type = 'button';
     rs.onclick = () => { index.palette = {}; setTop('palette'); window.SiteColours && SiteColours.apply(index); draw(); };
     probe.remove();

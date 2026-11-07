@@ -265,3 +265,21 @@ body.is-editing:not(.previewing) .ed-ruler-y { width: 10px; }
 .wk-pop .wk-none { background: linear-gradient(135deg, var(--bg) 45%, var(--mute) 47% 53%, var(--bg) 55%); }
 .wk-random { width: 100%; text-align: left; padding: 4px 0; color: var(--fg); }
 .work-page.is-editing { padding-bottom: 140px; }
+
+/* while editing, clicking and dragging moves things: it never selects text (typing still can) */
+.cv.editing, .cv.editing * { -webkit-user-select: none; user-select: none; }
+.cv.editing [contenteditable="true"], .cv.editing [contenteditable="true"] * { -webkit-user-select: text; user-select: text; }
+
+/* section markers: invisible on the site, a dashed line while editing */
+.cv.editing .marker { border-top: 1px dashed #ff2e88; position: relative; }
+.cv.editing .marker::after { content: "§ " attr(data-label); position: absolute; left: 0; top: 2px; color: #ff2e88; font: 400 11px Inter, sans-serif; letter-spacing: 0; white-space: nowrap; }
+.ed-secs { display: grid; gap: 4px; margin: 6px 0; }
+.ed-secs .ed-sec-row { display: flex; gap: 4px; align-items: center; }
+.ed-secs input { flex: 1; min-width: 0; padding: 3px 5px; border: 1px solid var(--faint); background: var(--bg); color: var(--fg); }
+.ed-secs small { color: var(--mute); width: 52px; }
+.ed-secs button { padding: 2px 6px; border: 1px solid var(--faint); }
+.cv.editing .it.t-marker { min-height: 12px; }
+.previewing .stage .ed-grid, .previewing .stage .ed-guides { display: none !important; }
+.ed-secs .ed-sec-row { display: grid; grid-template-columns: minmax(0, 1fr) 40px 24px 24px; gap: 4px; }
+.ed-secs small { width: auto; font-size: 10px; line-height: 1.1; }
+.ed-secs button { padding: 2px 0; }

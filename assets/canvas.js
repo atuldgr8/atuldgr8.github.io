@@ -138,6 +138,7 @@ window.Canvas = (() => {
         if (!o.edit) f.loading = 'lazy';
         break;
       }
+      case 'marker': h('div', 'marker', inner).dataset.label = it.nav || 'section'; break;   // an invisible place to jump to
       case 'box': {
         const b = h('div', 'box', inner);
         if (palCss(it.fill)) b.style.background = palCss(it.fill);
@@ -243,8 +244,12 @@ window.Canvas = (() => {
       }
       return;
     }
+    // edge to edge: wider than the page, over the side nav, all the way across the window
+    const off = cv.getBoundingClientRect().left, vw = document.documentElement.clientWidth;
     for (const c of cv.children) if (c._item) {
       c.style.order = '';
+      c.classList.toggle('bleed', !!c._item.bleed);
+      if (c._item.bleed) { c.style.left = -off + 'px'; c.style.width = vw + 'px'; }
       if (c._item.type === 'group') c.style.removeProperty('--u');
       if (c._item.type === 'instance') c.style.setProperty('--pu', 'var(--u)');
     }

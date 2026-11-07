@@ -381,7 +381,15 @@
     if (!list.some(p => p.slug === slug)) list.push(meta);
     SideNav.mount({ mode: doc.side || 'sections', projects: list, current: slug, cv, edit });
   }
-  function syncU() { stage.style.setProperty('--u', cv.style.getPropertyValue('--u')); }
+  function syncU() {
+    stage.style.setProperty('--u', cv.style.getPropertyValue('--u'));
+    // the editor's page is narrower than the real one (the panel takes room), so its text is
+    // drawn a bit smaller. Shrink the top bar and side nav by the same amount, so everything
+    // keeps the one-size look while editing too.
+    const u = parseFloat(cv.style.getPropertyValue('--u')) || 0;
+    const tk = document.body.classList.contains('has-side') ? 1 / (1 - .22) : 1;
+    if (u && !previewing) document.documentElement.style.setProperty('--size', Math.max(14, u * 13.67 * tk) + 'px');
+  }
   function lay() { C.layout(cv); syncU(); }
   function relayout() { lay(); drawOverlay(); }
   let rz; addEventListener('resize', () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(relayout); });
@@ -439,7 +447,7 @@
       const it = its[0], e = elOf(it.id);
       if (!e) return;
       const r = rectOf(e), f = frame(r, 'ed-handles');
-      const dirs = it.type === 'text' ? ['e', 'w'] : it.type === 'instance' ? ['e', 'w', 'se', 'sw', 'ne', 'nw'] : ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
+      const dirs = it.type === 'marker' ? [] : it.type === 'text' ? ['e', 'w'] : it.type === 'instance' ? ['e', 'w', 'se', 'sw', 'ne', 'nw'] : ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
       for (const d of dirs) { const k = h('i', 'hd hd-' + d, f); k.dataset.h = d; }
       h('span', 'ed-size', f, cols(it)).title = 'where it sits on the grid';
       if (poseKey()) { const pf = frame(rectOf(e._ly.scroll), 'ed-pose'); h('span', '', pf, 'posing keyframe · drag to move it'); }
@@ -520,6 +528,7 @@
     if (!el) { if (!e.shiftKey) setSel([]); return startMarquee(e); }
     const id = el.dataset.id;
     if (e.shiftKey) {
+      e.preventDefault(); getSelection().removeAllRanges();     // shift-click picks things, never text
       const s = new Set(sel); s.has(id) ? s.delete(id) : s.add(id);
       setSel([...s]); return;
     }
@@ -610,7 +619,7 @@
       }
       sel = hit; drawOverlay();
       box = frame(r, 'ed-marquee');
-    }, () => inspector());
+    }, () => { drawOverlay(); inspector(); });      // the marquee box always goes away
   }
 
   /* ---------------- double-click: type, step inside, swap pictures ---------------- */
@@ -991,6 +1000,7 @@
     document.body.classList.toggle('previewing', previewing);
     if (previewing) {
       ov.textContent = ''; guidesEl.textContent = '';
+      document.documentElement.style.removeProperty('--size');   // preview: real sizes
       C.render(cv, doc, { edit: false, src: resolve, onMediaError, lib: libMap() });
       mountSide(false); lay();
       cv.querySelectorAll('a').forEach(a => a.addEventListener('click', e => e.preventDefault()));
@@ -1283,9 +1293,31 @@
 
     const sd = keyed(sec('Side nav'), 'side');
     seg(sd, 'lists', { sections: 'sections', projects: 'projects', off: 'off' }, () => doc.side || 'sections', v => doc.side = v);
-    h('p', 'ed-note', sd, (doc.side || 'sections') === 'sections'
-      ? 'Lists the texts on this page that have “show in side nav” ticked (every Section block does).'
-      : (doc.side === 'off' ? 'No side nav: the page uses the full width.' : 'Lists all your projects, this one highlighted. Each name shows in its own colour on hover (set colours on the work list).'));
+    if ((doc.side || 'sections') === 'sections') {
+      h('p', 'ed-note', sd, 'Each section is a name in the side nav, tied to something on the page: click it there and the page goes to that thing. Everything below it, up to the next one, belongs to it.');
+      const anchors = [];
+      walk(doc.items, (it, arr, parent) => { if (it.nav) anchors.push(it); });
+      const absY = it => { let y = it.y, f = find(it.id); while (f && f.parent) { y += f.parent.y; f = find(f.parent.id); } return y; };
+      anchors.sort((a, b) => absY(a) - absY(b));
+      const list = h('div', 'ed-secs', sd);
+      for (const it of anchors) {
+        const r = h('div', 'ed-sec-row', list);
+        const inp = h('input', '', r); inp.value = it.nav === true ? plainText(it.text) : it.nav;
+        inp.oninput = () => { it.nav = inp.value || 'section'; touch(); mountSide(true); };
+        inp.onchange = () => commit(true);
+        h('small', '', r, (NAMES[it.type] || 'marker').toLowerCase());
+        const go = h('button', '', r, '→'); go.type = 'button'; go.title = 'go to it';
+        go.onclick = () => { const el = cv.querySelector(`.it[data-id="${it.id}"]`); if (el) el.scrollIntoView({ block: 'center' }); setSel([it.id]); };
+        const x = h('button', '', r, '×'); x.type = 'button'; x.title = 'take it out of the side nav';
+        x.onclick = () => { if (it.type === 'marker') removeItems([it.id]); else { delete it.nav; commit(); } };
+      }
+      if (!anchors.length) h('p', 'ed-note', sd, 'No sections yet.');
+      actions(sd, [['+ new section here', () => {
+        const label = prompt('Section name', 'section'); if (!label) return;
+        add({ id: uid(), type: 'marker', x: 0, y: r1(viewY()), w: U, h: 1, nav: label });
+        toast('Section added where you are. Drag its pink line up or down to move it. Or select anything on the page and tick “in the side nav”.', 5000);
+      }, 'An invisible marker at this spot on the page, with a name in the side nav']]);
+    } else h('p', 'ed-note', sd, doc.side === 'off' ? 'No side nav: the page uses the full width.' : 'Lists all your projects, this one highlighted.');
 
     const gr = keyed(sec('Grid'), 'grid');
     const g = G(), setG = (k, v) => { doc.grid = { ...(doc.grid || {}), [k]: v }; drawGrid(); };
@@ -1329,7 +1361,7 @@
     actions(sec('Together'), [['group  ⌘G', group], ['make component  ⌥⌘K', makeComponent], ['snap all to grid', () => { its.forEach(fitGrid); commit(); }], ['duplicate', duplicate], ['delete', () => removeItems([...sel])]]);
   }
 
-  const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group', button: 'Button', slides: 'Slideshow', instance: 'Component' };
+  const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group', button: 'Button', slides: 'Slideshow', instance: 'Component', marker: 'Section marker' };
   function itemPanel(it) {
     const c = it.type === 'instance' && comp(it.ref);
     h('p', 'ed-head', panel, (c ? `Component · ${c.name}` : NAMES[it.type]) + (scope.length ? ' · inside' : ''));
@@ -1349,11 +1381,6 @@
       colourField(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint' }, () => it.color || 'fg', v => it.color = v);
       seg(S, 'align', { left: 'left', center: 'centre', right: 'right' }, () => it.align || 'left', v => it.align = v);
       actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)]]);
-      check(S, 'show in side nav', () => !!it.nav, v => { if (v) it.nav = plainText(it.text).slice(0, 40) || 'section'; else delete it.nav; });
-      if (it.nav) {
-        text(S, 'nav label', () => it.nav === true ? '' : it.nav, v => it.nav = v.trim() || plainText(it.text).slice(0, 40));
-        if ((doc.side || 'sections') !== 'sections') actions(S, [['make the side nav list sections', () => { doc.side = 'sections'; commit(); }]]);
-      }
     }
     if (it.type === 'button') {
       seg(S, 'look', { line: 'outline', fill: 'filled', text: 'just text' }, () => it.look || 'line', v => it.look = v);
@@ -1385,6 +1412,10 @@
         actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)], ['remove text', () => { delete it.text; commit(); }]]);
       } else actions(S, [['put text inside', () => { it.text = 'Words inside the box'; commit(); startText(elOf(it.id), it); }]]);
     }
+    if (/image|video|slides|box|embed/.test(it.type) && !scope.length) {
+      check(S, 'edge to edge (across the whole window, over the side nav)', () => !!it.bleed, v => { if (v) it.bleed = true; else delete it.bleed; });
+    }
+    if (it.type === 'marker') h('p', 'ed-note', S, 'An invisible spot on the page that the side nav jumps to. Drag its pink line to move it.');
     if (it.type === 'group') actions(S, [['step inside  ↵', () => enter(it)], ['ungroup  ⇧⌘G', ungroup], ['make component', makeComponent]]);
     if (it.type === 'instance') {
       if (c) h('p', 'ed-note', S, `Linked: used ${uses(c.id)}× on this page. Step inside to change every copy at once, or detach this one to change it alone.`);
@@ -1397,7 +1428,16 @@
       check(K, 'open in a new tab', () => it.link && it.link.newTab, v => { it.link = it.link || { href: '' }; it.link.newTab = v; });
     }
 
-    animPanel(it);
+    // side nav: any object can start a section
+    const N = keyed(sec('Side nav', panel, !!it.nav || it.type === 'marker'), 'nav');
+    const guess = () => it.type === 'text' ? plainText(it.text).slice(0, 40) : (it.alt || NAMES[it.type] || 'section').toLowerCase();
+    check(N, 'in the side nav, as a section', () => !!it.nav, v => { if (v) it.nav = guess() || 'section'; else delete it.nav; });
+    if (it.nav) {
+      text(N, 'called', () => it.nav === true ? '' : it.nav, v => it.nav = v.trim() || guess());
+      if ((doc.side || 'sections') !== 'sections') actions(N, [['make the side nav list sections', () => { doc.side = 'sections'; commit(); }]]);
+    }
+
+    if (it.type !== 'marker') animPanel(it);
     actions(panel, [['duplicate  ⌘D', duplicate], ['delete  ⌫', () => removeItems([it.id])]]);
   }
 

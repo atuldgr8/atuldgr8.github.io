@@ -100,7 +100,8 @@ window.SideNav = (() => {
     } else {
       const secs = [...cv.querySelectorAll('.it[id^="sec-"]')]
         .map(el => ({ el, label: el._item.nav === true ? plain(el._item.text) : el._item.nav }))
-        .filter(s => s.label);
+        .filter(s => s.label)
+        .sort((a, b) => a.el.getBoundingClientRect().top - b.el.getBoundingClientRect().top);   // in page order
       for (const s of secs) {
         const li = h('li', '', list), a = h('a', '', li, s.label);
         a.href = '#' + s.el.id; a.dataset.dock = '';
