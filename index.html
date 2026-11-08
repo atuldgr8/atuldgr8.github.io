@@ -701,9 +701,6 @@ bulb.addEventListener('pointerdown', e => {
       if (Math.hypot(ar.left + ar.width / 2 - cx, ar.top + ar.height / 2 - cy) < Math.min(innerWidth, innerHeight) * .15) ats.classList.add('found');
     }
     const ir = ink.getBoundingClientRect();
-    if (!inkFound && cx > ir.left - 60 && cx < ir.right + 60 && cy > ir.top - 60 && cy < ir.bottom + 60) {
-      inkFound = true; hush(); try { sessionStorage.setItem('ink-found', '1'); } catch (e) {}
-    }
     inkLit.style.setProperty('--ix', cx - ir.left + 'px'); inkLit.style.setProperty('--iy', cy - ir.top + 'px');
   };
   const up = () => {
@@ -724,12 +721,9 @@ apply(); nearer();
 /* ---------- the bulb talks ----------
    Point at it and it says something (a different line each time). Its own voice:
    it talks about "him", not "me". Change the lines here. */
-// asked until the light has found the hidden text; after that it stays quiet
-var MORE = 'want to throw some more light on who I am?', inkFound = false;
-try { inkFound = !!sessionStorage.getItem('ink-found'); } catch (e) {}
 const LINES = {
-  dark:  ['let there be light.', 'press and hold. it gets brighter.', MORE, 'there’s more under the intro than it lets on.', 'click and hover away at stuff. esp the colourful stuff.'],
-  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold it under the intro. I wrote that bit in lemon juice.', 'switch it off. some things only show in the dark.', MORE, 'click and hover away at stuff. esp the colourful stuff.'],
+  dark:  ['let there be light.', 'press and hold. it gets brighter.', 'use it to throw some light on who I am.', 'there’s more under the intro than it lets on.', 'click and hover away at stuff. esp the colourful stuff.'],
+  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold it under the intro. I wrote that bit in lemon juice.', 'switch it off. some things only show in the dark.', 'click and hover away at stuff. esp the colourful stuff.'],
 };
 // once there's a plain ATS resume, the bulb lets people know where it is
 if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('there’s an even more boring resume. *cough* ats *cough*');
@@ -741,7 +735,7 @@ btn.addEventListener('pointerenter', e => {
   stopNudging();
   clearTimeout(psstT);
   psstT = setTimeout(() => {
-    const l = LINES[isDark() ? 'dark' : 'light'].filter(t => !(inkFound && t === MORE));
+    const l = LINES[isDark() ? 'dark' : 'light'];
     psst.textContent = l[said++ % l.length];
     psst.classList.add('on');
   }, 250);
