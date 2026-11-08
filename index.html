@@ -94,10 +94,11 @@
   /* ---------- nav ---------- */
   .work, .resume, .ats { text-decoration: none; }
   .ats { grid-column: 12; grid-row: 1; justify-self: start; align-self: end; translate: 0 100%;
-         color: var(--mute); opacity: 0; pointer-events: none; transition: opacity .25s; padding-top: .2em; }
+         color: var(--mute); opacity: 0; pointer-events: none; transition: opacity .25s; padding-top: .2em; white-space: nowrap; }
   .resume:hover ~ .ats, .ats:hover, .ats.found { opacity: 1; pointer-events: auto; }
   .bar.stuck .ats.found:not(:hover) { opacity: 0; pointer-events: none; }   /* found ones tuck away once you scroll on */
   .ats:hover { color: var(--fg); }
+  .bar .resume { translate: 0 calc(var(--ah, 0px) * (1 - var(--as, 1))); }
   @media (max-width: 700px) { .ats { grid-column: 4; } }
 
 
@@ -223,18 +224,18 @@
 
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
-  .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 2em); max-width: min(17em, 70vw);
-          padding: 5px 9px 6px; font: 400 15px/1 VT323, ui-monospace, monospace; letter-spacing: .02em;
+  .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 42px); max-width: min(15em, 80vw);
+          padding: 8px 14px 10px; font: 400 30px/.95 VT323, ui-monospace, monospace; letter-spacing: .02em;
           color: var(--mute); background: var(--bg); pointer-events: none;
           /* a 2px pixel border with its corners knocked out */
-          box-shadow: 0 -2px 0 var(--mute), 0 2px 0 var(--mute), -2px 0 0 var(--mute), 2px 0 0 var(--mute);
+          box-shadow: 0 -3px 0 var(--mute), 0 3px 0 var(--mute), -3px 0 0 var(--mute), 3px 0 0 var(--mute);
           opacity: 0; transition: opacity .15s steps(2); }
   /* the tail: three stepped pixels, drawn with shadows of one tiny square */
-  .psst::after { content: ""; position: absolute; left: 8px; top: calc(100% + 2px); width: 2px; height: 2px;
+  .psst::after { content: ""; position: absolute; left: 12px; top: calc(100% + 3px); width: 3px; height: 3px;
                  background: var(--mute);
-                 box-shadow: 2px 0 var(--mute), 4px 0 var(--mute), 6px 0 var(--mute),
-                             0 2px var(--mute), 2px 2px var(--mute), 4px 2px var(--mute),
-                             0 4px var(--mute), 2px 4px var(--mute), 0 6px var(--mute); }
+                 box-shadow: 3px 0 var(--mute), 6px 0 var(--mute), 9px 0 var(--mute),
+                             0 3px var(--mute), 3px 3px var(--mute), 6px 3px var(--mute),
+                             0 6px var(--mute), 3px 6px var(--mute), 0 9px var(--mute); }
   .psst.on { opacity: 1; }
   body.past .psst { display: none; }
   /* lights on: a one-frame glimpse, barely darker than white */
@@ -540,14 +541,14 @@ const INK = [154, 106, 53];
 function heatFrame(now) {
   const dt = Math.min(.1, (now - (heatT || now)) / 1000); heatT = now;
   let warm = false;
-  const reach = Math.min(innerWidth, innerHeight) * .16;
+  const reach = Math.min(innerWidth, innerHeight) * .24;
   for (const w of inkWords) {
     if (heatAt && !isDark()) {
       const r = w.el.getBoundingClientRect();
       const d = Math.hypot(r.left + r.width / 2 - heatAt[0], r.top + r.height / 2 - heatAt[1]);
-      if (d < reach) w.heat = Math.min(1.8, w.heat + dt * (1 - d / reach) / 2.2);   // ~2–3 s of holding to come through
+      if (d < reach) w.heat = Math.min(3, w.heat + dt * Math.min(1, 1.6 * (1 - d / reach)) / .8);   // about a second of holding
     }
-    w.heat = Math.max(0, w.heat - dt * .05);          // fades slowly: a fully warmed word lingers ~15 s
+    w.heat = Math.max(0, w.heat - dt * .02);          // a fully warmed word stays ~1.5 min, then fades over ~50 s
     const a = isDark() ? 0 : Math.min(1, w.heat);
     w.el.style.color = a ? `rgba(${INK}, ${(a * a * (3 - 2 * a)).toFixed(3)})` : '';
     if (w.heat > 0) warm = true;

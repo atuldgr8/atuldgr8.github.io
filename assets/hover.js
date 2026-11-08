@@ -75,6 +75,8 @@
         el.style.transform = (o.s === 1 && !o.x && !o.y) ? '' : `translate(${o.x.toFixed(2)}px, ${o.y.toFixed(2)}px) scale(${o.s.toFixed(4)})`;
         // the pronunciation next to the name grows and moves along with it
         // ...and "Hi, I'm" above it moves up to make room
+        // ...and "resume" moves up as "ats friendly" under it grows
+        if (el.classList.contains('ats') && el.parentElement) { el.parentElement.style.setProperty('--as', o.s.toFixed(4)); el.parentElement.style.setProperty('--ah', el.offsetHeight + 'px'); }
         const hello = el.id === 'name' && el.closest('.hello');
         if (hello) { hello.style.setProperty('--sw', o.s.toFixed(4)); hello.style.setProperty('--nw', el.offsetWidth + 'px'); hello.style.setProperty('--nh', el.offsetHeight + 'px'); }
       });
@@ -94,7 +96,7 @@
     try { const o = localStorage.getItem('swell-override'); if (o) m.bar = m.intro = o === 'on'; } catch (e) {}
     if (m.bar) {
       // grows from its bottom-left corner, up and to the right
-      const bar = [...document.querySelectorAll('#name, .bar .work, .bar .resume, .top .me, .top .nav-work, .top .nav-resume')];
+      const bar = [...document.querySelectorAll('#name, .bar .work, .bar .resume, .bar .ats, .top .me, .top .nav-work, .top .nav-resume')];
       bar.forEach(el => { el.style.display = 'inline-block'; el.style.transformOrigin = '0 100%'; });
       Swell(bar, { max: .16, reach: 90 });
     }
