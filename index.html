@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/home.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 <style>
   /* ---------- tokens: one typeface, ONE size, colour does the hierarchy ---------- */
   :root {
@@ -65,11 +65,15 @@
   .bar::before {
     content: ""; position: absolute; z-index: -1; pointer-events: none;
     left: calc(var(--gutter) * -1); right: calc(var(--gutter) * -1);
-    top: -100vh; bottom: calc(var(--size) * -.6);
-    background: var(--bg);
+    top: -100vh; bottom: calc(var(--size) * -2.6);
+    background: linear-gradient(to bottom, var(--bg) calc(100% - var(--size) * 2.2), transparent);
   }
-  .hi-line { display: inline-block; transition: opacity .35s; }
-  .bar.stuck .hi-line { opacity: 0; }
+  .hi-line { display: inline-block; transition: opacity .35s; translate: 0 calc(var(--nh, 0px) * (1 - var(--sw, 1))); }
+  .bar.stuck .hi-line { opacity: 0; pointer-events: none; }
+  /* "Hi," is a way to say hi back: point at it and it asks, click it to write */
+  a.hi { text-decoration: none; }
+  .hiback { display: inline-block; margin-left: .6em; color: var(--faint); opacity: 0; pointer-events: none; }
+  .hi-line:has(a.hi:hover) .hiback { animation: appear .45s cubic-bezier(.2, .8, .3, 1) both; }
   .hello  { grid-column: 1 / span 6; grid-row: 1; }
   .work   { grid-column: 10;         grid-row: 1; justify-self: start; }
   .resume { grid-column: 12;         grid-row: 1; justify-self: start; }
@@ -87,7 +91,12 @@
   }
 
   /* ---------- nav ---------- */
-  .work, .resume { text-decoration: none; }
+  .work, .resume, .ats { text-decoration: none; }
+  .ats { grid-column: 12; grid-row: 1; justify-self: start; align-self: end; translate: 0 100%;
+         color: var(--mute); opacity: 0; pointer-events: none; transition: opacity .25s; padding-top: .2em; }
+  .resume:hover ~ .ats, .ats:hover { opacity: 1; pointer-events: auto; }
+  .ats:hover { color: var(--fg); }
+  @media (max-width: 700px) { .ats { grid-column: 4; } }
 
 
   /* ---------- name, cursor, pronunciation ---------- */
@@ -155,8 +164,9 @@
 
   /* ---------- light/dark switch ---------- */
   #theme {
-    position: fixed; left: var(--gutter); bottom: 24px; z-index: 5;
+    position: fixed; left: var(--gutter); bottom: 24px; z-index: 13;
     display: flex; align-items: center; gap: .45em; color: var(--mute);
+    font-family: VT323, ui-monospace, monospace; font-size: 1.3em; letter-spacing: 0;
   }
   #theme:hover { color: var(--fg); }
   /* a little pixel bulb, drawn square by square like a 90s phone emoji */
@@ -169,7 +179,7 @@
      Lights off: someone is standing there, barely visible.
      Drag the bulb around like a torch to see who it is.
      Lights on: a single-frame flash of it, a little closer every time. */
-  #thing { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  #thing { position: fixed; inset: 0; z-index: 11; pointer-events: none;
            --r: 15vmin; --tx: -100vw; --ty: -100vh; --a: .045; --l: 32%; }
   #thing .layer { position: absolute; inset: 0; opacity: 0; }
   /* anchored at the middle of the ring (around the head), so it can grow into a giant head */
@@ -187,7 +197,7 @@
             mask-image: radial-gradient(circle var(--r) at var(--tx) var(--ty), #000 50%, transparent 100%);
   }
   /* the light itself sits above everything, the top bar included */
-  #glow { position: fixed; inset: 0; z-index: 11; pointer-events: none; opacity: 0;
+  #glow { position: fixed; inset: 0; z-index: 12; pointer-events: none; opacity: 0;
           --r: 15vmin; --tx: -100vw; --ty: -100vh; --a: .045;
           background: radial-gradient(circle var(--r) at var(--tx) var(--ty), rgba(255,244,214,var(--a)), transparent 100%); }
   :root[data-dark] #glow.on, :root[data-dark] #thing.torch .lit { opacity: 1; }
@@ -195,9 +205,8 @@
   /* ---------- the ink: words about me under the landing text ----------
      In the dark they're written one shade off black, and the torch reads them.
      With the lights on it's invisible ink: hold the warm bulb near and it browns into view. */
-  .ink { grid-column: 1 / span 7; position: relative; margin-top: calc(var(--step) * 2); pointer-events: none; user-select: none; }
-  .ink .base { color: var(--bg); }
-  :root[data-dark] .ink .base { color: #141414; }
+  .ink { grid-column: 1 / span 7; position: relative; pointer-events: none; user-select: none; }
+  .ink .base { color: transparent; }             /* truly invisible until the bulb finds it */
   .ink .lit { position: absolute; inset: 0; opacity: 0; transition: opacity .3s;
     --ix: -999px; --iy: -999px; --r: 15vmin;
     -webkit-mask-image: radial-gradient(circle var(--r) at var(--ix) var(--iy), #000 45%, transparent 100%);
@@ -208,12 +217,12 @@
   body.torching .ink .lit { opacity: 1; }
 
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
-  .psst { position: fixed; z-index: 12; left: var(--gutter); bottom: calc(24px + 2.2em); max-width: min(22em, 70vw);
-          padding: .45em .65em; font-size: .8em; letter-spacing: -.02em; line-height: 1.3;
-          color: var(--fg); background: var(--bg); border: 1px solid var(--fg); pointer-events: none;
+  .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 2.6em); max-width: min(20em, 70vw);
+          padding: .3em .6em .35em; font: 400 1.15em/1.1 VT323, ui-monospace, monospace; letter-spacing: 0;
+          color: var(--mute); background: var(--bg); border: 1px solid var(--mute); pointer-events: none;
           opacity: 0; transform: translateY(4px); transition: opacity .2s, transform .25s; }
   .psst::after { content: ""; position: absolute; left: .55em; top: 100%; width: 8px; height: 8px; background: var(--bg);
-                 border: solid var(--fg); border-width: 0 1px 1px 0; transform: translate(0, -4px) rotate(45deg); }
+                 border: solid var(--mute); border-width: 0 1px 1px 0; transform: translate(0, -4px) rotate(45deg); }
   .psst.on { opacity: 1; transform: none; }
   body.past .psst { display: none; }
   /* lights on: a one-frame glimpse, barely darker than white */
@@ -230,19 +239,19 @@
   .bulb { transition: transform .5s var(--pop), filter .4s, color .3s; }
   #theme:hover .bulb, #theme.dragging .bulb { color: var(--warm); filter: drop-shadow(0 0 .3em rgba(245, 197, 24, .45)); }
   #theme:hover .bulb .glow, #theme.dragging .bulb .glow { opacity: 1; transition: opacity .3s; }
-  /* it flickers to get your attention, a little more each time you leave it waiting */
-  #theme.flicker .bulb { animation: flick var(--fd, 1.1s) steps(1) both; }
-  #theme.flicker .bulb .glow { animation: flickglow var(--fd, 1.1s) steps(1) both; }
-  @keyframes flick { 0%, 100% { color: inherit; } 8%, 22%, 40%, 55% { color: var(--warm); } 14%, 30%, 48% { color: inherit; } }
-  /* the room dips with it, like the power stuttered */
-  #dip { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0; background: #000; }
-  :root[data-dark] #dip { background: #fff3cf; }
-  #dip.on { animation: dip var(--fd, 1.1s) steps(1) both; }
-  @keyframes dip { 0%, 100% { opacity: 0; } 8%, 22%, 40% { opacity: var(--dip); } 14%, 30%, 48% { opacity: 0; } }
-
-  @keyframes flickglow { 0%, 100% { opacity: var(--g0); } 8%, 22%, 40%, 55% { opacity: 1; } 14%, 30%, 48% { opacity: var(--g0); } }
+  /* calling for attention: the bulb glows and fades, a little more urgently each time */
+  #theme.call .bulb { animation: call var(--cd, 1.6s) ease-in-out both; }
+  #theme.call .bulb .glow { animation: callglow var(--cd, 1.6s) ease-in-out both; }
+  @keyframes call {
+    0%, 100% { color: inherit; filter: none; scale: 1; }
+    40%, 60% { color: var(--warm); filter: drop-shadow(0 0 calc(.25em + var(--k) * .3em) rgba(245, 197, 24, calc(.3 + var(--k) * .15))); scale: calc(1 + var(--k) * .06); }
+  }
+  @keyframes callglow { 0%, 100% { opacity: var(--g0); } 40%, 60% { opacity: 1; } }
   :root[data-dark] #theme { --g0: 0; }
   :root:not([data-dark]) #theme { --g0: 1; }
+  /* ...and if that doesn't work, the whole room flickers between light and dark */
+  html.flash { animation: flash 1.3s steps(1) both; }
+  @keyframes flash { 0%, 16%, 36%, 52%, 100% { filter: none; } 8%, 26%, 44% { filter: invert(1) hue-rotate(180deg); } }
   main { position: relative; z-index: 2; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -254,11 +263,13 @@
 <body>
 
 <header class="bar">
-  <p class="hello"><span class="hi-line"><span class="hi">Hi,</span> I'm</span><br>
+  <p class="hello"><span class="hi-line"><a class="hi" href="mailto:atul_s@nid.edu">Hi,</a> I'm<span class="hiback" aria-hidden="true">say hi back?</span></span><br>
     <span class="name-line"><a id="name" href="#how-white-people-pronounce-my-name">Atul Suresh</a><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
   </p>
   <a class="work" href="#work">work</a>
   <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
+  <!-- the plain, ATS-friendly resume: shows up under "resume" when you point at it. Put its link in href and remove "hidden" -->
+  <a class="ats" href="" target="_blank" rel="noopener" hidden>ats friendly :)</a>
 </header>
 
 <main>
@@ -267,11 +278,6 @@
     trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
   </p>
 
-  <div class="note">
-    <p>Portfolio under construction, and like all good things, is taking time.<br>
-      Say hi: <a href="mailto:atul_s@nid.edu">atul_s@nid.edu</a></p>
-    <p>if you're bored and still wanna hang around, click and hover away at stuff</p>
-  </div>
   <!-- the ink: only readable by the bulb's light. PLACEHOLDER words, swap in your own -->
   <div class="ink" aria-hidden="true"><div class="base"><p>Placeholder: a few lines about where I started, architecture first,
     then graphics, then screens and code, and why I keep switching.</p>
@@ -384,7 +390,8 @@ function reset() {
 }
 setFill(0);
 // only a real mouse counts as hovering (taps on phones fire fake hover events)
-line.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') wait = setTimeout(reveal, 600); });
+// only on the landing: once the bar has pinned itself at the top, the name stays quiet
+line.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && !document.querySelector('.bar').classList.contains('stuck')) wait = setTimeout(reveal, 600); });
 line.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') reset(); });
 
 /* the name: on a laptop, only hovering says it. Phones can't hover, so a tap does. */
@@ -505,6 +512,7 @@ const ink = document.querySelector('.ink'), inkLit = (() => {   // a lit copy of
 })();
 const setv = (k, v) => { thing.style.setProperty(k, v); glowEl.style.setProperty(k, v); inkLit.style.setProperty(k, v); };
 bulb.addEventListener('pointerdown', e => {
+  if (typeof stopNudging === 'function') stopNudging();
   const sx = e.clientX, sy = e.clientY;
   let moving = false, done = false, t0 = 0, raf;
   btn.setPointerCapture(e.pointerId);
@@ -558,9 +566,11 @@ apply(); nearer();
    Point at it and it says something (a different line each time). Its own voice:
    it talks about "him", not "me". Change the lines here. */
 const LINES = {
-  dark:  ['psst. pick me up and drag me around.', 'try holding me over his name. or under it.', 'there’s more written here than you can see.', 'the longer you hold me, the brighter I get.'],
-  light: ['psst. pick me up and drag me around.', 'some of the ink on this page only shows when it’s warm.', 'hold me close to the page, under his name.', 'or switch me off. things look different in the dark.'],
+  dark:  ['psst. pick me up and drag me around.', 'shine me just under what he wrote up there.', 'there’s more written here than you can see.', 'the longer you hold me, the brighter I get.'],
+  light: ['psst. pick me up and drag me around.', 'some of the ink on this page only shows when it’s warm.', 'hold me close, just under what he wrote up there.', 'or switch me off. things look different in the dark.'],
 };
+// once there's a plain ATS resume, the bulb lets people know where it is
+if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('point at “resume” for a more boring version.');
 const psst = document.querySelector('.psst');
 let said = 0, psstT;
 function hush() { clearTimeout(psstT); psst.classList.remove('on'); }
@@ -577,24 +587,29 @@ btn.addEventListener('pointerenter', e => {
 btn.addEventListener('pointerleave', hush);
 
 /* ---------- getting your attention ----------
-   Left alone on the landing, the bulb flickers (and the room dips like the power stuttered),
-   a little more each time: at 4, 10 and 17 seconds. Once you've pointed at it, it stops. */
+   Left alone on the landing, the bulb calls out: it glows and fades at 5s, then again
+   every 5s, a little more urgently each time. At 25s the whole room flickers between
+   light and dark. The moment you point at the bulb (or pick it up), it stops for good. */
 let nudged = false;
 try { nudged = !!sessionStorage.getItem('bulb-met'); } catch (e) {}
 const nudgeT = [];
 function stopNudging() { nudged = true; nudgeT.forEach(clearTimeout); try { sessionStorage.setItem('bulb-met', '1'); } catch (e) {} }
-function flicker(sec, strength) {
-  if (nudged || scrollY > innerHeight * .3 || document.hidden) return;
-  let dip = document.getElementById('dip');
-  if (!dip) { dip = document.createElement('div'); dip.id = 'dip'; document.body.appendChild(dip); }
-  for (const el of [btn, dip]) el.style.setProperty('--fd', sec + 's');
-  dip.style.setProperty('--dip', isDark() ? .05 + strength * .03 : .35 + strength * .15);
-  btn.classList.remove('flicker'); dip.classList.remove('on'); void btn.offsetWidth;
-  btn.classList.add('flicker'); dip.classList.add('on');
-  setTimeout(() => { btn.classList.remove('flicker'); dip.classList.remove('on'); }, sec * 1000 + 50);
+const away = () => nudged || scrollY > innerHeight * .3 || document.hidden;
+function call(k) {
+  if (away()) return;
+  btn.style.setProperty('--k', k); btn.style.setProperty('--cd', 1.6 - k * .15 + 's');
+  btn.classList.remove('call'); void btn.offsetWidth; btn.classList.add('call');
+  btn.addEventListener('animationend', () => btn.classList.remove('call'), { once: true });
+}
+function flash() {
+  if (away()) return;
+  const r = document.documentElement;
+  r.classList.remove('flash'); void r.offsetWidth; r.classList.add('flash');
+  setTimeout(() => r.classList.remove('flash'), 1400);
 }
 if (!nudged && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  nudgeT.push(setTimeout(() => flicker(1.1, 1), 4000), setTimeout(() => flicker(1.5, 2), 10000), setTimeout(() => flicker(2, 3), 17000));
+  [1, 2, 3, 4].forEach(k => nudgeT.push(setTimeout(() => call(k), k * 5000)));
+  nudgeT.push(setTimeout(flash, 25000));
 }
 </script>
 <script src="assets/side.js"></script>

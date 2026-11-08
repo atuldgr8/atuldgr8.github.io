@@ -74,7 +74,9 @@
         if (Math.abs(o.ts - o.s) + Math.abs(o.tx - o.x) + Math.abs(o.ty - o.y) > .003) moving = true;
         el.style.transform = (o.s === 1 && !o.x && !o.y) ? '' : `translate(${o.x.toFixed(2)}px, ${o.y.toFixed(2)}px) scale(${o.s.toFixed(4)})`;
         // the pronunciation next to the name grows and moves along with it
-        if (el.id === 'name' && el.parentElement) { el.parentElement.style.setProperty('--sw', o.s.toFixed(4)); el.parentElement.style.setProperty('--nw', el.offsetWidth + 'px'); }
+        // ...and "Hi, I'm" above it moves up to make room
+        const hello = el.id === 'name' && el.closest('.hello');
+        if (hello) { hello.style.setProperty('--sw', o.s.toFixed(4)); hello.style.setProperty('--nw', el.offsetWidth + 'px'); hello.style.setProperty('--nh', el.offsetHeight + 'px'); }
       });
       raf = moving ? requestAnimationFrame(frame) : 0;
     };
@@ -97,7 +99,7 @@
       Swell(bar, { max: .16, reach: 90 });
     }
     const intro = document.querySelector('.intro');
-    if (m.intro && intro) Grow([...intro.querySelectorAll('a')], { max: .3, reach: 90 });
+    if (m.intro && intro) Grow([...intro.querySelectorAll('a'), ...document.querySelectorAll('.bar a.hi')], { max: .3, reach: 90 });
   }
   /* Grow: only the words you can point at or click get bigger, for real (their
      text size changes), so the rest of the paragraph moves along to make room.
