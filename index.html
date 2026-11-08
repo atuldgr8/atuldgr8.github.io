@@ -72,7 +72,8 @@
   .bar.stuck .hi-line { opacity: 0; pointer-events: none; }
   /* "Hi," is a way to say hi back: point at it and it asks, click it to write */
   a.hi { text-decoration: none; }
-  .hiback { display: inline-block; margin-left: .6em; color: var(--faint); opacity: 0; pointer-events: none; }
+  .hi-line { position: relative; }
+  .hiback { position: absolute; left: 0; bottom: 100%; margin-bottom: .2em; white-space: nowrap; color: var(--faint); opacity: 0; pointer-events: none; }
   .hi-line:has(a.hi:hover) .hiback { animation: appear .45s cubic-bezier(.2, .8, .3, 1) both; }
   .hello  { grid-column: 1 / span 6; grid-row: 1; }
   .work   { grid-column: 10;         grid-row: 1; justify-self: start; }
@@ -166,7 +167,6 @@
   #theme {
     position: fixed; left: var(--gutter); bottom: 24px; z-index: 13;
     display: flex; align-items: center; gap: .45em; color: var(--mute);
-    font-family: VT323, ui-monospace, monospace; font-size: 1.3em; letter-spacing: 0;
   }
   #theme:hover { color: var(--fg); }
   /* a little pixel bulb, drawn square by square like a 90s phone emoji */
@@ -217,13 +217,20 @@
   body.torching .ink .lit { opacity: 1; }
 
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
-  .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 2.6em); max-width: min(20em, 70vw);
-          padding: .3em .6em .35em; font: 400 1.15em/1.1 VT323, ui-monospace, monospace; letter-spacing: 0;
-          color: var(--mute); background: var(--bg); border: 1px solid var(--mute); pointer-events: none;
-          opacity: 0; transform: translateY(4px); transition: opacity .2s, transform .25s; }
-  .psst::after { content: ""; position: absolute; left: .55em; top: 100%; width: 8px; height: 8px; background: var(--bg);
-                 border: solid var(--mute); border-width: 0 1px 1px 0; transform: translate(0, -4px) rotate(45deg); }
-  .psst.on { opacity: 1; transform: none; }
+  /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
+  .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 2em); max-width: min(17em, 70vw);
+          padding: 5px 9px 6px; font: 400 15px/1 VT323, ui-monospace, monospace; letter-spacing: .02em;
+          color: var(--mute); background: var(--bg); pointer-events: none;
+          /* a 2px pixel border with its corners knocked out */
+          box-shadow: 0 -2px 0 var(--mute), 0 2px 0 var(--mute), -2px 0 0 var(--mute), 2px 0 0 var(--mute);
+          opacity: 0; transition: opacity .15s steps(2); }
+  /* the tail: three stepped pixels, drawn with shadows of one tiny square */
+  .psst::after { content: ""; position: absolute; left: 8px; top: calc(100% + 2px); width: 2px; height: 2px;
+                 background: var(--mute);
+                 box-shadow: 2px 0 var(--mute), 4px 0 var(--mute), 6px 0 var(--mute),
+                             0 2px var(--mute), 2px 2px var(--mute), 4px 2px var(--mute),
+                             0 4px var(--mute), 2px 4px var(--mute), 0 6px var(--mute); }
+  .psst.on { opacity: 1; }
   body.past .psst { display: none; }
   /* lights on: a one-frame glimpse, barely darker than white */
   #thing.glimpse .lit { color: #ededed; -webkit-mask-image: none; mask-image: none; animation: blink .035s steps(1) both; }
@@ -263,13 +270,13 @@
 <body>
 
 <header class="bar">
-  <p class="hello"><span class="hi-line"><a class="hi" href="mailto:atul_s@nid.edu">Hi,</a> I'm<span class="hiback" aria-hidden="true">say hi back?</span></span><br>
+  <p class="hello"><span class="hi-line"><span class="hiback" aria-hidden="true">say hi back</span><a class="hi" href="mailto:atul_s@nid.edu">Hi,</a> I'm</span><br>
     <span class="name-line"><a id="name" href="#how-white-people-pronounce-my-name">Atul Suresh</a><span class="say" aria-hidden="true">uh·thool soo·rayysh<span class="fill"><span>uh·thool soo·rayysh</span></span></span></span>
   </p>
   <a class="work" href="#work">work</a>
-  <a class="resume" href="https://drive.google.com/file/d/1oWF_tZGkbyCLx98JRv4v-hcWlEsx6g2Q/view?usp=sharing" target="_blank" rel="noopener">resume</a>
-  <!-- the plain, ATS-friendly resume: shows up under "resume" when you point at it. Put its link in href and remove "hidden" -->
-  <a class="ats" href="" target="_blank" rel="noopener" hidden>ats friendly :)</a>
+  <a class="resume" href="resume/Atul-Suresh-Resume.pdf" target="_blank" rel="noopener">resume</a>
+  <!-- the plain, ATS-friendly resume: shows up under "resume" when you point at it -->
+  <a class="ats" href="resume/Atul-Suresh-Resume-ATS.pdf" target="_blank" rel="noopener">ats friendly :)</a>
 </header>
 
 <main>
@@ -566,11 +573,11 @@ apply(); nearer();
    Point at it and it says something (a different line each time). Its own voice:
    it talks about "him", not "me". Change the lines here. */
 const LINES = {
-  dark:  ['psst. pick me up and drag me around.', 'shine me just under what he wrote up there.', 'there’s more written here than you can see.', 'the longer you hold me, the brighter I get.'],
-  light: ['psst. pick me up and drag me around.', 'some of the ink on this page only shows when it’s warm.', 'hold me close, just under what he wrote up there.', 'or switch me off. things look different in the dark.'],
+  dark:  ['pick it up.', 'hold it longer. it gets brighter.', 'there’s more under the intro. look.', 'I wrote things you can only read in the light.'],
+  light: ['pick it up.', 'some of this ink only shows when it’s warm.', 'hold it just under the intro.', 'or switch it off. try the dark.'],
 };
 // once there's a plain ATS resume, the bulb lets people know where it is
-if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('point at “resume” for a more boring version.');
+if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('point at “resume” for the boring version.');
 const psst = document.querySelector('.psst');
 let said = 0, psstT;
 function hush() { clearTimeout(psstT); psst.classList.remove('on'); }
