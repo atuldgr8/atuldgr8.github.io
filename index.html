@@ -78,7 +78,8 @@
   .hello  { grid-column: 1 / span 6; grid-row: 1; }
   .work   { grid-column: 10;         grid-row: 1; justify-self: start; }
   .resume { grid-column: 12;         grid-row: 1; justify-self: start; }
-  .intro, .note { grid-column: 1 / span 7; align-self: start; }
+  .intro, .note, .more { grid-column: 1 / span 7; align-self: start; }
+  .more { color: var(--mute); white-space: nowrap; }
 
   /* phones: 4 columns, nav still on the same line as the name */
   @media (max-width: 700px) {
@@ -86,7 +87,7 @@
     .hello  { grid-column: 1 / span 2; }
     .work   { grid-column: 3; }
     .resume { grid-column: 4; }
-    .intro, .note { grid-column: 1 / -1; }
+    .intro, .note, .more { grid-column: 1 / -1; }
     /* no room beside the name, so the pronunciation appears just below it */
     .name-line .say { position: absolute; left: 0; top: 100%; margin: .35em 0 0; }
   }
@@ -311,6 +312,8 @@
     <span class="l1">I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from <a class="door" data-win="nid" href="#eventually-everything-connects">NID</a>,</span><br>
     trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
   </p>
+
+  <p class="more">want to shine a little more light on who I am?</p>
 
   <!-- the ink: only readable by the bulb's light -->
   <div class="ink" aria-hidden="true"><div class="base">
