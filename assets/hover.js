@@ -101,7 +101,7 @@
       Swell(bar, { max: .16, reach: 90 });
     }
     const intro = document.querySelector('.intro');
-    if (m.intro && intro) Grow([...intro.querySelectorAll('a'), ...document.querySelectorAll('.bar a.hi')], { max: .3, reach: 90 });
+    // the intro's clickable words don't swell on a normal hover: only under the bulb's light (see index.html)
   }
   /* Grow: only the words you can point at or click get bigger, for real (their
      text size changes), so the rest of the paragraph moves along to make room.
@@ -136,17 +136,15 @@
     document.documentElement.addEventListener('pointerleave', () => { px = py = null; if (!raf) raf = requestAnimationFrame(frame); });
   }
 
-  if (!matchMedia('(hover: hover)').matches) return;
   const css = v => !v ? 'var(--fg)' : v[0] === '#' ? v : `var(--${v})`;
   let lastRandom = -1;
   const probe = document.createElement('i'); probe.hidden = true; document.documentElement.appendChild(probe);
-  document.addEventListener('pointerover', e => {
-    const el = e.target.closest && e.target.closest(SEL);
-    if (!el || el.matches(SKIP) || el.classList.contains('hc')) return;
+  // give something its hover colour (by its role). Used by hovering, and by the bulb's light.
+  function paint(el) {
     if (!el.dataset.ownHc) {
       const role = (ROLES.find(([, s]) => el.matches(s)) || ['other'])[0];
       let v = assign[role] || assign.other;
-      if (!v || v === 'none') return;
+      if (!v || v === 'none') return false;
       if (v === 'random') { let i; do { i = Math.floor(Math.random() * TOKENS.length); } while (i === lastRandom); lastRandom = i; v = TOKENS[i]; }
       el.style.setProperty('--hc', css(v));
     }
@@ -155,6 +153,13 @@
     const m = getComputedStyle(probe).color.match(/\d+/g);
     if (m) el.style.setProperty('--hci', `rgb(${255 - m[0]}, ${255 - m[1]}, ${255 - m[2]})`);
     el.classList.add('hc');
-    el.addEventListener('pointerleave', () => el.classList.remove('hc'), { once: true });
+    return true;
+  }
+  window.Paint = { on: paint, off: el => el.classList.remove('hc') };
+  if (!matchMedia('(hover: hover)').matches) return;
+  document.addEventListener('pointerover', e => {
+    const el = e.target.closest && e.target.closest(SEL);
+    if (!el || el.matches(SKIP) || el.classList.contains('hc')) return;
+    if (paint(el)) el.addEventListener('pointerleave', () => el.classList.remove('hc'), { once: true });
   });
 })();

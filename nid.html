@@ -7,7 +7,7 @@
 <script>
   try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
   // use exactly the same text size as the main page that opened this window
-  try { document.documentElement.style.setProperty('--size', getComputedStyle(opener.document.body).fontSize); } catch (e) {}
+  try { document.documentElement.style.setProperty('--size', getComputedStyle((opener || parent).document.body).fontSize); } catch (e) {}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,8 +39,9 @@
   <p class="quote">“Eventually, everything connects.”<br>Charles Eames, whose India Report (1958) led to NID. Words to live by.</p>
   <p>Photo: <a href="https://www.nid.edu" target="_blank" rel="noopener">NID</a></p>
   <script>
-    addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-    addEventListener('load', () => { try { resizeBy(0, document.documentElement.scrollHeight - innerHeight); } catch (e) {} });
+    const inPage = parent !== window;           // opened as a little window inside the home page
+    addEventListener('keydown', e => { if (e.key === 'Escape') { if (inPage) parent.postMessage('close-win', '*'); else close(); } });
+    if (!inPage) addEventListener('load', () => { try { resizeBy(0, document.documentElement.scrollHeight - innerHeight); } catch (e) {} });
   </script>
 </body>
 </html>

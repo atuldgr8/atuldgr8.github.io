@@ -260,7 +260,7 @@
     h('h3', '', M, 'Motion');
     h('p', 'wk-hint', M, 'The swell: words grow a little as the mouse comes near and the ones around lean away. On your laptop, the “swell” button in the corner flips it on/off just for you, to compare.');
     const mo = index.motion = index.motion || {};
-    for (const [k, label] of [['bar', 'swell on your name, work and resume'], ['intro', 'swell on the intro paragraph']]) {
+    for (const [k, label] of [['bar', 'swell on your name, work and resume']]) {
       const l = h('label', 'wk-line', M); const c = h('input', '', l); c.type = 'checkbox';
       c.checked = mo[k] !== false; h('span', '', l, label);
       c.onchange = () => { mo[k] = c.checked; setTop('motion'); };

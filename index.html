@@ -222,6 +222,19 @@
   :root:not([data-dark]) .ink .lit { display: none; }
   .ink .base .w { transition: none; }
 
+  /* ---------- little windows (drawn by the page, like a tiny desktop) ---------- */
+  .win { position: fixed; background: var(--bg); border: 1px solid var(--fg); box-shadow: 0 10px 30px rgba(0,0,0,.12);
+         animation: winin .18s cubic-bezier(.2, .8, .3, 1) both; }
+  .win.closing { animation: winout .16s ease-in both; }
+  @keyframes winin { from { opacity: 0; transform: scale(.96); } }
+  @keyframes winout { to { opacity: 0; transform: scale(.97); } }
+  .win-t { display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: .25em .5em;
+           border-bottom: 1px solid var(--fg); cursor: grab; user-select: none; touch-action: none; color: var(--mute); }
+  .win-t:active { cursor: grabbing; }
+  .win-n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .win-x { color: var(--fg); padding: 0 .2em; }
+  .win iframe { display: block; width: 100%; border: 0; background: var(--bg); }
+
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
   .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 42px); max-width: min(15em, 80vw);
@@ -298,11 +311,10 @@
     trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
   </p>
 
-  <!-- the ink: only readable by the bulb's light. DRAFT words, Atul to rewrite -->
+  <!-- the ink: only readable by the bulb's light -->
   <div class="ink" aria-hidden="true"><div class="base">
-    <p>I started out drawing buildings, and slowly realised the part I liked most was how people moved through them. So I followed that, into graphics, then screens, then code.</p>
-    <p>These days I design interactions, and build the ones I can't stop thinking about. I like things that look boring until you poke them. You just poked one, so hi.</p>
-    <p>Eventually, everything connects. I'm still finding out how.</p>
+    <p>My background is in architecture, but I've never been particularly good at staying in one lane. I've since worked across spaces, graphics, objects and digital experiences, with an increasing interest in interaction and creative technology. I'm drawn to the overlaps, and to the unexpected connections between seemingly unrelated things.</p>
+    <p>I like keeping things simple, stripping ideas down to their essentials, but always leaving room for humour, play and a little weirdness. I'm curious about how people perceive and navigate the world, and enjoy pulling things apart, connecting dots and making things. After all, eventually, everything connects.</p>
   </div></div>
 </main>
 
@@ -452,27 +464,62 @@ new ResizeObserver(fitIntro).observe(intro);
 document.fonts && document.fonts.ready.then(fitIntro);
 
 /* ================= little windows =================
-   A door opens a REAL small browser window with its own tiny page
-   (e.g. fish.html), placed right next to the word you clicked.
-   Browsers allow this because it happens straight after a click.
-   (Phones have no floating windows, so there it opens as a tab.) */
+   A door opens a small window *inside the page* with its own tiny page
+   (e.g. fish.html), next to the word you clicked. (Real browser pop-ups
+   turn into full tabs on many Macs, so these are drawn by the page itself.)
+   Drag it by its title bar, × or Esc closes it. */
 const WINS = {
   fish: { page: 'fish.html', w: 520, h: 240 },
   nid:  { page: 'nid.html',  w: 560, h: 320 },
 };
+let winZ = 40;
+function openWin(key, x, y) {
+  const spec = WINS[key]; if (!spec) return;
+  let win = document.querySelector(`.win[data-key="${key}"]`);
+  if (win) { win.style.zIndex = ++winZ; return; }               // already open: bring it to the front
+  const vw = innerWidth, gut = 16, w = Math.min(spec.w, vw - gut * 2);
+  win = document.createElement('div'); win.className = 'win'; win.dataset.key = key; win.style.zIndex = ++winZ;
+  win.style.width = w + 'px';
+  win.innerHTML = '<div class="win-t"><span class="win-n"></span><button type="button" class="win-x" aria-label="close">×</button></div><iframe title=""></iframe>';
+  const f = win.querySelector('iframe'); f.src = spec.page; f.style.height = spec.h + 'px';
+  document.body.appendChild(win);
+  const place = hgt => {
+    win.style.left = Math.max(gut, Math.min(x + 16, vw - w - gut)) + 'px';
+    win.style.top = Math.max(gut, Math.min(y + 20, innerHeight - hgt - gut)) + 'px';
+  };
+  place(spec.h + 30);
+  f.addEventListener('load', () => {
+    try {
+      const d = f.contentDocument;
+      win.querySelector('.win-n').textContent = d.title;
+      f.style.height = Math.min(d.documentElement.scrollHeight, innerHeight - 80) + 'px';
+      place(win.offsetHeight);
+      d.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+    } catch (e) {}
+  });
+  const shut = () => { win.classList.add('closing'); setTimeout(() => win.remove(), 160); };
+  win.querySelector('.win-x').onclick = shut;
+  win.addEventListener('pointerdown', () => { win.style.zIndex = ++winZ; });
+  // drag by the title bar
+  win.querySelector('.win-t').addEventListener('pointerdown', e => {
+    if (e.target.closest('.win-x')) return;
+    const sx = e.clientX - win.offsetLeft, sy = e.clientY - win.offsetTop, t = e.currentTarget;
+    t.setPointerCapture(e.pointerId); f.style.pointerEvents = 'none';
+    const mv = ev => { win.style.left = ev.clientX - sx + 'px'; win.style.top = Math.max(0, ev.clientY - sy) + 'px'; };
+    const up = () => { t.removeEventListener('pointermove', mv); f.style.pointerEvents = ''; };
+    t.addEventListener('pointermove', mv); t.addEventListener('pointerup', up, { once: true });
+  });
+}
+addEventListener('message', e => {
+  if (e.data !== 'close-win') return;
+  document.querySelectorAll('.win iframe').forEach(f => { if (f.contentWindow === e.source) f.closest('.win').querySelector('.win-x').click(); });
+});
+addEventListener('keydown', e => { if (e.key === 'Escape') { const all = [...document.querySelectorAll('.win')]; const top = all.sort((a, b) => b.style.zIndex - a.style.zIndex)[0]; if (top) top.querySelector('.win-x').click(); } });
 
 document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e => {
   e.preventDefault();                       // the link's address is only there for the status-bar joke
-  const spec = WINS[d.dataset.win];
-  if (!spec) return;                        // a door that doesn't open anything (yet)
   const r = d.getBoundingClientRect();
-  const x = e.clientX || r.left + r.width / 2, y = e.clientY || r.bottom;
-  const chrome = Math.max(0, outerHeight - innerHeight);       // the browser's own bars
-  const left = Math.round(screenX + Math.max(0, Math.min(x + 16, innerWidth - spec.w - 24)));
-  const topY = Math.round(screenY + chrome + Math.max(0, Math.min(y + 20, innerHeight - spec.h - 24)));
-  const w = open(spec.page, 'atul-' + d.dataset.win,
-    `popup,width=${spec.w},height=${spec.h},left=${left},top=${topY}`);
-  if (w) w.focus();
+  openWin(d.dataset.win, e.clientX || r.left + r.width / 2, e.clientY || r.bottom);
 }));
 
 /* ================= light / dark (and who's in the dark) ================= */
@@ -532,6 +579,31 @@ const glowEl = document.getElementById('glow');
 const ink = document.querySelector('.ink'), inkLit = (() => {   // a lit copy of the ink, on top of it
   const c = ink.querySelector('.base').cloneNode(true); c.className = 'lit'; ink.appendChild(c); return c;
 })();
+/* under the bulb's light, the intro's clickable words (and "Hi,") light up in their colours
+   and grow, and the rest of the line makes room. Without the bulb they only change colour. */
+const litWords = [...document.querySelectorAll('.intro a, .bar a.hi')].map(el => ({ el, s: 1, t: 1, on: false }));
+let lightPos = null, lightRaf = 0;
+function lightFrame() {
+  let moving = false;
+  const reach = Math.min(innerWidth, innerHeight) * .14, grow = .3;
+  for (const w of litWords) {
+    let k = 0;
+    if (lightPos) {
+      const r = w.el.getBoundingClientRect();
+      const dx = Math.max(r.left - lightPos[0], 0, lightPos[0] - r.right), dy = Math.max(r.top - lightPos[1], 0, lightPos[1] - r.bottom);
+      k = Math.max(0, 1 - Math.hypot(dx, dy) / reach);
+    }
+    w.t = 1 + grow * (1 - Math.cos(k * Math.PI)) / 2;
+    const on = k > .25;
+    if (on !== w.on) { w.on = on; window.Paint && (on ? Paint.on(w.el) : Paint.off(w.el)); }
+    w.s += (w.t - w.s) * .18;
+    if (Math.abs(w.t - w.s) > .002) moving = true; else w.s = w.t;
+    w.el.style.fontSize = w.s === 1 ? '' : w.s.toFixed(4) + 'em';
+  }
+  lightRaf = (moving || lightPos) ? requestAnimationFrame(lightFrame) : 0;
+}
+function lightAt(x, y) { lightPos = x == null ? null : [x, y]; if (!lightRaf) lightRaf = requestAnimationFrame(lightFrame); }
+
 /* the ink is exactly as wide as the intro above it */
 const introEl = document.querySelector('.intro');
 function fitInk() {
@@ -585,7 +657,7 @@ bulb.addEventListener('pointerdown', e => {
   const finish = () => {
     done = true; cancelAnimationFrame(raf);
     btn.classList.remove('dragging'); thing.classList.remove('torch'); glowEl.classList.remove('on');
-    warmAt(null);
+    warmAt(null); lightAt(null);
     document.body.classList.remove('torching');
     bulb.style.transform = '';
     ['--r', '--a', '--l'].forEach(v => { thing.style.removeProperty(v); glowEl.style.removeProperty(v); });
@@ -602,7 +674,7 @@ bulb.addEventListener('pointerdown', e => {
     bulb.style.transform = `translate(${dx}px, ${dy}px)`;
     const r = bulb.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     setv('--tx', cx + 'px'); setv('--ty', cy + 'px');
-    warmAt(cx, cy);
+    warmAt(cx, cy); lightAt(cx, cy);
     // shine (or warm) it near "resume" and the boring one turns up, and stays put so you can click it
     const ats = document.querySelector('.bar .ats');
     if (ats && !ats.hidden && !ats.classList.contains('found')) {
