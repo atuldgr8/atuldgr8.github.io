@@ -126,6 +126,9 @@ window.Home = (() => {
   if (!slides.length) { sec.hidden = true; }
   else {
     open.textContent = (index && index.tldr) || 'TL;DR';
+    const note = document.createElement('span'); note.className = 'note';
+    note.textContent = 'a snapshot of my work through the years, for when you need to browse super quick';
+    open.appendChild(note);
     open.hidden = false;
     const els = slides.map(s => {
       const d = document.createElement('div'); d.className = 'tl-slide';
@@ -148,6 +151,13 @@ window.Home = (() => {
     const side = e => { const r = stage.getBoundingClientRect(); return e.clientX - r.left < r.width / 3 ? -1 : 1; };
     stage.addEventListener('click', e => show(at + side(e)));
     stage.addEventListener('pointermove', e => { stage.style.cursor = side(e) < 0 ? 'w-resize' : 'e-resize'; });
+    // the shadow leans away from the cursor, like a light following your hand
+    addEventListener('pointermove', e => {
+      const r = stage.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      const dx = (e.clientX - (r.left + r.width / 2)) / innerWidth, dy = (e.clientY - (r.top + r.height / 2)) / innerHeight;
+      stage.style.setProperty('--sx', (-dx * 48).toFixed(1) + 'px');
+      stage.style.setProperty('--sy', (14 - dy * 36).toFixed(1) + 'px');
+    }, { passive: true });
     let inView = false;
     new IntersectionObserver(([en]) => { inView = en.intersectionRatio > .6; }, { threshold: [0, .6, 1] }).observe(sec);
     addEventListener('keydown', e => {
