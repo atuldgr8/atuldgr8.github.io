@@ -214,7 +214,11 @@
   :root[data-dark] .ink .lit { color: #bdbdbd; }
   :root:not([data-dark]) .ink .lit { color: #9a6a35; }
   .ink p + p { margin-top: calc(var(--step) / 2); }
-  body.torching .ink .lit { opacity: 1; }
+  :root[data-dark] body.torching .ink .lit { opacity: 1; }
+  /* lights on: lemon-juice ink. Each word browns slowly while the bulb's warmth is near,
+     and stays a while after you take it away, then fades back. */
+  :root:not([data-dark]) .ink .lit { display: none; }
+  .ink .base .w { transition: none; }
 
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
@@ -266,6 +270,13 @@
     #thing.glimpse .lit { animation: none; }
   }
 </style>
+<!-- visit counter (goatcounter.com/atuldgr8): only on the real site, never on your laptop or in the editor -->
+<script>
+  if (!/^(localhost|127\.|\[::1\])/.test(location.hostname) && !/[?&]edit(=|&|$)/.test(location.search)) {
+    const g = document.createElement('script'); g.async = true; g.src = 'https://gc.zgo.at/count.js';
+    g.dataset.goatcounter = 'https://atuldgr8.goatcounter.com/count'; document.head.appendChild(g);
+  }
+</script>
 </head>
 <body>
 
@@ -517,6 +528,33 @@ const glowEl = document.getElementById('glow');
 const ink = document.querySelector('.ink'), inkLit = (() => {   // a lit copy of the ink, on top of it
   const c = ink.querySelector('.base').cloneNode(true); c.className = 'lit'; ink.appendChild(c); return c;
 })();
+/* lemon ink (lights on): every word keeps its own "heat" */
+const inkWords = [];
+ink.querySelectorAll('.base p').forEach(p => {
+  p.innerHTML = p.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' ');
+  p.querySelectorAll('.w').forEach(el => inkWords.push({ el, heat: 0 }));
+});
+let heatAt = null, heatRaf = 0, heatT = 0;
+const INK = [154, 106, 53];
+function heatFrame(now) {
+  const dt = Math.min(.1, (now - (heatT || now)) / 1000); heatT = now;
+  let warm = false;
+  const reach = Math.min(innerWidth, innerHeight) * .16;
+  for (const w of inkWords) {
+    if (heatAt && !isDark()) {
+      const r = w.el.getBoundingClientRect();
+      const d = Math.hypot(r.left + r.width / 2 - heatAt[0], r.top + r.height / 2 - heatAt[1]);
+      if (d < reach) w.heat = Math.min(1.8, w.heat + dt * (1 - d / reach) / 2.2);   // ~2–3 s of holding to come through
+    }
+    w.heat = Math.max(0, w.heat - dt * .05);          // fades slowly: a fully warmed word lingers ~15 s
+    const a = isDark() ? 0 : Math.min(1, w.heat);
+    w.el.style.color = a ? `rgba(${INK}, ${(a * a * (3 - 2 * a)).toFixed(3)})` : '';
+    if (w.heat > 0) warm = true;
+  }
+  heatRaf = (warm || heatAt) ? requestAnimationFrame(heatFrame) : 0;
+  if (!heatRaf) heatT = 0;
+}
+function warmAt(x, y) { heatAt = x == null ? null : [x, y]; if (!heatRaf) heatRaf = requestAnimationFrame(heatFrame); }
 const setv = (k, v) => { thing.style.setProperty(k, v); glowEl.style.setProperty(k, v); inkLit.style.setProperty(k, v); };
 bulb.addEventListener('pointerdown', e => {
   if (typeof stopNudging === 'function') stopNudging();
@@ -535,6 +573,7 @@ bulb.addEventListener('pointerdown', e => {
   const finish = () => {
     done = true; cancelAnimationFrame(raf);
     btn.classList.remove('dragging'); thing.classList.remove('torch'); glowEl.classList.remove('on');
+    warmAt(null);
     document.body.classList.remove('torching');
     bulb.style.transform = '';
     ['--r', '--a', '--l'].forEach(v => { thing.style.removeProperty(v); glowEl.style.removeProperty(v); });
@@ -551,6 +590,7 @@ bulb.addEventListener('pointerdown', e => {
     bulb.style.transform = `translate(${dx}px, ${dy}px)`;
     const r = bulb.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     setv('--tx', cx + 'px'); setv('--ty', cy + 'px');
+    warmAt(cx, cy);
     const ir = ink.getBoundingClientRect();
     inkLit.style.setProperty('--ix', cx - ir.left + 'px'); inkLit.style.setProperty('--iy', cy - ir.top + 'px');
   };
@@ -573,11 +613,11 @@ apply(); nearer();
    Point at it and it says something (a different line each time). Its own voice:
    it talks about "him", not "me". Change the lines here. */
 const LINES = {
-  dark:  ['pick it up.', 'hold it longer. it gets brighter.', 'there’s more under the intro. look.', 'I wrote things you can only read in the light.'],
-  light: ['pick it up.', 'some of this ink only shows when it’s warm.', 'hold it just under the intro.', 'or switch it off. try the dark.'],
+  dark:  ['let there be light.', 'press and hold. it gets brighter.', 'use it to throw some light on who I am.', 'there’s more under the intro than it lets on.'],
+  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold it under the intro. I wrote that bit in lemon juice.', 'switch it off. some things only show in the dark.'],
 };
 // once there's a plain ATS resume, the bulb lets people know where it is
-if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('point at “resume” for the boring version.');
+if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('want the boring version of me? point at “resume”.');
 const psst = document.querySelector('.psst');
 let said = 0, psstT;
 function hush() { clearTimeout(psstT); psst.classList.remove('on'); }
