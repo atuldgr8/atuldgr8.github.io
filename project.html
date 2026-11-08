@@ -73,7 +73,7 @@
   cv.addEventListener('load', () => Canvas.layout(cv), true);
 
   // next project, wrapping around to the first
-  const shown = list.filter(p => !p.hidden);
+  const shown = list.filter(p => !p.hidden && !p.soon);
   const i = shown.findIndex(p => p.slug === slug);
   if (shown.length > 1 && i > -1) {
     const n = shown[(i + 1) % shown.length];

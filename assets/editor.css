@@ -129,6 +129,7 @@ kbd { font: inherit; padding: 0 4px; border: 1px solid var(--faint); color: var(
 .wk-tools button:hover, .wk-tools a:hover { color: var(--fg); }
 .wk-tools button.on { color: var(--fg); }
 .wk-row.is-fun .t::after { content: " *"; color: var(--mute); }
+.wk-row.is-soon .t::after { content: " (coming soon)"; color: var(--mute); }
 body.is-editing.work-page .ed-bar, body.is-editing.work-page .ed-toast, body.is-editing.work-page .ed-help { left: 50%; }
 
 /* ---------- rows, rulers, guides, snap lines ---------- */

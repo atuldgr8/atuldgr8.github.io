@@ -70,6 +70,11 @@ When Claude says it's pushed, press **Fetch**, then **Pull**. This stops the two
 - **+ video** in the bottom bar: paste a YouTube, Vimeo or Google Drive link, or leave it empty to pick a video file.
   Google Drive videos must be shared as "Anyone with the link".
 
+## Coming soon
+
+- In the work-list editor, press **soon** on a project: its name shows in grey with "(coming soon)" and doesn't open.
+  Press it again when the page is ready.
+
 ## Fun (behind the asterisk)
 
 - In the work-list editor, press **fun** on a project to move it out of the work list.

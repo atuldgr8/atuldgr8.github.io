@@ -62,11 +62,13 @@ window.Home = (() => {
 
   function fill(box, arr) {
     for (const p of arr) {
-      const a = document.createElement('a');
-      a.className = 'wk';
-      a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
+      // not ready yet: the name shows, quietly, with "(coming soon)", and doesn't open
+      const a = document.createElement(p.soon ? 'span' : 'a');
+      a.className = 'wk' + (p.soon ? ' soon' : '');
+      if (!p.soon) a.href = `project.html?p=${encodeURIComponent(p.slug)}`;
       a.dataset.dock = '';
       a.textContent = p.title;
+      if (p.soon) { const s = document.createElement('small'); s.textContent = (index && index.soonLabel) || '(coming soon)'; a.appendChild(s); }
       if (p.color) a.style.setProperty('--c', colour(p.color));
       if (p.thumb) {
         const i = document.createElement('img');
@@ -120,7 +122,7 @@ window.Home = (() => {
   const open = $('.tldr-open');
   const bySlug = Object.fromEntries(all.map(p => [p.slug, p]));
   let slides = ((index && index.tldrSlides) || []).filter(s => s && s.src);
-  if (!slides.length) slides = projects.map(p => ({ src: p.thumb, slug: p.slug }));
+  if (!slides.length) slides = projects.filter(p => !p.soon).map(p => ({ src: p.thumb, slug: p.slug }));
   if (!slides.length) { sec.hidden = true; }
   else {
     open.textContent = (index && index.tldr) || 'TL;DR';

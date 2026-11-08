@@ -51,7 +51,7 @@
     list.textContent = '';
     if (!index.projects.length) h('p', 'empty', list, 'No projects yet. Start one with “+ new project”.');
     index.projects.forEach((p, i) => {
-      const r = h('div', 'wk-row' + (p.hidden ? ' hidden' : '') + (p.fun ? ' is-fun' : ''), list);
+      const r = h('div', 'wk-row' + (p.hidden ? ' hidden' : '') + (p.fun ? ' is-fun' : '') + (p.soon ? ' is-soon' : ''), list);
       const grab = h('span', 'grab', r, '⠿'); grab.title = 'drag to reorder';
       r.draggable = false;
       grab.onpointerdown = () => { r.draggable = true; };
@@ -89,6 +89,9 @@
       const vw = h('button', '', tools, p.hidden ? 'show' : 'hide'); vw.type = 'button';
       vw.title = p.hidden ? 'Hidden from visitors' : 'Visible to visitors';
       vw.onclick = () => { p.hidden = !p.hidden; mark(p, 'hidden'); touch(); draw(); };
+      const sn = h('button', p.soon ? 'on' : '', tools, p.soon ? 'soon ✓' : 'soon'); sn.type = 'button';
+      sn.title = p.soon ? 'Shows as “(coming soon)” and doesn’t open. Press to make it a normal link.' : 'Show the name with “(coming soon)”, not clickable yet';
+      sn.onclick = () => { if (p.soon) delete p.soon; else p.soon = true; mark(p, 'soon'); touch(); draw(); };
       const fn = h('button', p.fun ? 'on' : '', tools, p.fun ? 'fun ✓' : 'fun'); fn.type = 'button';
       fn.title = p.fun ? 'In the fun list (behind the asterisk)' : 'Move it to the fun list, behind “work*”';
       fn.onclick = () => { if (p.fun) delete p.fun; else p.fun = true; mark(p, 'fun'); touch(); draw(); };

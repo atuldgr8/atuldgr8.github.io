@@ -22,6 +22,8 @@ main { position: relative; z-index: 2; }
 /* the asterisk: a footnote under the work, opening the not-work */
 .star { color: var(--mute); cursor: pointer; padding-left: .05em; }
 .star:hover { color: var(--hc, var(--fg)); }
+.wk.soon { color: var(--mute); cursor: default; }
+.wk.soon small { font-size: 1em; margin-left: .35em; color: var(--faint, var(--mute)); }
 .fun-open { display: block; margin-top: calc(var(--step) * 1.2); padding: 0; color: var(--mute); text-align: left; cursor: pointer; }
 .fun-open:hover, .fun-open.open { color: var(--fg); }
 .fun-open[hidden], .list.fun[hidden] { display: none; }

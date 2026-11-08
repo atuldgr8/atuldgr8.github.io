@@ -73,6 +73,8 @@
         o.s += (o.ts - o.s) * .16; o.x += (o.tx - o.x) * .16; o.y += (o.ty - o.y) * .16;
         if (Math.abs(o.ts - o.s) + Math.abs(o.tx - o.x) + Math.abs(o.ty - o.y) > .003) moving = true;
         el.style.transform = (o.s === 1 && !o.x && !o.y) ? '' : `translate(${o.x.toFixed(2)}px, ${o.y.toFixed(2)}px) scale(${o.s.toFixed(4)})`;
+        // the pronunciation next to the name grows and moves along with it
+        if (el.id === 'name' && el.parentElement) { el.parentElement.style.setProperty('--sw', o.s.toFixed(4)); el.parentElement.style.setProperty('--nw', el.offsetWidth + 'px'); }
       });
       raf = moving ? requestAnimationFrame(frame) : 0;
     };

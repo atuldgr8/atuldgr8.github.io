@@ -107,17 +107,30 @@
   }
   #name { font-weight: 700; cursor: default; text-decoration: none; }
 
-  /* the pronunciation pops in like an 8-bit character spawning: it blinks into being, no motion at all */
+  /* the pronunciation appears like a magician: a puff of smoke, and when it
+     thins out, there it is. It also grows and moves along when the name swells. */
   .say {
     position: relative; display: inline-block; margin-left: .45em;
     color: var(--faint);
     opacity: 0; transform-origin: 0 80%;
     pointer-events: none;
+    translate: calc(var(--nw, 0px) * (var(--sw, 1) - 1)) 0; scale: var(--sw, 1);
   }
-  .name-line.show .say { animation: spawn .42s steps(1) both; }
-  @keyframes spawn {
-    0%  { opacity: 1; }  14% { opacity: 0; }  28% { opacity: 1; }  42% { opacity: 0; }
-    56% { opacity: 1; }  70% { opacity: 0; }  80%, 100% { opacity: 1; }
+  .name-line.show .say { animation: appear .5s cubic-bezier(.2, .8, .3, 1) .16s both; }
+  @keyframes appear {
+    0%   { opacity: 0; transform: scale(.82); filter: blur(4px); }
+    45%  { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: none; filter: none; }
+  }
+  /* the smoke: soft round puffs that burst out from where the words will be, then drift up and fade */
+  .smoke { position: absolute; left: 0; top: 0; pointer-events: none; }
+  .smoke i { position: absolute; border-radius: 50%; background: var(--mute); filter: blur(6px); opacity: 0;
+             animation: puff var(--d, .9s) cubic-bezier(.15, .7, .3, 1) both; }
+  :root[data-dark] .smoke i { background: #9a9a9a; }
+  @keyframes puff {
+    0%   { opacity: 0;   transform: translate(-50%, -50%) scale(.2); }
+    18%  { opacity: .55; }
+    100% { opacity: 0;   transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(var(--s)); }
   }
   /* the fill: a sliding window. The box slides in from the left while the
      text inside slides the other way, so letters stay still and only the
@@ -319,10 +332,32 @@ function setFill(p) {
 }
 let wait, startT, raf, running = false;
 
+const sayEl = line.querySelector('.say');
+function smoke() {
+  // a handful of puffs, spread over where the words will appear
+  line.querySelectorAll('.smoke').forEach(n => n.remove());
+  const box = document.createElement('span'); box.className = 'smoke';
+  const w = sayEl.offsetWidth, hgt = sayEl.offsetHeight;
+  box.style.left = sayEl.offsetLeft + 'px'; box.style.top = sayEl.offsetTop + 'px';
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('i'), size = hgt * (.7 + Math.random() * .9);
+    p.style.width = p.style.height = size + 'px';
+    p.style.left = w * (.08 + Math.random() * .84) + 'px'; p.style.top = hgt * (.3 + Math.random() * .5) + 'px';
+    p.style.setProperty('--x', (Math.random() - .5) * hgt * 1.4 + 'px');
+    p.style.setProperty('--y', -(.2 + Math.random() * .9) * hgt + 'px');
+    p.style.setProperty('--s', 1.6 + Math.random() * 1.4);
+    p.style.setProperty('--d', .7 + Math.random() * .5 + 's');
+    p.style.animationDelay = Math.random() * .08 + 's';
+    box.appendChild(p);
+  }
+  line.appendChild(box);
+  setTimeout(() => box.remove(), 1400);
+}
 function reveal() {
+  if (!line.classList.contains('show') && !matchMedia('(prefers-reduced-motion: reduce)').matches) smoke();
   line.classList.add('show');
   clearTimeout(startT);
-  startT = setTimeout(play, 220);             // let the pop land first
+  startT = setTimeout(play, 520);             // let the smoke clear first
 }
 function play() {
   cancelAnimationFrame(raf);
