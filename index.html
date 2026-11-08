@@ -156,7 +156,9 @@
   .door { text-decoration: none; cursor: text; }
   /* the intro is two lines, unless the first line would have to wrap:
      then it becomes one flowing sentence instead */
-  .intro { line-height: var(--lh-read); letter-spacing: var(--ls-read); }   /* same breathing room as the paragraphs */
+  /* the landing reads a touch tighter than the case studies: about a quarter less air */
+  .intro, .ink p { --lh-land: 1.32; }
+  .intro { line-height: var(--lh-land); letter-spacing: var(--ls-read); }
   .intro .l1 { white-space: nowrap; }
   .intro.flow .l1 { white-space: normal; }
   .intro.flow br { display: none; }
@@ -216,8 +218,9 @@
             mask-image: radial-gradient(circle var(--r) at var(--ix) var(--iy), #000 45%, transparent 100%); }
   :root[data-dark] .ink .lit { color: #bdbdbd; }
   :root:not([data-dark]) .ink .lit { color: #9a6a35; }
-  .ink p { line-height: var(--lh-read); letter-spacing: var(--ls-read); }
-  .ink p + p { margin-top: calc(var(--step) / 2); }
+  .ink p { line-height: var(--lh-land); letter-spacing: var(--ls-read); }
+  .ink p + p { margin-top: calc(var(--step) * .375); }
+  .ink { margin-top: calc(var(--step) * -.4); }   /* tucked a little closer under the intro */
   :root[data-dark] body.torching .ink .lit { opacity: 1; }
   /* lights on: lemon-juice ink. Each word browns slowly while the bulb's warmth is near,
      and stays a while after you take it away, then fades back. */
