@@ -464,10 +464,11 @@ new ResizeObserver(fitIntro).observe(intro);
 document.fonts && document.fonts.ready.then(fitIntro);
 
 /* ================= little windows =================
-   A door opens a small window *inside the page* with its own tiny page
-   (e.g. fish.html), next to the word you clicked. (Real browser pop-ups
-   turn into full tabs on many Macs, so these are drawn by the page itself.)
-   Drag it by its title bar, × or Esc closes it. */
+   A door opens a REAL small browser window with its own tiny page
+   (e.g. fish.html), placed right next to the word you clicked.
+   Some browsers turn that into a full tab instead (Safari's tab setting, full-screen
+   mode, Arc...). If that happens, the tab closes straight away and the same little
+   page opens as a window drawn inside this page instead. Phones always get that one. */
 const WINS = {
   fish: { page: 'fish.html', w: 520, h: 240 },
   nid:  { page: 'nid.html',  w: 560, h: 320 },
@@ -516,10 +517,27 @@ addEventListener('message', e => {
 });
 addEventListener('keydown', e => { if (e.key === 'Escape') { const all = [...document.querySelectorAll('.win')]; const top = all.sort((a, b) => b.style.zIndex - a.style.zIndex)[0]; if (top) top.querySelector('.win-x').click(); } });
 
+function openReal(key, x, y) {
+  const spec = WINS[key];
+  const chrome = Math.max(0, outerHeight - innerHeight);       // the browser's own bars
+  const left = Math.round(screenX + Math.max(0, Math.min(x + 16, innerWidth - spec.w - 24)));
+  const topY = Math.round(screenY + chrome + Math.max(0, Math.min(y + 20, innerHeight - spec.h - 24)));
+  const w = open(spec.page, 'atul-' + key, `popup,width=${spec.w},height=${spec.h},left=${left},top=${topY}`);
+  if (!w) return false;                                        // blocked: use the in-page one
+  w.focus();
+  // did we get a small window, or did the browser make it a big tab?
+  const tooBig = () => { try { return w.innerWidth > spec.w * 1.6 || w.innerHeight > spec.h * 2.5; } catch (e) { return false; } };
+  const check = () => { if (!w.closed && tooBig()) { w.close(); openWin(key, x, y); } };
+  setTimeout(check, 120); setTimeout(check, 500);
+  return true;
+}
 document.querySelectorAll('.door').forEach(d => d.addEventListener('click', e => {
   e.preventDefault();                       // the link's address is only there for the status-bar joke
+  if (!WINS[d.dataset.win]) return;
   const r = d.getBoundingClientRect();
-  openWin(d.dataset.win, e.clientX || r.left + r.width / 2, e.clientY || r.bottom);
+  const x = e.clientX || r.left + r.width / 2, y = e.clientY || r.bottom;
+  const desktop = matchMedia('(hover: hover) and (pointer: fine)').matches && innerWidth > 700;
+  if (!(desktop && openReal(d.dataset.win, x, y))) openWin(d.dataset.win, x, y);
 }));
 
 /* ================= light / dark (and who's in the dark) ================= */
