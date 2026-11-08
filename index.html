@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/home.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
   /* ---------- tokens: one typeface, ONE size, colour does the hierarchy ---------- */
   :root {
@@ -207,7 +207,7 @@
   /* ---------- the ink: words about me under the landing text ----------
      In the dark they're written one shade off black, and the torch reads them.
      With the lights on it's invisible ink: hold the warm bulb near and it browns into view. */
-  .ink { grid-column: 1 / span 7; position: relative; pointer-events: none; user-select: none; }
+  .ink { grid-column: 1 / span 7; max-width: 33ch; position: relative; pointer-events: none; user-select: none; }
   .ink .base { color: transparent; }             /* truly invisible until the bulb finds it */
   .ink .lit { position: absolute; inset: 0; opacity: 0; transition: opacity .3s;
     --ix: -999px; --iy: -999px; --r: 15vmin;
@@ -237,18 +237,19 @@
 
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
-  .psst { position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 42px); max-width: min(15em, 80vw);
-          padding: 8px 14px 10px; font: 400 30px/.95 VT323, ui-monospace, monospace; letter-spacing: .02em;
-          color: var(--mute); background: var(--bg); pointer-events: none;
-          /* a 2px pixel border with its corners knocked out */
-          box-shadow: 0 -3px 0 var(--mute), 0 3px 0 var(--mute), -3px 0 0 var(--mute), 3px 0 0 var(--mute);
+  @font-face { font-family: 'Geist Pixel'; src: url(assets/fonts/GeistPixel-Square.woff2) format('woff2'); font-display: swap; }
+  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 30px); max-width: min(20em, 80vw);
+          padding: 4px 7px 5px; font: 400 12px/1.15 'Geist Pixel', ui-monospace, monospace;
+          color: var(--pc); background: var(--bg); pointer-events: none;
+          /* a 1px pixel border with its corners knocked out */
+          box-shadow: 0 -1px 0 var(--pc), 0 1px 0 var(--pc), -1px 0 0 var(--pc), 1px 0 0 var(--pc);
           opacity: 0; transition: opacity .15s steps(2); }
-  /* the tail: three stepped pixels, drawn with shadows of one tiny square */
-  .psst::after { content: ""; position: absolute; left: 12px; top: calc(100% + 3px); width: 3px; height: 3px;
-                 background: var(--mute);
-                 box-shadow: 3px 0 var(--mute), 6px 0 var(--mute), 9px 0 var(--mute),
-                             0 3px var(--mute), 3px 3px var(--mute), 6px 3px var(--mute),
-                             0 6px var(--mute), 3px 6px var(--mute), 0 9px var(--mute); }
+  /* the tail: a few stepped pixels, drawn with shadows of one tiny square */
+  .psst::after { content: ""; position: absolute; left: 7px; top: calc(100% + 1px); width: 2px; height: 2px;
+                 background: var(--pc);
+                 box-shadow: 2px 0 var(--pc), 4px 0 var(--pc),
+                             0 2px var(--pc), 2px 2px var(--pc),
+                             0 4px var(--pc); }
   .psst.on { opacity: 1; }
   body.past .psst { display: none; }
   /* lights on: a one-frame glimpse, barely darker than white */
@@ -626,7 +627,7 @@ function lightAt(x, y) { lightPos = x == null ? null : [x, y]; if (!lightRaf) li
 const introEl = document.querySelector('.intro');
 function fitInk() {
   const r = document.createRange(); r.selectNodeContents(introEl);
-  ink.style.maxWidth = innerWidth > 700 ? Math.ceil(r.getBoundingClientRect().width) + 'px' : '';
+  ink.style.maxWidth = '';   // width now comes from CSS (about 45 characters a line)
 }
 fitInk(); addEventListener('resize', fitInk); document.fonts && document.fonts.ready.then(fitInk);
 
