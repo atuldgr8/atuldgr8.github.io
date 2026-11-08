@@ -221,6 +221,7 @@
      and stays a while after you take it away, then fades back. */
   :root:not([data-dark]) .ink .lit { display: none; }
   .ink .base .w { transition: none; }
+  :root:not([data-dark]) .ink .base { filter: url(#lemon); }
 
   /* ---------- little windows (drawn by the page, like a tiny desktop) ---------- */
   .win { position: fixed; background: var(--bg); border: 1px solid var(--fg); box-shadow: 0 10px 30px rgba(0,0,0,.12);
@@ -307,6 +308,24 @@
 </header>
 
 <main>
+  <!-- lemon juice: blotchy, slightly bled, grainy edges. Used on the ink with the lights on. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="lemon" x="-4%" y="-10%" width="108%" height="120%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.055" numOctaves="3" seed="11" result="blot"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.8" xChannelSelector="R" yChannelSelector="G" result="wob"/>
+      <feGaussianBlur in="wob" stdDeviation="0.45" result="soak"/>
+      <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.4 0 0 0 -0.7" result="n"/>
+      <feComposite in="soak" in2="n" operator="arithmetic" k1="2.4" k2="0.55" k3="0" k4="-0.3" result="a"/>
+      <feFlood flood-color="#9a6a35" result="juice"/>
+      <feComposite in="juice" in2="a" operator="in" result="base"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3 0 0 0 -1.6" result="g"/>
+      <feComposite in="a" in2="g" operator="arithmetic" k1="0.8" k2="0" k3="0" k4="0" result="sa"/>
+      <feFlood flood-color="#6b3f14"/>
+      <feComposite in2="sa" operator="in" result="scorch"/>
+      <feMerge><feMergeNode in="base"/><feMergeNode in="scorch"/></feMerge>
+    </filter>
+  </svg>
   <p class="intro">
     <span class="l1">I'm an <a class="door" data-win="fish" href="#this-may-or-may-not-be-my-favourite-building-ever">architect</a> &amp; <a class="struck" href="https://eyeondesign.aiga.org/when-did-design-stop-being-multidisciplinary/" target="_blank" rel="noopener">multidisciplinary</a> designer from <a class="door" data-win="nid" href="#eventually-everything-connects">NID</a>,</span><br>
     trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
