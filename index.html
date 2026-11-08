@@ -95,7 +95,8 @@
   .work, .resume, .ats { text-decoration: none; }
   .ats { grid-column: 12; grid-row: 1; justify-self: start; align-self: end; translate: 0 100%;
          color: var(--mute); opacity: 0; pointer-events: none; transition: opacity .25s; padding-top: .2em; }
-  .resume:hover ~ .ats, .ats:hover { opacity: 1; pointer-events: auto; }
+  .resume:hover ~ .ats, .ats:hover, .ats.found { opacity: 1; pointer-events: auto; }
+  .bar.stuck .ats.found:not(:hover) { opacity: 0; pointer-events: none; }   /* found ones tuck away once you scroll on */
   .ats:hover { color: var(--fg); }
   @media (max-width: 700px) { .ats { grid-column: 4; } }
 
@@ -591,6 +592,12 @@ bulb.addEventListener('pointerdown', e => {
     const r = bulb.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     setv('--tx', cx + 'px'); setv('--ty', cy + 'px');
     warmAt(cx, cy);
+    // shine (or warm) it near "resume" and the boring one turns up, and stays put so you can click it
+    const ats = document.querySelector('.bar .ats');
+    if (ats && !ats.hidden && !ats.classList.contains('found')) {
+      const ar = ats.getBoundingClientRect();
+      if (Math.hypot(ar.left + ar.width / 2 - cx, ar.top + ar.height / 2 - cy) < Math.min(innerWidth, innerHeight) * .15) ats.classList.add('found');
+    }
     const ir = ink.getBoundingClientRect();
     inkLit.style.setProperty('--ix', cx - ir.left + 'px'); inkLit.style.setProperty('--iy', cy - ir.top + 'px');
   };
@@ -613,11 +620,11 @@ apply(); nearer();
    Point at it and it says something (a different line each time). Its own voice:
    it talks about "him", not "me". Change the lines here. */
 const LINES = {
-  dark:  ['let there be light.', 'press and hold. it gets brighter.', 'use it to throw some light on who I am.', 'there’s more under the intro than it lets on.'],
-  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold it under the intro. I wrote that bit in lemon juice.', 'switch it off. some things only show in the dark.'],
+  dark:  ['let there be light.', 'press and hold. it gets brighter.', 'use it to throw some light on who I am.', 'there’s more under the intro than it lets on.', 'click and hover away at stuff. esp the colourful stuff.'],
+  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold it under the intro. I wrote that bit in lemon juice.', 'switch it off. some things only show in the dark.', 'click and hover away at stuff. esp the colourful stuff.'],
 };
 // once there's a plain ATS resume, the bulb lets people know where it is
-if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('want the boring version of me? point at “resume”.');
+if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('there’s an even more boring resume. *cough* ats *cough*');
 const psst = document.querySelector('.psst');
 let said = 0, psstT;
 function hush() { clearTimeout(psstT); psst.classList.remove('on'); }
