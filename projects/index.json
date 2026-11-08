@@ -31,5 +31,8 @@
       "color": "#b8b100"
     }
   ],
-  "funLabel": "and some work-adjacent fun"
+  "funLabel": "and some work-adjacent fun",
+  "motion": {
+    "intro": false
+  }
 }
