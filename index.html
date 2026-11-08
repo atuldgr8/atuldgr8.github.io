@@ -215,6 +215,7 @@
             mask-image: radial-gradient(circle var(--r) at var(--ix) var(--iy), #000 45%, transparent 100%); }
   :root[data-dark] .ink .lit { color: #bdbdbd; }
   :root:not([data-dark]) .ink .lit { color: #9a6a35; }
+  .ink p { line-height: var(--lh-read); letter-spacing: var(--ls-read); }
   .ink p + p { margin-top: calc(var(--step) / 2); }
   :root[data-dark] body.torching .ink .lit { opacity: 1; }
   /* lights on: lemon-juice ink. Each word browns slowly while the bulb's warmth is near,

@@ -4,6 +4,8 @@
   --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --ghost: #f2f2f2;
   --size: max(14px, 1.367vw);
   --lh: 1.02;
+  --lh-read: 1.42;      /* paragraphs: room between lines so they read easily */
+  --ls-read: -0.025em;  /* and a little less squeeze between letters */
   --step: calc(var(--size) * var(--lh) * 2);
   --gutter: max(20px, 3.2vw);
   --gap: max(12px, 1.6vw);
@@ -121,7 +123,7 @@ html, body { overflow-x: clip; }
 .it { position: absolute; }
 .ly { width: 100%; height: 100%; transform-origin: 50% 50%; }
 .t-text .ly { height: auto; }
-.txt { font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); line-height: var(--lh); overflow-wrap: break-word; }
+.txt { font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); line-height: var(--lh-read); letter-spacing: var(--ls-read); overflow-wrap: break-word; }
 .txt.w-700 { font-weight: 700; }
 .txt.c-mute { color: var(--mute); }
 .txt.c-faint { color: var(--faint); }
