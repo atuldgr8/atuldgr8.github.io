@@ -741,24 +741,36 @@ apply(); nearer();
    Point at it and it says something (a different line each time). Its own voice:
    it talks about "him", not "me". Change the lines here. */
 const LINES = {
-  dark:  ['let there be light.', 'press and hold. it gets brighter.', 'use it to throw some light on who I am.', 'there’s more under the intro than it lets on.', 'click and hover away at stuff. esp the colourful stuff.'],
-  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold it under the intro. I wrote that bit in lemon juice.', 'switch it off. some things only show in the dark.', 'click and hover away at stuff. esp the colourful stuff.'],
+  dark:  ['let there be light', 'press and hold, it gets brighter', 'there’s more to me than the intro lets on',
+          'throw some light on who i am', 'hover away over everything', 'especially the colourful words',
+          'there’s a more boring version of my resume', '*cough* ats *cough*'],
+  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold this bulb under the intro',
+          'i wrote some bits with lemon juice', 'when life gives you lemons',
+          'there’s a more boring version of my resume', '*cough* ats *cough*'],
 };
-// once there's a plain ATS resume, the bulb lets people know where it is
-if (!document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k].push('there’s an even more boring resume. *cough* ats *cough*');
+// no plain ATS resume on the site? then the bulb doesn't mention it
+if (document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k] = LINES[k].filter(t => !/resume|ats/.test(t));
 const psst = document.querySelector('.psst');
-let said = 0, psstT;
+const said = { dark: 0, light: 0 };   // each mode remembers where it got to
+let psstT;
 function hush() { clearTimeout(psstT); psst.classList.remove('on'); }
+function say(wait) {
+  clearTimeout(psstT);
+  psstT = setTimeout(() => {
+    const k = isDark() ? 'dark' : 'light', l = LINES[k];
+    psst.textContent = l[said[k]++ % l.length];
+    psst.classList.add('on');
+  }, wait);
+}
 btn.addEventListener('pointerenter', e => {
   if (e.pointerType !== 'mouse' || btn.classList.contains('dragging')) return;
   stopNudging();
-  clearTimeout(psstT);
-  psstT = setTimeout(() => {
-    const l = LINES[isDark() ? 'dark' : 'light'];
-    psst.textContent = l[said++ % l.length];
-    psst.classList.add('on');
-  }, 250);
+  say(250);
 });
+// every click (that isn't the end of a drag) flips the light and moves on to the next line
+let clickWasDrag = false;
+btn.addEventListener('click', () => { clickWasDrag = dragged; }, true);
+btn.addEventListener('click', () => { if (!clickWasDrag && btn.matches(':hover')) say(60); });
 btn.addEventListener('pointerleave', hush);
 
 /* ---------- getting your attention ----------
