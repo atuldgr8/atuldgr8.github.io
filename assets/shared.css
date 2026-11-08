@@ -10,6 +10,8 @@
 :root {
   --red: #d40000;  --blue: #1f3a93;  --green: #0a7d4f; --yellow: #a86f00;
   --purple: #6a1fd6; --orange: #e04a0b; --pink: #c8246a; --teal: #00727a;
+  --lh-read: 1.42;      /* paragraphs: room between lines so they read easily */
+  --ls-read: -0.025em;  /* and a little less squeeze between letters */
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {

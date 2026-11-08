@@ -156,6 +156,7 @@
   .door { text-decoration: none; cursor: text; }
   /* the intro is two lines, unless the first line would have to wrap:
      then it becomes one flowing sentence instead */
+  .intro { line-height: var(--lh-read); letter-spacing: var(--ls-read); }   /* same breathing room as the paragraphs */
   .intro .l1 { white-space: nowrap; }
   .intro.flow .l1 { white-space: normal; }
   .intro.flow br { display: none; }
