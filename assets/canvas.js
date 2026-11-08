@@ -251,12 +251,14 @@ window.Canvas = (() => {
         if (c._item.type === 'group') c.style.setProperty('--u', inner / c._item.w + 'px');
         if (c._item.type === 'instance') c.style.setProperty('--pu', inner / c._item.w + 'px');
       }
+      // a caption hangs under its picture: make room for it so it never runs into the next thing
+      for (const c of kids) { const cap = c.querySelector(':scope > .cap'); c.style.marginBottom = cap ? cap.offsetHeight + 'px' : ''; }
       return;
     }
     // edge to edge: wider than the page, over the side nav, all the way across the window
     const off = cv.getBoundingClientRect().left, vw = document.documentElement.clientWidth;
     for (const c of cv.children) if (c._item) {
-      c.style.order = '';
+      c.style.order = ''; c.style.marginBottom = '';
       c.classList.toggle('bleed', !!c._item.bleed);
       if (c._item.bleed) { c.style.left = -off + 'px'; c.style.width = vw + 'px'; }
       if (c._item.type === 'group') c.style.removeProperty('--u');

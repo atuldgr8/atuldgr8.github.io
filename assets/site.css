@@ -220,6 +220,6 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
 .it > .cap:not(.always) { opacity: 0; transform: translateY(-3px); transition: opacity .25s, transform .35s var(--pop, ease); }
 .it:hover > .cap { opacity: 1; transform: none; }
 @media (hover: none) { .it > .cap:not(.always) { opacity: 1; transform: none; } }   /* phones can't point: show them all */
-.cv.flow > .it > .cap { position: static; padding-top: .45em; }
+.cv.flow > .it > .cap { opacity: 1; transform: none; }   /* phones: captions always show, hanging under the picture */
 .top .star { color: var(--mute); padding-left: .05em; cursor: pointer; }
 .top .star:hover { color: var(--fg); }
