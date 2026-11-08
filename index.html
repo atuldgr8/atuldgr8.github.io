@@ -298,10 +298,12 @@
     trying to make the world a little bit easier to <a class="door" href="#says-the-guy-hiding-a-bunch-of-stuff-on-his-website">navigate</a>
   </p>
 
-  <!-- the ink: only readable by the bulb's light. PLACEHOLDER words, swap in your own -->
-  <div class="ink" aria-hidden="true"><div class="base"><p>Placeholder: a few lines about where I started, architecture first,
-    then graphics, then screens and code, and why I keep switching.</p>
-    <p>Placeholder: what makes me curious, what I can't stop poking at, and what I'd love to be doing in five years.</p></div></div>
+  <!-- the ink: only readable by the bulb's light. DRAFT words, Atul to rewrite -->
+  <div class="ink" aria-hidden="true"><div class="base">
+    <p>I started out drawing buildings, and slowly realised the part I liked most was how people moved through them. So I followed that, into graphics, then screens, then code.</p>
+    <p>These days I design interactions, and build the ones I can't stop thinking about. I like things that look boring until you poke them. You just poked one, so hi.</p>
+    <p>Eventually, everything connects. I'm still finding out how.</p>
+  </div></div>
 </main>
 
 <!-- keep scrolling: the work, then the TL;DR. Same page, all of it. -->
@@ -530,6 +532,14 @@ const glowEl = document.getElementById('glow');
 const ink = document.querySelector('.ink'), inkLit = (() => {   // a lit copy of the ink, on top of it
   const c = ink.querySelector('.base').cloneNode(true); c.className = 'lit'; ink.appendChild(c); return c;
 })();
+/* the ink is exactly as wide as the intro above it */
+const introEl = document.querySelector('.intro');
+function fitInk() {
+  const r = document.createRange(); r.selectNodeContents(introEl);
+  ink.style.maxWidth = innerWidth > 700 ? Math.ceil(r.getBoundingClientRect().width) + 'px' : '';
+}
+fitInk(); addEventListener('resize', fitInk); document.fonts && document.fonts.ready.then(fitInk);
+
 /* lemon ink (lights on): every word keeps its own "heat" */
 const inkWords = [];
 ink.querySelectorAll('.base p').forEach(p => {
