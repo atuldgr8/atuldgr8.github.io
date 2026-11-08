@@ -238,18 +238,18 @@
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
   @font-face { font-family: 'Geist Pixel'; src: url(assets/fonts/GeistPixel-Square.woff2) format('woff2'); font-display: swap; }
-  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 30px); max-width: min(20em, 80vw);
-          padding: 4px 7px 5px; font: 400 12px/2.3 'Geist Pixel', ui-monospace, monospace;
+  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 34px); max-width: min(16em, 80vw);
+          padding: 8px 14px 10px; font: 400 24px/normal 'Geist Pixel', ui-monospace, monospace;
           color: var(--pc); background: var(--bg); pointer-events: none;
           /* a 1px pixel border with its corners knocked out */
-          box-shadow: 0 -1px 0 var(--pc), 0 1px 0 var(--pc), -1px 0 0 var(--pc), 1px 0 0 var(--pc);
+          box-shadow: 0 -2px 0 var(--pc), 0 2px 0 var(--pc), -2px 0 0 var(--pc), 2px 0 0 var(--pc);
           opacity: 0; transition: opacity .15s steps(2); }
   /* the tail: a few stepped pixels, drawn with shadows of one tiny square */
-  .psst::after { content: ""; position: absolute; left: 7px; top: calc(100% + 1px); width: 2px; height: 2px;
+  .psst::after { content: ""; position: absolute; left: 12px; top: calc(100% + 2px); width: 4px; height: 4px;
                  background: var(--pc);
-                 box-shadow: 2px 0 var(--pc), 4px 0 var(--pc),
-                             0 2px var(--pc), 2px 2px var(--pc),
-                             0 4px var(--pc); }
+                 box-shadow: 4px 0 var(--pc), 8px 0 var(--pc),
+                             0 4px var(--pc), 4px 4px var(--pc),
+                             0 8px var(--pc); }
   .psst.on { opacity: 1; }
   body.past .psst { display: none; }
   /* lights on: a one-frame glimpse, barely darker than white */
