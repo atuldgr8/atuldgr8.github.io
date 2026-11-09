@@ -371,42 +371,6 @@
    "anim": {}
   },
   {
-   "id": "ip8nmns75",
-   "type": "text",
-   "x": 14,
-   "y": -324,
-   "w": 222,
-   "h": 19.3,
-   "text": "01",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "ip9l2z9qs",
-   "type": "text",
-   "x": 14,
-   "y": -324,
-   "w": 222,
-   "h": 19.3,
-   "text": "01",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "ipc2y12jc",
-   "type": "text",
-   "x": 14,
-   "y": -324,
-   "w": 222,
-   "h": 19.3,
-   "text": "01",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
    "id": "cc001t",
    "type": "text",
    "x": 32.0,
@@ -2893,262 +2857,10 @@
    "capShow": true
   },
   {
-   "id": "cc203p",
-   "type": "image",
-   "x": 270.0,
-   "y": 10625.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-01.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 1",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc204p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 10625.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-02.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 2",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.06,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc205p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 10625.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-03.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 3",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.12,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc206p",
-   "type": "image",
-   "x": 270.0,
-   "y": 10796.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-04.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 4",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc207p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 10796.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-05.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 5",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.06,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc208p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 10796.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-06.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 6",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.12,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc209p",
-   "type": "image",
-   "x": 270.0,
-   "y": 10967.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-07.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 7",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc210p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 10967.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-08.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 8",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.06,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc211p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 10967.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-09.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 9",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.12,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc212p",
-   "type": "image",
-   "x": 270.0,
-   "y": 11138.6,
-   "w": 222.0,
-   "h": 155,
-   "src": "projects/media/design-process/sketch-10.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch 10",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "zoom": true
-  },
-  {
-   "id": "cc213t",
-   "type": "text",
-   "x": 270.0,
-   "y": 11305.6,
-   "w": 460.0,
-   "h": 19,
-   "text": "Concept sketches. Click any sketch to enlarge.",
-   "anim": {},
-   "color": "mute",
-   "size": "s"
-  },
-  {
    "id": "cc214t",
    "type": "text",
    "x": 270.0,
-   "y": 11415.6,
+   "y": 11137.6,
    "w": 460.0,
    "h": 19,
    "text": "Concept selection",
@@ -3159,7 +2871,7 @@
    "id": "cc215t",
    "type": "text",
    "x": 270.0,
-   "y": 11456.6,
+   "y": 11178.6,
    "w": 460.0,
    "h": 19,
    "text": "Concepts were selected on the basis of plausibility, potential impact, and room for experimentation. Three directions were developed further: NID Commons, the Empathy Game and the AI Energy Flow Mediator.",
@@ -3170,7 +2882,7 @@
    "id": "cc219g",
    "type": "group",
    "x": 270.0,
-   "y": 11543.6,
+   "y": 11265.6,
    "w": 222.0,
    "h": 75,
    "anim": {},
@@ -3215,7 +2927,7 @@
    "id": "cc223g",
    "type": "group",
    "x": 508.00000000000006,
-   "y": 11543.6,
+   "y": 11265.6,
    "w": 222.0,
    "h": 94,
    "anim": {},
@@ -3260,7 +2972,7 @@
    "id": "cc227g",
    "type": "group",
    "x": 746.0000000000001,
-   "y": 11543.6,
+   "y": 11265.6,
    "w": 222.0,
    "h": 75,
    "anim": {},
@@ -3305,7 +3017,7 @@
    "id": "cc228p",
    "type": "image",
    "x": 270.0,
-   "y": 11677.6,
+   "y": 11399.6,
    "w": 698.0,
    "h": 433,
    "src": "projects/media/design-process/concept-scoring.jpg",
@@ -3331,7 +3043,7 @@
    "id": "cc229t",
    "type": "text",
    "x": 32.0,
-   "y": 12340.6,
+   "y": 12062.6,
    "w": 222.0,
    "h": 19,
    "text": "nid commons",
@@ -3343,7 +3055,7 @@
    "id": "cc230t",
    "type": "text",
    "x": 270.0,
-   "y": 12340.6,
+   "y": 12062.6,
    "w": 460.0,
    "h": 19,
    "text": "NID Commons",
@@ -3354,7 +3066,7 @@
    "id": "cc231t",
    "type": "text",
    "x": 270.0,
-   "y": 12381.6,
+   "y": 12103.6,
    "w": 460.0,
    "h": 19,
    "text": "NID Commons explored how a digital platform could support student collaboration. The first prototype used learner profiles and a compatibility matrix to suggest groups.",
@@ -3365,7 +3077,7 @@
    "id": "cc234g",
    "type": "group",
    "x": 270.0,
-   "y": 12470.6,
+   "y": 12192.6,
    "w": 222.0,
    "h": 122,
    "anim": {},
@@ -3399,7 +3111,7 @@
    "id": "cc237g",
    "type": "group",
    "x": 508.00000000000006,
-   "y": 12470.6,
+   "y": 12192.6,
    "w": 222.0,
    "h": 160,
    "anim": {},
@@ -3433,7 +3145,7 @@
    "id": "cc240g",
    "type": "group",
    "x": 746.0000000000001,
-   "y": 12470.6,
+   "y": 12192.6,
    "w": 222.0,
    "h": 102,
    "anim": {},
@@ -3467,7 +3179,7 @@
    "id": "cc241t",
    "type": "text",
    "x": 270.0,
-   "y": 12670.6,
+   "y": 12392.6,
    "w": 460.0,
    "h": 19,
    "text": "The platform offered ways to organise collaboration, but still depended on students arriving with an existing purpose. It exposed a gap between providing infrastructure for collaboration and helping people initiate it.",
@@ -3478,7 +3190,7 @@
    "id": "cc242s",
    "type": "slides",
    "x": 270.0,
-   "y": 12759.6,
+   "y": 12481.6,
    "w": 698.0,
    "h": 374,
    "fit": "contain",
@@ -3525,7 +3237,7 @@
    "look": "line",
    "text": "Try the prototype",
    "x": 270.0,
-   "y": 13187.6,
+   "y": 12909.6,
    "w": 222.0,
    "h": 42,
    "link": {
@@ -3538,7 +3250,7 @@
    "id": "cc244t",
    "type": "text",
    "x": 32.0,
-   "y": 13429.6,
+   "y": 13151.6,
    "w": 222.0,
    "h": 19,
    "text": "empathy game",
@@ -3550,7 +3262,7 @@
    "id": "cc245t",
    "type": "text",
    "x": 270.0,
-   "y": 13429.6,
+   "y": 13151.6,
    "w": 460.0,
    "h": 19,
    "text": "Empathy Game",
@@ -3561,7 +3273,7 @@
    "id": "cc246t",
    "type": "text",
    "x": 270.0,
-   "y": 13470.6,
+   "y": 13192.6,
    "w": 460.0,
    "h": 19,
    "text": "Rather than only discussing different communication styles, players had to experience the effects of communication, interpretation and coordination while working towards a common goal.",
@@ -3572,7 +3284,7 @@
    "id": "cc247t",
    "type": "text",
    "x": 270.0,
-   "y": 13541.6,
+   "y": 13263.6,
    "w": 460.0,
    "h": 19,
    "text": "Players had to describe information without revealing a hidden goal pattern, infer the pattern from cues and actions, and coordinate the timing of their contributions.",
@@ -3583,7 +3295,7 @@
    "id": "cc248p",
    "type": "image",
    "x": 270.0,
-   "y": 13630.6,
+   "y": 13352.6,
    "w": 222.0,
    "h": 278,
    "src": "projects/media/design-process/game-cards-1.jpg",
@@ -3606,7 +3318,7 @@
    "id": "cc249p",
    "type": "image",
    "x": 508.00000000000006,
-   "y": 13630.6,
+   "y": 13352.6,
    "w": 222.0,
    "h": 278,
    "src": "projects/media/design-process/game-cards-2.jpg",
@@ -3629,7 +3341,7 @@
    "id": "cc250p",
    "type": "image",
    "x": 746.0000000000001,
-   "y": 13630.6,
+   "y": 13352.6,
    "w": 222.0,
    "h": 278,
    "src": "projects/media/design-process/game-components.jpg",
@@ -3652,7 +3364,7 @@
    "id": "cc251t",
    "type": "text",
    "x": 270.0,
-   "y": 13956.6,
+   "y": 13678.6,
    "w": 460.0,
    "h": 19,
    "text": "Testing revealed three outcomes:",
@@ -3663,7 +3375,7 @@
    "id": "cc254g",
    "type": "group",
    "x": 270.0,
-   "y": 13993.6,
+   "y": 13715.6,
    "w": 222.0,
    "h": 64,
    "anim": {},
@@ -3697,7 +3409,7 @@
    "id": "cc257g",
    "type": "group",
    "x": 508.00000000000006,
-   "y": 13993.6,
+   "y": 13715.6,
    "w": 222.0,
    "h": 83,
    "anim": {},
@@ -3731,7 +3443,7 @@
    "id": "cc260g",
    "type": "group",
    "x": 746.0000000000001,
-   "y": 13993.6,
+   "y": 13715.6,
    "w": 222.0,
    "h": 102,
    "anim": {},
@@ -3765,7 +3477,7 @@
    "id": "cc261t",
    "type": "text",
    "x": 270.0,
-   "y": 14131.6,
+   "y": 13853.6,
    "w": 460.0,
    "h": 19,
    "text": "Completing the task did not necessarily mean the team had collaborated well.",
@@ -3778,7 +3490,7 @@
    "fill": "faint",
    "round": 6,
    "x": 270.0,
-   "y": 14207.6,
+   "y": 13929.6,
    "w": 698.0,
    "h": 73,
    "text": "A playable version of the game will live here.",
@@ -3788,7 +3500,7 @@
    "id": "cc263t",
    "type": "text",
    "x": 32.0,
-   "y": 14480.6,
+   "y": 14202.6,
    "w": 222.0,
    "h": 19,
    "text": "flow mediator",
@@ -3800,7 +3512,7 @@
    "id": "cc264t",
    "type": "text",
    "x": 270.0,
-   "y": 14480.6,
+   "y": 14202.6,
    "w": 460.0,
    "h": 19,
    "text": "Flow Mediator",
@@ -3811,7 +3523,7 @@
    "id": "cc265t",
    "type": "text",
    "x": 270.0,
-   "y": 14521.6,
+   "y": 14243.6,
    "w": 460.0,
    "h": 19,
    "text": "The AI Energy Flow Mediator explored how an AI-based companion could support group work through conversational guidance and adaptive lighting.",
@@ -3822,7 +3534,7 @@
    "id": "cc266t",
    "type": "text",
    "x": 270.0,
-   "y": 14592.6,
+   "y": 14314.6,
    "w": 460.0,
    "h": 19,
    "text": "The final Wizard of Oz test used a mock interface operated by human facilitators behind the scenes.",
@@ -3833,7 +3545,7 @@
    "id": "cc269g",
    "type": "group",
    "x": 270.0,
-   "y": 14662.6,
+   "y": 14384.6,
    "w": 222.0,
    "h": 70,
    "anim": {},
@@ -3869,7 +3581,7 @@
    "id": "cc270t",
    "type": "text",
    "x": 270.0,
-   "y": 14788.6,
+   "y": 14510.6,
    "w": 460.0,
    "h": 19,
    "text": "Reflective learners appreciated the non-judgmental text dialogue, while expressive learners valued quick motivational feedback. The test also raised concerns about overreliance on automated empathy.",
@@ -3880,7 +3592,7 @@
    "id": "cc271t",
    "type": "text",
    "x": 270.0,
-   "y": 14859.6,
+   "y": 14581.6,
    "w": 460.0,
    "h": 19,
    "text": "The exploration suggested that AI could supplement human mentorship, but should not replace it.",
@@ -3891,7 +3603,7 @@
    "id": "cc272p",
    "type": "image",
    "x": 270.0,
-   "y": 14929.6,
+   "y": 14651.6,
    "w": 341.0,
    "h": 241,
    "src": "projects/media/design-process/mediator-storyboard-1.jpg",
@@ -3916,7 +3628,7 @@
    "id": "cc273p",
    "type": "image",
    "x": 627.0,
-   "y": 14929.6,
+   "y": 14651.6,
    "w": 341.0,
    "h": 241,
    "src": "projects/media/design-process/mediator-woz.jpg",
@@ -3941,7 +3653,7 @@
    "id": "cc274t",
    "type": "text",
    "x": 32.0,
-   "y": 15400.6,
+   "y": 15122.6,
    "w": 222.0,
    "h": 19,
    "text": "reflection",
@@ -3953,7 +3665,7 @@
    "id": "cc275t",
    "type": "text",
    "x": 270.0,
-   "y": 15400.6,
+   "y": 15122.6,
    "w": 460.0,
    "h": 19,
    "text": "Reflection",
@@ -3964,7 +3676,7 @@
    "id": "cc276t",
    "type": "text",
    "x": 270.0,
-   "y": 15441.6,
+   "y": 15163.6,
    "w": 460.0,
    "h": 19,
    "text": "The project made me more comfortable working with ambiguity. Rather than trying to predict what NID might look like in 2030, we used speculative design to explore possibilities and ask better questions. It also made me think differently about collaboration: participation is not always loud or visible, and productive disagreement can be just as important as compatibility.",
@@ -3977,7 +3689,7 @@
    "look": "line",
    "text": "Read the full presentation (PDF)",
    "x": 270.0,
-   "y": 15585.6,
+   "y": 15307.6,
    "w": 301,
    "h": 42,
    "link": {
@@ -3985,6 +3697,75 @@
     "newTab": true
    },
    "anim": {}
+  },
+  {
+   "id": "ccsketches",
+   "type": "slides",
+   "x": 270.0,
+   "y": 10625.6,
+   "w": 698.0000000000001,
+   "h": 391,
+   "fit": "contain",
+   "mode": "click",
+   "trans": "fade",
+   "counter": true,
+   "every": 3,
+   "slides": [
+    {
+     "src": "projects/media/design-process/sketch-01.jpg",
+     "alt": "Concept sketch 1"
+    },
+    {
+     "src": "projects/media/design-process/sketch-02.jpg",
+     "alt": "Concept sketch 2"
+    },
+    {
+     "src": "projects/media/design-process/sketch-03.jpg",
+     "alt": "Concept sketch 3"
+    },
+    {
+     "src": "projects/media/design-process/sketch-04.jpg",
+     "alt": "Concept sketch 4"
+    },
+    {
+     "src": "projects/media/design-process/sketch-05.jpg",
+     "alt": "Concept sketch 5"
+    },
+    {
+     "src": "projects/media/design-process/sketch-06.jpg",
+     "alt": "Concept sketch 6"
+    },
+    {
+     "src": "projects/media/design-process/sketch-07.jpg",
+     "alt": "Concept sketch 7"
+    },
+    {
+     "src": "projects/media/design-process/sketch-08.jpg",
+     "alt": "Concept sketch 8"
+    },
+    {
+     "src": "projects/media/design-process/sketch-09.jpg",
+     "alt": "Concept sketch 9"
+    },
+    {
+     "src": "projects/media/design-process/sketch-10.jpg",
+     "alt": "Concept sketch 10"
+    }
+   ],
+   "caption": "Concept sketches. Click for the next one.",
+   "capShow": true,
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
+    }
+   }
   }
  ],
  "secGap": 200
