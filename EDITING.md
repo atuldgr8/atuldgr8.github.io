@@ -122,3 +122,11 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 - Text: **background → project** puts the words on a block of the project's colour.
 - Sections panel: **even out the space between sections** puts the same gap (the number above it) before every section.
 - Turn off **snap** in the bottom bar when you want something deliberately off the grid.
+
+## Review mode (leaving yourself notes on a page)
+
+- Add `&review` to a project page's address, e.g. `project.html?p=spanda&review` (works on your computer and on the live site). Visitors never see any of this.
+- **Click** anything to comment on it. **Shift-click** several things to leave one comment on all of them. **Click empty space** for "something's missing here".
+- **Enter** saves, Shift+Enter makes a new line, Esc cancels. Click a red numbered pin to edit or delete that comment.
+- The bar at the bottom: **list** shows all comments by section (click one to jump to it), **download** saves them as a Markdown file you can hand to a chat.
+- Comments are kept in that browser only, until you delete them.

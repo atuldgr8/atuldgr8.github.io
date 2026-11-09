@@ -77,6 +77,12 @@
   SideNav.mount({ cv });
   Canvas.layout(cv);
   Canvas.animate(cv);
+  // review mode (only with &review in the address): click things to leave comments, download them as notes
+  if (new URLSearchParams(location.search).has('review')) {
+    const rs = document.createElement('script'); rs.src = 'assets/review.js';
+    rs.onload = () => Review.start({ cv, doc, slug });
+    document.head.appendChild(rs);
+  }
   let t; addEventListener('resize', () => { cancelAnimationFrame(t); t = requestAnimationFrame(() => Canvas.layout(cv)); });
   document.fonts && document.fonts.ready.then(() => Canvas.layout(cv));
   cv.addEventListener('load', () => Canvas.layout(cv), true);
