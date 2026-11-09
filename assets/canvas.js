@@ -7,7 +7,7 @@
    Every element ("item") looks like:
    { id, type: text|image|video|embed|box|group,
      x, y, w, h,                       // units, relative to its group
-     text, weight, color, align,       // text
+     text, weight, color, align, size, // text (size: 's' small, 'l' large; medium if missing)
      src, alt, fit,                    // image / video / embed
      fill,                             // box: line|fill|ghost|faint
      link: { href, newTab },
@@ -31,7 +31,7 @@ window.Canvas = (() => {
   const NEUTRAL = { x: 0, y: 0, scale: 1, rotate: 0, opacity: 1, blur: 0 };
   // palette colours (light/dark versions live in shared.css), plus "bg" = the page background
   const PAL = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'teal', 'bg'];
-  const palCss = v => v && v[0] === '#' ? v : PAL.includes(v) ? `var(--${v})` : null;
+  const palCss = v => v && v[0] === '#' ? v : v === 'accent' ? 'var(--accent, var(--fg))' : PAL.includes(v) ? `var(--${v})` : null;
   // a page can set its own grid; anything it leaves out falls back to these
   const GRID = { cols: COLS, margin: M, gap: GAP, row: ROW };
   function grid(doc) {
@@ -129,6 +129,7 @@ window.Canvas = (() => {
       case 'text': {
         const t = h('div', 'txt', inner);
         if (it.weight == 700) t.classList.add('w-700');
+        if (it.size === 's' || it.size === 'l') t.classList.add('sz-' + it.size);
         if (palCss(it.color)) t.style.color = palCss(it.color);
         else if (it.color && it.color !== 'fg') t.classList.add('c-' + it.color);
         if (it.align && it.align !== 'left') t.classList.add('a-' + it.align);

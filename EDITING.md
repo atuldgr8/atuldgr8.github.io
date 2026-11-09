@@ -70,6 +70,12 @@ When Claude says it's pushed, press **Fetch**, then **Pull**. This stops the two
 - **+ video** in the bottom bar: paste a YouTube, Vimeo or Google Drive link, or leave it empty to pick a video file.
   Google Drive videos must be shared as "Anyone with the link".
 
+## Text sizes and the project colour
+
+- Click a text box: **size** has small, medium (the usual) and large. Large is for a big statement or a number; once or twice a page is plenty. Small is for quieter reading text and notes.
+- **colour → project** uses the project's own colour from the work list (Work editor → its colour). Change it there and every "project" bit on the page follows. Boxes have it too.
+- The side nav shows the section you're in, in the project's colour.
+
 ## Coming soon
 
 - In the work-list editor, press **soon** on a project: its name shows in grey with "(coming soon)" and doesn't open.

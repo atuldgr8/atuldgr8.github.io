@@ -1442,8 +1442,9 @@
 
     const S = keyed(sec(c ? 'Component' : NAMES[it.type]), 'kind');
     if (it.type === 'text') {
+      seg(S, 'size', { s: 'small', m: 'medium', l: 'large' }, () => it.size || 'm', v => { if (v === 'm') delete it.size; else it.size = v; });
       seg(S, 'weight', { 400: 'regular', 700: 'bold' }, () => it.weight || 400, v => it.weight = +v);
-      colourField(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint' }, () => it.color || 'fg', v => it.color = v);
+      colourField(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint', accent: 'project' }, () => it.color || 'fg', v => it.color = v);
       seg(S, 'align', { left: 'left', center: 'centre', right: 'right' }, () => it.align || 'left', v => it.align = v);
       actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)]]);
     }
@@ -1474,7 +1475,7 @@
       actions(S, [['16 : 9', () => { it.h = r1(it.w * 9 / 16); commit(); }], ['4 : 3', () => { it.h = r1(it.w * 3 / 4); commit(); }], ['square', () => { it.h = it.w; commit(); }]]);
     }
     if (it.type === 'box') {
-      colourField(S, 'look', { line: 'line', fill: 'ink', ghost: 'tint', faint: 'grey' }, () => it.fill || 'line', v => it.fill = v);
+      colourField(S, 'look', { line: 'line', fill: 'ink', ghost: 'tint', faint: 'grey', accent: 'project' }, () => it.fill || 'line', v => it.fill = v);
       num(S, 'round corners', () => it.round || 0, v => { if (v > 0) it.round = v; else delete it.round; }, 1);
       if (it.text != null) {
         colourField(S, 'text colour', { fg: 'ink', bg: 'page bg' }, () => it.color || 'fg', v => { if (v === 'fg') delete it.color; else it.color = v; });

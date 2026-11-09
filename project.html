@@ -57,6 +57,8 @@
   const list = (index && index.projects) || [];
   const meta = list.find(p => p.slug === slug);
   if (meta) document.title = `${meta.title} · Atul Suresh`;
+  // the project's own colour (from the work list): side nav, and anything set to "project" colour
+  if (meta && meta.color) document.documentElement.style.setProperty('--accent', meta.color[0] === '#' ? meta.color : `var(--${meta.color})`);
   if (list.some(p => p.fun && !p.hidden)) {      // "work*": the asterisk leads to the fun list on the home page
     const st = document.createElement('span'); st.className = 'star'; st.textContent = '*';
     st.title = index.funLabel || 'and some not-work';
