@@ -9,33 +9,36 @@
  "secGap": 200,
  "items": [
   {
-   "id": "sp001t",
+   "id": "sp001p",
+   "type": "image",
+   "x": 0,
+   "y": 96,
+   "w": 1000,
+   "h": 700,
+   "src": "projects/media/spanda/hero-logo.jpg",
+   "fit": "cover",
+   "alt": "SPANDA: four translucent paws, pink, yellow, blue and clear, on white bedding",
+   "bleed": true,
+   "anim": {}
+  },
+  {
+   "id": "sp002t",
    "type": "text",
    "x": 32,
-   "y": 196.0,
+   "y": 860,
    "w": 698,
-   "h": 47.3,
-   "text": "SPANDA",
+   "h": 88.9,
+   "text": "The animal is already speaking. We just don’t have the equipment to receive it.",
    "anim": {},
    "size": "l",
    "weight": 700,
    "color": "accent"
   },
   {
-   "id": "sp002t",
-   "type": "text",
-   "x": 32,
-   "y": 272.3,
-   "w": 460,
-   "h": 50.8,
-   "text": "The animal is already speaking. We just don’t have the equipment to receive it.",
-   "anim": {}
-  },
-  {
    "id": "sp003t",
    "type": "text",
    "x": 32,
-   "y": 347.1,
+   "y": 968.9,
    "w": 698,
    "h": 20.4,
    "text": "Haptic Design · Human-Animal Interaction · Design Research",
@@ -44,15 +47,242 @@
    "color": "mute"
   },
   {
-   "id": "sp004p",
-   "type": "image",
+   "id": "sp006g",
+   "type": "group",
    "x": 32,
-   "y": 412.5,
-   "w": 936,
-   "h": 560,
+   "y": 1029.3,
+   "w": 460,
+   "h": 59.8,
+   "anim": {},
+   "children": [
+    {
+     "id": "sp004t",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 460,
+     "h": 20.4,
+     "text": "my role",
+     "anim": {},
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "sp005t",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 460,
+     "h": 39.8,
+     "text": "Solo: research, concept, haptic language, electronics, firmware, computer vision, form, identity",
+     "anim": {},
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "sp009g",
+   "type": "group",
+   "x": 508,
+   "y": 1029.3,
+   "w": 222,
+   "h": 40.4,
+   "anim": {},
+   "children": [
+    {
+     "id": "sp007t",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 20.4,
+     "text": "team",
+     "anim": {},
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "sp008t",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 20.4,
+     "text": "Solo project",
+     "anim": {},
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "sp012g",
+   "type": "group",
+   "x": 746,
+   "y": 1029.3,
+   "w": 222,
+   "h": 40.4,
+   "anim": {},
+   "children": [
+    {
+     "id": "sp010t",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 20.4,
+     "text": "time",
+     "anim": {},
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "sp011t",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 20.4,
+     "text": "Semester 2, 2026 · jury on 5 May",
+     "anim": {},
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "sp015g",
+   "type": "group",
+   "x": 508,
+   "y": 1125.1,
+   "w": 222,
+   "h": 59.8,
+   "anim": {},
+   "children": [
+    {
+     "id": "sp013t",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 20.4,
+     "text": "course",
+     "anim": {},
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "sp014t",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 39.8,
+     "text": "DP 1: Problem Solving, New Media Design",
+     "anim": {},
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "sp018g",
+   "type": "group",
+   "x": 746,
+   "y": 1125.1,
+   "w": 222,
+   "h": 59.8,
+   "anim": {},
+   "children": [
+    {
+     "id": "sp016t",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 20.4,
+     "text": "where",
+     "anim": {},
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "sp017t",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 39.8,
+     "text": "Indroda Nature Park and Kankaria Zoo, Ahmedabad",
+     "anim": {},
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "sp019t",
+   "type": "text",
+   "x": 32,
+   "y": 1384.8999999999999,
+   "w": 222,
+   "h": 25.9,
+   "text": "overview",
+   "anim": {},
+   "color": "mute",
+   "nav": "overview"
+  },
+  {
+   "id": "sp020t",
+   "type": "text",
+   "x": 270,
+   "y": 1384.8999999999999,
+   "w": 460,
+   "h": 25.9,
+   "text": "What SPANDA is",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp021t",
+   "type": "text",
+   "x": 270,
+   "y": 1426.8,
+   "w": 698,
+   "h": 111.2,
+   "text": "Sanskrit: the first pulse. The vibration that precedes understanding.",
+   "anim": {},
+   "size": "l",
+   "bg": "accent"
+  },
+  {
+   "id": "sp022t",
+   "type": "text",
+   "x": 270,
+   "y": 1566.0,
+   "w": 460,
+   "h": 39.8,
+   "text": "Paw-shaped. Handheld. Held against the chest. When you hold it, you receive the animal’s state as a sensation.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp023t",
+   "type": "text",
+   "x": 270,
+   "y": 1613.8,
+   "w": 460,
+   "h": 39.8,
+   "text": "To receive another’s presence, you must first choose to be present. Deliberate, conscious.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp024p",
+   "type": "image",
+   "x": 270,
+   "y": 1677.6,
+   "w": 460,
+   "h": 380,
    "src": "projects/media/spanda/hero.jpg",
    "fit": "cover",
-   "alt": "A glowing translucent paw held against the chest, under a knit sweater",
+   "alt": "A glowing paw held against the chest under a knit sweater",
    "anim": {
     "enter": {
      "on": true,
@@ -67,255 +297,15 @@
    }
   },
   {
-   "id": "sp007g",
-   "type": "group",
-   "x": 32,
-   "y": 1030.5,
-   "w": 460,
-   "h": 59.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp005t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 460,
-     "h": 20.4,
-     "text": "my role",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp006t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 460,
-     "h": 39.8,
-     "text": "Solo: research, concept, haptic language, electronics, firmware, computer vision, form, identity",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp010g",
-   "type": "group",
-   "x": 508,
-   "y": 1030.5,
-   "w": 222,
-   "h": 40.4,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp008t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "team",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp009t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 20.4,
-     "text": "Solo project",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp013g",
-   "type": "group",
-   "x": 746,
-   "y": 1030.5,
-   "w": 222,
-   "h": 40.4,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp011t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "time",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp012t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 20.4,
-     "text": "Semester 2, 2026 · jury on 5 May",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp016g",
-   "type": "group",
-   "x": 508,
-   "y": 1126.3,
-   "w": 222,
-   "h": 59.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp014t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "course",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp015t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 39.8,
-     "text": "DP 1: Problem Solving, New Media Design",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp019g",
-   "type": "group",
-   "x": 746,
-   "y": 1126.3,
-   "w": 222,
-   "h": 59.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp017t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "where",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp018t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 39.8,
-     "text": "Indroda Nature Park and Kankaria Zoo, Ahmedabad",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp020t",
-   "type": "text",
-   "x": 32,
-   "y": 1386.1,
-   "w": 222,
-   "h": 25.9,
-   "text": "overview",
-   "anim": {},
-   "color": "mute",
-   "nav": "overview"
-  },
-  {
-   "id": "sp021t",
-   "type": "text",
-   "x": 270,
-   "y": 1386.1,
-   "w": 460,
-   "h": 25.9,
-   "text": "What SPANDA is",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "sp022t",
-   "type": "text",
-   "x": 270,
-   "y": 1428.0,
-   "w": 460,
-   "h": 39.8,
-   "text": "SPANDA. Sanskrit: the first pulse. The vibration that precedes understanding.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "sp023t",
-   "type": "text",
-   "x": 270,
-   "y": 1475.8,
-   "w": 460,
-   "h": 39.8,
-   "text": "Paw-shaped. Handheld. Held against the chest. When you hold it, you receive the animal’s state, as a sensation, not information.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "sp024p",
-   "type": "image",
-   "x": 270,
-   "y": 1539.6,
-   "w": 341,
-   "h": 400,
-   "src": "projects/media/spanda/prototype-hand.jpg",
-   "fit": "cover",
-   "alt": "The working SPANDA prototype held in a hand",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "caption": "The working prototype.",
-   "capShow": true
-  },
-  {
    "id": "sp025p",
    "type": "image",
-   "x": 627,
-   "y": 1539.6,
-   "w": 341,
-   "h": 400,
-   "src": "projects/media/spanda/paw-leaves.jpg",
+   "x": 746,
+   "y": 1677.6,
+   "w": 222,
+   "h": 182,
+   "src": "projects/media/spanda/paw-white.jpg",
    "fit": "cover",
-   "alt": "A glowing paw held in an open hand among leaves",
+   "alt": "The white paw on a white surface",
    "anim": {
     "enter": {
      "on": true,
@@ -327,15 +317,36 @@
      "delay": 0.1,
      "ease": "out"
     }
-   },
-   "caption": "How it is meant to feel.",
-   "capShow": true
+   }
   },
   {
-   "id": "sp026t",
+   "id": "sp026p",
+   "type": "image",
+   "x": 746,
+   "y": 1875.6,
+   "w": 222,
+   "h": 182,
+   "src": "projects/media/spanda/paw-leaves.jpg",
+   "fit": "cover",
+   "alt": "A glowing paw held in an open hand among leaves",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0.2,
+     "ease": "out"
+    }
+   }
+  },
+  {
+   "id": "sp027t",
    "type": "text",
    "x": 270,
-   "y": 1997.6,
+   "y": 2097.6,
    "w": 460,
    "h": 25.9,
    "text": "Feel it",
@@ -343,10 +354,10 @@
    "weight": 700
   },
   {
-   "id": "sp027t",
+   "id": "sp028t",
    "type": "text",
    "x": 270,
-   "y": 2039.5,
+   "y": 2139.5,
    "w": 460,
    "h": 20.4,
    "text": "Three states from the demo.",
@@ -354,16 +365,16 @@
    "size": "s"
   },
   {
-   "id": "sp037g",
+   "id": "sp038g",
    "type": "group",
    "x": 270,
-   "y": 2075.9,
+   "y": 2175.9,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp028t",
+     "id": "sp029t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -375,7 +386,7 @@
      "color": "mute"
     },
     {
-     "id": "sp029t",
+     "id": "sp030t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -386,7 +397,7 @@
      "weight": 700
     },
     {
-     "id": "sp030t",
+     "id": "sp031t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -399,16 +410,16 @@
    ]
   },
   {
-   "id": "sp038g",
+   "id": "sp039g",
    "type": "group",
    "x": 508,
-   "y": 2075.9,
+   "y": 2175.9,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp031t",
+     "id": "sp032t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -420,7 +431,7 @@
      "color": "mute"
     },
     {
-     "id": "sp032t",
+     "id": "sp033t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -431,7 +442,7 @@
      "weight": 700
     },
     {
-     "id": "sp033t",
+     "id": "sp034t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -444,16 +455,16 @@
    ]
   },
   {
-   "id": "sp039g",
+   "id": "sp040g",
    "type": "group",
    "x": 746,
-   "y": 2075.9,
+   "y": 2175.9,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp034t",
+     "id": "sp035t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -465,7 +476,7 @@
      "color": "mute"
     },
     {
-     "id": "sp035t",
+     "id": "sp036t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -476,7 +487,7 @@
      "weight": 700
     },
     {
-     "id": "sp036t",
+     "id": "sp037t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -489,24 +500,24 @@
    ]
   },
   {
-   "id": "sp040x",
+   "id": "sp041x",
    "type": "box",
    "fill": "faint",
    "round": 6,
    "x": 270,
-   "y": 2176.2000000000003,
+   "y": 2276.2000000000003,
    "w": 698,
    "h": 73,
    "text": "The demo video will live here.",
    "anim": {}
   },
   {
-   "id": "sp041u",
+   "id": "sp042u",
    "type": "button",
    "look": "line",
    "text": "Read the full presentation (PDF)",
    "x": 270,
-   "y": 2273.2000000000003,
+   "y": 2373.2000000000003,
    "w": 250,
    "h": 35,
    "link": {
@@ -516,10 +527,10 @@
    "anim": {}
   },
   {
-   "id": "sp042t",
+   "id": "sp043t",
    "type": "text",
    "x": 32,
-   "y": 2508.2000000000003,
+   "y": 2608.2000000000003,
    "w": 222,
    "h": 25.9,
    "text": "problem framing",
@@ -528,10 +539,10 @@
    "nav": "problem framing"
   },
   {
-   "id": "sp043t",
+   "id": "sp044t",
    "type": "text",
    "x": 270,
-   "y": 2508.2000000000003,
+   "y": 2608.2000000000003,
    "w": 460,
    "h": 25.9,
    "text": "Framing the problem",
@@ -539,10 +550,10 @@
    "weight": 700
   },
   {
-   "id": "sp044t",
+   "id": "sp045t",
    "type": "text",
    "x": 270,
-   "y": 2550.1000000000004,
+   "y": 2650.1000000000004,
    "w": 460,
    "h": 59.2,
    "text": "The Problem Solving module asks you to frame your own problem and write your own brief. That means working through ambiguity and vagueness before there is a problem at all.",
@@ -550,10 +561,10 @@
    "size": "s"
   },
   {
-   "id": "sp045t",
+   "id": "sp046t",
    "type": "text",
    "x": 270,
-   "y": 2617.3,
+   "y": 2717.3,
    "w": 460,
    "h": 39.8,
    "text": "I started wide, with every place communication happens without words, and followed the branch about animals and humans.",
@@ -561,10 +572,10 @@
    "size": "s"
   },
   {
-   "id": "sp046t",
+   "id": "sp047t",
    "type": "text",
    "x": 270,
-   "y": 2669.1000000000004,
+   "y": 2769.1000000000004,
    "w": 460,
    "h": 39.8,
    "text": "Cross-species · young children · differently abled · shock and trauma · high stakes · power display · intimacy · digital · environmental",
@@ -573,10 +584,10 @@
    "color": "mute"
   },
   {
-   "id": "sp047s",
+   "id": "sp048s",
    "type": "slides",
    "x": 270,
-   "y": 2728.9000000000005,
+   "y": 2828.9000000000005,
    "w": 698,
    "h": 439,
    "fit": "contain",
@@ -611,204 +622,372 @@
    "capShow": true
   },
   {
-   "id": "sp048t",
-   "type": "text",
-   "x": 270,
-   "y": 3281.9000000000005,
-   "w": 460,
-   "h": 25.9,
-   "text": "Three contexts",
-   "anim": {},
-   "weight": 700
-  },
-  {
    "id": "sp049t",
    "type": "text",
    "x": 270,
-   "y": 3323.8000000000006,
+   "y": 3365.9000000000005,
    "w": 460,
-   "h": 59.2,
-   "text": "For each context I wrote a context sheet, scenarios (setting, persona, trigger, action, internal state, friction) and How Might We questions, then clustered and voted on them.",
+   "h": 78.6,
+   "text": "Three contexts came out of it: the street, the home and the zoo. For each, I put together a context sheet, wrote scenarios (setting, persona, trigger, action, internal state, friction) and How Might We questions, then clustered and voted on them.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp059g",
-   "type": "group",
+   "id": "sp050t",
+   "type": "text",
    "x": 270,
-   "y": 3403.0000000000005,
-   "w": 222,
-   "h": 134.5,
+   "y": 3500.5000000000005,
+   "w": 460,
+   "h": 25.9,
+   "text": "The shared street",
    "anim": {},
-   "children": [
-    {
-     "id": "sp050t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "01",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp051t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "The shared street",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp052t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 78.6,
-     "text": "How might we help a commuter navigate and respect the invisible territorial boundaries of street dogs?",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp060g",
-   "type": "group",
-   "x": 508,
-   "y": 3403.0000000000005,
-   "w": 222,
-   "h": 134.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp053t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "02",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp054t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "The urban house",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp055t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 78.6,
-     "text": "How might we make a pet’s invisible sensory load perceptible to humans so that biological stress is no longer mistranslated as ‘bad behavior’?",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp061g",
-   "type": "group",
-   "x": 746,
-   "y": 3403.0000000000005,
-   "w": 222,
-   "h": 134.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp056t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "03",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp057t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "The urban institution",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp058t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 78.6,
-     "text": "How might we bridge the sensory and behavioral gaps between species to trigger a visceral kinship?",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp062s",
-   "type": "slides",
-   "mode": "row",
-   "show": 3,
-   "gap": 16,
-   "fit": "contain",
+   "id": "sp051t",
+   "type": "text",
    "x": 270,
-   "y": 3561.5000000000005,
+   "y": 3542.4000000000005,
+   "w": 460,
+   "h": 59.2,
+   "text": "Ahmedabad has about 1.5 lakh street dogs by current AMC estimates. Anti-rabies vaccinations have surged to 7,500 a month. The AMC has notified only 126 designated feeding spots for the entire city.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp052t",
+   "type": "text",
+   "x": 270,
+   "y": 3605.6000000000004,
+   "w": 460,
+   "h": 20.4,
+   "text": "Vibes of India, Jan 2026; Times of India, Jan 2026.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp053t",
+   "type": "text",
+   "x": 270,
+   "y": 3646.0000000000005,
+   "w": 460,
+   "h": 20.4,
+   "text": "The “Invisible” Trespass",
+   "anim": {},
+   "size": "s",
+   "weight": 700
+  },
+  {
+   "id": "sp054t",
+   "type": "text",
+   "x": 270,
+   "y": 3670.4000000000005,
+   "w": 460,
+   "h": 98.0,
+   "text": "A commuter walking to their scooter unknowingly crosses a “Safe Zone” boundary, marked by scent and historical use. The dog gives a low warning growl; the human, blind to the boundary, keeps walking. The human thinks they are on a public sidewalk. The dog thinks they are an intruder breaching a private residence.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp055t",
+   "type": "text",
+   "x": 270,
+   "y": 3776.4000000000005,
+   "w": 460,
+   "h": 39.8,
+   "text": "Other scenarios: The Silent “No” · The Anonymous Nuisance · The “Night-Biker” Chase · The Survival Silhouette",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp056t",
+   "type": "text",
+   "x": 270,
+   "y": 3836.2000000000007,
+   "w": 460,
+   "h": 39.8,
+   "text": "The HMWs clustered into territorial maps, predatory triggers and sensory understanding, and narrowed to three:",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp057t",
+   "type": "text",
+   "x": 270,
+   "y": 3888.000000000001,
+   "w": 460,
+   "h": 75.7,
+   "text": "<span class=\"c-mute\">the where</span><br>How might we help a commuter navigate and respect the invisible territorial boundaries of street dogs?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp058t",
+   "type": "text",
+   "x": 270,
+   "y": 3977.7000000000007,
+   "w": 460,
+   "h": 100.6,
+   "text": "<span class=\"c-mute\">the how</span><br>How might we bridge the sensory gap between human motion and a dog’s predatory triggers to de-escalate the urban ‘menace’ narrative?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp059t",
+   "type": "text",
+   "x": 270,
+   "y": 4092.3000000000006,
+   "w": 460,
+   "h": 125.5,
+   "text": "<span class=\"c-mute\">the who</span><br>How might we dismantle the ‘stray menace’ label by surfacing the individual history and character of neighborhood dogs, shifting their status from ‘nuisance’ to ‘resident subject’?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp060p",
+   "type": "image",
+   "x": 270,
+   "y": 4241.800000000001,
    "w": 698,
-   "h": 150,
-   "slides": [
-    {
-     "src": "projects/media/spanda/board-street.jpg",
-     "alt": "The street board: context sheet, scenarios and HMWs"
-    },
-    {
-     "src": "projects/media/spanda/board-home.jpg",
-     "alt": "The urban house board: context sheet, scenarios and HMWs"
-    },
-    {
-     "src": "projects/media/spanda/board-home-scenarios.jpg",
-     "alt": "Pet scenarios with their HMWs"
-    },
-    {
-     "src": "projects/media/spanda/board-home-hmws.jpg",
-     "alt": "Pet HMWs clustered into three themes"
-    },
-    {
-     "src": "projects/media/spanda/board-zoo.jpg",
-     "alt": "The zoo board: context sheet, scenarios and HMWs"
+   "h": 332.4,
+   "src": "projects/media/spanda/board-street.jpg",
+   "fit": "contain",
+   "alt": "The street board: context sheet, scenarios and HMWs",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
     }
-   ],
-   "anim": {},
-   "caption": "The context boards. Use the arrows or swipe; click any board to enlarge.",
+   },
+   "zoom": true,
+   "caption": "The street board. Click to enlarge.",
    "capShow": true
+  },
+  {
+   "id": "sp061t",
+   "type": "text",
+   "x": 270,
+   "y": 4664.180952380953,
+   "w": 460,
+   "h": 25.9,
+   "text": "The urban house",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp062t",
+   "type": "text",
+   "x": 270,
+   "y": 4706.080952380953,
+   "w": 460,
+   "h": 78.6,
+   "text": "India’s pet dog population is projected to hit 43.9 million by late 2026, with 63% of urban households owning at least one dog. Ahmedabad sees only a 38% registration rate. 70% of the city’s new pet owners live in high-rises, where the service lift is the primary interface.",
+   "anim": {},
+   "size": "s"
   },
   {
    "id": "sp063t",
    "type": "text",
    "x": 270,
-   "y": 3825.5000000000005,
+   "y": 4788.680952380953,
+   "w": 460,
+   "h": 20.4,
+   "text": "Dogster 2026; Gujarat Samachar 2026.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp064t",
+   "type": "text",
+   "x": 270,
+   "y": 4829.080952380953,
+   "w": 460,
+   "h": 20.4,
+   "text": "The “Guilty” Projection",
+   "anim": {},
+   "size": "s",
+   "weight": 700
+  },
+  {
+   "id": "sp065t",
+   "type": "text",
+   "x": 270,
+   "y": 4853.480952380953,
+   "w": 460,
+   "h": 78.6,
+   "text": "An owner discovers a chewed remote and scolds the dog with a towering posture and angry tone. The dog lowers its head, shows “whale eyes” and avoids eye contact. The owner says, “See? He knows he’s guilty.” The “Guilty Look” is a survival mechanism to de-escalate human anger.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp066t",
+   "type": "text",
+   "x": 270,
+   "y": 4936.080952380953,
+   "w": 460,
+   "h": 20.4,
+   "text": "The ‘Guilty Look’ study, Alexandra Horowitz.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp067t",
+   "type": "text",
+   "x": 270,
+   "y": 4964.480952380953,
+   "w": 460,
+   "h": 39.8,
+   "text": "Other scenarios: The Elevator Breach · The Acoustic Smog · The Rest Violation · The Resource War · Unpreparedness",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp068t",
+   "type": "text",
+   "x": 270,
+   "y": 5024.280952380953,
+   "w": 460,
+   "h": 59.2,
+   "text": "The HMWs clustered into sensory experiences and stress signals, behavioural boundaries and autonomy, and realistic pet needs, and narrowed to one:",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp069t",
+   "type": "text",
+   "x": 270,
+   "y": 5095.480952380953,
+   "w": 460,
+   "h": 75.7,
+   "text": "How might we make a pet’s invisible sensory load perceptible to humans so that biological stress is no longer mistranslated as ‘bad behavior’?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp070p",
+   "type": "image",
+   "x": 270,
+   "y": 5195.1809523809525,
+   "w": 698,
+   "h": 459.8,
+   "src": "projects/media/spanda/board-home.jpg",
+   "fit": "contain",
+   "alt": "The urban house board: context sheet, scenarios and HMWs",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
+    }
+   },
+   "zoom": true,
+   "caption": "The urban house board. Click to enlarge.",
+   "capShow": true
+  },
+  {
+   "id": "sp071t",
+   "type": "text",
+   "x": 270,
+   "y": 5745.03,
+   "w": 460,
+   "h": 25.9,
+   "text": "The urban institution",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp072t",
+   "type": "text",
+   "x": 270,
+   "y": 5786.929999999999,
+   "w": 460,
+   "h": 20.4,
+   "text": "The “Statue” at the Moat",
+   "anim": {},
+   "size": "s",
+   "weight": 700
+  },
+  {
+   "id": "sp073t",
+   "type": "text",
+   "x": 270,
+   "y": 5811.329999999999,
+   "w": 460,
+   "h": 98.0,
+   "text": "Sunday, 11:30 AM, at the tiger enclosure. A father and a 6-year-old stand at the railing. The tiger is sitting 25 feet away across the moat, staring at the horizon. The child asks, “Papa, is it real or a toy?” because it hasn’t moved for three minutes. The father whistles loudly and waves his arms. The 20-foot gap makes the tiger feel like a 3D movie or a statue.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp074t",
+   "type": "text",
+   "x": 270,
+   "y": 5917.329999999999,
+   "w": 460,
+   "h": 78.6,
+   "text": "Other scenarios: The “Invisible” Predator · The “Clown” in the Cage · The Observation Wall · It’s just a Lion. For keepers: The “Snapshot” Audit · The Memory Tax. For the animals: The “Static” Enrichment Loop · The “Privacy” Vacuum.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp075t",
+   "type": "text",
+   "x": 270,
+   "y": 6015.929999999999,
+   "w": 460,
+   "h": 59.2,
+   "text": "The HMWs clustered into animal observation and behaviour interpretation, animal welfare and autonomy, physical and spatial design, and data capture and monitoring. The zoo HMW became the design question below.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp076p",
+   "type": "image",
+   "x": 270,
+   "y": 6099.129999999999,
+   "w": 698,
+   "h": 340.0,
+   "src": "projects/media/spanda/board-zoo.jpg",
+   "fit": "contain",
+   "alt": "The zoo board: context sheet, scenarios and HMWs",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
+    }
+   },
+   "zoom": true,
+   "caption": "The zoo board. Click to enlarge.",
+   "capShow": true
+  },
+  {
+   "id": "sp077t",
+   "type": "text",
+   "x": 270,
+   "y": 6529.155714285714,
    "w": 460,
    "h": 25.9,
    "text": "Why the zoo",
@@ -816,10 +995,10 @@
    "weight": 700
   },
   {
-   "id": "sp064t",
+   "id": "sp078t",
    "type": "text",
    "x": 270,
-   "y": 3867.4000000000005,
+   "y": 6571.055714285713,
    "w": 460,
    "h": 39.8,
    "text": "Why zoo? The clearest place to design: highest density of encounters, most visible breakdown, and a live policy mandate to fix it.",
@@ -827,10 +1006,10 @@
    "size": "s"
   },
   {
-   "id": "sp065t",
+   "id": "sp079t",
    "type": "text",
    "x": 32,
-   "y": 4107.200000000001,
+   "y": 6810.8557142857135,
    "w": 222,
    "h": 25.9,
    "text": "context",
@@ -839,10 +1018,10 @@
    "nav": "context"
   },
   {
-   "id": "sp066t",
+   "id": "sp080t",
    "type": "text",
    "x": 270,
-   "y": 4107.200000000001,
+   "y": 6810.8557142857135,
    "w": 460,
    "h": 25.9,
    "text": "How people visit zoos",
@@ -850,10 +1029,10 @@
    "weight": 700
   },
   {
-   "id": "sp067t",
+   "id": "sp081t",
    "type": "text",
    "x": 270,
-   "y": 4149.1,
+   "y": 6852.755714285713,
    "w": 460,
    "h": 59.2,
    "text": "Zoo visits are mostly about recognising and identifying animals, and not relating to them. This creates a distance where visitors disengage, provoke animals to trigger a reaction, and treat them as objects of spectacle.",
@@ -861,16 +1040,16 @@
    "size": "s"
   },
   {
-   "id": "sp077g",
+   "id": "sp091g",
    "type": "group",
    "x": 270,
-   "y": 4232.3,
+   "y": 6935.955714285713,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp068t",
+     "id": "sp082t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -882,7 +1061,7 @@
      "color": "mute"
     },
     {
-     "id": "sp069t",
+     "id": "sp083t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -893,7 +1072,7 @@
      "weight": 700
     },
     {
-     "id": "sp070t",
+     "id": "sp084t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -906,16 +1085,16 @@
    ]
   },
   {
-   "id": "sp078g",
+   "id": "sp092g",
    "type": "group",
    "x": 508,
-   "y": 4232.3,
+   "y": 6935.955714285713,
    "w": 222,
    "h": 115.1,
    "anim": {},
    "children": [
     {
-     "id": "sp071t",
+     "id": "sp085t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -927,7 +1106,7 @@
      "color": "mute"
     },
     {
-     "id": "sp072t",
+     "id": "sp086t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -938,7 +1117,7 @@
      "weight": 700
     },
     {
-     "id": "sp073t",
+     "id": "sp087t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -951,16 +1130,16 @@
    ]
   },
   {
-   "id": "sp079g",
+   "id": "sp093g",
    "type": "group",
    "x": 746,
-   "y": 4232.3,
+   "y": 6935.955714285713,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp074t",
+     "id": "sp088t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -972,7 +1151,7 @@
      "color": "mute"
     },
     {
-     "id": "sp075t",
+     "id": "sp089t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -983,7 +1162,7 @@
      "weight": 700
     },
     {
-     "id": "sp076t",
+     "id": "sp090t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -996,10 +1175,10 @@
    ]
   },
   {
-   "id": "sp080t",
+   "id": "sp094t",
    "type": "text",
    "x": 270,
-   "y": 4403.400000000001,
+   "y": 7107.055714285713,
    "w": 460,
    "h": 25.9,
    "text": "Kankaria Zoo in numbers",
@@ -1007,16 +1186,16 @@
    "weight": 700
   },
   {
-   "id": "sp083g",
+   "id": "sp097g",
    "type": "group",
    "x": 270,
-   "y": 4445.3,
+   "y": 7148.955714285713,
    "w": 222,
    "h": 71.7,
    "anim": {},
    "children": [
     {
-     "id": "sp081t",
+     "id": "sp095t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1029,7 +1208,7 @@
      "color": "accent"
     },
     {
-     "id": "sp082t",
+     "id": "sp096t",
      "type": "text",
      "x": 0,
      "y": 51.3,
@@ -1042,16 +1221,16 @@
    ]
   },
   {
-   "id": "sp086g",
+   "id": "sp100g",
    "type": "group",
    "x": 508,
-   "y": 4445.3,
+   "y": 7148.955714285713,
    "w": 222,
    "h": 71.7,
    "anim": {},
    "children": [
     {
-     "id": "sp084t",
+     "id": "sp098t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1064,7 +1243,7 @@
      "color": "accent"
     },
     {
-     "id": "sp085t",
+     "id": "sp099t",
      "type": "text",
      "x": 0,
      "y": 51.3,
@@ -1077,16 +1256,16 @@
    ]
   },
   {
-   "id": "sp089g",
+   "id": "sp103g",
    "type": "group",
    "x": 270,
-   "y": 4545.0,
+   "y": 7248.655714285713,
    "w": 222,
-   "h": 110.5,
+   "h": 129.9,
    "anim": {},
    "children": [
     {
-     "id": "sp087t",
+     "id": "sp101t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1099,29 +1278,29 @@
      "color": "accent"
     },
     {
-     "id": "sp088t",
+     "id": "sp102t",
      "type": "text",
      "x": 0,
      "y": 51.3,
      "w": 222,
-     "h": 59.2,
-     "text": "ambient noise, with a documented correlation with increased cortisol and pacing in leopards",
+     "h": 78.6,
+     "text": "ambient noise, with a documented correlation with increased cortisol and pacing in leopards (ResearchGate 2025)",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp092g",
+   "id": "sp106g",
    "type": "group",
    "x": 508,
-   "y": 4545.0,
+   "y": 7248.655714285713,
    "w": 222,
-   "h": 91.1,
+   "h": 110.5,
    "anim": {},
    "children": [
     {
-     "id": "sp090t",
+     "id": "sp104t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1134,171 +1313,13 @@
      "color": "accent"
     },
     {
-     "id": "sp091t",
+     "id": "sp105t",
      "type": "text",
      "x": 0,
      "y": 51.3,
      "w": 222,
-     "h": 39.8,
-     "text": "provocation rate in high-density viewing zones (global baseline)",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp093t",
-   "type": "text",
-   "x": 270,
-   "y": 4679.5,
-   "w": 460,
-   "h": 59.2,
-   "text": "About 5,500 visitors on a weekday. Entry is ₹20 for adults and ₹10 for children, which makes it a cheap day out more than an educational visit. Sources: MDPI Animals 2023; ResearchGate 2025.",
-   "anim": {},
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "sp094t",
-   "type": "text",
-   "x": 270,
-   "y": 4794.7,
-   "w": 460,
-   "h": 25.9,
-   "text": "Policy",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "sp104g",
-   "type": "group",
-   "x": 270,
-   "y": 4836.599999999999,
-   "w": 222,
-   "h": 153.9,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp095t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "01",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp096t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Learning and empathy",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp097t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 98.0,
-     "text": "The 43rd CZA meeting (3 Feb 2026): zoos must move from “display centres” to spaces for “research, learning, and inspiring empathy.”",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp105g",
-   "type": "group",
-   "x": 508,
-   "y": 4836.599999999999,
-   "w": 222,
-   "h": 153.9,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp098t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "02",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp099t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Student feedback",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp100t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 98.0,
-     "text": "The 44th CZA meeting (28 Feb 2026): schools to hold “exclusive classes” to seek “collective suggestions for strengthening zoos” after visits.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp106g",
-   "type": "group",
-   "x": 746,
-   "y": 4836.599999999999,
-   "w": 222,
-   "h": 153.9,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp101t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "03",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp102t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "The viewer’s perspective",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp103t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 98.0,
-     "text": "MoS Shri Kirti Vardhan Singh called for technology and collaboration to improve zoos from the “viewer’s perspective”, against a “loss of sensitivity” in younger generations.",
+     "h": 59.2,
+     "text": "provocation rate in high-density viewing zones, a global baseline (MDPI Animals 2023)",
      "anim": {},
      "size": "s"
     }
@@ -1308,10 +1329,10 @@
    "id": "sp107t",
    "type": "text",
    "x": 270,
-   "y": 5006.499999999999,
+   "y": 7402.555714285712,
    "w": 460,
-   "h": 20.4,
-   "text": "Source: PIB Delhi.",
+   "h": 59.2,
+   "text": "About 5,500 visitors on a weekday. Entry is ₹20 for adults and ₹10 for children, which positions it as a cheap “outing” more than an educational visit.",
    "anim": {},
    "size": "s",
    "color": "mute"
@@ -1320,7 +1341,96 @@
    "id": "sp108t",
    "type": "text",
    "x": 270,
-   "y": 5082.899999999999,
+   "y": 7517.755714285712,
+   "w": 460,
+   "h": 25.9,
+   "text": "Policy",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp109t",
+   "type": "text",
+   "x": 270,
+   "y": 7559.655714285712,
+   "w": 460,
+   "h": 25.9,
+   "text": "Learning and empathy",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp110t",
+   "type": "text",
+   "x": 270,
+   "y": 7589.5557142857115,
+   "w": 460,
+   "h": 39.8,
+   "text": "The 43rd CZA meeting (3 Feb 2026) mandated that zoos transition from “display centres” to spaces for “research, learning, and inspiring empathy.”",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp111t",
+   "type": "text",
+   "x": 270,
+   "y": 7651.355714285712,
+   "w": 460,
+   "h": 25.9,
+   "text": "Student feedback",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp112t",
+   "type": "text",
+   "x": 270,
+   "y": 7681.255714285711,
+   "w": 460,
+   "h": 59.2,
+   "text": "The 44th CZA meeting (28 Feb 2026) instructed schools to hold “exclusive classes” to seek “collective suggestions for strengthening zoos” following visits.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp113t",
+   "type": "text",
+   "x": 270,
+   "y": 7762.455714285711,
+   "w": 460,
+   "h": 25.9,
+   "text": "The viewer’s perspective",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp114t",
+   "type": "text",
+   "x": 270,
+   "y": 7792.355714285711,
+   "w": 460,
+   "h": 59.2,
+   "text": "MoS Shri Kirti Vardhan Singh called for technology and stakeholder collaboration to improve zoos from the “viewer’s perspective”, to counter the “loss of sensitivity” in younger generations.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp115t",
+   "type": "text",
+   "x": 270,
+   "y": 7859.555714285711,
+   "w": 460,
+   "h": 20.4,
+   "text": "Source: PIB Delhi.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp116t",
+   "type": "text",
+   "x": 270,
+   "y": 7935.95571428571,
    "w": 460,
    "h": 25.9,
    "text": "The user",
@@ -1328,16 +1438,16 @@
    "weight": 700
   },
   {
-   "id": "sp111g",
+   "id": "sp119g",
    "type": "group",
    "x": 270,
-   "y": 5124.799999999998,
+   "y": 7977.85571428571,
    "w": 222,
    "h": 91.1,
    "anim": {},
    "children": [
     {
-     "id": "sp109t",
+     "id": "sp117t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1350,7 +1460,7 @@
      "color": "accent"
     },
     {
-     "id": "sp110t",
+     "id": "sp118t",
      "type": "text",
      "x": 0,
      "y": 51.3,
@@ -1363,10 +1473,10 @@
    ]
   },
   {
-   "id": "sp112t",
+   "id": "sp120t",
    "type": "text",
    "x": 270,
-   "y": 5239.899999999999,
+   "y": 8092.95571428571,
    "w": 460,
    "h": 59.2,
    "text": "School-aged children. 6 to 14. Organised group visits. Highest provocation rate of any visitor group. Lowest biodiversity literacy. First and often only direct encounter with these animals. What lands here lands for life.",
@@ -1374,10 +1484,10 @@
    "size": "s"
   },
   {
-   "id": "sp113t",
+   "id": "sp121t",
    "type": "text",
    "x": 32,
-   "y": 5499.0999999999985,
+   "y": 8352.15571428571,
    "w": 222,
    "h": 25.9,
    "text": "field visits",
@@ -1386,10 +1496,10 @@
    "nav": "field visits"
   },
   {
-   "id": "sp114t",
+   "id": "sp122t",
    "type": "text",
    "x": 270,
-   "y": 5499.0999999999985,
+   "y": 8352.15571428571,
    "w": 460,
    "h": 25.9,
    "text": "Observations at the enclosure",
@@ -1397,10 +1507,10 @@
    "weight": 700
   },
   {
-   "id": "sp115t",
+   "id": "sp123t",
    "type": "text",
    "x": 270,
-   "y": 5540.999999999998,
+   "y": 8394.055714285709,
    "w": 460,
    "h": 20.4,
    "text": "Primary research at Indroda Nature Park and Kankaria Zoo, Ahmedabad.",
@@ -1408,16 +1518,16 @@
    "size": "s"
   },
   {
-   "id": "sp125g",
+   "id": "sp133g",
    "type": "group",
    "x": 270,
-   "y": 5585.399999999998,
+   "y": 8438.455714285708,
    "w": 222,
    "h": 120.6,
    "anim": {},
    "children": [
     {
-     "id": "sp116t",
+     "id": "sp124t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1429,7 +1539,7 @@
      "color": "mute"
     },
     {
-     "id": "sp117t",
+     "id": "sp125t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1440,7 +1550,7 @@
      "weight": 700
     },
     {
-     "id": "sp118t",
+     "id": "sp126t",
      "type": "text",
      "x": 0,
      "y": 80.8,
@@ -1453,16 +1563,16 @@
    ]
   },
   {
-   "id": "sp126g",
+   "id": "sp134g",
    "type": "group",
    "x": 508,
-   "y": 5585.399999999998,
+   "y": 8438.455714285708,
    "w": 222,
-   "h": 120.6,
+   "h": 101.2,
    "anim": {},
    "children": [
     {
-     "id": "sp119t",
+     "id": "sp127t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1474,7 +1584,7 @@
      "color": "mute"
     },
     {
-     "id": "sp120t",
+     "id": "sp128t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1485,29 +1595,29 @@
      "weight": 700
     },
     {
-     "id": "sp121t",
+     "id": "sp129t",
      "type": "text",
      "x": 0,
      "y": 80.8,
      "w": 222,
-     "h": 39.8,
-     "text": "Spectacle drove attention, not curiosity.",
+     "h": 20.4,
+     "text": "Spectacle drove the attention.",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp127g",
+   "id": "sp135g",
    "type": "group",
    "x": 746,
-   "y": 5585.399999999998,
+   "y": 8438.455714285708,
    "w": 222,
    "h": 140.0,
    "anim": {},
    "children": [
     {
-     "id": "sp122t",
+     "id": "sp130t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1519,7 +1629,7 @@
      "color": "mute"
     },
     {
-     "id": "sp123t",
+     "id": "sp131t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1530,7 +1640,7 @@
      "weight": 700
     },
     {
-     "id": "sp124t",
+     "id": "sp132t",
      "type": "text",
      "x": 0,
      "y": 80.8,
@@ -1543,16 +1653,16 @@
    ]
   },
   {
-   "id": "sp137g",
+   "id": "sp145g",
    "type": "group",
    "x": 270,
-   "y": 5757.399999999998,
+   "y": 8610.455714285708,
    "w": 222,
    "h": 145.5,
    "anim": {},
    "children": [
     {
-     "id": "sp128t",
+     "id": "sp136t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1564,7 +1674,7 @@
      "color": "mute"
     },
     {
-     "id": "sp129t",
+     "id": "sp137t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1575,7 +1685,7 @@
      "weight": 700
     },
     {
-     "id": "sp130t",
+     "id": "sp138t",
      "type": "text",
      "x": 0,
      "y": 105.7,
@@ -1588,16 +1698,16 @@
    ]
   },
   {
-   "id": "sp138g",
+   "id": "sp146g",
    "type": "group",
    "x": 508,
-   "y": 5757.399999999998,
+   "y": 8610.455714285708,
    "w": 222,
    "h": 164.9,
    "anim": {},
    "children": [
     {
-     "id": "sp131t",
+     "id": "sp139t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1609,7 +1719,7 @@
      "color": "mute"
     },
     {
-     "id": "sp132t",
+     "id": "sp140t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1620,7 +1730,7 @@
      "weight": 700
     },
     {
-     "id": "sp133t",
+     "id": "sp141t",
      "type": "text",
      "x": 0,
      "y": 105.7,
@@ -1633,16 +1743,16 @@
    ]
   },
   {
-   "id": "sp139g",
+   "id": "sp147g",
    "type": "group",
    "x": 746,
-   "y": 5757.399999999998,
+   "y": 8610.455714285708,
    "w": 222,
    "h": 145.5,
    "anim": {},
    "children": [
     {
-     "id": "sp134t",
+     "id": "sp142t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1654,7 +1764,7 @@
      "color": "mute"
     },
     {
-     "id": "sp135t",
+     "id": "sp143t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1665,7 +1775,7 @@
      "weight": 700
     },
     {
-     "id": "sp136t",
+     "id": "sp144t",
      "type": "text",
      "x": 0,
      "y": 105.7,
@@ -1678,10 +1788,10 @@
    ]
   },
   {
-   "id": "sp140p",
+   "id": "sp148p",
    "type": "image",
    "x": 270,
-   "y": 5946.299999999997,
+   "y": 8799.355714285708,
    "w": 341,
    "h": 225,
    "src": "projects/media/spanda/field-tiger.jpg",
@@ -1704,10 +1814,10 @@
    "capShow": true
   },
   {
-   "id": "sp141p",
+   "id": "sp149p",
    "type": "image",
    "x": 627,
-   "y": 5946.299999999997,
+   "y": 8799.355714285708,
    "w": 341,
    "h": 225,
    "src": "projects/media/spanda/field-leopard.jpg",
@@ -1730,10 +1840,10 @@
    "capShow": true
   },
   {
-   "id": "sp142t",
+   "id": "sp150t",
    "type": "text",
    "x": 349,
-   "y": 6285.299999999997,
+   "y": 9138.355714285708,
    "w": 619,
    "h": 88.9,
    "text": "The animal was reading the room. Nobody in the room knew that.",
@@ -1742,10 +1852,10 @@
    "align": "right"
   },
   {
-   "id": "sp143t",
+   "id": "sp151t",
    "type": "text",
    "x": 349,
-   "y": 6420.399999999998,
+   "y": 9273.455714285708,
    "w": 619,
    "h": 20.4,
    "text": "At the leopard enclosure, Kankaria.",
@@ -1755,21 +1865,21 @@
    "align": "right"
   },
   {
-   "id": "sp144t",
+   "id": "sp152t",
    "type": "text",
    "x": 270,
-   "y": 6496.799999999997,
+   "y": 9349.855714285708,
    "w": 460,
-   "h": 39.8,
-   "text": "The gap is not information. It is the ability to receive what the animal is already broadcasting.",
+   "h": 20.4,
+   "text": "The gap is the ability to receive what the animal is already broadcasting.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp145t",
+   "id": "sp153t",
    "type": "text",
    "x": 32,
-   "y": 6736.599999999998,
+   "y": 9570.255714285708,
    "w": 222,
    "h": 25.9,
    "text": "insights",
@@ -1778,10 +1888,10 @@
    "nav": "insights"
   },
   {
-   "id": "sp146t",
+   "id": "sp154t",
    "type": "text",
    "x": 270,
-   "y": 6736.599999999998,
+   "y": 9570.255714285708,
    "w": 460,
    "h": 25.9,
    "text": "Three things visitors can’t read",
@@ -1789,10 +1899,10 @@
    "weight": 700
   },
   {
-   "id": "sp147t",
+   "id": "sp155t",
    "type": "text",
    "x": 270,
-   "y": 6778.499999999997,
+   "y": 9612.155714285707,
    "w": 460,
    "h": 39.8,
    "text": "The zoo’s How Might We questions clustered into three groups. Each group named a different kind of illiteracy.",
@@ -1800,16 +1910,16 @@
    "size": "s"
   },
   {
-   "id": "sp157g",
+   "id": "sp165g",
    "type": "group",
    "x": 270,
-   "y": 6842.299999999997,
+   "y": 9675.955714285707,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp148t",
+     "id": "sp156t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1821,7 +1931,7 @@
      "color": "mute"
     },
     {
-     "id": "sp149t",
+     "id": "sp157t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1832,7 +1942,7 @@
      "weight": 700
     },
     {
-     "id": "sp150t",
+     "id": "sp158t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -1845,16 +1955,16 @@
    ]
   },
   {
-   "id": "sp158g",
+   "id": "sp166g",
    "type": "group",
    "x": 508,
-   "y": 6842.299999999997,
+   "y": 9675.955714285707,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp151t",
+     "id": "sp159t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1866,7 +1976,7 @@
      "color": "mute"
     },
     {
-     "id": "sp152t",
+     "id": "sp160t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1877,7 +1987,7 @@
      "weight": 700
     },
     {
-     "id": "sp153t",
+     "id": "sp161t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -1890,16 +2000,16 @@
    ]
   },
   {
-   "id": "sp159g",
+   "id": "sp167g",
    "type": "group",
    "x": 746,
-   "y": 6842.299999999997,
+   "y": 9675.955714285707,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp154t",
+     "id": "sp162t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1911,7 +2021,7 @@
      "color": "mute"
     },
     {
-     "id": "sp155t",
+     "id": "sp163t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -1922,7 +2032,7 @@
      "weight": 700
     },
     {
-     "id": "sp156t",
+     "id": "sp164t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -1935,10 +2045,10 @@
    ]
   },
   {
-   "id": "sp160t",
+   "id": "sp168t",
    "type": "text",
    "x": 270,
-   "y": 6953.999999999997,
+   "y": 9787.655714285707,
    "w": 460,
    "h": 39.8,
    "text": "Signs, guides, and plaques address biographical illiteracy at best. Behavioural and sensorial remain mostly unattended to.",
@@ -1946,16 +2056,16 @@
    "size": "s"
   },
   {
-   "id": "sp163g",
+   "id": "sp171g",
    "type": "group",
    "x": 270,
-   "y": 7025.799999999997,
+   "y": 9859.455714285707,
    "w": 222,
    "h": 110.5,
    "anim": {},
    "children": [
     {
-     "id": "sp161t",
+     "id": "sp169t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -1968,7 +2078,7 @@
      "color": "accent"
     },
     {
-     "id": "sp162t",
+     "id": "sp170t",
      "type": "text",
      "x": 0,
      "y": 51.3,
@@ -1981,10 +2091,10 @@
    ]
   },
   {
-   "id": "sp164t",
+   "id": "sp172t",
    "type": "text",
    "x": 270,
-   "y": 7160.299999999997,
+   "y": 9993.955714285707,
    "w": 460,
    "h": 20.4,
    "text": "Global Evaluation of Biodiversity Literacy.",
@@ -1993,21 +2103,56 @@
    "color": "mute"
   },
   {
-   "id": "sp165t",
+   "id": "sp173t",
    "type": "text",
    "x": 270,
-   "y": 7204.699999999997,
+   "y": 10038.355714285706,
    "w": 460,
-   "h": 59.2,
-   "text": "Stillness is not laziness. It is vigilant mapping. Leopards operate in infrasound and spatial acoustic maps imperceptible to humans. The gap is not social, it is hardware.",
+   "h": 20.4,
+   "text": "Stillness is vigilant mapping.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp166t",
+   "id": "sp174t",
    "type": "text",
    "x": 270,
-   "y": 7319.899999999997,
+   "y": 10062.755714285706,
+   "w": 460,
+   "h": 20.4,
+   "text": "Felid Sensory Biology.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp175t",
+   "type": "text",
+   "x": 270,
+   "y": 10095.155714285705,
+   "w": 460,
+   "h": 39.8,
+   "text": "Leopards operate in infrasound and spatial acoustic maps imperceptible to humans. The gap is hardware.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp176t",
+   "type": "text",
+   "x": 270,
+   "y": 10138.955714285705,
+   "w": 460,
+   "h": 20.4,
+   "text": "Umwelt, von Uexküll.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp177t",
+   "type": "text",
+   "x": 270,
+   "y": 10215.355714285704,
    "w": 460,
    "h": 25.9,
    "text": "What the tiger is actually doing",
@@ -2015,10 +2160,10 @@
    "weight": 700
   },
   {
-   "id": "sp167t",
+   "id": "sp178t",
    "type": "text",
    "x": 270,
-   "y": 7361.7999999999965,
+   "y": 10257.255714285704,
    "w": 222,
    "h": 20.4,
    "text": "what you see",
@@ -2027,10 +2172,10 @@
    "color": "mute"
   },
   {
-   "id": "sp168t",
+   "id": "sp179t",
    "type": "text",
    "x": 508,
-   "y": 7361.7999999999965,
+   "y": 10257.255714285704,
    "w": 460,
    "h": 20.4,
    "text": "what is actually happening",
@@ -2039,16 +2184,16 @@
    "color": "mute"
   },
   {
-   "id": "sp172g",
+   "id": "sp183g",
    "type": "group",
    "x": 270,
-   "y": 7391.7999999999965,
+   "y": 10287.255714285704,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp169t",
+     "id": "sp180t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2060,39 +2205,39 @@
      "weight": 700
     },
     {
-     "id": "sp170t",
+     "id": "sp181t",
      "type": "text",
      "x": 238,
      "y": 0,
      "w": 460,
      "h": 39.8,
-     "text": "40–50 BPM resting heart rate. Ears rotating independently, mapping every footfall in the corridor. Vigilant acoustic mapping, not sleep.",
+     "text": "40–50 BPM resting heart rate. Ears rotating independently, mapping every footfall in the corridor. Vigilant acoustic mapping.",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp171b",
+   "id": "sp182b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 7443.6,
+   "y": 10339.1,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp176g",
+   "id": "sp187g",
    "type": "group",
    "x": 270,
-   "y": 7457.599999999997,
+   "y": 10353.055714285703,
    "w": 698,
-   "h": 59.2,
+   "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp173t",
+     "id": "sp184t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2104,39 +2249,39 @@
      "weight": 700
     },
     {
-     "id": "sp174t",
+     "id": "sp185t",
      "type": "text",
      "x": 238,
      "y": 0,
      "w": 460,
-     "h": 59.2,
-     "text": "Infrasound reception: processing territorial signals below 20Hz, completely inaudible to humans. It is not ignoring. It is listening to a frequency we cannot hear.",
+     "h": 39.8,
+     "text": "Infrasound reception: processing territorial signals below 20Hz, completely inaudible to humans. It is listening to a frequency we cannot hear.",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp175b",
+   "id": "sp186b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 7528.8,
+   "y": 10404.9,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp180g",
+   "id": "sp191g",
    "type": "group",
    "x": 270,
-   "y": 7542.7999999999965,
+   "y": 10418.855714285703,
    "w": 698,
-   "h": 59.2,
+   "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp177t",
+     "id": "sp188t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2148,39 +2293,39 @@
      "weight": 700
     },
     {
-     "id": "sp178t",
+     "id": "sp189t",
      "type": "text",
      "x": 238,
      "y": 0,
      "w": 460,
-     "h": 59.2,
-     "text": "Stereotypic pacing, zoochosis. Repetitive locomotion from spatial frustration. A coping mechanism, not excitement. The zoo’s own failure, made physical.",
+     "h": 39.8,
+     "text": "Stereotypic pacing, zoochosis. Repetitive locomotion from spatial frustration. A coping mechanism. The zoo’s own failure, made physical.",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp179b",
+   "id": "sp190b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 7614.0,
+   "y": 10470.7,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp184g",
+   "id": "sp195g",
    "type": "group",
    "x": 270,
-   "y": 7627.999999999996,
+   "y": 10484.655714285702,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp181t",
+     "id": "sp192t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2192,7 +2337,7 @@
      "weight": 700
     },
     {
-     "id": "sp182t",
+     "id": "sp193t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -2205,26 +2350,26 @@
    ]
   },
   {
-   "id": "sp183b",
+   "id": "sp194b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 7679.8,
+   "y": 10536.5,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp188g",
+   "id": "sp199g",
    "type": "group",
    "x": 270,
-   "y": 7693.7999999999965,
+   "y": 10550.455714285701,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp185t",
+     "id": "sp196t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2236,7 +2381,7 @@
      "weight": 700
     },
     {
-     "id": "sp186t",
+     "id": "sp197t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -2249,20 +2394,20 @@
    ]
   },
   {
-   "id": "sp187b",
+   "id": "sp198b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 7745.6,
+   "y": 10602.3,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp189t",
+   "id": "sp200t",
    "type": "text",
    "x": 270,
-   "y": 7759.599999999997,
+   "y": 10616.2557142857,
    "w": 460,
    "h": 20.4,
    "text": "Typical visitor remarks, and the tiger’s umwelt behind them.",
@@ -2271,10 +2416,10 @@
    "color": "mute"
   },
   {
-   "id": "sp190t",
+   "id": "sp201t",
    "type": "text",
    "x": 32,
-   "y": 7979.999999999996,
+   "y": 10836.6557142857,
    "w": 222,
    "h": 25.9,
    "text": "inspiration",
@@ -2283,10 +2428,10 @@
    "nav": "inspiration"
   },
   {
-   "id": "sp191t",
+   "id": "sp202t",
    "type": "text",
    "x": 270,
-   "y": 7979.999999999996,
+   "y": 10836.6557142857,
    "w": 460,
    "h": 25.9,
    "text": "How some traditions relate to animals",
@@ -2294,10 +2439,10 @@
    "weight": 700
   },
   {
-   "id": "sp192t",
+   "id": "sp203t",
    "type": "text",
    "x": 270,
-   "y": 8021.899999999996,
+   "y": 10878.5557142857,
    "w": 460,
    "h": 39.8,
    "text": "This knowledge existed. We designed it out. Indigenous and traditional communities did not have this gap.",
@@ -2305,145 +2450,76 @@
    "size": "s"
   },
   {
-   "id": "sp202g",
-   "type": "group",
+   "id": "sp204t",
+   "type": "text",
    "x": 270,
-   "y": 8085.699999999996,
-   "w": 222,
-   "h": 115.1,
+   "y": 10942.355714285699,
+   "w": 460,
+   "h": 25.9,
+   "text": "Warli tradition",
    "anim": {},
-   "children": [
-    {
-     "id": "sp193t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "01",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp194t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Warli tradition",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp195t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 59.2,
-     "text": "Humans and animals depicted at equal scale, in shared ecological space. Not hierarchy. Cohabitation.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp203g",
-   "type": "group",
-   "x": 508,
-   "y": 8085.699999999996,
-   "w": 222,
-   "h": 153.9,
+   "id": "sp205t",
+   "type": "text",
+   "x": 270,
+   "y": 10972.255714285699,
+   "w": 460,
+   "h": 39.8,
+   "text": "Humans and animals depicted at equal scale, in shared ecological space. Cohabitation.",
    "anim": {},
-   "children": [
-    {
-     "id": "sp196t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "02",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp197t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Waghoba",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp198t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 98.0,
-     "text": "Western Ghats leopard and tiger deity. The animal is not an exhibit, but a presence to be respected. Territorial boundaries acknowledged before approach.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "size": "s"
   },
   {
-   "id": "sp204g",
-   "type": "group",
-   "x": 746,
-   "y": 8085.699999999996,
-   "w": 222,
-   "h": 134.5,
+   "id": "sp206t",
+   "type": "text",
+   "x": 270,
+   "y": 11034.055714285698,
+   "w": 460,
+   "h": 25.9,
+   "text": "Waghoba",
    "anim": {},
-   "children": [
-    {
-     "id": "sp199t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "03",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp200t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Shamanic soul-transfer",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp201t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 78.6,
-     "text": "Temporarily inhabiting an animal’s body schema to understand its state. Embodied empathy as method, not metaphor.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp205p",
+   "id": "sp207t",
+   "type": "text",
+   "x": 270,
+   "y": 11063.955714285697,
+   "w": 460,
+   "h": 39.8,
+   "text": "Western Ghats leopard and tiger deity. The animal is a presence to be respected. Territorial boundaries acknowledged before approach.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp208t",
+   "type": "text",
+   "x": 270,
+   "y": 11125.755714285697,
+   "w": 460,
+   "h": 25.9,
+   "text": "Shamanic soul-transfer",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp209t",
+   "type": "text",
+   "x": 270,
+   "y": 11155.655714285696,
+   "w": 460,
+   "h": 39.8,
+   "text": "A cross-cultural practice of temporarily inhabiting an animal’s body schema to understand its state. Embodied empathy as a method.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp210p",
    "type": "image",
    "x": 270,
-   "y": 8263.599999999997,
+   "y": 11219.455714285696,
    "w": 460,
    "h": 173.3,
    "src": "projects/media/spanda/warli.jpg",
@@ -2465,10 +2541,10 @@
    "capShow": true
   },
   {
-   "id": "sp206t",
+   "id": "sp211t",
    "type": "text",
    "x": 270,
-   "y": 8526.866666666663,
+   "y": 11482.722380952362,
    "w": 460,
    "h": 25.9,
    "text": "From spectator to kin",
@@ -2476,10 +2552,10 @@
    "weight": 700
   },
   {
-   "id": "sp207t",
+   "id": "sp212t",
    "type": "text",
    "x": 270,
-   "y": 8568.766666666663,
+   "y": 11524.622380952362,
    "w": 222,
    "h": 20.4,
    "text": "dimension",
@@ -2488,10 +2564,10 @@
    "color": "mute"
   },
   {
-   "id": "sp208t",
+   "id": "sp213t",
    "type": "text",
    "x": 508,
-   "y": 8568.766666666663,
+   "y": 11524.622380952362,
    "w": 222,
    "h": 20.4,
    "text": "the spectator",
@@ -2500,10 +2576,10 @@
    "color": "mute"
   },
   {
-   "id": "sp209t",
+   "id": "sp214t",
    "type": "text",
    "x": 746,
-   "y": 8568.766666666663,
+   "y": 11524.622380952362,
    "w": 222,
    "h": 20.4,
    "text": "the kin",
@@ -2512,16 +2588,16 @@
    "color": "mute"
   },
   {
-   "id": "sp214g",
+   "id": "sp219g",
    "type": "group",
    "x": 270,
-   "y": 8598.766666666663,
+   "y": 11554.622380952362,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp210t",
+     "id": "sp215t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2533,7 +2609,7 @@
      "weight": 700
     },
     {
-     "id": "sp211t",
+     "id": "sp216t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -2545,7 +2621,7 @@
      "color": "mute"
     },
     {
-     "id": "sp212t",
+     "id": "sp217t",
      "type": "text",
      "x": 476,
      "y": 0,
@@ -2558,26 +2634,26 @@
    ]
   },
   {
-   "id": "sp213b",
+   "id": "sp218b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 8650.6,
+   "y": 11606.4,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp219g",
+   "id": "sp224g",
    "type": "group",
    "x": 270,
-   "y": 8664.566666666662,
+   "y": 11620.422380952361,
    "w": 698,
    "h": 20.4,
    "anim": {},
    "children": [
     {
-     "id": "sp215t",
+     "id": "sp220t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2589,7 +2665,7 @@
      "weight": 700
     },
     {
-     "id": "sp216t",
+     "id": "sp221t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -2601,7 +2677,7 @@
      "color": "mute"
     },
     {
-     "id": "sp217t",
+     "id": "sp222t",
      "type": "text",
      "x": 476,
      "y": 0,
@@ -2614,26 +2690,26 @@
    ]
   },
   {
-   "id": "sp218b",
+   "id": "sp223b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 8697.0,
+   "y": 11652.8,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp224g",
+   "id": "sp229g",
    "type": "group",
    "x": 270,
-   "y": 8710.966666666662,
+   "y": 11666.82238095236,
    "w": 698,
    "h": 20.4,
    "anim": {},
    "children": [
     {
-     "id": "sp220t",
+     "id": "sp225t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2645,7 +2721,7 @@
      "weight": 700
     },
     {
-     "id": "sp221t",
+     "id": "sp226t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -2657,7 +2733,7 @@
      "color": "mute"
     },
     {
-     "id": "sp222t",
+     "id": "sp227t",
      "type": "text",
      "x": 476,
      "y": 0,
@@ -2670,26 +2746,26 @@
    ]
   },
   {
-   "id": "sp223b",
+   "id": "sp228b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 8743.4,
+   "y": 11699.2,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp229g",
+   "id": "sp234g",
    "type": "group",
    "x": 270,
-   "y": 8757.366666666661,
+   "y": 11713.22238095236,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp225t",
+     "id": "sp230t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2701,7 +2777,7 @@
      "weight": 700
     },
     {
-     "id": "sp226t",
+     "id": "sp231t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -2713,7 +2789,7 @@
      "color": "mute"
     },
     {
-     "id": "sp227t",
+     "id": "sp232t",
      "type": "text",
      "x": 476,
      "y": 0,
@@ -2726,80 +2802,20 @@
    ]
   },
   {
-   "id": "sp228b",
+   "id": "sp233b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 8809.2,
+   "y": 11765.0,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp230t",
+   "id": "sp236t",
    "type": "text",
    "x": 32,
-   "y": 8879.16666666666,
-   "w": 222,
-   "h": 20.4,
-   "text": "how the question changed",
-   "anim": {},
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "sp231t",
-   "type": "text",
-   "x": 270,
-   "y": 8879.16666666666,
-   "w": 460,
-   "h": 39.8,
-   "text": "How might we redesign the zoo experience to move from just ‘looking at’ animals to actually ‘connecting’ with them?",
-   "anim": {},
-   "size": "s",
-   "color": "faint"
-  },
-  {
-   "id": "sp232t",
-   "type": "text",
-   "x": 270,
-   "y": 8930.96666666666,
-   "w": 460,
-   "h": 59.2,
-   "text": "How might we bridge the sensory and behavioral gaps between visitors and animals so that the passive ‘consumption of a species’ is replaced by the active acknowledgement of a unique individual life?",
-   "anim": {},
-   "size": "s",
-   "color": "faint"
-  },
-  {
-   "id": "sp233t",
-   "type": "text",
-   "x": 270,
-   "y": 9002.16666666666,
-   "w": 460,
-   "h": 59.2,
-   "text": "How might we bridge the sensory and behavioral gaps between species to trigger a visceral kinship, transforming the ‘passive consumption’ of a zoo display into the acknowledgment of a unique individual life?",
-   "anim": {},
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "sp234t",
-   "type": "text",
-   "x": 270,
-   "y": 9073.366666666661,
-   "w": 460,
-   "h": 59.2,
-   "text": "Also voted, and set aside: How might we enable a captive animal’s internal state to dictate its external environment, restoring its agency over its social exposure?",
-   "anim": {},
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "sp235t",
-   "type": "text",
-   "x": 32,
-   "y": 9188.566666666662,
+   "y": 11867.02238095236,
    "w": 222,
    "h": 20.4,
    "text": "design question",
@@ -2808,10 +2824,10 @@
    "color": "mute"
   },
   {
-   "id": "sp236t",
+   "id": "sp237t",
    "type": "text",
    "x": 270,
-   "y": 9180.566666666662,
+   "y": 11859.02238095236,
    "w": 698,
    "h": 255.5,
    "text": "“How might we bridge the communication divide in zoos to move from the ‘passive consumption’ of a display toward a visceral encounter with an individual’s presence, triggering a sense of interspecies kinship?”",
@@ -2821,10 +2837,10 @@
    "color": "accent"
   },
   {
-   "id": "sp237t",
+   "id": "sp238t",
    "type": "text",
    "x": 32,
-   "y": 9516.066666666662,
+   "y": 12194.52238095236,
    "w": 222,
    "h": 20.4,
    "text": "design principles",
@@ -2833,16 +2849,16 @@
    "color": "mute"
   },
   {
-   "id": "sp247g",
+   "id": "sp248g",
    "type": "group",
    "x": 270,
-   "y": 9516.066666666662,
+   "y": 12194.52238095236,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp238t",
+     "id": "sp239t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2854,18 +2870,18 @@
      "color": "mute"
     },
     {
-     "id": "sp239t",
+     "id": "sp240t",
      "type": "text",
      "x": 0,
      "y": 24,
      "w": 222,
      "h": 25.9,
-     "text": "Inhabit, don’t observe",
+     "text": "Inhabit the animal’s state",
      "anim": {},
      "weight": 700
     },
     {
-     "id": "sp240t",
+     "id": "sp241t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -2878,16 +2894,16 @@
    ]
   },
   {
-   "id": "sp248g",
+   "id": "sp249g",
    "type": "group",
    "x": 508,
-   "y": 9516.066666666662,
+   "y": 12194.52238095236,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp241t",
+     "id": "sp242t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2899,18 +2915,18 @@
      "color": "mute"
     },
     {
-     "id": "sp242t",
+     "id": "sp243t",
      "type": "text",
      "x": 0,
      "y": 24,
      "w": 222,
      "h": 25.9,
-     "text": "An individual, not a species",
+     "text": "One named individual",
      "anim": {},
      "weight": 700
     },
     {
-     "id": "sp243t",
+     "id": "sp244t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -2923,16 +2939,16 @@
    ]
   },
   {
-   "id": "sp249g",
+   "id": "sp250g",
    "type": "group",
    "x": 746,
-   "y": 9516.066666666662,
+   "y": 12194.52238095236,
    "w": 222,
    "h": 95.7,
    "anim": {},
    "children": [
     {
-     "id": "sp244t",
+     "id": "sp245t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2944,7 +2960,7 @@
      "color": "mute"
     },
     {
-     "id": "sp245t",
+     "id": "sp246t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -2955,7 +2971,7 @@
      "weight": 700
     },
     {
-     "id": "sp246t",
+     "id": "sp247t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -2968,16 +2984,16 @@
    ]
   },
   {
-   "id": "sp256g",
+   "id": "sp257g",
    "type": "group",
    "x": 270,
-   "y": 9643.766666666663,
+   "y": 12322.22238095236,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp250t",
+     "id": "sp251t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -2989,7 +3005,7 @@
      "color": "mute"
     },
     {
-     "id": "sp251t",
+     "id": "sp252t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3000,7 +3016,7 @@
      "weight": 700
     },
     {
-     "id": "sp252t",
+     "id": "sp253t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3013,16 +3029,16 @@
    ]
   },
   {
-   "id": "sp257g",
+   "id": "sp258g",
    "type": "group",
    "x": 508,
-   "y": 9643.766666666663,
+   "y": 12322.22238095236,
    "w": 222,
    "h": 115.1,
    "anim": {},
    "children": [
     {
-     "id": "sp253t",
+     "id": "sp254t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3034,7 +3050,7 @@
      "color": "mute"
     },
     {
-     "id": "sp254t",
+     "id": "sp255t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3045,7 +3061,7 @@
      "weight": 700
     },
     {
-     "id": "sp255t",
+     "id": "sp256t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3058,10 +3074,10 @@
    ]
   },
   {
-   "id": "sp258t",
+   "id": "sp259t",
    "type": "text",
    "x": 32,
-   "y": 9814.866666666663,
+   "y": 12493.32238095236,
    "w": 222,
    "h": 20.4,
    "text": "defining the interaction",
@@ -3070,10 +3086,10 @@
    "color": "mute"
   },
   {
-   "id": "sp259p",
+   "id": "sp260p",
    "type": "image",
    "x": 270,
-   "y": 9814.866666666663,
+   "y": 12493.32238095236,
    "w": 698,
    "h": 333.1,
    "src": "projects/media/spanda/five-w-h.jpg",
@@ -3096,10 +3112,10 @@
    "capShow": true
   },
   {
-   "id": "sp260t",
+   "id": "sp261t",
    "type": "text",
    "x": 32,
-   "y": 10382.003030303027,
+   "y": 13060.458744588725,
    "w": 222,
    "h": 25.9,
    "text": "the object",
@@ -3108,10 +3124,10 @@
    "nav": "the object"
   },
   {
-   "id": "sp261t",
+   "id": "sp262t",
    "type": "text",
    "x": 270,
-   "y": 10382.003030303027,
+   "y": 13060.458744588725,
    "w": 460,
    "h": 25.9,
    "text": "Held against the chest",
@@ -3119,21 +3135,102 @@
    "weight": 700
   },
   {
-   "id": "sp262t",
-   "type": "text",
+   "id": "sp263p",
+   "type": "image",
    "x": 270,
-   "y": 10423.903030303027,
-   "w": 460,
-   "h": 39.8,
-   "text": "To receive another’s presence, you must first choose to be present. Deliberate, conscious.",
-   "anim": {},
-   "size": "s"
+   "y": 13102.358744588724,
+   "w": 341,
+   "h": 260,
+   "src": "projects/media/spanda/paw-yellow.jpg",
+   "fit": "cover",
+   "alt": "The yellow paw",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
+    }
+   }
   },
   {
-   "id": "sp263t",
+   "id": "sp264p",
+   "type": "image",
+   "x": 627,
+   "y": 13102.358744588724,
+   "w": 341,
+   "h": 260,
+   "src": "projects/media/spanda/paw-blue.jpg",
+   "fit": "cover",
+   "alt": "The blue paw",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0.1,
+     "ease": "out"
+    }
+   }
+  },
+  {
+   "id": "sp265p",
+   "type": "image",
+   "x": 270,
+   "y": 13378.358744588724,
+   "w": 341,
+   "h": 260,
+   "src": "projects/media/spanda/paw-pink.jpg",
+   "fit": "cover",
+   "alt": "The pink paw",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
+    }
+   }
+  },
+  {
+   "id": "sp266p",
+   "type": "image",
+   "x": 627,
+   "y": 13378.358744588724,
+   "w": 341,
+   "h": 260,
+   "src": "projects/media/spanda/paw-lanyard.jpg",
+   "fit": "cover",
+   "alt": "The clear paw hanging from a wrist on its lanyard",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0.1,
+     "ease": "out"
+    }
+   }
+  },
+  {
+   "id": "sp267t",
    "type": "text",
    "x": 270,
-   "y": 10511.703030303026,
+   "y": 13686.358744588724,
    "w": 460,
    "h": 25.9,
    "text": "Why the chest",
@@ -3141,21 +3238,33 @@
    "weight": 700
   },
   {
-   "id": "sp264t",
+   "id": "sp268t",
    "type": "text",
    "x": 270,
-   "y": 10553.603030303026,
+   "y": 13728.258744588724,
    "w": 460,
    "h": 59.2,
-   "text": "The chest contains CT afferents that route to the interoceptive cortex. The body reads the signal as coming from within, not from a device. The wrist is informational touch. The chest is affective touch.",
+   "text": "The chest contains CT afferents that route to the interoceptive cortex. The body reads the signal as coming from within. The wrist is informational touch. The chest is affective touch.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp265t",
+   "id": "sp269t",
    "type": "text",
    "x": 270,
-   "y": 10660.803030303026,
+   "y": 13791.458744588725,
+   "w": 460,
+   "h": 20.4,
+   "text": "McGlone et al., 2014.",
+   "anim": {},
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "sp270t",
+   "type": "text",
+   "x": 270,
+   "y": 13859.858744588724,
    "w": 460,
    "h": 25.9,
    "text": "Form and parts",
@@ -3163,10 +3272,10 @@
    "weight": 700
   },
   {
-   "id": "sp266p",
+   "id": "sp271p",
    "type": "image",
    "x": 270,
-   "y": 10702.703030303026,
+   "y": 13901.758744588724,
    "w": 341,
    "h": 472.4,
    "src": "projects/media/spanda/exploded-view.jpg",
@@ -3189,10 +3298,10 @@
    "capShow": true
   },
   {
-   "id": "sp267t",
+   "id": "sp272t",
    "type": "text",
    "x": 627,
-   "y": 10702.703030303026,
+   "y": 13901.758744588724,
    "w": 341,
    "h": 20.4,
    "text": "Shell",
@@ -3201,10 +3310,10 @@
    "weight": 700
   },
   {
-   "id": "sp268t",
+   "id": "sp273t",
    "type": "text",
    "x": 627,
-   "y": 10727.103030303026,
+   "y": 13926.158744588723,
    "w": 341,
    "h": 39.8,
    "text": "Translucent tinted polycarbonate, satin finish. Electronics visible inside.",
@@ -3212,10 +3321,10 @@
    "size": "s"
   },
   {
-   "id": "sp269t",
+   "id": "sp274t",
    "type": "text",
    "x": 627,
-   "y": 10780.903030303025,
+   "y": 13979.958744588723,
    "w": 341,
    "h": 20.4,
    "text": "Pads",
@@ -3224,10 +3333,10 @@
    "weight": 700
   },
   {
-   "id": "sp270t",
+   "id": "sp275t",
    "type": "text",
    "x": 627,
-   "y": 10805.303030303025,
+   "y": 14004.358744588722,
    "w": 341,
    "h": 39.8,
    "text": "Soft-touch silicone rubber. 5 contact points, 5 actuators.",
@@ -3235,10 +3344,10 @@
    "size": "s"
   },
   {
-   "id": "sp271t",
+   "id": "sp276t",
    "type": "text",
    "x": 627,
-   "y": 10859.103030303024,
+   "y": 14058.158744588722,
    "w": 341,
    "h": 20.4,
    "text": "Lanyard",
@@ -3247,10 +3356,10 @@
    "weight": 700
   },
   {
-   "id": "sp272t",
+   "id": "sp277t",
    "type": "text",
    "x": 627,
-   "y": 10883.503030303023,
+   "y": 14082.558744588721,
    "w": 341,
    "h": 39.8,
    "text": "Braided nylon. Secure handling in high-density environments.",
@@ -3258,10 +3367,10 @@
    "size": "s"
   },
   {
-   "id": "sp273t",
+   "id": "sp278t",
    "type": "text",
    "x": 627,
-   "y": 10937.303030303023,
+   "y": 14136.35874458872,
    "w": 341,
    "h": 20.4,
    "text": "Inside",
@@ -3270,10 +3379,10 @@
    "weight": 700
   },
   {
-   "id": "sp274t",
+   "id": "sp279t",
    "type": "text",
    "x": 627,
-   "y": 10961.703030303022,
+   "y": 14160.75874458872,
    "w": 341,
    "h": 117.4,
    "text": "DA7280 LRA: central pad, heartbeat + resonance.<br>4× ERM: toe pads, directional rhythm.<br>NeoPixel strip: edge, valence layer.<br>ESP32-C3: wireless control.<br>Neo6M GPS: locator.<br>TTP223: touch sensor for activation.",
@@ -3281,10 +3390,10 @@
    "size": "s"
   },
   {
-   "id": "sp275t",
+   "id": "sp280t",
    "type": "text",
    "x": 627,
-   "y": 11093.103030303022,
+   "y": 14292.15874458872,
    "w": 341,
    "h": 39.8,
    "text": "Translucent by design. The child sees it working. Transparency as consent.",
@@ -3292,47 +3401,10 @@
    "size": "s"
   },
   {
-   "id": "sp276s",
-   "type": "slides",
-   "mode": "row",
-   "show": 3,
-   "gap": 16,
-   "fit": "cover",
-   "x": 270,
-   "y": 11233.116073781286,
-   "w": 698,
-   "h": 140,
-   "slides": [
-    {
-     "src": "projects/media/spanda/hover.jpg",
-     "alt": "Four paws in pink, yellow, blue and clear"
-    },
-    {
-     "src": "projects/media/spanda/paw-white.jpg",
-     "alt": "White paw"
-    },
-    {
-     "src": "projects/media/spanda/paw-blue.jpg",
-     "alt": "Blue paw"
-    },
-    {
-     "src": "projects/media/spanda/paw-yellow.jpg",
-     "alt": "Yellow paw"
-    },
-    {
-     "src": "projects/media/spanda/paw-pink.jpg",
-     "alt": "Pink paw"
-    }
-   ],
-   "anim": {},
-   "caption": "Colourways.",
-   "capShow": true
-  },
-  {
-   "id": "sp277p",
+   "id": "sp281p",
    "type": "image",
    "x": 270,
-   "y": 11431.116073781286,
+   "y": 14448.171788066984,
    "w": 341,
    "h": 310,
    "src": "projects/media/spanda/prototype-hand.jpg",
@@ -3355,10 +3427,10 @@
    "capShow": true
   },
   {
-   "id": "sp278p",
+   "id": "sp282p",
    "type": "image",
    "x": 627,
-   "y": 11431.116073781286,
+   "y": 14448.171788066984,
    "w": 341,
    "h": 310,
    "src": "projects/media/spanda/prototype-open.jpg",
@@ -3381,10 +3453,10 @@
    "capShow": true
   },
   {
-   "id": "sp279t",
+   "id": "sp283t",
    "type": "text",
    "x": 32,
-   "y": 11975.116073781286,
+   "y": 14992.171788066984,
    "w": 222,
    "h": 25.9,
    "text": "haptic language",
@@ -3393,10 +3465,10 @@
    "nav": "haptic language"
   },
   {
-   "id": "sp280t",
+   "id": "sp284t",
    "type": "text",
    "x": 270,
-   "y": 11975.116073781286,
+   "y": 14992.171788066984,
    "w": 460,
    "h": 25.9,
    "text": "How haptics carry feeling",
@@ -3404,10 +3476,10 @@
    "weight": 700
   },
   {
-   "id": "sp281t",
+   "id": "sp285t",
    "type": "text",
    "x": 270,
-   "y": 12017.016073781286,
+   "y": 15034.071788066984,
    "w": 460,
    "h": 59.2,
    "text": "Most educational media routes through the brain first; signs, screens, audio guides land in the cognitive layer, the same layer where we project narratives onto what we see. Haptics bypass that layer entirely.",
@@ -3415,10 +3487,10 @@
    "size": "s"
   },
   {
-   "id": "sp282t",
+   "id": "sp286t",
    "type": "text",
    "x": 270,
-   "y": 12084.216073781286,
+   "y": 15101.271788066984,
    "w": 460,
    "h": 78.6,
    "text": "Two approaches. Where a biological rhythm exists, such as a heartbeat or a breath, we mirror it directly. Where it doesn’t, we use rhythm rate and envelope shape as the emotional lever. Slow and smooth reads as calm. Fast and jagged reads as threat. The body already knows this.",
@@ -3426,22 +3498,33 @@
    "size": "s"
   },
   {
-   "id": "sp283t",
+   "id": "sp287t",
    "type": "text",
    "x": 270,
-   "y": 12170.816073781287,
+   "y": 15187.871788066985,
    "w": 460,
-   "h": 78.6,
-   "text": "Rhythm is the single parameter that independently modulates valence, arousal, and perceived roughness (Seifi & MacLean, 2013). Only naturalistic, biomimetic patterns reliably reach calm-pleasant states in children (Seifi & MacLean, 2013; Shim & Tan, 2020).",
+   "h": 59.2,
+   "text": "Rhythm is the single parameter that independently modulates valence, arousal, and perceived roughness. Only naturalistic, biomimetic patterns reliably reach calm-pleasant states in children.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp288t",
+   "type": "text",
+   "x": 270,
+   "y": 15251.071788066985,
+   "w": 460,
+   "h": 20.4,
+   "text": "Seifi & MacLean, 2013; Shim & Tan, 2020.",
    "anim": {},
    "size": "s",
    "color": "mute"
   },
   {
-   "id": "sp284t",
+   "id": "sp289t",
    "type": "text",
    "x": 270,
-   "y": 12297.416073781287,
+   "y": 15319.471788066985,
    "w": 460,
    "h": 25.9,
    "text": "What the research said",
@@ -3449,10 +3532,10 @@
    "weight": 700
   },
   {
-   "id": "sp285t",
+   "id": "sp290t",
    "type": "text",
    "x": 270,
-   "y": 12339.316073781287,
+   "y": 15361.371788066985,
    "w": 460,
    "h": 20.4,
    "text": "Every pattern decision was checked against research on affective haptics.",
@@ -3460,16 +3543,16 @@
    "size": "s"
   },
   {
-   "id": "sp295g",
+   "id": "sp300g",
    "type": "group",
    "x": 270,
-   "y": 12383.716073781286,
+   "y": 15405.771788066984,
    "w": 222,
-   "h": 115.1,
+   "h": 134.5,
    "anim": {},
    "children": [
     {
-     "id": "sp286t",
+     "id": "sp291t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3481,40 +3564,40 @@
      "color": "mute"
     },
     {
-     "id": "sp287t",
+     "id": "sp292t",
      "type": "text",
      "x": 0,
      "y": 24,
      "w": 222,
      "h": 25.9,
-     "text": "Rhythm over frequency",
+     "text": "Rhythm drives feeling",
      "anim": {},
      "weight": 700
     },
     {
-     "id": "sp288t",
+     "id": "sp293t",
      "type": "text",
      "x": 0,
      "y": 55.9,
      "w": 222,
-     "h": 59.2,
-     "text": "Rhythm rate drives emotional valence far more than the carrier frequency.",
+     "h": 78.6,
+     "text": "Rhythm rate shapes emotional valence far more than the carrier frequency. (Azevedo et al., 2017; Costa et al., 2016)",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp296g",
+   "id": "sp301g",
    "type": "group",
    "x": 508,
-   "y": 12383.716073781286,
+   "y": 15405.771788066984,
    "w": 222,
-   "h": 134.5,
+   "h": 153.9,
    "anim": {},
    "children": [
     {
-     "id": "sp289t",
+     "id": "sp294t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3526,40 +3609,40 @@
      "color": "mute"
     },
     {
-     "id": "sp290t",
+     "id": "sp295t",
      "type": "text",
      "x": 0,
      "y": 24,
      "w": 222,
      "h": 25.9,
-     "text": "Biology over codes",
+     "text": "Biology reads clearly",
      "anim": {},
      "weight": 700
     },
     {
-     "id": "sp291t",
+     "id": "sp296t",
      "type": "text",
      "x": 0,
      "y": 55.9,
      "w": 222,
-     "h": 78.6,
-     "text": "Calm states are reached with naturalistic rhythms like breath and heartbeat. Abstract codes fail, especially with children.",
+     "h": 98.0,
+     "text": "Calm states are reached with naturalistic rhythms like breath and heartbeat. Abstract codes fail, especially with children. (Shim & Tan, 2020)",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp297g",
+   "id": "sp302g",
    "type": "group",
    "x": 746,
-   "y": 12383.716073781286,
+   "y": 15405.771788066984,
    "w": 222,
    "h": 115.1,
    "anim": {},
    "children": [
     {
-     "id": "sp292t",
+     "id": "sp297t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3571,7 +3654,7 @@
      "color": "mute"
     },
     {
-     "id": "sp293t",
+     "id": "sp298t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3582,7 +3665,7 @@
      "weight": 700
     },
     {
-     "id": "sp294t",
+     "id": "sp299t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3595,10 +3678,10 @@
    ]
   },
   {
-   "id": "sp298t",
+   "id": "sp303t",
    "type": "text",
    "x": 270,
-   "y": 12566.216073781286,
+   "y": 15607.671788066984,
    "w": 460,
    "h": 25.9,
    "text": "Choosing behaviours",
@@ -3606,10 +3689,10 @@
    "weight": 700
   },
   {
-   "id": "sp299t",
+   "id": "sp304t",
    "type": "text",
    "x": 270,
-   "y": 12608.116073781286,
+   "y": 15649.571788066984,
    "w": 460,
    "h": 78.6,
    "text": "I scored candidate behaviours on Frequency (how often it happens), Gap (how invisible or misread it is to visitors) and Viability (whether it can be sensed and felt). An early map suggested a purr for contentment; tigers and leopards don’t purr, so it went.",
@@ -3617,16 +3700,16 @@
    "size": "s"
   },
   {
-   "id": "sp309g",
+   "id": "sp314g",
    "type": "group",
    "x": 270,
-   "y": 12710.716073781286,
+   "y": 15752.171788066984,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp300t",
+     "id": "sp305t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3638,7 +3721,7 @@
      "color": "mute"
     },
     {
-     "id": "sp301t",
+     "id": "sp306t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3649,7 +3732,7 @@
      "weight": 700
     },
     {
-     "id": "sp302t",
+     "id": "sp307t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3662,16 +3745,16 @@
    ]
   },
   {
-   "id": "sp310g",
+   "id": "sp315g",
    "type": "group",
    "x": 508,
-   "y": 12710.716073781286,
+   "y": 15752.171788066984,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp303t",
+     "id": "sp308t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3683,7 +3766,7 @@
      "color": "mute"
     },
     {
-     "id": "sp304t",
+     "id": "sp309t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3694,7 +3777,7 @@
      "weight": 700
     },
     {
-     "id": "sp305t",
+     "id": "sp310t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3707,16 +3790,16 @@
    ]
   },
   {
-   "id": "sp311g",
+   "id": "sp316g",
    "type": "group",
    "x": 746,
-   "y": 12710.716073781286,
+   "y": 15752.171788066984,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp306t",
+     "id": "sp311t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3728,7 +3811,7 @@
      "color": "mute"
     },
     {
-     "id": "sp307t",
+     "id": "sp312t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3739,7 +3822,7 @@
      "weight": 700
     },
     {
-     "id": "sp308t",
+     "id": "sp313t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3752,16 +3835,16 @@
    ]
   },
   {
-   "id": "sp321g",
+   "id": "sp326g",
    "type": "group",
    "x": 270,
-   "y": 12819.016073781286,
+   "y": 15860.471788066983,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp312t",
+     "id": "sp317t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3773,7 +3856,7 @@
      "color": "mute"
     },
     {
-     "id": "sp313t",
+     "id": "sp318t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3784,7 +3867,7 @@
      "weight": 700
     },
     {
-     "id": "sp314t",
+     "id": "sp319t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3797,16 +3880,16 @@
    ]
   },
   {
-   "id": "sp322g",
+   "id": "sp327g",
    "type": "group",
    "x": 508,
-   "y": 12819.016073781286,
+   "y": 15860.471788066983,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp315t",
+     "id": "sp320t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3818,7 +3901,7 @@
      "color": "mute"
     },
     {
-     "id": "sp316t",
+     "id": "sp321t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3829,7 +3912,7 @@
      "weight": 700
     },
     {
-     "id": "sp317t",
+     "id": "sp322t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3842,16 +3925,16 @@
    ]
   },
   {
-   "id": "sp323g",
+   "id": "sp328g",
    "type": "group",
    "x": 746,
-   "y": 12819.016073781286,
+   "y": 15860.471788066983,
    "w": 222,
    "h": 76.3,
    "anim": {},
    "children": [
     {
-     "id": "sp318t",
+     "id": "sp323t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -3863,7 +3946,7 @@
      "color": "mute"
     },
     {
-     "id": "sp319t",
+     "id": "sp324t",
      "type": "text",
      "x": 0,
      "y": 24,
@@ -3874,7 +3957,7 @@
      "weight": 700
     },
     {
-     "id": "sp320t",
+     "id": "sp325t",
      "type": "text",
      "x": 0,
      "y": 55.9,
@@ -3887,14 +3970,14 @@
    ]
   },
   {
-   "id": "sp324s",
+   "id": "sp329s",
    "type": "slides",
    "mode": "row",
    "show": 3,
    "gap": 16,
    "fit": "cover",
    "x": 270,
-   "y": 12919.316073781285,
+   "y": 15960.771788066982,
    "w": 698,
    "h": 180,
    "slides": [
@@ -3928,10 +4011,10 @@
    "capShow": true
   },
   {
-   "id": "sp325t",
+   "id": "sp330t",
    "type": "text",
    "x": 32,
-   "y": 13333.316073781285,
+   "y": 16374.771788066982,
    "w": 222,
    "h": 25.9,
    "text": "how it works",
@@ -3940,10 +4023,10 @@
    "nav": "how it works"
   },
   {
-   "id": "sp326t",
+   "id": "sp331t",
    "type": "text",
    "x": 270,
-   "y": 13333.316073781285,
+   "y": 16374.771788066982,
    "w": 460,
    "h": 25.9,
    "text": "Live experience flow",
@@ -3951,10 +4034,10 @@
    "weight": 700
   },
   {
-   "id": "sp327p",
+   "id": "sp332p",
    "type": "image",
    "x": 270,
-   "y": 13375.216073781285,
+   "y": 16416.671788066982,
    "w": 341,
    "h": 453.8,
    "src": "projects/media/spanda/flow-live.jpg",
@@ -3977,10 +4060,10 @@
    "capShow": true
   },
   {
-   "id": "sp328t",
+   "id": "sp333t",
    "type": "text",
    "x": 627,
-   "y": 13375.216073781285,
+   "y": 16416.671788066982,
    "w": 341,
    "h": 39.8,
    "text": "The child calibrates at entry, during a brief onboarding, to felt metaphors. Intensity set, mystery intact.",
@@ -3988,10 +4071,10 @@
    "size": "s"
   },
   {
-   "id": "sp329t",
+   "id": "sp334t",
    "type": "text",
    "x": 627,
-   "y": 13429.016073781284,
+   "y": 16470.47178806698,
    "w": 341,
    "h": 59.2,
    "text": "At the enclosure, GPS confirms which animal they are standing in front of. In multi-animal enclosures, one hero individual is foregrounded via signage.",
@@ -3999,21 +4082,21 @@
    "size": "s"
   },
   {
-   "id": "sp330t",
+   "id": "sp335t",
    "type": "text",
    "x": 627,
-   "y": 13502.216073781285,
+   "y": 16543.671788066982,
    "w": 341,
-   "h": 78.6,
-   "text": "The trigger is either a keeper who knows the animal’s current state, or the CV pipeline reading it live. Either way, what arrives in the child’s chest is not information, it is presence.",
+   "h": 59.2,
+   "text": "The trigger is either a keeper who knows the animal’s current state, or the CV pipeline reading it live. Either way, what arrives in the child’s chest is presence.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp331t",
+   "id": "sp336t",
    "type": "text",
    "x": 270,
-   "y": 13918.987727324591,
+   "y": 16960.44344161029,
    "w": 460,
    "h": 25.9,
    "text": "Training pipeline",
@@ -4021,10 +4104,10 @@
    "weight": 700
   },
   {
-   "id": "sp332p",
+   "id": "sp337p",
    "type": "image",
    "x": 270,
-   "y": 13960.88772732459,
+   "y": 17002.34344161029,
    "w": 341,
    "h": 453.8,
    "src": "projects/media/spanda/flow-training.jpg",
@@ -4047,44 +4130,44 @@
    "capShow": true
   },
   {
-   "id": "sp333t",
+   "id": "sp338t",
    "type": "text",
    "x": 627,
-   "y": 13960.88772732459,
+   "y": 17002.34344161029,
    "w": 341,
    "h": 59.2,
-   "text": "SPANDA is not trained on species, it is trained on individuals. Keepers log daily behavioural observations per named animal. That data builds the model.",
+   "text": "SPANDA is trained on individuals. Keepers log daily behavioural observations per named animal. That data builds the model.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp334t",
+   "id": "sp339t",
    "type": "text",
    "x": 627,
-   "y": 14034.087727324591,
+   "y": 17075.54344161029,
    "w": 341,
    "h": 78.6,
-   "text": "The hero animal selected for each enclosure is the one the child will feel. ‘Prathap’, not just some leopard. This is what makes attribution possible, and attribution is what makes empathy possible.",
+   "text": "The hero animal selected for each enclosure is the one the child will feel: ‘Prathap’, one named leopard. This is what makes attribution possible, and attribution is what makes empathy possible.",
    "anim": {},
    "size": "s"
   },
   {
-   "id": "sp335x",
+   "id": "sp340x",
    "type": "box",
    "fill": "faint",
    "round": 6,
    "x": 270,
-   "y": 14472.659380867897,
+   "y": 17514.115095153596,
    "w": 698,
    "h": 73,
    "text": "A newer training pipeline: coming soon.",
    "anim": {}
   },
   {
-   "id": "sp336t",
+   "id": "sp341t",
    "type": "text",
    "x": 32,
-   "y": 14745.659380867897,
+   "y": 17787.115095153596,
    "w": 222,
    "h": 25.9,
    "text": "validation",
@@ -4093,10 +4176,10 @@
    "nav": "validation"
   },
   {
-   "id": "sp337t",
+   "id": "sp342t",
    "type": "text",
    "x": 270,
-   "y": 14745.659380867897,
+   "y": 17787.115095153596,
    "w": 460,
    "h": 50.8,
    "text": "<s class=\"c-faint\">Why this works</s><br>Why this should work, hopefully*",
@@ -4104,10 +4187,10 @@
    "weight": 700
   },
   {
-   "id": "sp338t",
+   "id": "sp343t",
    "type": "text",
    "x": 270,
-   "y": 14812.459380867896,
+   "y": 17853.915095153596,
    "w": 222,
    "h": 20.4,
    "text": "link",
@@ -4116,10 +4199,10 @@
    "color": "mute"
   },
   {
-   "id": "sp339t",
+   "id": "sp344t",
    "type": "text",
    "x": 508,
-   "y": 14812.459380867896,
+   "y": 17853.915095153596,
    "w": 460,
    "h": 20.4,
    "text": "claim and source",
@@ -4128,16 +4211,16 @@
    "color": "mute"
   },
   {
-   "id": "sp343g",
+   "id": "sp348g",
    "type": "group",
    "x": 270,
-   "y": 14842.459380867896,
+   "y": 17883.915095153596,
    "w": 698,
    "h": 20.4,
    "anim": {},
    "children": [
     {
-     "id": "sp340t",
+     "id": "sp345t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4149,39 +4232,39 @@
      "weight": 700
     },
     {
-     "id": "sp341t",
+     "id": "sp346t",
      "type": "text",
      "x": 238,
      "y": 0,
      "w": 460,
      "h": 20.4,
-     "text": "The gap is biological, not social. (von Uexküll, 1934)",
+     "text": "The gap is biological. (von Uexküll, 1934)",
      "anim": {},
      "size": "s"
     }
    ]
   },
   {
-   "id": "sp342b",
+   "id": "sp347b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 14874.9,
+   "y": 17916.3,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp347g",
+   "id": "sp352g",
    "type": "group",
    "x": 270,
-   "y": 14888.859380867896,
+   "y": 17930.315095153597,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp344t",
+     "id": "sp349t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4193,7 +4276,7 @@
      "weight": 700
     },
     {
-     "id": "sp345t",
+     "id": "sp350t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4206,26 +4289,26 @@
    ]
   },
   {
-   "id": "sp346b",
+   "id": "sp351b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 14940.7,
+   "y": 17982.1,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp351g",
+   "id": "sp356g",
    "type": "group",
    "x": 270,
-   "y": 14954.659380867895,
+   "y": 17996.115095153596,
    "w": 698,
    "h": 20.4,
    "anim": {},
    "children": [
     {
-     "id": "sp348t",
+     "id": "sp353t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4237,7 +4320,7 @@
      "weight": 700
     },
     {
-     "id": "sp349t",
+     "id": "sp354t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4250,26 +4333,26 @@
    ]
   },
   {
-   "id": "sp350b",
+   "id": "sp355b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 14987.1,
+   "y": 18028.5,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp355g",
+   "id": "sp360g",
    "type": "group",
    "x": 270,
-   "y": 15001.059380867895,
+   "y": 18042.515095153598,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp352t",
+     "id": "sp357t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4281,7 +4364,7 @@
      "weight": 700
     },
     {
-     "id": "sp353t",
+     "id": "sp358t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4294,26 +4377,26 @@
    ]
   },
   {
-   "id": "sp354b",
+   "id": "sp359b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 15052.9,
+   "y": 18094.3,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp359g",
+   "id": "sp364g",
    "type": "group",
    "x": 270,
-   "y": 15066.859380867894,
+   "y": 18108.315095153597,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp356t",
+     "id": "sp361t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4325,7 +4408,7 @@
      "weight": 700
     },
     {
-     "id": "sp357t",
+     "id": "sp362t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4338,26 +4421,26 @@
    ]
   },
   {
-   "id": "sp358b",
+   "id": "sp363b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 15118.7,
+   "y": 18160.1,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp363g",
+   "id": "sp368g",
    "type": "group",
    "x": 270,
-   "y": 15132.659380867894,
+   "y": 18174.115095153596,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp360t",
+     "id": "sp365t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4369,7 +4452,7 @@
      "weight": 700
     },
     {
-     "id": "sp361t",
+     "id": "sp366t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4382,26 +4465,26 @@
    ]
   },
   {
-   "id": "sp362b",
+   "id": "sp367b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 15184.5,
+   "y": 18225.9,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp367g",
+   "id": "sp372g",
    "type": "group",
    "x": 270,
-   "y": 15198.459380867893,
+   "y": 18239.915095153596,
    "w": 698,
    "h": 20.4,
    "anim": {},
    "children": [
     {
-     "id": "sp364t",
+     "id": "sp369t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4413,7 +4496,7 @@
      "weight": 700
     },
     {
-     "id": "sp365t",
+     "id": "sp370t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4426,26 +4509,26 @@
    ]
   },
   {
-   "id": "sp366b",
+   "id": "sp371b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 15230.9,
+   "y": 18272.3,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp371g",
+   "id": "sp376g",
    "type": "group",
    "x": 270,
-   "y": 15244.859380867892,
+   "y": 18286.315095153597,
    "w": 698,
    "h": 39.8,
    "anim": {},
    "children": [
     {
-     "id": "sp368t",
+     "id": "sp373t",
      "type": "text",
      "x": 0,
      "y": 0,
@@ -4457,7 +4540,7 @@
      "weight": 700
     },
     {
-     "id": "sp369t",
+     "id": "sp374t",
      "type": "text",
      "x": 238,
      "y": 0,
@@ -4470,20 +4553,20 @@
    ]
   },
   {
-   "id": "sp370b",
+   "id": "sp375b",
    "type": "box",
    "fill": "faint",
    "x": 270,
-   "y": 15296.7,
+   "y": 18338.1,
    "w": 698,
    "h": 1,
    "anim": {}
   },
   {
-   "id": "sp372t",
+   "id": "sp377t",
    "type": "text",
    "x": 32,
-   "y": 15510.659380867892,
+   "y": 18552.115095153596,
    "w": 222,
    "h": 25.9,
    "text": "faqs",
@@ -4492,10 +4575,10 @@
    "nav": "faqs"
   },
   {
-   "id": "sp373t",
+   "id": "sp378t",
    "type": "text",
    "x": 270,
-   "y": 15510.659380867892,
+   "y": 18552.115095153596,
    "w": 460,
    "h": 25.9,
    "text": "FAQs (frequently asked to me, by me)",
@@ -4503,241 +4586,164 @@
    "weight": 700
   },
   {
-   "id": "sp380g",
-   "type": "group",
+   "id": "sp379t",
+   "type": "text",
    "x": 270,
-   "y": 15552.559380867891,
-   "w": 222,
-   "h": 154.8,
+   "y": 18594.015095153598,
+   "w": 460,
+   "h": 25.9,
+   "text": "Why children specifically?",
    "anim": {},
-   "children": [
-    {
-     "id": "sp374t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 25.9,
-     "text": "Why children specifically?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp375t",
-     "type": "text",
-     "x": 0,
-     "y": 56.8,
-     "w": 222,
-     "h": 98.0,
-     "text": "Highest provocation rate. Lowest literacy. Longest memory. A felt experience at 8 years old shapes how you see an animal for the rest of your life.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp381g",
-   "type": "group",
-   "x": 508,
-   "y": 15552.559380867891,
-   "w": 222,
-   "h": 154.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp376t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 50.8,
-     "text": "Why haptics and not audio?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp377t",
-     "type": "text",
-     "x": 0,
-     "y": 56.8,
-     "w": 222,
-     "h": 98.0,
-     "text": "Sound is processed cognitively. We assign meaning, narrative, and emotion to what we hear. Haptics bypass that layer. The body receives before the brain interprets.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp382g",
-   "type": "group",
-   "x": 746,
-   "y": 15552.559380867891,
-   "w": 222,
-   "h": 116.0,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp378t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 50.8,
-     "text": "What if the animal isn’t visible?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp379t",
-     "type": "text",
-     "x": 0,
-     "y": 56.8,
-     "w": 222,
-     "h": 59.2,
-     "text": "SPANDA defaults to resting heartbeat. Presence felt even when presence is hidden.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp389g",
-   "type": "group",
+   "id": "sp380t",
+   "type": "text",
    "x": 270,
-   "y": 15739.35938086789,
-   "w": 222,
-   "h": 135.4,
+   "y": 18623.9150951536,
+   "w": 460,
+   "h": 59.2,
+   "text": "Highest provocation rate. Lowest literacy. Longest memory. A felt experience at 8 years old shapes how you see an animal for the rest of your life.",
    "anim": {},
-   "children": [
-    {
-     "id": "sp383t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 50.8,
-     "text": "What about multi-animal enclosures?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp384t",
-     "type": "text",
-     "x": 0,
-     "y": 56.8,
-     "w": 222,
-     "h": 78.6,
-     "text": "One hero individual foregrounded per enclosure, introduced by name via signage. SPANDA is calibrated to that individual.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "size": "s"
   },
   {
-   "id": "sp390g",
-   "type": "group",
-   "x": 508,
-   "y": 15739.35938086789,
-   "w": 222,
-   "h": 154.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp385t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 25.9,
-     "text": "What if there’s no keeper?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp386t",
-     "type": "text",
-     "x": 0,
-     "y": 56.8,
-     "w": 222,
-     "h": 98.0,
-     "text": "CV pipeline handles it. Keeper presence enables richer contextual triggering. No keeper means the system runs autonomously. Both are valid.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp391g",
-   "type": "group",
-   "x": 746,
-   "y": 15739.35938086789,
-   "w": 222,
-   "h": 154.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp387t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 50.8,
-     "text": "How do you handle haptic subjectivity?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp388t",
-     "type": "text",
-     "x": 0,
-     "y": 56.8,
-     "w": 222,
-     "h": 98.0,
-     "text": "Metaphor-based calibration at entry sets individual intensity and sensitivity. Long term, each calibration becomes a data point for a learning model.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp394g",
-   "type": "group",
+   "id": "sp381t",
+   "type": "text",
    "x": 270,
-   "y": 15926.15938086789,
-   "w": 222,
-   "h": 149.3,
+   "y": 18705.1150951536,
+   "w": 460,
+   "h": 25.9,
+   "text": "Why haptics and not audio?",
    "anim": {},
-   "children": [
-    {
-     "id": "sp392t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 25.9,
-     "text": "How does this scale?",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp393t",
-     "type": "text",
-     "x": 0,
-     "y": 31.9,
-     "w": 222,
-     "h": 117.4,
-     "text": "Keepers already log daily behavioural observations. SPANDA plugs into that existing workflow. Each enclosure gets a trained model per individual animal. The pipeline is repeatable.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp395t",
+   "id": "sp382t",
+   "type": "text",
+   "x": 270,
+   "y": 18735.0150951536,
+   "w": 460,
+   "h": 59.2,
+   "text": "Sound is processed cognitively. We assign meaning, narrative, and emotion to what we hear. Haptics bypass that layer. The body receives before the brain interprets.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp383t",
+   "type": "text",
+   "x": 270,
+   "y": 18816.215095153602,
+   "w": 460,
+   "h": 25.9,
+   "text": "What if the animal isn’t visible?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp384t",
+   "type": "text",
+   "x": 270,
+   "y": 18846.115095153604,
+   "w": 460,
+   "h": 39.8,
+   "text": "SPANDA defaults to resting heartbeat. Presence felt even when presence is hidden.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp385t",
+   "type": "text",
+   "x": 270,
+   "y": 18907.915095153603,
+   "w": 460,
+   "h": 25.9,
+   "text": "What about multi-animal enclosures?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp386t",
+   "type": "text",
+   "x": 270,
+   "y": 18937.815095153604,
+   "w": 460,
+   "h": 39.8,
+   "text": "One hero individual foregrounded per enclosure, introduced by name via signage. SPANDA is calibrated to that individual.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp387t",
+   "type": "text",
+   "x": 270,
+   "y": 18999.615095153604,
+   "w": 460,
+   "h": 25.9,
+   "text": "What if there’s no keeper?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp388t",
+   "type": "text",
+   "x": 270,
+   "y": 19029.515095153605,
+   "w": 460,
+   "h": 59.2,
+   "text": "CV pipeline handles it. Keeper presence enables richer contextual triggering. No keeper means the system runs autonomously. Both are valid.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp389t",
+   "type": "text",
+   "x": 270,
+   "y": 19110.715095153606,
+   "w": 460,
+   "h": 25.9,
+   "text": "How do you handle haptic subjectivity?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp390t",
+   "type": "text",
+   "x": 270,
+   "y": 19140.615095153607,
+   "w": 460,
+   "h": 59.2,
+   "text": "Metaphor-based calibration at entry sets individual intensity and sensitivity. Long term, each calibration becomes a data point for a learning model.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp391t",
+   "type": "text",
+   "x": 270,
+   "y": 19221.815095153608,
+   "w": 460,
+   "h": 25.9,
+   "text": "How does this scale?",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp392t",
+   "type": "text",
+   "x": 270,
+   "y": 19251.71509515361,
+   "w": 460,
+   "h": 59.2,
+   "text": "Keepers already log daily behavioural observations. SPANDA plugs into that existing workflow. Each enclosure gets a trained model per individual animal. The pipeline is repeatable.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp393t",
    "type": "text",
    "x": 32,
-   "y": 16275.45938086789,
+   "y": 19510.91509515361,
    "w": 222,
    "h": 25.9,
    "text": "next steps",
@@ -4746,10 +4752,10 @@
    "nav": "next steps"
   },
   {
-   "id": "sp396t",
+   "id": "sp394t",
    "type": "text",
    "x": 270,
-   "y": 16275.45938086789,
+   "y": 19510.91509515361,
    "w": 460,
    "h": 25.9,
    "text": "What this becomes",
@@ -4757,280 +4763,142 @@
    "weight": 700
   },
   {
-   "id": "sp406g",
-   "type": "group",
+   "id": "sp395t",
+   "type": "text",
    "x": 270,
-   "y": 16317.359380867889,
-   "w": 222,
-   "h": 198.2,
+   "y": 19552.81509515361,
+   "w": 460,
+   "h": 25.9,
+   "text": "Onboarding and calibration",
    "anim": {},
-   "children": [
-    {
-     "id": "sp397t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "01",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp398t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Onboarding and calibration",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp399t",
-     "type": "text",
-     "x": 0,
-     "y": 80.8,
-     "w": 222,
-     "h": 117.4,
-     "text": "The metaphor-based calibration exists as a concept. The kiosk interface, the child-facing flow, the sensitivity logic are all unbuilt. Designing that experience is the next design problem.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp407g",
-   "type": "group",
-   "x": 508,
-   "y": 16317.359380867889,
-   "w": 222,
-   "h": 198.2,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp400t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "02",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp401t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "The keeper interface",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp402t",
-     "type": "text",
-     "x": 0,
-     "y": 80.8,
-     "w": 222,
-     "h": 117.4,
-     "text": "Currently a bare web panel for demo triggering. A proper one would let staff log observations in real time, flag state changes, and build the ethogram through daily use. A full design project in itself.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp408g",
-   "type": "group",
-   "x": 746,
-   "y": 16317.359380867889,
-   "w": 222,
-   "h": 178.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp403t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "03",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp404t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 50.8,
-     "text": "Signage redesigned around biography",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp405t",
-     "type": "text",
-     "x": 0,
-     "y": 80.8,
-     "w": 222,
-     "h": 98.0,
-     "text": "Not “Indian Leopard, Panthera pardus fusca.” Dharma. 7 years old. Currently resting. Signage that makes the animal a subject, not a specimen.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp418g",
-   "type": "group",
+   "id": "sp396t",
+   "type": "text",
    "x": 270,
-   "y": 16547.55938086789,
-   "w": 222,
-   "h": 178.8,
+   "y": 19582.715095153613,
+   "w": 460,
+   "h": 59.2,
+   "text": "The metaphor-based calibration exists as a concept. The kiosk interface, the child-facing flow, the sensitivity logic are all unbuilt. Designing that experience is the next design problem.",
    "anim": {},
-   "children": [
-    {
-     "id": "sp409t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "04",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp410t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 50.8,
-     "text": "A haptic vocabulary that learns",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp411t",
-     "type": "text",
-     "x": 0,
-     "y": 80.8,
-     "w": 222,
-     "h": 98.0,
-     "text": "Each calibration a data point. The system gets better at knowing which patterns land for which bodies. The framework keeps getting learnt.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "size": "s"
   },
   {
-   "id": "sp419g",
-   "type": "group",
-   "x": 508,
-   "y": 16547.55938086789,
-   "w": 222,
-   "h": 140.0,
+   "id": "sp397t",
+   "type": "text",
+   "x": 270,
+   "y": 19663.915095153614,
+   "w": 460,
+   "h": 25.9,
+   "text": "The keeper interface",
    "anim": {},
-   "children": [
-    {
-     "id": "sp412t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "05",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp413t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "A translation framework",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp414t",
-     "type": "text",
-     "x": 0,
-     "y": 80.8,
-     "w": 222,
-     "h": 59.2,
-     "text": "One that doesn’t exist yet in this project or in the literature. SPANDA is the first attempt to need one.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "weight": 700
   },
   {
-   "id": "sp420g",
-   "type": "group",
-   "x": 746,
-   "y": 16547.55938086789,
-   "w": 222,
-   "h": 217.6,
+   "id": "sp398t",
+   "type": "text",
+   "x": 270,
+   "y": 19693.815095153615,
+   "w": 460,
+   "h": 78.6,
+   "text": "Currently a bare web panel for demo triggering. A proper keeper interface would let staff log behavioural observations in real time, flag state changes, and build the ethogram directly through daily interaction with the device. A full design project in itself.",
    "anim": {},
-   "children": [
-    {
-     "id": "sp415t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 20.4,
-     "text": "06",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp416t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.9,
-     "text": "Richer sensor input",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp417t",
-     "type": "text",
-     "x": 0,
-     "y": 80.8,
-     "w": 222,
-     "h": 136.8,
-     "text": "The CV pipeline currently reads pose and spatial velocity. Next: directional microphones, thermal cameras, ground vibration sensors. More of the animal’s inner life translatable, including when it isn’t visible.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
+   "size": "s"
   },
   {
-   "id": "sp421p",
+   "id": "sp399t",
+   "type": "text",
+   "x": 270,
+   "y": 19794.415095153614,
+   "w": 460,
+   "h": 25.9,
+   "text": "Signage redesigned around biography",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp400t",
+   "type": "text",
+   "x": 270,
+   "y": 19824.315095153615,
+   "w": 460,
+   "h": 39.8,
+   "text": "In place of “Indian Leopard, Panthera pardus fusca”: Dharma. 7 years old. Currently resting. Signage that makes the animal a subject.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp401t",
+   "type": "text",
+   "x": 270,
+   "y": 19886.115095153615,
+   "w": 460,
+   "h": 25.9,
+   "text": "A haptic vocabulary that learns",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp402t",
+   "type": "text",
+   "x": 270,
+   "y": 19916.015095153616,
+   "w": 460,
+   "h": 39.8,
+   "text": "Each calibration a data point. The system gets better at knowing which patterns land for which bodies. The framework keeps getting learnt.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp403t",
+   "type": "text",
+   "x": 270,
+   "y": 19977.815095153615,
+   "w": 460,
+   "h": 25.9,
+   "text": "A translation framework",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp404t",
+   "type": "text",
+   "x": 270,
+   "y": 20007.715095153617,
+   "w": 460,
+   "h": 39.8,
+   "text": "One that doesn’t exist yet in this project or in the literature. SPANDA is the first attempt to need one.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp405t",
+   "type": "text",
+   "x": 270,
+   "y": 20069.515095153616,
+   "w": 460,
+   "h": 25.9,
+   "text": "Richer sensor input",
+   "anim": {},
+   "weight": 700
+  },
+  {
+   "id": "sp406t",
+   "type": "text",
+   "x": 270,
+   "y": 20099.415095153618,
+   "w": 460,
+   "h": 98.0,
+   "text": "The CV pipeline currently reads pose and spatial velocity. Next: directional microphones picking up vocalisation, thermal cameras reading body heat and respiration, ground vibration sensors detecting movement through substrate. More of the animal’s inner life translatable, including when it isn’t visible.",
+   "anim": {},
+   "size": "s"
+  },
+  {
+   "id": "sp407p",
    "type": "image",
    "x": 270,
-   "y": 16789.159380867888,
+   "y": 20221.415095153618,
    "w": 698,
    "h": 440.9,
    "src": "projects/media/spanda/cat.jpg",
@@ -5050,10 +4918,10 @@
    }
   },
   {
-   "id": "sp422t",
+   "id": "sp408t",
    "type": "text",
    "x": 270,
-   "y": 17270.06271420122,
+   "y": 20702.31842848695,
    "w": 460,
    "h": 25.9,
    "text": "SPANDA. The first pulse.",
@@ -5061,12 +4929,12 @@
    "weight": 700
   },
   {
-   "id": "sp423u",
+   "id": "sp409u",
    "type": "button",
    "look": "line",
    "text": "Read the full presentation (PDF)",
    "x": 270,
-   "y": 17319.96271420122,
+   "y": 20752.21842848695,
    "w": 250,
    "h": 35,
    "link": {
@@ -5074,18 +4942,6 @@
     "newTab": true
    },
    "anim": {}
-  },
-  {
-   "id": "sp424t",
-   "type": "text",
-   "x": 270,
-   "y": 17402.96271420122,
-   "w": 460,
-   "h": 117.4,
-   "text": "References: Chen, P., Yu, B., Sun, X., Xia, J., Liu, X., & Ren, X. (2025). ZooWear: Animal-inspired head-mounted haptic interfaces to augment the zoo experience. International Journal of Human–Computer Interaction. Also cited: von Uexküll (1934); McGlone et al. (2014); Löken et al. (2009); Seifi & MacLean (2013); Shim & Tan (2020); Jones et al. (2009); Ju & Minamizawa (2023).",
-   "anim": {},
-   "size": "s",
-   "color": "mute"
   }
  ]
 }
