@@ -1,1182 +1,1186 @@
 {
- "v": 2,
- "intro": "intro",
- "items": [
-  {
-   "id": "cbd01t",
-   "type": "text",
-   "x": 32.0,
-   "y": 196,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "Collaborative by Design",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd02t",
-   "type": "text",
-   "x": 32.0,
-   "y": 221,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "NID Gandhinagar · Speculative design sprint · 2025",
-   "anim": {},
-   "color": "mute"
-  },
-  {
-   "id": "cbd03t",
-   "type": "text",
-   "x": 32.0,
-   "y": 266,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Exploring how different modes of expression shape collaboration, and imagining more inclusive ways of learning together at NID in 2030.",
-   "anim": {}
-  },
-  {
-   "id": "cbd04p",
-   "type": "image",
-   "x": 32.0,
-   "y": 384,
-   "w": 936.0,
-   "h": 526,
-   "src": "projects/media/design-process/hero-gameplay.jpg",
-   "fit": "cover",
-   "alt": "Students playing the Empathy Game around a table",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd05b",
-   "type": "box",
-   "fill": "faint",
-   "x": 32.0,
-   "y": 950,
-   "w": 936.0,
-   "h": 1,
-   "anim": {}
-  },
-  {
-   "id": "cbd06g",
-   "type": "group",
-   "x": 32.0,
-   "y": 966,
-   "w": 222.0,
-   "h": 62,
-   "anim": {},
-   "children": [
+  "v": 2,
+  "intro": "intro",
+  "items": [
     {
-     "id": "cbd07t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 14,
-     "text": "role",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd01t",
+      "type": "text",
+      "x": 32,
+      "y": 196,
+      "w": 618.6666666666667,
+      "h": 25.2,
+      "text": "Collaborative by Design",
+      "anim": {},
+      "weight": 700
     },
     {
-     "id": "cbd08t",
-     "type": "text",
-     "x": 0,
-     "y": 21,
-     "w": 222.0,
-     "h": 14,
-     "text": "[ROLE]",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd09g",
-   "type": "group",
-   "x": 270.0,
-   "y": 966,
-   "w": 222.0,
-   "h": 62,
-   "anim": {},
-   "children": [
-    {
-     "id": "cbd10t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 14,
-     "text": "time",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd02t",
+      "type": "text",
+      "x": 32,
+      "y": 221,
+      "w": 618.6666666666667,
+      "h": 25.2,
+      "text": "NID Gandhinagar · Speculative design sprint · 2025",
+      "anim": {},
+      "color": "mute"
     },
     {
-     "id": "cbd11t",
-     "type": "text",
-     "x": 0,
-     "y": 21,
-     "w": 222.0,
-     "h": 14,
-     "text": "2 weeks, 2025",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd12g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 966,
-   "w": 222.0,
-   "h": 62,
-   "anim": {},
-   "children": [
-    {
-     "id": "cbd13t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 14,
-     "text": "team",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd03t",
+      "type": "text",
+      "x": 32,
+      "y": 266,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "Exploring how different modes of expression shape collaboration, and imagining more inclusive ways of learning together at NID in 2030.",
+      "anim": {}
     },
     {
-     "id": "cbd14t",
-     "type": "text",
-     "x": 0,
-     "y": 21,
-     "w": 222.0,
-     "h": 14,
-     "text": "7 students from 7 programmes",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd15g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 966,
-   "w": 222.0,
-   "h": 62,
-   "anim": {},
-   "children": [
-    {
-     "id": "cbd16t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 14,
-     "text": "methods",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd04p",
+      "type": "image",
+      "x": 32,
+      "y": 384,
+      "w": 936,
+      "h": 526,
+      "src": "projects/media/design-process/hero-gameplay.jpg",
+      "fit": "cover",
+      "alt": "Students playing the Empathy Game around a table",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
     },
     {
-     "id": "cbd17t",
-     "type": "text",
-     "x": 0,
-     "y": 21,
-     "w": 222.0,
-     "h": 14,
-     "text": "Surveys, directed storytelling, prototyping, Wizard of Oz testing",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd18t",
-   "type": "text",
-   "x": 32.0,
-   "y": 1199,
-   "w": 222.0,
-   "h": 14,
-   "text": "overview",
-   "anim": {},
-   "color": "mute",
-   "nav": "overview"
-  },
-  {
-   "id": "cbd19t",
-   "type": "text",
-   "x": 270.0,
-   "y": 1199,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We made three things, each working at a different scale: the campus, the table and the moment.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd20p",
-   "type": "image",
-   "x": 270,
-   "y": 1280,
-   "w": 222,
-   "h": 166,
-   "src": "projects/media/design-process/commons-home.jpg",
-   "fit": "cover",
-   "alt": "NID Commons welcome screen",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "caption": "NID Commons: a platform for finding people to work with, and places to work.",
-   "capShow": true
-  },
-  {
-   "id": "cbd21p",
-   "type": "image",
-   "x": 508,
-   "y": 1280,
-   "w": 222,
-   "h": 166,
-   "src": "projects/media/design-process/game-components.jpg",
-   "fit": "cover",
-   "alt": "Empathy Game cards and pieces",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   },
-   "caption": "Empathy Game: a card game where nobody can win alone.",
-   "capShow": true
-  },
-  {
-   "id": "cbd22p",
-   "type": "image",
-   "x": 746,
-   "y": 1280,
-   "w": 222,
-   "h": 166,
-   "src": "projects/media/design-process/mediator-storyboard-2.jpg",
-   "fit": "cover",
-   "alt": "Storyboard sketch of the Flow Mediator",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.2,
-     "ease": "out"
-    }
-   },
-   "caption": "Flow Mediator: an AI companion that checks in on a group while it works.",
-   "capShow": true
-  },
-  {
-   "id": "cbd23t",
-   "type": "text",
-   "x": 32.0,
-   "y": 1610,
-   "w": 222.0,
-   "h": 14,
-   "text": "context",
-   "anim": {},
-   "color": "mute",
-   "nav": "context"
-  },
-  {
-   "id": "cbd24t",
-   "type": "text",
-   "x": 270.0,
-   "y": 1610,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Group work at NID tends to reward the students who think out loud.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd25t",
-   "type": "text",
-   "x": 270.0,
-   "y": 1682,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Our brief was the future of campus life at NID in 2030. We narrowed it to collaboration. Some students work things out by talking, and do well in crits and group discussions. Others work things out by making, writing or reflecting, and their contribution is easy to miss.",
-   "anim": {}
-  },
-  {
-   "id": "cbd26t",
-   "type": "text",
-   "x": 270.0,
-   "y": 1799,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Reports from UNESCO, OECD, Pew Research Center, Stanford HAI and others pointed the same way: learning environments tend to favour expressive students, attention is increasingly fragmented, and reflective learners need calmer room to work.",
-   "anim": {}
-  },
-  {
-   "id": "cbd27p",
-   "type": "image",
-   "x": 32.0,
-   "y": 1926,
-   "w": 936.0,
-   "h": 468,
-   "src": "projects/media/design-process/context-wall.jpg",
-   "fit": "cover",
-   "alt": "Sticky-note wall from early mapping sessions",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "caption": "Early mapping of campus life in 2030.",
-   "capShow": true
-  },
-  {
-   "id": "cbd28t",
-   "type": "text",
-   "x": 32.0,
-   "y": 2558,
-   "w": 222.0,
-   "h": 14,
-   "text": "research",
-   "anim": {},
-   "color": "mute",
-   "nav": "research"
-  },
-  {
-   "id": "cbd29t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2558,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We treated expression as a spectrum, not a personality type.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd30t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2605,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We built a survey around seven scales, each with a reflective end and an expressive end, such as <em>drained ↔ energised</em> and <em>think or sketch quietly ↔ talk ideas through aloud</em>. Plotting the answers gave us seven recurring patterns, which we called learner archetypes.",
-   "anim": {}
-  },
-  {
-   "id": "cbd31t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2747,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We read these as patterns people move between, not boxes they belong in. The most common was the Ambiguous Ambivert, whose answers sit close to the middle, leaning slightly one way.",
-   "anim": {}
-  },
-  {
-   "id": "cbd32s",
-   "type": "slides",
-   "x": 32.0,
-   "y": 2849,
-   "w": 936.0,
-   "h": 374,
-   "fit": "contain",
-   "mode": "click",
-   "trans": "fade",
-   "counter": true,
-   "every": 3,
-   "slides": [
-    {
-     "src": "projects/media/design-process/archetypes-1.jpg",
-     "alt": "Radar charts for four learner archetypes"
+      "id": "cbd05b",
+      "type": "box",
+      "fill": "faint",
+      "x": 32,
+      "y": 950,
+      "w": 936,
+      "h": 1,
+      "anim": {}
     },
     {
-     "src": "projects/media/design-process/archetypes-2.jpg",
-     "alt": "Radar charts for three more learner archetypes"
-    }
-   ],
-   "caption": "The seven archetypes, plotted across the seven scales. Click for the rest.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd33t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3313,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Then we asked for stories.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd34t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3360,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "A survey tells you what people prefer. To learn what actually happens, we ran directed storytelling sessions: students walked us through arriving at NID, getting stuck, and working in groups. We turned each conversation into an empathy map, then grouped what we heard into affinity and causal maps.",
-   "anim": {}
-  },
-  {
-   "id": "cbd35t",
-   "type": "text",
-   "x": 32.0,
-   "y": 3618,
-   "w": 222.0,
-   "h": 14,
-   "text": "insights",
-   "anim": {},
-   "color": "mute",
-   "nav": "insights"
-  },
-  {
-   "id": "cbd36t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3618,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Quiet isn't the same as absent.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd37t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3665,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Three findings shaped everything we made:",
-   "anim": {}
-  },
-  {
-   "id": "cbd38g",
-   "type": "group",
-   "x": 270,
-   "y": 3714,
-   "w": 222,
-   "h": 150,
-   "anim": {},
-   "children": [
-    {
-     "id": "cbd39t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 14,
-     "text": "01",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd06g",
+      "type": "group",
+      "x": 32,
+      "y": 966,
+      "w": 222,
+      "h": 62,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd07t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "role",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd08t",
+          "type": "text",
+          "x": 0,
+          "y": 21,
+          "w": 222,
+          "h": 25.2,
+          "text": "[ROLE]",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cbd40t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 14,
-     "text": "Quietness gets misread",
-     "weight": 700,
-     "anim": {}
+      "id": "cbd09g",
+      "type": "group",
+      "x": 270,
+      "y": 966,
+      "w": 222,
+      "h": 62,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd10t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "time",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd11t",
+          "type": "text",
+          "x": 0,
+          "y": 21,
+          "w": 222,
+          "h": 25.2,
+          "text": "2 weeks, 2025",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cbd41t",
-     "type": "text",
-     "x": 0,
-     "y": 70,
-     "w": 222,
-     "h": 14,
-     "text": "Silence is often reflection or observation, not disengagement.",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd42g",
-   "type": "group",
-   "x": 508,
-   "y": 3714,
-   "w": 222,
-   "h": 150,
-   "anim": {},
-   "children": [
-    {
-     "id": "cbd43t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 14,
-     "text": "02",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd12g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 966,
+      "w": 222,
+      "h": 62,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd13t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "team",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd14t",
+          "type": "text",
+          "x": 0,
+          "y": 21,
+          "w": 222,
+          "h": 49.7,
+          "text": "7 students from 7 programmes",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cbd44t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 14,
-     "text": "Visible isn't the same as contributing",
-     "weight": 700,
-     "anim": {}
+      "id": "cbd15g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 966,
+      "w": 222,
+      "h": 62,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd16t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "methods",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd17t",
+          "type": "text",
+          "x": 0,
+          "y": 21,
+          "w": 222,
+          "h": 75,
+          "text": "Surveys, directed storytelling, prototyping, Wizard of Oz testing",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cbd45t",
-     "type": "text",
-     "x": 0,
-     "y": 70,
-     "w": 222,
-     "h": 14,
-     "text": "Making, writing and observing count, even when no one sees them happen.",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd46g",
-   "type": "group",
-   "x": 746,
-   "y": 3714,
-   "w": 222,
-   "h": 150,
-   "anim": {},
-   "children": [
-    {
-     "id": "cbd47t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 14,
-     "text": "03",
-     "color": "mute",
-     "anim": {}
+      "id": "cbd18t",
+      "type": "text",
+      "x": 32,
+      "y": 1199,
+      "w": 222,
+      "h": 25.2,
+      "text": "overview",
+      "anim": {},
+      "color": "mute",
+      "nav": "overview"
     },
     {
-     "id": "cbd48t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 14,
-     "text": "Feedback timing matters",
-     "weight": 700,
-     "anim": {}
+      "id": "cbd19t",
+      "type": "text",
+      "x": 270,
+      "y": 1199,
+      "w": 539.3333333333334,
+      "h": 49.7,
+      "text": "We made three things, each working at a different scale: the campus, the table and the moment.",
+      "anim": {},
+      "weight": 700
     },
     {
-     "id": "cbd49t",
-     "type": "text",
-     "x": 0,
-     "y": 70,
-     "w": 222,
-     "h": 14,
-     "text": "Some students want feedback right away. Others need time with an idea first.",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cbd50t",
-   "type": "text",
-   "x": 32.0,
-   "y": 3921,
-   "w": 222.0,
-   "h": 14,
-   "text": "research question",
-   "anim": {},
-   "color": "mute"
-  },
-  {
-   "id": "cbd51t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3921,
-   "w": 698.0,
-   "h": 14,
-   "text": "How do we make learning more collaborative for people with different levels of expression, at NID in 2030?",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd52s",
-   "type": "slides",
-   "x": 32.0,
-   "y": 4054,
-   "w": 936.0,
-   "h": 453,
-   "fit": "contain",
-   "mode": "click",
-   "trans": "fade",
-   "counter": true,
-   "every": 3,
-   "slides": [
-    {
-     "src": "projects/media/design-process/board-teseec.jpg",
-     "alt": "TESEEC framework board"
+      "id": "cbd20p",
+      "type": "image",
+      "x": 270,
+      "y": 1280,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/design-process/commons-home.jpg",
+      "fit": "cover",
+      "alt": "NID Commons welcome screen",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "caption": "NID Commons: a platform for finding people to work with, and places to work.",
+      "capShow": true
     },
     {
-     "src": "projects/media/design-process/board-stakeholders.jpg",
-     "alt": "Stakeholder map"
+      "id": "cbd21p",
+      "type": "image",
+      "x": 508,
+      "y": 1280,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/design-process/game-components.jpg",
+      "fit": "cover",
+      "alt": "Empathy Game cards and pieces",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      },
+      "caption": "Empathy Game: a card game where nobody can win alone.",
+      "capShow": true
     },
     {
-     "src": "projects/media/design-process/board-empathy-1.jpg",
-     "alt": "Empathy maps, participants 1 to 3"
+      "id": "cbd22p",
+      "type": "image",
+      "x": 746,
+      "y": 1280,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/design-process/mediator-storyboard-2.jpg",
+      "fit": "cover",
+      "alt": "Storyboard sketch of the Flow Mediator",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      },
+      "caption": "Flow Mediator: an AI companion that checks in on a group while it works.",
+      "capShow": true
     },
     {
-     "src": "projects/media/design-process/board-empathy-2.jpg",
-     "alt": "Empathy maps, participants 4 to 6"
+      "id": "cbd23t",
+      "type": "text",
+      "x": 32,
+      "y": 1610,
+      "w": 222,
+      "h": 25.2,
+      "text": "context",
+      "anim": {},
+      "color": "mute",
+      "nav": "context"
     },
     {
-     "src": "projects/media/design-process/board-affinity.jpg",
-     "alt": "Affinity map"
+      "id": "cbd24t",
+      "type": "text",
+      "x": 270,
+      "y": 1610,
+      "w": 539.3333333333334,
+      "h": 49.7,
+      "text": "Group work at NID tends to reward the students who think out loud.",
+      "anim": {},
+      "weight": 700
     },
     {
-     "src": "projects/media/design-process/board-causal.jpg",
-     "alt": "Causal map"
-    }
-   ],
-   "caption": "The working boards: TESEEC framework, stakeholder map, empathy maps, affinity map and causal map.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd53t",
-   "type": "text",
-   "x": 32.0,
-   "y": 4671,
-   "w": 222.0,
-   "h": 14,
-   "text": "process",
-   "anim": {},
-   "color": "mute",
-   "nav": "process"
-  },
-  {
-   "id": "cbd54t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4671,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Twelve concepts, three kept.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd55t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4718,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We bodystormed, role-played and mapped “how might we” questions until we had twelve concepts, from wearable energy reflectors to modular partitions for the studio.",
-   "anim": {}
-  },
-  {
-   "id": "cbd56t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4810,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We scored each one on three questions: is it plausible by 2030, would it improve collaboration, and does it leave room to experiment? Three made it through.",
-   "anim": {}
-  },
-  {
-   "id": "cbd57p",
-   "type": "image",
-   "x": 270,
-   "y": 4912,
-   "w": 460,
-   "h": 307,
-   "src": "projects/media/design-process/ideation-bodystorming.jpg",
-   "fit": "cover",
-   "alt": "The team bodystorming and sketching around a table",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd58p",
-   "type": "image",
-   "x": 746,
-   "y": 4912,
-   "w": 222,
-   "h": 146,
-   "src": "projects/media/design-process/sketch-studio.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch of an inclusive studio",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd59p",
-   "type": "image",
-   "x": 746,
-   "y": 5074,
-   "w": 222,
-   "h": 146,
-   "src": "projects/media/design-process/sketch-mediator.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch of the AI flow mediator",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.2,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd60t",
-   "type": "text",
-   "x": 32.0,
-   "y": 5350,
-   "w": 222.0,
-   "h": 14,
-   "text": "nid commons",
-   "anim": {},
-   "color": "mute",
-   "nav": "nid commons"
-  },
-  {
-   "id": "cbd61t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5350,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "A platform for finding people to work with, and places to work.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd62t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5397,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Version 1.0 matched students with a compatibility score built from our research. It fell apart when people who work at different rhythms were paired up.",
-   "anim": {}
-  },
-  {
-   "id": "cbd63t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5489,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Version 1.1 added SMART goals, so every match started with a shared, concrete aim. Participation evened out, but nothing happened until someone made the first move.",
-   "anim": {}
-  },
-  {
-   "id": "cbd64t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5581,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Version 1.2 reworked the flow and added a campus map of places to work together. The lesson: a platform can connect people, but it can't give them a reason. Students who arrived without a purpose stalled.",
-   "anim": {}
-  },
-  {
-   "id": "cbd65s",
-   "type": "slides",
-   "x": 32.0,
-   "y": 5708,
-   "w": 936.0,
-   "h": 502,
-   "fit": "contain",
-   "mode": "click",
-   "trans": "fade",
-   "counter": true,
-   "every": 3,
-   "slides": [
-    {
-     "src": "projects/media/design-process/commons-v1-0.jpg",
-     "alt": "NID Commons version 1.0"
+      "id": "cbd25t",
+      "type": "text",
+      "x": 270,
+      "y": 1682,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "Our brief was the future of campus life at NID in 2030. We narrowed it to collaboration. Some students work things out by talking, and do well in crits and group discussions. Others work things out by making, writing or reflecting, and their contribution is easy to miss.",
+      "anim": {}
     },
     {
-     "src": "projects/media/design-process/commons-v1-1.jpg",
-     "alt": "NID Commons version 1.1 with SMART goals"
+      "id": "cbd26t",
+      "type": "text",
+      "x": 270,
+      "y": 1799,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "Reports from UNESCO, OECD, Pew Research Center, Stanford HAI and others pointed the same way: learning environments tend to favour expressive students, attention is increasingly fragmented, and reflective learners need calmer room to work.",
+      "anim": {}
     },
     {
-     "src": "projects/media/design-process/commons-v1-2.jpg",
-     "alt": "NID Commons version 1.2 home screen"
+      "id": "cbd27p",
+      "type": "image",
+      "x": 270,
+      "y": 1926,
+      "w": 698,
+      "h": 468,
+      "src": "projects/media/design-process/context-wall.jpg",
+      "fit": "cover",
+      "alt": "Sticky-note wall from early mapping sessions",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "caption": "Early mapping of campus life in 2030.",
+      "capShow": true
     },
     {
-     "src": "projects/media/design-process/commons-map.jpg",
-     "alt": "NID Commons campus map of collaboration spots"
+      "id": "cbd28t",
+      "type": "text",
+      "x": 32,
+      "y": 2558,
+      "w": 222,
+      "h": 25.2,
+      "text": "research",
+      "anim": {},
+      "color": "mute",
+      "nav": "research"
+    },
+    {
+      "id": "cbd29t",
+      "type": "text",
+      "x": 270,
+      "y": 2558,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "We treated expression as a spectrum, not a personality type.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd30t",
+      "type": "text",
+      "x": 270,
+      "y": 2605,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "We built a survey around seven scales, each with a reflective end and an expressive end, such as <em>drained ↔ energised</em> and <em>think or sketch quietly ↔ talk ideas through aloud</em>. Plotting the answers gave us seven recurring patterns, which we called learner archetypes.",
+      "anim": {}
+    },
+    {
+      "id": "cbd31t",
+      "type": "text",
+      "x": 270,
+      "y": 2747,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "We read these as patterns people move between, not boxes they belong in. The most common was the Ambiguous Ambivert, whose answers sit close to the middle, leaning slightly one way.",
+      "anim": {}
+    },
+    {
+      "id": "cbd32s",
+      "type": "slides",
+      "x": 270,
+      "y": 2849,
+      "w": 698,
+      "h": 374,
+      "fit": "contain",
+      "mode": "click",
+      "trans": "fade",
+      "counter": true,
+      "every": 3,
+      "slides": [
+        {
+          "src": "projects/media/design-process/archetypes-1.jpg",
+          "alt": "Radar charts for four learner archetypes"
+        },
+        {
+          "src": "projects/media/design-process/archetypes-2.jpg",
+          "alt": "Radar charts for three more learner archetypes"
+        }
+      ],
+      "caption": "The seven archetypes, plotted across the seven scales. Click for the rest.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd33t",
+      "type": "text",
+      "x": 270,
+      "y": 3313,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "Then we asked for stories.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd34t",
+      "type": "text",
+      "x": 270,
+      "y": 3360,
+      "w": 539.3333333333334,
+      "h": 124.6,
+      "text": "A survey tells you what people prefer. To learn what actually happens, we ran directed storytelling sessions: students walked us through arriving at NID, getting stuck, and working in groups. We turned each conversation into an empathy map, then grouped what we heard into affinity and causal maps.",
+      "anim": {}
+    },
+    {
+      "id": "cbd35t",
+      "type": "text",
+      "x": 32,
+      "y": 3618,
+      "w": 222,
+      "h": 25.2,
+      "text": "insights",
+      "anim": {},
+      "color": "mute",
+      "nav": "insights"
+    },
+    {
+      "id": "cbd36t",
+      "type": "text",
+      "x": 270,
+      "y": 3618,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "Quiet isn't the same as absent.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd37t",
+      "type": "text",
+      "x": 270,
+      "y": 3665,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "Three findings shaped everything we made:",
+      "anim": {}
+    },
+    {
+      "id": "cbd38g",
+      "type": "group",
+      "x": 270,
+      "y": 3714,
+      "w": 222,
+      "h": 150,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd39t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "01",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd40t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Quietness gets misread",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cbd41t",
+          "type": "text",
+          "x": 0,
+          "y": 70,
+          "w": 222,
+          "h": 75,
+          "text": "Silence is often reflection or observation, not disengagement.",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cbd42g",
+      "type": "group",
+      "x": 508,
+      "y": 3714,
+      "w": 222,
+      "h": 150,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd43t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "02",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd44t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Visible isn't the same as contributing",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cbd45t",
+          "type": "text",
+          "x": 0,
+          "y": 70,
+          "w": 222,
+          "h": 99.5,
+          "text": "Making, writing and observing count, even when no one sees them happen.",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cbd46g",
+      "type": "group",
+      "x": 746,
+      "y": 3714,
+      "w": 222,
+      "h": 150,
+      "anim": {},
+      "children": [
+        {
+          "id": "cbd47t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "03",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cbd48t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Feedback timing matters",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cbd49t",
+          "type": "text",
+          "x": 0,
+          "y": 70,
+          "w": 222,
+          "h": 75,
+          "text": "Some students want feedback right away. Others need time with an idea first.",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cbd50t",
+      "type": "text",
+      "x": 32,
+      "y": 3921,
+      "w": 222,
+      "h": 25.2,
+      "text": "research question",
+      "anim": {},
+      "color": "mute"
+    },
+    {
+      "id": "cbd51t",
+      "type": "text",
+      "x": 270,
+      "y": 3921,
+      "w": 698,
+      "h": 49.7,
+      "text": "How do we make learning more collaborative for people with different levels of expression, at NID in 2030?",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd52s",
+      "type": "slides",
+      "x": 270,
+      "y": 4054,
+      "w": 698,
+      "h": 453,
+      "fit": "contain",
+      "mode": "click",
+      "trans": "fade",
+      "counter": true,
+      "every": 3,
+      "slides": [
+        {
+          "src": "projects/media/design-process/board-teseec.jpg",
+          "alt": "TESEEC framework board"
+        },
+        {
+          "src": "projects/media/design-process/board-stakeholders.jpg",
+          "alt": "Stakeholder map"
+        },
+        {
+          "src": "projects/media/design-process/board-empathy-1.jpg",
+          "alt": "Empathy maps, participants 1 to 3"
+        },
+        {
+          "src": "projects/media/design-process/board-empathy-2.jpg",
+          "alt": "Empathy maps, participants 4 to 6"
+        },
+        {
+          "src": "projects/media/design-process/board-affinity.jpg",
+          "alt": "Affinity map"
+        },
+        {
+          "src": "projects/media/design-process/board-causal.jpg",
+          "alt": "Causal map"
+        }
+      ],
+      "caption": "The working boards: TESEEC framework, stakeholder map, empathy maps, affinity map and causal map.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd53t",
+      "type": "text",
+      "x": 32,
+      "y": 4671,
+      "w": 222,
+      "h": 25.2,
+      "text": "process",
+      "anim": {},
+      "color": "mute",
+      "nav": "process"
+    },
+    {
+      "id": "cbd54t",
+      "type": "text",
+      "x": 270,
+      "y": 4671,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "Twelve concepts, three kept.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd55t",
+      "type": "text",
+      "x": 270,
+      "y": 4718,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "We bodystormed, role-played and mapped “how might we” questions until we had twelve concepts, from wearable energy reflectors to modular partitions for the studio.",
+      "anim": {}
+    },
+    {
+      "id": "cbd56t",
+      "type": "text",
+      "x": 270,
+      "y": 4810,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "We scored each one on three questions: is it plausible by 2030, would it improve collaboration, and does it leave room to experiment? Three made it through.",
+      "anim": {}
+    },
+    {
+      "id": "cbd57p",
+      "type": "image",
+      "x": 270,
+      "y": 4912,
+      "w": 460,
+      "h": 307,
+      "src": "projects/media/design-process/ideation-bodystorming.jpg",
+      "fit": "cover",
+      "alt": "The team bodystorming and sketching around a table",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd58p",
+      "type": "image",
+      "x": 746,
+      "y": 4912,
+      "w": 222,
+      "h": 146,
+      "src": "projects/media/design-process/sketch-studio.jpg",
+      "fit": "cover",
+      "alt": "Concept sketch of an inclusive studio",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd59p",
+      "type": "image",
+      "x": 746,
+      "y": 5074,
+      "w": 222,
+      "h": 146,
+      "src": "projects/media/design-process/sketch-mediator.jpg",
+      "fit": "cover",
+      "alt": "Concept sketch of the AI flow mediator",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd60t",
+      "type": "text",
+      "x": 32,
+      "y": 5350,
+      "w": 222,
+      "h": 25.2,
+      "text": "nid commons",
+      "anim": {},
+      "color": "mute",
+      "nav": "nid commons"
+    },
+    {
+      "id": "cbd61t",
+      "type": "text",
+      "x": 270,
+      "y": 5350,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "A platform for finding people to work with, and places to work.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd62t",
+      "type": "text",
+      "x": 270,
+      "y": 5397,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "Version 1.0 matched students with a compatibility score built from our research. It fell apart when people who work at different rhythms were paired up.",
+      "anim": {}
+    },
+    {
+      "id": "cbd63t",
+      "type": "text",
+      "x": 270,
+      "y": 5489,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "Version 1.1 added SMART goals, so every match started with a shared, concrete aim. Participation evened out, but nothing happened until someone made the first move.",
+      "anim": {}
+    },
+    {
+      "id": "cbd64t",
+      "type": "text",
+      "x": 270,
+      "y": 5581,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "Version 1.2 reworked the flow and added a campus map of places to work together. The lesson: a platform can connect people, but it can't give them a reason. Students who arrived without a purpose stalled.",
+      "anim": {}
+    },
+    {
+      "id": "cbd65s",
+      "type": "slides",
+      "x": 270,
+      "y": 5708,
+      "w": 698,
+      "h": 502,
+      "fit": "contain",
+      "mode": "click",
+      "trans": "fade",
+      "counter": true,
+      "every": 3,
+      "slides": [
+        {
+          "src": "projects/media/design-process/commons-v1-0.jpg",
+          "alt": "NID Commons version 1.0"
+        },
+        {
+          "src": "projects/media/design-process/commons-v1-1.jpg",
+          "alt": "NID Commons version 1.1 with SMART goals"
+        },
+        {
+          "src": "projects/media/design-process/commons-v1-2.jpg",
+          "alt": "NID Commons version 1.2 home screen"
+        },
+        {
+          "src": "projects/media/design-process/commons-map.jpg",
+          "alt": "NID Commons campus map of collaboration spots"
+        }
+      ],
+      "caption": "Versions 1.0, 1.1 and 1.2, and the campus map.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd66u",
+      "type": "button",
+      "look": "line",
+      "text": "Open the prototype",
+      "x": 270,
+      "y": 6268,
+      "w": 222,
+      "h": 42,
+      "link": {
+        "href": "https://amount-hatch-73522679.figma.site",
+        "newTab": true
+      },
+      "anim": {}
+    },
+    {
+      "id": "cbd67t",
+      "type": "text",
+      "x": 32,
+      "y": 6440,
+      "w": 222,
+      "h": 25.2,
+      "text": "empathy game",
+      "anim": {},
+      "color": "mute",
+      "nav": "empathy game"
+    },
+    {
+      "id": "cbd68t",
+      "type": "text",
+      "x": 270,
+      "y": 6440,
+      "w": 539.3333333333334,
+      "h": 25.2,
+      "text": "A card game where nobody can win alone.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd69t",
+      "type": "text",
+      "x": 270,
+      "y": 6487,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "Players share a goal pattern that no one is allowed to describe. Each player has one kind of move, like move or rotate, and can only talk about actions. To win, they have to say a lot with a little, build a shared picture of the goal, and rely on each other's roles.",
+      "anim": {}
+    },
+    {
+      "id": "cbd70t",
+      "type": "text",
+      "x": 270,
+      "y": 6604,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "We watched teams play and looked for three endings: the team loses because communication breaks down; the team wins but one player takes over; or the team wins and learns. Winning turned out not to mean collaborating.",
+      "anim": {}
+    },
+    {
+      "id": "cbd71p",
+      "type": "image",
+      "x": 270,
+      "y": 6731,
+      "w": 222,
+      "h": 278,
+      "src": "projects/media/design-process/game-cards-1.jpg",
+      "fit": "cover",
+      "alt": "Early paper prototypes of the game cards",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd72p",
+      "type": "image",
+      "x": 508,
+      "y": 6731,
+      "w": 222,
+      "h": 278,
+      "src": "projects/media/design-process/game-cards-2.jpg",
+      "fit": "cover",
+      "alt": "Later iteration of the game cards",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd73p",
+      "type": "image",
+      "x": 746,
+      "y": 6731,
+      "w": 222,
+      "h": 278,
+      "src": "projects/media/design-process/game-components.jpg",
+      "fit": "cover",
+      "alt": "Final game cards and pieces",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd74t",
+      "type": "text",
+      "x": 32,
+      "y": 7139,
+      "w": 222,
+      "h": 25.2,
+      "text": "flow mediator",
+      "anim": {},
+      "color": "mute",
+      "nav": "flow mediator"
+    },
+    {
+      "id": "cbd75t",
+      "type": "text",
+      "x": 270,
+      "y": 7139,
+      "w": 539.3333333333334,
+      "h": 49.7,
+      "text": "An AI companion for group work, tested with a person behind the curtain.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd76t",
+      "type": "text",
+      "x": 270,
+      "y": 7211,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "Flow Mediator started as an ambient system, with adaptive lighting and a voice assistant, that would sense a group's energy and nudge it back into balance.",
+      "anim": {}
+    },
+    {
+      "id": "cbd77t",
+      "type": "text",
+      "x": 270,
+      "y": 7303,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "To test the idea without building an AI, we faked one. Ten students worked on an open brief with an “AI” that was really one of us, typing check-ins, guidance and reflective prompts.",
+      "anim": {}
+    },
+    {
+      "id": "cbd78t",
+      "type": "text",
+      "x": 270,
+      "y": 7395,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "Reflective students liked having a private, non-judgemental place to think. Expressive students liked quick encouragement. But some leaned on the bot instead of each other. AI can support mentorship, but it can't replace it.",
+      "anim": {}
+    },
+    {
+      "id": "cbd79p",
+      "type": "image",
+      "x": 270,
+      "y": 7522,
+      "w": 460,
+      "h": 325,
+      "src": "projects/media/design-process/mediator-storyboard-1.jpg",
+      "fit": "cover",
+      "alt": "Storyboard of a group session with the Flow Mediator",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd80p",
+      "type": "image",
+      "x": 746,
+      "y": 7522,
+      "w": 222,
+      "h": 325,
+      "src": "projects/media/design-process/mediator-woz.jpg",
+      "fit": "cover",
+      "alt": "A student during the Wizard of Oz test session",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cbd81t",
+      "type": "text",
+      "x": 32,
+      "y": 7977,
+      "w": 222,
+      "h": 25.2,
+      "text": "reflection",
+      "anim": {},
+      "color": "mute",
+      "nav": "reflection"
+    },
+    {
+      "id": "cbd82t",
+      "type": "text",
+      "x": 270,
+      "y": 7977,
+      "w": 539.3333333333334,
+      "h": 49.7,
+      "text": "The challenge was never to fix introversion or amplify extroversion.",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cbd83t",
+      "type": "text",
+      "x": 270,
+      "y": 8049,
+      "w": 539.3333333333334,
+      "h": 99.4,
+      "text": "It was to design conditions where everyone gets to contribute in their own way. Technology helped connect people, but it couldn't stand in for empathy. Collaboration worked best when the system left room for autonomy and reflection.",
+      "anim": {}
+    },
+    {
+      "id": "cbd84t",
+      "type": "text",
+      "x": 270,
+      "y": 8166,
+      "w": 539.3333333333334,
+      "h": 74.9,
+      "text": "[Your reflection: two or three sentences in your own voice. What held up, what didn't, and what you'd test next with more than two weeks.]",
+      "anim": {}
     }
-   ],
-   "caption": "Versions 1.0, 1.1 and 1.2, and the campus map.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd66u",
-   "type": "button",
-   "look": "line",
-   "text": "Open the prototype",
-   "x": 270.0,
-   "y": 6268,
-   "w": 222.0,
-   "h": 42,
-   "link": {
-    "href": "https://amount-hatch-73522679.figma.site",
-    "newTab": true
-   },
-   "anim": {}
-  },
-  {
-   "id": "cbd67t",
-   "type": "text",
-   "x": 32.0,
-   "y": 6440,
-   "w": 222.0,
-   "h": 14,
-   "text": "empathy game",
-   "anim": {},
-   "color": "mute",
-   "nav": "empathy game"
-  },
-  {
-   "id": "cbd68t",
-   "type": "text",
-   "x": 270.0,
-   "y": 6440,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "A card game where nobody can win alone.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd69t",
-   "type": "text",
-   "x": 270.0,
-   "y": 6487,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Players share a goal pattern that no one is allowed to describe. Each player has one kind of move, like move or rotate, and can only talk about actions. To win, they have to say a lot with a little, build a shared picture of the goal, and rely on each other's roles.",
-   "anim": {}
-  },
-  {
-   "id": "cbd70t",
-   "type": "text",
-   "x": 270.0,
-   "y": 6604,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "We watched teams play and looked for three endings: the team loses because communication breaks down; the team wins but one player takes over; or the team wins and learns. Winning turned out not to mean collaborating.",
-   "anim": {}
-  },
-  {
-   "id": "cbd71p",
-   "type": "image",
-   "x": 270,
-   "y": 6731,
-   "w": 222,
-   "h": 278,
-   "src": "projects/media/design-process/game-cards-1.jpg",
-   "fit": "cover",
-   "alt": "Early paper prototypes of the game cards",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd72p",
-   "type": "image",
-   "x": 508,
-   "y": 6731,
-   "w": 222,
-   "h": 278,
-   "src": "projects/media/design-process/game-cards-2.jpg",
-   "fit": "cover",
-   "alt": "Later iteration of the game cards",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd73p",
-   "type": "image",
-   "x": 746,
-   "y": 6731,
-   "w": 222,
-   "h": 278,
-   "src": "projects/media/design-process/game-components.jpg",
-   "fit": "cover",
-   "alt": "Final game cards and pieces",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.2,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd74t",
-   "type": "text",
-   "x": 32.0,
-   "y": 7139,
-   "w": 222.0,
-   "h": 14,
-   "text": "flow mediator",
-   "anim": {},
-   "color": "mute",
-   "nav": "flow mediator"
-  },
-  {
-   "id": "cbd75t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7139,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "An AI companion for group work, tested with a person behind the curtain.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd76t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7211,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Flow Mediator started as an ambient system, with adaptive lighting and a voice assistant, that would sense a group's energy and nudge it back into balance.",
-   "anim": {}
-  },
-  {
-   "id": "cbd77t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7303,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "To test the idea without building an AI, we faked one. Ten students worked on an open brief with an “AI” that was really one of us, typing check-ins, guidance and reflective prompts.",
-   "anim": {}
-  },
-  {
-   "id": "cbd78t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7395,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "Reflective students liked having a private, non-judgemental place to think. Expressive students liked quick encouragement. But some leaned on the bot instead of each other. AI can support mentorship, but it can't replace it.",
-   "anim": {}
-  },
-  {
-   "id": "cbd79p",
-   "type": "image",
-   "x": 270,
-   "y": 7522,
-   "w": 460,
-   "h": 325,
-   "src": "projects/media/design-process/mediator-storyboard-1.jpg",
-   "fit": "cover",
-   "alt": "Storyboard of a group session with the Flow Mediator",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd80p",
-   "type": "image",
-   "x": 746,
-   "y": 7522,
-   "w": 222,
-   "h": 325,
-   "src": "projects/media/design-process/mediator-woz.jpg",
-   "fit": "cover",
-   "alt": "A student during the Wizard of Oz test session",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cbd81t",
-   "type": "text",
-   "x": 32.0,
-   "y": 7977,
-   "w": 222.0,
-   "h": 14,
-   "text": "reflection",
-   "anim": {},
-   "color": "mute",
-   "nav": "reflection"
-  },
-  {
-   "id": "cbd82t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7977,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "The challenge was never to fix introversion or amplify extroversion.",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cbd83t",
-   "type": "text",
-   "x": 270.0,
-   "y": 8049,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "It was to design conditions where everyone gets to contribute in their own way. Technology helped connect people, but it couldn't stand in for empathy. Collaboration worked best when the system left room for autonomy and reflection.",
-   "anim": {}
-  },
-  {
-   "id": "cbd84t",
-   "type": "text",
-   "x": 270.0,
-   "y": 8166,
-   "w": 539.3333333333334,
-   "h": 14,
-   "text": "[Your reflection: two or three sentences in your own voice. What held up, what didn't, and what you'd test next with more than two weeks.]",
-   "anim": {}
+  ],
+  "guides": {
+    "x": [],
+    "y": []
   }
- ]
 }
