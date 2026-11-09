@@ -239,3 +239,5 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
 .zoom-ov img { width: 100%; height: 100%; object-fit: contain; transform: scale(.97); transition: transform .35s cubic-bezier(.2,.8,.3,1); }
 .zoom-ov.on img { transform: none; }
 .it.pinned { z-index: 5; }
+/* "drop shadow": follows the shape of what's inside, so a cut-out picture casts a cut-out shadow */
+.it.shadow > .ly { filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .16)) drop-shadow(0 2px 4px rgba(0, 0, 0, .08)); }

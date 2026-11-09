@@ -215,6 +215,8 @@ window.Canvas = (() => {
     s.height = it.type === 'text' || grows ? '' : `calc(var(--u) * ${it.h})`;
     s.minHeight = grows ? `calc(var(--u) * ${it.h})` : '';
     if (it.type !== 'text' && it.w && it.h) s.setProperty('--ar', `${it.w} / ${it.h}`);
+    s.rotate = it.tilt ? it.tilt + 'deg' : '';           // a little tilt, to break the grid now and then
+    el.classList.toggle('shadow', !!it.shadow);          // a soft shadow that follows the picture's own shape (cut-outs too)
   }
 
   const narrow = matchMedia('(max-width: 700px)');

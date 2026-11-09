@@ -102,3 +102,11 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 - Delete the "Sample project" before the first time you go live.
 - Motion (the swell on/off) is at the very bottom of the work-list editor. The blue **swell** button
   (next to **edit**) shows on the visitor pages on your laptop, not inside the editor.
+
+## Breaking the grid a little
+
+- Any block: **tilt (degrees)** turns it slightly (try -3 to 3), **drop shadow** gives it a soft shadow that follows its shape. A picture with its background removed (a .png or .webp with see-through background) gets a cut-out shadow.
+- Pictures: **click to enlarge** lets visitors click that one picture to see it big. Only the ones you tick.
+- Text: **background → project** puts the words on a block of the project's colour.
+- Sections panel: **even out the space between sections** puts the same gap (the number above it) before every section.
+- Turn off **snap** in the bottom bar when you want something deliberately off the grid.

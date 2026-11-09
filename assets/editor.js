@@ -1488,6 +1488,10 @@
       if (it.src) h('p', 'ed-note', S, it.src.startsWith('blob:') ? 'not saved into the folder yet' : it.src);
     }
     if (it.type === 'slides') slidesPanel(it, S);
+    if (it.type !== 'marker') {
+      num(S, 'tilt (degrees)', () => it.tilt || 0, v => { if (v) it.tilt = v; else delete it.tilt; }, .5);
+      check(S, 'drop shadow', () => !!it.shadow, v => { if (v) it.shadow = true; else delete it.shadow; });
+    }
     if (/^(image|video|embed|slides)$/.test(it.type)) {
       const Cp = keyed(sec('Caption', panel, !!it.caption), 'caption');
       text(Cp, 'caption', () => it.caption, v => { if (v.trim()) it.caption = v.trim(); else delete it.caption; }, 'a few quiet words under it');
