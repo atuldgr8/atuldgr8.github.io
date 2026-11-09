@@ -1,0 +1,516 @@
+{
+  "v": 2,
+  "side": "sections",
+  "items": [
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 200,
+      "w": 618.6666666666667,
+      "weight": 700,
+      "text": "Project title",
+      "id": "i5q1zof4"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 218,
+      "w": 618.6666666666667,
+      "color": "mute",
+      "text": "Client or course · What kind of thing · 2026",
+      "id": "i5rox5b1"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 256,
+      "w": 539.3333333333334,
+      "text": "One or two lines on what this is, and why it matters.",
+      "id": "i5skf0ek"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 32,
+      "y": 330,
+      "w": 936,
+      "h": 527,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "id": "i5tqgpvm"
+    },
+    {
+      "type": "box",
+      "fill": "faint",
+      "x": 32,
+      "y": 997,
+      "w": 936,
+      "h": 1,
+      "id": "i5u4p3qn"
+    },
+    {
+      "type": "group",
+      "x": 32,
+      "y": 1013,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "role",
+          "id": "i5wzfoku"
+        },
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "What you did",
+          "id": "i5xddqdx"
+        }
+      ],
+      "id": "i5vmxlhw"
+    },
+    {
+      "type": "group",
+      "x": 270,
+      "y": 1013,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "when",
+          "id": "i5zyllpo"
+        },
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "8 weeks, 2026",
+          "id": "i60t80z3"
+        }
+      ],
+      "id": "i5ydlh8t"
+    },
+    {
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 1013,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "with",
+          "id": "i62v66kz"
+        },
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "Who you worked with",
+          "id": "i63ckpkr"
+        }
+      ],
+      "id": "i61ac5g8"
+    },
+    {
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 1013,
+      "w": 222,
+      "h": 30,
+      "children": [
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "color": "mute",
+          "text": "tools",
+          "id": "i65qng8t"
+        },
+        {
+          "type": "text",
+          "h": 14,
+          "x": 0,
+          "y": 16,
+          "w": 222,
+          "text": "Figma, p5.js, a lot of paper",
+          "id": "i66r6yzx"
+        }
+      ],
+      "id": "i648bdrv"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 1155,
+      "w": 222,
+      "color": "mute",
+      "text": "intro",
+      "nav": "intro",
+      "id": "i674vfw5"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 1155,
+      "w": 539.3333333333334,
+      "weight": 700,
+      "text": "What is this, in one sentence?",
+      "id": "i68jxzt7"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 1191,
+      "w": 539.3333333333334,
+      "text": "A few lines of story. What was going on, what you noticed, what you decided to do about it. Keep it short: the pictures do the rest.",
+      "id": "i69zj6tw"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 1345,
+      "w": 222,
+      "color": "mute",
+      "text": "problem",
+      "nav": "problem",
+      "id": "i6ax80vy"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 1345,
+      "w": 539.3333333333334,
+      "weight": 700,
+      "text": "What was wrong, or what was missing?",
+      "id": "i6bb84wd"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 1381,
+      "w": 539.3333333333334,
+      "text": "A few lines of story. What was going on, what you noticed, what you decided to do about it. Keep it short: the pictures do the rest.",
+      "id": "i6cx9y3d"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 32,
+      "y": 1535,
+      "w": 460,
+      "h": 575,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "id": "i6derxjm"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 508.00000000000006,
+      "y": 1535,
+      "w": 460,
+      "h": 575,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.12,
+          "ease": "out"
+        }
+      },
+      "id": "i6eykd8g"
+    },
+    {
+      "type": "box",
+      "fill": "blue",
+      "round": 8,
+      "x": 270,
+      "y": 2250,
+      "w": 539.3333333333334,
+      "h": 104,
+      "weight": 700,
+      "color": "bg",
+      "text": "The result, in numbers if you can. 33% → 60%, three cities, one very happy client.",
+      "id": "i6f2odbe"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 2494,
+      "w": 222,
+      "color": "mute",
+      "text": "process",
+      "nav": "process",
+      "id": "i6gjeymn"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 2494,
+      "w": 539.3333333333334,
+      "weight": 700,
+      "text": "How did you go about it?",
+      "id": "i6hp85l8"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 2530,
+      "w": 539.3333333333334,
+      "text": "A few lines of story. What was going on, what you noticed, what you decided to do about it. Keep it short: the pictures do the rest.",
+      "id": "i6izovyr"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 32,
+      "y": 2684,
+      "w": 618.6666666666667,
+      "h": 464,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "id": "i6jj2hqc"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 666.6666666666667,
+      "y": 2684,
+      "w": 301.33333333333337,
+      "h": 224,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      },
+      "id": "i6khqyuv"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 666.6666666666667,
+      "y": 2924,
+      "w": 301.33333333333337,
+      "h": 224,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      },
+      "id": "i6lokrbv"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 0,
+      "y": 3288,
+      "w": 1000,
+      "h": 560,
+      "bleed": true,
+      "anim": {
+        "scroll": {
+          "on": true,
+          "keys": [
+            {
+              "at": 100,
+              "s": {
+                "scale": 1.12
+              },
+              "ease": "linear"
+            },
+            {
+              "at": 30,
+              "s": {}
+            }
+          ]
+        }
+      },
+      "id": "i6mkmiyy"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 3988,
+      "w": 222,
+      "color": "mute",
+      "text": "outcome",
+      "nav": "outcome",
+      "id": "i6nprebe"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 3988,
+      "w": 539.3333333333334,
+      "weight": 700,
+      "text": "What happened in the end?",
+      "id": "i6o9k5zi"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 4024,
+      "w": 539.3333333333334,
+      "text": "A few lines of story. What was going on, what you noticed, what you decided to do about it. Keep it short: the pictures do the rest.",
+      "id": "i6pjuf3p"
+    },
+    {
+      "type": "image",
+      "src": "",
+      "fit": "cover",
+      "x": 32,
+      "y": 4178,
+      "w": 936,
+      "h": 527,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "id": "i6q18x33"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 4717,
+      "w": 380.6666666666667,
+      "color": "mute",
+      "text": "Caption: what you are looking at, and why.",
+      "id": "i6rh991a"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 32,
+      "y": 4871,
+      "w": 222,
+      "color": "mute",
+      "text": "reflection",
+      "nav": "reflection",
+      "id": "i6slv3c1"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 4871,
+      "w": 539.3333333333334,
+      "weight": 700,
+      "text": "What did you learn, and what would you do next?",
+      "id": "i6t532a2"
+    },
+    {
+      "type": "text",
+      "h": 14,
+      "x": 270,
+      "y": 4907,
+      "w": 539.3333333333334,
+      "text": "A few lines of story. What was going on, what you noticed, what you decided to do about it. Keep it short: the pictures do the rest.",
+      "id": "i6ur7pwd"
+    }
+  ]
+}

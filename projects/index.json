@@ -20,6 +20,80 @@
       "hidden": false,
       "soon": true,
       "color": "pink"
+    },
+    {
+      "slug": "narayanpet-weavers-centre",
+      "title": "Narayanpet Weavers' Centre",
+      "year": "2026",
+      "tags": "Architecural Design, Ethnographic Research",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "color": "#ff00bb",
+      "soon": true
+    },
+    {
+      "slug": "head-held-high---annual-reports",
+      "title": "Head Held High - Annual Reports",
+      "year": "2026",
+      "tags": "Graphic Design, Editorial Design, Illustrations, Data Visualisation",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "soon": true,
+      "color": "#ff0000"
+    },
+    {
+      "slug": "prototyping-experiences",
+      "title": "Prototyping Experiences",
+      "year": "2026",
+      "tags": "",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "soon": true
+    },
+    {
+      "slug": "web-design-projects",
+      "title": "Web Design Projects",
+      "year": "2026",
+      "tags": "UI/UX Design",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "soon": true
+    },
+    {
+      "slug": "the-right-of-passage",
+      "title": "The Right of Passage",
+      "year": "2026",
+      "tags": "Experiential Design, Storytelling",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "soon": true,
+      "fun": true
+    },
+    {
+      "slug": "where-do-you-stand",
+      "title": "Where Do You Stand?",
+      "year": "2026",
+      "tags": "Experiential Design, Storytelling",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "soon": true,
+      "fun": true
+    },
+    {
+      "slug": "misc",
+      "title": "Misc.*",
+      "year": "2026",
+      "tags": "",
+      "summary": "",
+      "thumb": "",
+      "hidden": true,
+      "fun": true
     }
   ],
   "funLabel": "and some work-adjacent fun",
