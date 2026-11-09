@@ -294,3 +294,11 @@ body.is-editing:not(.previewing) .ed-ruler-y { width: 10px; }
 .ed-secs button:disabled { opacity: .3; cursor: default; }
 .ed-secs small { width: auto; font-size: 10px; line-height: 1.1; }
 .ed-secs button { padding: 2px 0; }
+
+/* the little bar above a text box while you type: styles only the selected words */
+.ed-wordbar { position: fixed; z-index: 72; display: flex; align-items: center; gap: 2px; padding: 3px;
+  font: 400 var(--ed)/1 Inter, system-ui, sans-serif; letter-spacing: -0.01em;
+  background: var(--fg); color: var(--bg); }
+.ed-wordbar button { font: inherit; color: inherit; background: none; border: 0; padding: 5px 7px; cursor: pointer; }
+.ed-wordbar button:hover { background: color-mix(in srgb, var(--bg) 18%, transparent); }
+.ed-wordbar .sep { width: 1px; align-self: stretch; margin: 3px 3px; background: color-mix(in srgb, var(--bg) 30%, transparent); }

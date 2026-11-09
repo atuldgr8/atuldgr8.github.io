@@ -1,7 +1,7 @@
 /* =====================================================================
    The editor. Opens on project.html?p=<slug>&edit
    Same canvas as the live page, plus: select, drag, resize, snapping
-   (columns, rows, other things, your own guides; hold Alt to break it),
+   (columns, rows, other things, your own guides; hold Ctrl/Cmd to break it; Alt-drag makes a copy),
    groups, linked components, a block library, text editing, pictures,
    slideshows, buttons, animation, undo, preview, and saving into your folder.
    ===================================================================== */
@@ -404,7 +404,7 @@
   const libB = B('+ blocks', 'Ready-made blocks, buttons, slideshows and your own components (B)', () => toggleLib());
   sep();
   const gridB = B('grid', 'Show the grid (G)', () => { pref.grid = !pref.grid; paintToggles(); });
-  const snapB = B('snap', 'Snapping on/off (S). Hold Alt while dragging to break it once. Details in the page panel.', () => { pref.snap = !pref.snap; paintToggles(); });
+  const snapB = B('snap', 'Snapping on/off (S). Hold Ctrl (Cmd on a Mac) while dragging to break it once. Details in the page panel.', () => { pref.snap = !pref.snap; paintToggles(); });
   const guidesB = B('guides', 'Show your guides (;). Drag from the rulers to make one.', () => { pref.guides = !pref.guides; paintToggles(); drawGuides(); });
   sep();
   B('undo', 'Undo (⌘Z)', doUndo);
@@ -430,7 +430,7 @@
 
   const help = h('div', 'ed-help', document.body);
   help.innerHTML = `<b>Shortcuts</b>
-  <p>drag · move &nbsp; <kbd>Alt</kbd> drag · no snapping &nbsp; <kbd>Shift</kbd> click · add to selection</p>
+  <p>drag · move &nbsp; <kbd>Alt</kbd> drag · copy &nbsp; <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> drag · no snapping &nbsp; <kbd>Shift</kbd> click · add to selection</p>
   <p>double-click text · type &nbsp; double-click group or component · step inside &nbsp; <kbd>Esc</kbd> · step out</p>
   <p><kbd>⌘G</kbd> group &nbsp; <kbd>⇧⌘G</kbd> ungroup &nbsp; <kbd>⌥⌘K</kbd> make component &nbsp; <kbd>⌘D</kbd> duplicate &nbsp; <kbd>⌫</kbd> delete</p>
   <p><kbd>⌘C</kbd>/<kbd>⌘V</kbd> copy, paste (pictures too) &nbsp; <kbd>]</kbd>/<kbd>[</kbd> front, back</p>
@@ -642,14 +642,22 @@
     }
     const start = its.map(i => ({ i, x: i.x, y: i.y }));
     const bb = bbox(its), p0 = toUnits(e), skip = new Set(its.map(i => i.id));
+    const copying = e.altKey;             // Alt-drag: a copy stays where it was, you carry the original away
     let moved = false;
     drag(e, ev => {
       const p = toUnits(ev);
       let dx = p.x - p0.x, dy = p.y - p0.y;
       if (!moved && Math.hypot(dx, dy) * uPx() < 3) return;
-      if (!moved) { moved = true; stage.classList.add('dragging'); }
+      if (!moved) {
+        moved = true; stage.classList.add('dragging');
+        if (copying) {
+          const arr = scopeItems();
+          for (const s of start) arr.splice(arr.indexOf(s.i), 0, freshIds(clone(s.i)));   // the copy sits just under the original
+          render(true);
+        }
+      }
       snapLines = [];
-      if (pref.snap && !ev.altKey) { const s = snapMove(bb.x + dx, bb.y + dy, bb.w, bb.h, skip); dx = s.x - bb.x; dy = s.y - bb.y; }
+      if (pref.snap && !(ev.ctrlKey || ev.metaKey)) { const s = snapMove(bb.x + dx, bb.y + dy, bb.w, bb.h, skip); dx = s.x - bb.x; dy = s.y - bb.y; }
       for (const s of start) { s.i.x = r1(s.x + dx); s.i.y = r1(s.y + dy); const el = elOf(s.i.id); if (el) C.place(el, s.i); }
       lay(); drawOverlay();
     }, () => { snapLines = []; if (moved) { commit(true); inspector(); } else drawOverlay(); });
@@ -661,7 +669,7 @@
     const s0 = { x: it.x, y: it.y, w: it.w, h: it.h }, ar = s0.w / (s0.h || 1), p0 = toUnits(e);
     const kidsSnap = it.children ? clone(it.children) : null, skip = new Set([it.id]);
     drag(e, ev => {
-      const p = toUnits(ev), dx = p.x - p0.x, dy = p.y - p0.y, free = !pref.snap || ev.altKey;
+      const p = toUnits(ev), dx = p.x - p0.x, dy = p.y - p0.y, free = !pref.snap || ev.ctrlKey || ev.metaKey;
       snapLines = [];
       let { x, y, w, h: hh } = s0;
       if (dir.includes('e')) { w = s0.w + dx; if (!free) w = snapOne('x', x + w, skip) - x; }
@@ -728,6 +736,44 @@
     }
   });
 
+  // while typing: a small bar to style only the words you've selected
+  let wordBar = null;
+  const WORD = { colour: ['c-fg', 'c-mute', 'c-faint', 'c-accent'], size: ['sz-s', 'sz-m', 'sz-l'] };
+  function styleWords(kind, cls) {
+    const s = getSelection(); if (!editing || !s.rangeCount || s.isCollapsed) return toast('Select some words first');
+    const r = s.getRangeAt(0); if (!editing.el.contains(r.commonAncestorContainer)) return;
+    const frag = r.extractContents();
+    frag.querySelectorAll('span').forEach(sp => { WORD[kind].forEach(c => sp.classList.remove(c)); if (!sp.className) sp.replaceWith(...sp.childNodes); });
+    const sp = document.createElement('span'); sp.className = cls; sp.appendChild(frag);
+    r.insertNode(sp);
+    s.removeAllRanges(); const nr = document.createRange(); nr.selectNodeContents(sp); s.addRange(nr);
+  }
+  function showWordBar() {
+    hideWordBar();
+    wordBar = h('div', 'ed-wordbar', document.body);
+    const btn = (label, title, fn) => { const b = h('button', '', wordBar, label); b.title = title; b.addEventListener('pointerdown', e => { e.preventDefault(); fn(); }); };
+    btn('B', 'Bold (Ctrl/Cmd B)', () => document.execCommand('bold'));
+    btn('I', 'Italic (Ctrl/Cmd I)', () => document.execCommand('italic'));
+    h('span', 'sep', wordBar);
+    btn('ink', 'Selected words in ink', () => styleWords('colour', 'c-fg'));
+    btn('grey', 'Selected words in grey', () => styleWords('colour', 'c-mute'));
+    btn('faint', 'Selected words faint', () => styleWords('colour', 'c-faint'));
+    btn('project', "Selected words in the project's colour", () => styleWords('colour', 'c-accent'));
+    h('span', 'sep', wordBar);
+    btn('S', 'Selected words small', () => styleWords('size', 'sz-s'));
+    btn('M', 'Selected words medium', () => styleWords('size', 'sz-m'));
+    btn('L', 'Selected words large', () => styleWords('size', 'sz-l'));
+    placeWordBar();
+  }
+  function placeWordBar() {
+    if (!wordBar || !editing) return;
+    const r = editing.el.getBoundingClientRect();
+    wordBar.style.left = Math.max(8, r.left) + 'px';
+    wordBar.style.top = Math.max(8, r.top - wordBar.offsetHeight - 8) + 'px';
+  }
+  function hideWordBar() { if (wordBar) { wordBar.remove(); wordBar = null; } }
+  addEventListener('scroll', placeWordBar, true);
+
   function startText(el, it, resume) {
     const t = el && el.querySelector(it.type === 'button' ? '.btn > span' : it.type === 'box' ? '.box > .txt' : '.txt'); if (!t) return;
     editing = { el: t, it };
@@ -741,9 +787,11 @@
     }
     el.classList.add('typing');
     drawOverlay();
+    showWordBar();
   }
   function finishText() {
     if (!editing) return;
+    hideWordBar();
     const { el, it } = editing;
     editing = null;
     el.contentEditable = 'false';
@@ -769,9 +817,13 @@
         if (tag === 'br') { out.push('<br>'); continue; }
         const block = tag === 'div' || tag === 'p';
         if (block && out.length && out[out.length - 1] !== '<br>') out.push('<br>');
+        // styled words: keep only our own colour/size classes
+        const cls = tag === 'span' ? [...c.classList].filter(k => /^(c-(fg|mute|faint|accent)|sz-[sml])$/.test(k)).join(' ') : '';
         const keep = { b: 'b', strong: 'b', i: 'i', em: 'i', a: 'a' }[tag]
-          || (tag === 'span' && /bold|[6-9]00/.test(c.style.fontWeight) ? 'b' : null);
-        if (keep === 'a') {
+          || (tag === 'span' && /bold|[6-9]00/.test(c.style.fontWeight) ? 'b' : null)
+          || (cls ? 'span' : null);
+        if (keep === 'span') out.push(`<span class="${cls}">`);
+        else if (keep === 'a') {
           const href = (c.getAttribute('href') || '').replace(/"/g, '%22');
           out.push(`<a href="${href}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>`);
         } else if (keep) out.push(`<${keep}>`);
@@ -1447,7 +1499,7 @@
     check(sn, 'rows', () => pref.sRows, v => pref.sRows = v, true);
     check(sn, 'edges and middles of other things', () => pref.sEls, v => pref.sEls = v, true);
     check(sn, 'your guides', () => pref.sGuides, v => pref.sGuides = v, true);
-    h('p', 'ed-note', sn, 'Hold Alt while dragging to ignore all of it. Drag from the top or left edge of the page to make a guide.');
+    h('p', 'ed-note', sn, 'Hold Ctrl (Cmd on a Mac) while dragging to ignore all of it. Drag from the top or left edge of the page to make a guide.');
 
     const t = keyed(sec('Hover picture (work page + TL;DR)'), 'thumb');
     const pics = []; walk(doc.items, it => { if (it.type === 'image' && it.src) pics.push(it.src); if (it.type === 'slides') (it.slides || []).forEach(s => pics.push(s.src)); });
@@ -1457,7 +1509,7 @@
     if (meta.thumb) { const im = h('img', 'ed-thumb', t); im.src = resolve(meta.thumb); im.onerror = () => onMediaError(im, meta.thumb); }
     actions(t, [['upload a different one', async () => { const [f] = await pickFiles('image/*', false); if (f) { const { src } = await stash(f); meta.thumb = src; commit(); } }]]);
     const how = keyed(sec('How this works', panel, false), 'how');
-    h('p', 'ed-note', how).innerHTML = `Click to select. Drag to move: it snaps to columns, rows, guides and other things. Hold <kbd>Alt</kbd> to break the grid.<br><br>
+    h('p', 'ed-note', how).innerHTML = `Click to select. Drag to move: it snaps to columns, rows, guides and other things. Hold <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> to break the grid. Hold <kbd>Alt</kbd> as you drag to leave a copy behind.<br><br>
       <b>+ blocks</b> (B) has ready-made layouts, buttons and slideshows, and the components you make yourself.<br><br>
       Everything you do is kept as a draft in this browser. <b>Save</b> writes <code>projects/${slug}.json</code> (and your components) into your site folder; then commit and push to publish.`;
   }
@@ -1477,7 +1529,7 @@
     }
   }
 
-  const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group', button: 'Button', slides: 'Slideshow', instance: 'Component', marker: 'Section marker' };
+  const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group', button: 'Button', slides: 'Slideshow / carousel', instance: 'Component', marker: 'Section marker' };
   function itemPanel(it, many = 0) {
     const c = it.type === 'instance' && comp(it.ref);
     if (many) h('p', 'ed-head', panel, `Change all ${many} at once`);
@@ -1505,7 +1557,9 @@
     }
     if (it.type === 'button') {
       seg(S, 'look', { line: 'outline', fill: 'filled', text: 'just text' }, () => it.look || 'line', v => it.look = v);
-      colourField(S, 'colour', { fg: 'ink' }, () => it.color || 'fg', v => { if (v === 'fg') delete it.color; else it.color = v; });
+      seg(S, 'size', { s: 'small', m: 'medium', l: 'large' }, () => it.size || 'm', v => { if (v === 'm') delete it.size; else it.size = v; });
+      seg(S, 'weight', { 400: 'regular', 700: 'bold' }, () => it.weight || 400, v => { if (v == 400) delete it.weight; else it.weight = +v; });
+      colourField(S, 'colour', { fg: 'ink', mute: 'grey', accent: 'project' }, () => it.color || 'fg', v => { if (v === 'fg') delete it.color; else it.color = v; });
       actions(S, [['edit label  ↵', () => startText(elOf(it.id), it)]]);
     }
     if (it.type === 'image' || it.type === 'video') {
@@ -1572,11 +1626,18 @@
 
   function slidesPanel(it, S) {
     const list = it.slides = it.slides || [];
-    seg(S, 'changes', { click: 'on click', auto: 'by itself' }, () => it.mode || 'click', v => it.mode = v);
+    seg(S, 'shows', { click: 'one, on click', auto: 'one, by itself', row: 'several in a row' }, () => it.mode || 'click', v => it.mode = v);
+    if (it.mode === 'row') {
+      num(S, 'how many at once', () => it.show || 3, v => { if (v >= 1) it.show = Math.round(v); }, 1, false);
+      num(S, 'gap between', () => it.gap ?? 16, v => { if (v >= 0) it.gap = v; }, 2, false);
+      seg(S, 'fit', { cover: 'fill box', contain: 'whole picture' }, () => it.fit || 'cover', v => it.fit = v);
+      check(S, 'click a picture to enlarge', () => it.zoom !== false, v => { if (v) delete it.zoom; else it.zoom = false; });
+    } else {
     if (it.mode === 'auto') num(S, 'every (s)', () => it.every || 3, v => it.every = v, .5, false);
     seg(S, 'transition', { fade: 'fade', slide: 'slide', cut: 'cut' }, () => it.trans || 'fade', v => it.trans = v);
     seg(S, 'fit', { cover: 'fill box', contain: 'whole picture' }, () => it.fit || 'cover', v => it.fit = v);
     check(S, 'show 1 / 5 counter', () => it.counter !== false, v => it.counter = v);
+    }
     const strip = h('div', 'ed-slides', S);
     list.forEach((sl, i) => {
       const t = h('div', 'ed-slide' + (i === (slideAt[it.id] || 0) ? ' on' : ''), strip);
@@ -1590,7 +1651,7 @@
       mk('×', () => { list.splice(i, 1); slideAt[it.id] = Math.max(0, i - 1); commit(); }, 'remove');
     });
     actions(S, [['+ add pictures', async () => { const f = await pickFiles('image/*'); if (f.length) addFiles(f, null, it); }]]);
-    h('p', 'ed-note', S, 'Or drop pictures onto the slideshow. Visitors click the right side for next, left for previous.');
+    h('p', 'ed-note', S, it.mode === 'row' ? 'Or drop pictures onto it. The box\'s height is the pictures\' height; visitors slide along with the arrows or a swipe.' : 'Or drop pictures onto the slideshow. Visitors click the right side for next, left for previous.');
   }
 
   function animPanel(it) {

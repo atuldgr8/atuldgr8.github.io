@@ -145,8 +145,8 @@ html, body { overflow-x: clip; }
 .cv.flow .box.has-text { padding: 1.1em 1.2em; }
 .grp { position: relative; width: 100%; height: 100%; }
 .inst { --u: calc(var(--pu) * var(--k)); }
-.btn { display: grid; place-items: center; width: 100%; height: 100%; padding: 0 .6em; text-align: center;
-       font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); transition: background .25s, color .25s; }
+.btn { --sz: 1; display: grid; place-items: center; width: 100%; height: 100%; padding: 0 .6em; text-align: center;
+       font-size: max(calc(14px * var(--sz)), calc(var(--u) * 13.67 * var(--tk, 1) * var(--sz))); transition: background .25s, color .25s; }
 .btn.b-line { border: 1px solid currentColor; }
 .btn.b-fill { background: var(--fg); color: var(--bg); }
 .btn.b-text { text-decoration: underline; text-underline-offset: 2px; }
@@ -233,11 +233,56 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
 .txt.has-bg { padding: .35em .55em; }
 /* "click to enlarge" pictures */
 .it.zoomable .media { cursor: zoom-in; }
-.zoom-ov { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 4vmin;
-           background: color-mix(in srgb, var(--bg) 92%, transparent); cursor: zoom-out; opacity: 0; transition: opacity .25s; }
+.zoom-ov { position: fixed; inset: 0; z-index: 200; background: color-mix(in srgb, var(--bg) 94%, transparent);
+           opacity: 0; transition: opacity .25s; touch-action: none; overscroll-behavior: contain; cursor: zoom-out; }
 .zoom-ov.on { opacity: 1; }
-.zoom-ov img { width: 100%; height: 100%; object-fit: contain; transform: scale(.97); transition: transform .35s cubic-bezier(.2,.8,.3,1); }
-.zoom-ov.on img { transform: none; }
+.zoom-stage { position: absolute; inset: 56px 56px 72px; display: grid; place-items: center; overflow: visible; pointer-events: none; }
+.zoom-stage img { max-width: calc(100vw - 112px); max-height: calc(100dvh - 128px); object-fit: contain; pointer-events: auto; cursor: zoom-in;
+                  transform-origin: 50% 50%; transition: transform .18s ease-out; user-select: none; -webkit-user-drag: none; }
+.zoom-ov.zoomed .zoom-stage img { cursor: grab; }
+.zoom-ov.panning .zoom-stage img { cursor: grabbing; transition: none; }
+.zoom-x { position: fixed; top: 16px; right: 16px; width: 40px; height: 40px; z-index: 2;
+          font: 400 28px/1 Inter, system-ui, sans-serif; color: var(--fg); background: var(--bg); border: 1px solid var(--faint); cursor: pointer; }
+.zoom-bar { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 0; z-index: 2;
+            background: var(--bg); border: 1px solid var(--faint); }
+.zoom-bar button { font: 400 15px/1 Inter, system-ui, sans-serif; color: var(--fg); background: none; border: 0; padding: 10px 14px; min-width: 44px; cursor: pointer; }
+.zoom-bar button + button { border-left: 1px solid var(--faint); }
+.zoom-x:hover, .zoom-bar button:hover { background: var(--fg); color: var(--bg); }
 .it.pinned { z-index: 5; }
 /* "drop shadow": follows the shape of what's inside, so a cut-out picture casts a cut-out shadow */
 .it.shadow > .ly { filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .16)) drop-shadow(0 2px 4px rgba(0, 0, 0, .08)); }
+
+/* buttons in the three sizes */
+.btn.sz-s { --sz: .78; }
+.btn.sz-l { --sz: 2.2; letter-spacing: -.045em; }
+.btn.w-700 { font-weight: 700; }
+/* words styled inside a text box (sizes are relative to the box's own size) */
+.txt .c-fg, .btn .c-fg { color: var(--fg); }
+.txt .c-mute, .btn .c-mute { color: var(--mute); }
+.txt .c-faint, .btn .c-faint { color: var(--faint); }
+.txt .c-accent, .btn .c-accent { color: var(--accent, var(--fg)); }
+.txt span.sz-s { font-size: calc(.78em / var(--sz, 1)); }
+.txt span.sz-m { font-size: calc(1em / var(--sz, 1)); }
+.txt span.sz-l { font-size: calc(2.2em / var(--sz, 1)); line-height: 1.08; letter-spacing: -.045em; }
+
+/* carousel: several pictures in a row; slide along with the arrows, a swipe or a trackpad */
+.car { position: relative; width: 100%; height: 100%; }
+.car-track { display: flex; gap: var(--cgap); height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
+             scrollbar-width: none; overscroll-behavior-x: contain; }
+.car-track::-webkit-scrollbar { display: none; }
+.car-cell { flex: 0 0 calc((100% - var(--cgap) * (var(--show) - 1)) / var(--show)); height: 100%; scroll-snap-align: start; position: relative; }
+.car-cell .media { width: 100%; height: 100%; display: block; }
+.car-cell.zoomable .media { cursor: zoom-in; }
+.car-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border: 1px solid var(--faint);
+             background: var(--bg); color: var(--fg); font: 400 16px/1 Inter, system-ui, sans-serif; cursor: pointer;
+             opacity: 0; transition: opacity .2s, background .2s, color .2s; }
+.car-prev { left: 10px; } .car-next { right: 10px; }
+.car:hover .car-arrow, .car-arrow:focus-visible { opacity: 1; }
+.car-arrow:hover { background: var(--fg); color: var(--bg); }
+.car-arrow:disabled { opacity: 0 !important; pointer-events: none; }
+@media (hover: none) { .car-arrow { opacity: .9; } }
+.cv.flow .car { --show: 1.15 !important; }   /* phones: one and a bit, so it's clear you can swipe */
+@media (max-width: 600px) {
+  .zoom-stage { inset: 64px 12px 76px; }
+  .zoom-stage img { max-width: calc(100vw - 24px); max-height: calc(100dvh - 140px); }
+}

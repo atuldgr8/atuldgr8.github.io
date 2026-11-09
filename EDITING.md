@@ -107,6 +107,14 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 
 - Shift-click (or drag a box around) several things **of the same kind**, say four text boxes or three pictures. Under "Change all … at once" in the panel, any setting you change (size, colour, weight, tilt, shadow, caption setting, animation switches…) goes to all of them. Their place, size, file and words stay their own.
 
+## Copying, styling words, carousels
+
+- **Alt-drag** anything to leave a copy behind (like Figma). To drag without snapping, hold **Ctrl** (Cmd on a Mac).
+- While typing in a text box, a small black bar appears above it. Select some words, then: **B**, **I**, a colour (ink / grey / faint / project) or a size (S / M / L). Only those words change.
+- **Buttons** have small / medium / large, regular / bold, and colours, like text.
+- **Carousel**: + blocks → Pictures → Carousel (or a slideshow with "shows: several in a row"). Set how many show at once and the gap. Visitors slide along with arrows or a swipe, and can click any picture to enlarge it.
+- **Click to enlarge** now opens the picture fitted inside the window, with × to close (or Esc, or a click beside the picture). Scroll, pinch or + / − to zoom; drag to look around.
+
 ## Breaking the grid a little
 
 - Any block: **tilt (degrees)** turns it slightly (try -3 to 3), **drop shadow** gives it a soft shadow that follows its shape. A picture with its background removed (a .png or .webp with see-through background) gets a cut-out shadow.

@@ -171,14 +171,36 @@ window.Canvas = (() => {
         break;
       }
       case 'button': {
-        const b = h('div', 'btn b-' + (it.look || 'line'), inner);
+        const b = h('div', 'btn b-' + (it.look || 'line') + (it.size === 's' || it.size === 'l' ? ' sz-' + it.size : '') + (it.weight == 700 ? ' w-700' : ''), inner);
         if (palCss(it.color)) b.style.color = palCss(it.color);
         h('span', '', b).innerHTML = it.text || 'Button';
         break;
       }
       case 'slides': {
         const list = it.slides || [];
-        if (!list.length) { const p = h('div', 'ph', inner); if (o.edit) p.dataset.label = 'slideshow'; break; }
+        if (!list.length) { const p = h('div', 'ph', inner); if (o.edit) p.dataset.label = it.mode === 'row' ? 'carousel' : 'slideshow'; break; }
+        if (it.mode === 'row') {             // carousel: several pictures in a row, slide along with arrows or a swipe
+          const car = h('div', 'car', inner), track = h('div', 'car-track', car);
+          car.style.setProperty('--show', Math.max(1, it.show || 3));
+          car.style.setProperty('--cgap', `calc(var(--u) * ${it.gap ?? 16})`);
+          list.forEach(sl => {
+            const cell = h('div', 'car-cell', track), m = h('img', 'media', cell);
+            m.alt = sl.alt || ''; m.draggable = false; m.decoding = 'async'; m.loading = 'lazy';
+            m.style.objectFit = it.fit || 'cover';
+            if (o.onMediaError) m.addEventListener('error', () => o.onMediaError(m, sl.src), { once: true });
+            m.src = o.src(sl.src);
+            if (!o.edit && it.zoom !== false) { cell.classList.add('zoomable'); m.addEventListener('click', () => enlarge(m)); }
+          });
+          if (!o.edit && list.length > (it.show || 3)) {
+            const step = d => track.scrollBy({ left: d * (track.querySelector('.car-cell').offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0)), behavior: 'smooth' });
+            const prev = h('button', 'car-arrow car-prev', car, '←'), next = h('button', 'car-arrow car-next', car, '→');
+            prev.type = next.type = 'button'; prev.setAttribute('aria-label', 'Previous pictures'); next.setAttribute('aria-label', 'Next pictures');
+            prev.onclick = () => step(-1); next.onclick = () => step(1);
+            const ends = () => { prev.disabled = track.scrollLeft < 4; next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 4; };
+            track.addEventListener('scroll', ends, { passive: true }); requestAnimationFrame(ends);
+          }
+          break;
+        }
         const box = h('div', 'sl sl-' + (it.trans || 'fade'), inner);
         const at = Math.min(list.length - 1, (o.slideAt && o.slideAt[it.id]) || 0);
         list.forEach((sl, i) => {
@@ -221,15 +243,96 @@ window.Canvas = (() => {
 
   const narrow = matchMedia('(max-width: 700px)');
 
-  // a picture marked "click to enlarge": opens over everything, click or Esc to close
+  // "click to enlarge": the picture opens over the page, fitted inside the window with a margin.
+  // Scroll / pinch / + − to zoom, drag to look around, double-click to zoom in or back.
+  // Close with ×, Esc, or a click on the empty space around it. The page behind doesn't scroll meanwhile.
   function enlarge(img) {
-    const ov = document.createElement('div'); ov.className = 'zoom-ov';
-    const big = document.createElement('img'); big.src = img.currentSrc || img.src; big.alt = img.alt;
-    ov.appendChild(big); document.body.appendChild(ov);
+    const src = typeof img === 'string' ? img : (img.currentSrc || img.src), alt = typeof img === 'string' ? '' : img.alt;
+    const root = document.documentElement, was = root.style.overflow;
+    root.style.overflow = 'hidden';
+    const ov = document.createElement('div'); ov.className = 'zoom-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', alt || 'Picture');
+    const stageEl = document.createElement('div'); stageEl.className = 'zoom-stage'; ov.appendChild(stageEl);
+    const big = document.createElement('img'); big.src = src; big.alt = alt; big.draggable = false; stageEl.appendChild(big);
+    const bar = document.createElement('div'); bar.className = 'zoom-bar'; ov.appendChild(bar);
+    const mk = (label, title, fn, cls) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.title = title; b.setAttribute('aria-label', title); if (cls) b.className = cls; b.addEventListener('click', e => { e.stopPropagation(); fn(); }); return b; };
+    const x = mk('×', 'Close (Esc)', () => close(), 'zoom-x'); ov.appendChild(x);
+    bar.append(mk('−', 'Zoom out', () => zoomBy(1 / 1.5)), mk('fit', 'Back to fit', () => set(1, 0, 0)), mk('+', 'Zoom in', () => zoomBy(1.5)));
+    document.body.appendChild(ov);
     requestAnimationFrame(() => ov.classList.add('on'));
-    const close = () => { ov.classList.remove('on'); removeEventListener('keydown', key); setTimeout(() => ov.remove(), 300); };
-    const key = e => { if (e.key === 'Escape') close(); };
-    ov.addEventListener('click', close); addEventListener('keydown', key);
+    x.focus({ preventScroll: true });
+
+    let s = 1, tx = 0, ty = 0;
+    const MAX = 8;
+    const centre = () => { const r = stageEl.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
+    function clampT() {               // don't let the picture be dragged away entirely
+      const r = stageEl.getBoundingClientRect(), w = big.offsetWidth * s, hh = big.offsetHeight * s;
+      const mx = Math.max(0, (w - r.width) / 2 + 40), my = Math.max(0, (hh - r.height) / 2 + 40);
+      tx = Math.max(-mx, Math.min(mx, tx)); ty = Math.max(-my, Math.min(my, ty));
+    }
+    function set(ns, ntx, nty) {
+      s = Math.max(1, Math.min(MAX, ns)); tx = s === 1 ? 0 : ntx; ty = s === 1 ? 0 : nty; clampT();
+      big.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+      ov.classList.toggle('zoomed', s > 1);
+    }
+    function zoomAt(ns, qx, qy) {     // zoom keeping the point under the cursor in place
+      ns = Math.max(1, Math.min(MAX, ns));
+      const c = centre(), k = ns / s;
+      set(ns, (qx - c.x) - k * (qx - c.x - tx), (qy - c.y) - k * (qy - c.y - ty));
+    }
+    const zoomBy = k => { const c = centre(); zoomAt(s * k, c.x, c.y); };
+
+    ov.addEventListener('wheel', e => {
+      e.preventDefault();
+      const k = Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0025));   // trackpad pinch arrives as ctrl+wheel
+      zoomAt(s * k, e.clientX, e.clientY);
+    }, { passive: false });
+
+    // drag to pan, two fingers to pinch
+    const pts = new Map(); let pan = null, pinch = null, movedPx = 0, downOn = null;
+    ov.addEventListener('pointerdown', e => {
+      if (e.target.closest('button')) return;
+      downOn = e.target;
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); ov.setPointerCapture(e.pointerId); movedPx = 0;
+      if (pts.size === 1) pan = { x: e.clientX, y: e.clientY, tx, ty };
+      if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), s }; pan = null; }
+    });
+    ov.addEventListener('pointermove', e => {
+      if (!pts.has(e.pointerId)) return;
+      const p0 = pts.get(e.pointerId); movedPx += Math.hypot(e.clientX - p0.x, e.clientY - p0.y);
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pinch && pts.size === 2) {
+        const [a, b] = [...pts.values()];
+        zoomAt(pinch.s * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d, (a.x + b.x) / 2, (a.y + b.y) / 2);
+      } else if (pan && s > 1) { set(s, pan.tx + e.clientX - pan.x, pan.ty + e.clientY - pan.y); ov.classList.add('panning'); }
+    });
+    const lift = e => {
+      pts.delete(e.pointerId); ov.classList.remove('panning');
+      if (pts.size < 2) pinch = null;
+      if (pts.size === 1) { const [p] = [...pts.values()]; pan = { x: p.x, y: p.y, tx, ty }; }
+      if (!pts.size) pan = null;
+    };
+    ov.addEventListener('pointerup', e => {
+      const wasTap = movedPx < 6 && pts.size === 1;
+      lift(e);
+      if (wasTap && downOn !== big) close();   // a click on the empty space closes
+    });
+    ov.addEventListener('pointercancel', lift);
+    big.addEventListener('dblclick', e => { s > 1 ? set(1, 0, 0) : zoomAt(2.5, e.clientX, e.clientY); });
+
+    const key = e => {
+      if (e.key === 'Escape') close();
+      else if (e.key === '+' || e.key === '=') zoomBy(1.5);
+      else if (e.key === '-') zoomBy(1 / 1.5);
+      else if (e.key === '0') set(1, 0, 0);
+    };
+    addEventListener('keydown', key);
+    let closed = false;
+    function close() {
+      if (closed) return; closed = true;
+      ov.classList.remove('on'); removeEventListener('keydown', key);
+      root.style.overflow = was;
+      setTimeout(() => ov.remove(), 280);
+    }
   }
   function render(cv, doc, o = {}) {
     o = { edit: false, src: s => s, ...o };
@@ -406,5 +509,5 @@ window.Canvas = (() => {
     ] };
   }
 
-  return { U, M, GAP, COLS, ROW, COLW, colX, span, grid, NEUTRAL, EASE, EASE_CSS, render, layout, animate, setState, mix, timing, template, place, keysOf, scrollState, full };
+  return { U, M, GAP, COLS, ROW, COLW, colX, span, grid, NEUTRAL, EASE, EASE_CSS, render, layout, animate, setState, mix, timing, template, place, keysOf, scrollState, full, enlarge };
 })();
