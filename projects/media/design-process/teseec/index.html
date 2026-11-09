@@ -9,7 +9,9 @@
 <style>
   /* Sized in "units" so it scales with its frame the way the case-study page does (frame = 698 units wide). */
   :root { --u: calc(100vw / 698); --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --ghost: #f6f6f6; --accent: #ebb800;
-          --m: max(13px, calc(var(--u) * 13.67)); --s: max(11px, calc(var(--u) * 10.66)); --l: max(22px, calc(var(--u) * 26)); }
+          --m: max(13px, calc(var(--u) * 13.67)); --s: max(11px, calc(var(--u) * 10.66)); --l: max(22px, calc(var(--u) * 26)); color-scheme: light dark; }
+  /* Fallback when opened on its own: follow the system. On the site, the page's own colours are copied in (see the script). */
+  @media (prefers-color-scheme: dark) { :root { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --faint: #3a3a3a; --ghost: #181818; } }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; background: var(--bg); color: var(--fg); }
   body { font: 400 var(--m)/1.42 Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif; overflow: hidden; }
@@ -37,10 +39,10 @@
   .notes { position: relative; min-height: 0; border-radius: calc(var(--u) * 4); overflow: hidden; background: var(--ghost); cursor: zoom-in; animation: in .35s ease both; }
   .notes img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
   .notes .mag { position: absolute; right: calc(var(--u) * 8); bottom: calc(var(--u) * 8); width: max(26px, calc(var(--u) * 26)); height: max(26px, calc(var(--u) * 26));
-                border-radius: 50%; background: var(--bg); display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+                border-radius: 50%; background: var(--bg); display: grid; place-items: center; box-shadow: 0 1px 4px color-mix(in srgb, var(--fg) 25%, transparent); color: var(--fg); }
   .notes .mag svg { width: 55%; height: 55%; }
 
-  .big { position: fixed; inset: 0; background: rgba(255,255,255,.97); display: none; z-index: 5; }
+  .big { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 97%, transparent); display: none; z-index: 5; }
   .big.on { display: block; }
   .big .stage { position: absolute; inset: 0; overflow: hidden; cursor: grab; touch-action: none; }
   .big .stage.drag { cursor: grabbing; }
@@ -70,6 +72,21 @@
   <div class="ctl"><button class="zo" aria-label="Zoom out">−</button><button class="zi" aria-label="Zoom in">+</button><button class="x" aria-label="Close">×</button></div>
   <div class="hint">Scroll or pinch to zoom, drag to move.</div></div>
 <script>
+/* Match the page around this frame: copy its colour tokens (light/dark mode, the project's colour)
+   and follow it when the mode changes. Reusable for any embed on the site. */
+(function themeFromPage() {
+  let host; try { host = window.frameElement; } catch (e) {}
+  if (!host) return;
+  const doc = host.ownerDocument, keys = ['--fg', '--bg', '--mute', '--faint', '--ghost', '--accent'];
+  const pull = () => {
+    const cs = getComputedStyle(host);
+    keys.forEach(k => { const v = cs.getPropertyValue(k).trim(); if (v) document.documentElement.style.setProperty(k, v); });
+  };
+  pull();
+  new MutationObserver(pull).observe(doc.documentElement, { attributes: true, attributeFilter: ['data-theme', 'style', 'class'] });
+  new MutationObserver(pull).observe(doc.body, { attributes: true, attributeFilter: ['data-theme', 'style', 'class'] });
+  doc.defaultView.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(pull, 30));
+})();
 const F = [
   ['T', 'technological', 'Technological', 'AI-driven personalization, datafication, and emotional surveillance redefining how students learn and are assessed.', 't'],
   ['E', 'educational', 'Educational and Institutional', 'Persistent “quiet bias” and the need for inclusive, reflective learning models that value varied expressions of engagement.', 'e-edu'],
@@ -95,7 +112,7 @@ function show(i) {
   panel.setAttribute('aria-labelledby', 'tab' + i);
   panel.innerHTML = `<div class="txt"><div class="num"><i>${pad(i + 1)}</i>of ${pad(F.length)}</div><h2>${f[2]}</h2><p>${f[3]}</p></div>
     <button class="notes" aria-label="Enlarge the sticky notes for ${f[2]}"><img src="${f[4]}.jpg" alt="Sticky notes from the TESEEC board under ${f[2]}">
-    <span class="mag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg></span></button>`;
+    <span class="mag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg></span></button>`;
   panel.querySelector('.notes').onclick = () => open(f);
 }
 const stage = big.querySelector('.stage'), bimg = big.querySelector('img');
