@@ -70,28 +70,48 @@ window.Home = (() => {
       a.textContent = p.title;
       if (p.soon) { const s = document.createElement('small'); s.textContent = (index && index.soonLabel) || '(coming soon)'; a.appendChild(s); }
       if (p.color) a.style.setProperty('--c', colour(p.color));
-      if (p.thumb) {
+      if (p.thumb && !p.soon) {
+        // picture + its intro line, which fade in together beside the list
+        const card = document.createElement('div'); card.className = 'wk-card';
         const i = document.createElement('img');
         i.src = p.thumb; i.alt = ''; i.decoding = 'async'; i.loading = 'lazy';
-        pic.appendChild(i); a._pic = i;
+        const t = document.createElement('p'); t.className = 'wk-blurb';
+        card.append(i, t); pic.appendChild(card); a._pic = card;
+        if (p.summary) t.textContent = p.summary; else card._slug = p.slug;
       }
       box.appendChild(a);
     }
     if (window.Dock) Dock(box, { max: .12, reach: 2.2 });
     // the hovered project's picture, beside the list
+    // the list's rows are full width, so measure the longest name, not the box
     const place = () => {
-      const r = box.getBoundingClientRect();
-      const left = r.right + innerWidth * .06, room = innerWidth - left - innerWidth * .04;
+      const right = Math.max(...[...box.querySelectorAll('.wk')].map(w => {
+        const r = document.createRange(); r.selectNodeContents(w); return r.getBoundingClientRect().right;
+      }));
+      const left = right + innerWidth * .06, room = innerWidth - left - innerWidth * .04;
       pic.style.left = left + 'px';
-      pic.style.width = Math.min(room, innerWidth * .34) + 'px';
-      pic.classList.toggle('none', room < 160);
+      pic.style.width = Math.min(room, innerWidth * .56) + 'px';
+      pic.classList.toggle('none', room < 220);
     };
     box.addEventListener('pointerover', e => {
       const a = e.target.closest('.wk');
-      if (a) place();
+      if (a) { place(); if (a._pic && a._pic._slug) intro(a._pic); }
       for (const i of pic.children) i.classList.toggle('on', !!a && i === a._pic);
     });
     box.addEventListener('pointerleave', () => { for (const i of pic.children) i.classList.remove('on'); });
+  }
+  // no summary written in the work list? use the page's own intro line (its first proper sentence)
+  function intro(card) {
+    const slug = card._slug; card._slug = null;
+    fetch(`projects/${slug}.json`).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d) return;
+      const items = (d.items || []).slice().sort((a, b) => a.y - b.y);
+      const firstNav = (items.find(i => i.nav) || { y: Infinity }).y;
+      const plain = h => { const x = document.createElement('div'); x.innerHTML = h || ''; return x.textContent.replace(/\s+/g, ' ').trim(); };
+      const line = items.filter(i => i.type === 'text' && i.y < firstNav && i.weight != 700 && i.size !== 'l')
+        .map(i => plain(i.text)).find(t => t.length > 40);
+      if (line) card.querySelector('.wk-blurb').textContent = line;
+    }).catch(() => {});
   }
   if (!projects.length) list.innerHTML = '<p class="empty">Nothing up yet. Soon.</p>';
   fill(list, projects);
