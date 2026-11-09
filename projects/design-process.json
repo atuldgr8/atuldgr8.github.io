@@ -1,2948 +1,2861 @@
 {
- "v": 2,
- "intro": "intro",
- "guides": {
-  "x": [],
-  "y": []
- },
- "items": [
-  {
-   "id": "cb001t",
-   "type": "text",
-   "x": 32.0,
-   "y": 196,
-   "w": 698.0,
-   "h": 14,
-   "text": "Collaborative by Design",
-   "anim": {},
-   "weight": 700,
-   "size": "l"
+  "v": 2,
+  "intro": "intro",
+  "guides": {
+    "x": [],
+    "y": []
   },
-  {
-   "id": "cb002t",
-   "type": "text",
-   "x": 32.0,
-   "y": 247,
-   "w": 698.0,
-   "h": 14,
-   "text": "Supporting Diverse Learning Expressions at NID 2030",
-   "anim": {},
-   "color": "mute"
-  },
-  {
-   "id": "cb003t",
-   "type": "text",
-   "x": 32.0,
-   "y": 277,
-   "w": 698.0,
-   "h": 14,
-   "text": "Speculative Design · Research · Interaction Design",
-   "anim": {},
-   "color": "mute",
-   "size": "s"
-  },
-  {
-   "id": "cb004t",
-   "type": "text",
-   "x": 32.0,
-   "y": 326,
-   "w": 460.0,
-   "h": 14,
-   "text": "Exploring how different modes of expression shape collaboration, and imagining more inclusive ways of learning together at NID in 2030.",
-   "anim": {}
-  },
-  {
-   "id": "cb005p",
-   "type": "image",
-   "x": 32.0,
-   "y": 442,
-   "w": 936.0,
-   "h": 526,
-   "src": "projects/media/design-process/hero-gameplay.jpg",
-   "fit": "cover",
-   "alt": "Students playing the Empathy Game around a table",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb006b",
-   "type": "box",
-   "fill": "faint",
-   "x": 32.0,
-   "y": 1008,
-   "w": 936.0,
-   "h": 1,
-   "anim": {}
-  },
-  {
-   "id": "cb007g",
-   "type": "group",
-   "x": 32.0,
-   "y": 1026,
-   "w": 460.0,
-   "h": 40,
-   "anim": {},
-   "children": [
+  "items": [
     {
-     "id": "cb008t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 460.0,
-     "h": 16,
-     "text": "my role",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb001t",
+      "type": "text",
+      "x": 32,
+      "y": 196,
+      "w": 698,
+      "h": 41.5,
+      "text": "Collaborative by Design",
+      "anim": {},
+      "weight": 700,
+      "size": "l",
+      "color": "accent"
     },
     {
-     "id": "cb009t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 460.0,
-     "h": 16,
-     "text": "Helped create the survey and ran it with participants; conducted and assisted directed storytelling interviews; research synthesis, frameworks and learner archetypes; Empathy Game and AI Flow Mediator concepts.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb010g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 1026,
-   "w": 222.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb011t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "team",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb003t",
+      "type": "text",
+      "x": 32,
+      "y": 378,
+      "w": 698,
+      "h": 19.3,
+      "text": "Speculative Design · Design Research · Interaction Design",
+      "anim": {},
+      "color": "mute",
+      "size": "s"
     },
     {
-     "id": "cb012t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222.0,
-     "h": 16,
-     "text": "7 students from 7 programmes · Group 10",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb013g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 1026,
-   "w": 222.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb014t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "time",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb004t",
+      "type": "text",
+      "x": 32,
+      "y": 266,
+      "w": 460,
+      "h": 74.9,
+      "text": "Exploring how different modes of expression shape collaboration, and imagining more inclusive ways of learning together at NID in 2030.",
+      "anim": {}
     },
     {
-     "id": "cb015t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222.0,
-     "h": 16,
-     "text": "2-week speculative design sprint, 2025",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb016g",
-   "type": "group",
-   "x": 32.0,
-   "y": 1120.8,
-   "w": 460.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb017t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 460.0,
-     "h": 16,
-     "text": "faculty mentors",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb005p",
+      "type": "image",
+      "x": 32,
+      "y": 442,
+      "w": 936,
+      "h": 526,
+      "src": "projects/media/design-process/hero-gameplay.jpg",
+      "fit": "cover",
+      "alt": "Students playing the Empathy Game around a table",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
     },
     {
-     "id": "cb018t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 460.0,
-     "h": 16,
-     "text": "Amresh Panigrahi, Austin Davis, Pratheek P Ashok, Neha Laishram, Manoj Kuldeep",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb019g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 1120.8,
-   "w": 222.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb020t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "theme",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb007g",
+      "type": "group",
+      "x": 32,
+      "y": 1026,
+      "w": 460,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb008t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 460,
+          "h": 19.3,
+          "text": "my role",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb009t",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 460,
+          "h": 57.9,
+          "text": "Helped create the survey and ran it with participants; conducted and assisted directed storytelling interviews; research synthesis, frameworks and learner archetypes; Empathy Game and AI Flow Mediator concepts.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb021t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222.0,
-     "h": 16,
-     "text": "Future of Contextual Life",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb022g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 1120.8,
-   "w": 222.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb023t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "where",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb010g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 1026,
+      "w": 222,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb011t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "team",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb012t",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "7 students from 7 programmes",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb024t",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222.0,
-     "h": 16,
-     "text": "NID Gandhinagar, New Media Design",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb025t",
-   "type": "text",
-   "x": 32.0,
-   "y": 1390.4,
-   "w": 222.0,
-   "h": 14,
-   "text": "overview",
-   "anim": {},
-   "color": "mute",
-   "nav": "overview"
-  },
-  {
-   "id": "cb026t",
-   "type": "text",
-   "x": 270.0,
-   "y": 1390.4,
-   "w": 460.0,
-   "h": 14,
-   "text": "Three directions we explored",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb027t",
-   "type": "text",
-   "x": 270.0,
-   "y": 1430.4,
-   "w": 460.0,
-   "h": 14,
-   "text": "The project developed three concepts for collaborative learning at NID: a digital platform, a physical game and an AI-based mediator.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb028p",
-   "type": "image",
-   "x": 270.0,
-   "y": 1500.4,
-   "w": 222.0,
-   "h": 166,
-   "src": "projects/media/design-process/commons-home.jpg",
-   "fit": "cover",
-   "alt": "NID Commons welcome screen",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "caption": "NID Commons: a digital platform for student collaboration.",
-   "capShow": true
-  },
-  {
-   "id": "cb029p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 1500.4,
-   "w": 222.0,
-   "h": 166,
-   "src": "projects/media/design-process/game-components.jpg",
-   "fit": "cover",
-   "alt": "Empathy Game cards and pieces",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   },
-   "caption": "Empathy Game: a game exploring communication and collaboration between players.",
-   "capShow": true
-  },
-  {
-   "id": "cb030p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 1500.4,
-   "w": 222.0,
-   "h": 166,
-   "src": "projects/media/design-process/mediator-storyboard-2.jpg",
-   "fit": "cover",
-   "alt": "Storyboard sketch of the Flow Mediator",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.2,
-     "ease": "out"
-    }
-   },
-   "caption": "Flow Mediator: an AI-based mediator for group work, offering guidance and reflective prompts.",
-   "capShow": true
-  },
-  {
-   "id": "cb031e",
-   "type": "embed",
-   "x": 270.0,
-   "y": 1787.2,
-   "w": 698.0,
-   "h": 393,
-   "src": "https://drive.google.com/file/d/1WcE8NHoX6kwCOXNFY8-NPRZviR_tLLo3/view?usp=sharing",
-   "caption": "The project documentary, about 3 minutes.",
-   "capShow": true,
-   "anim": {}
-  },
-  {
-   "id": "cb032u",
-   "type": "button",
-   "look": "line",
-   "text": "Read the full presentation (PDF)",
-   "x": 270.0,
-   "y": 2234.2,
-   "w": 301.33333333333337,
-   "h": 42,
-   "link": {
-    "href": "projects/media/design-process/collaborative-by-design-presentation.pdf",
-    "newTab": true
-   },
-   "anim": {}
-  },
-  {
-   "id": "cb033t",
-   "type": "text",
-   "x": 32.0,
-   "y": 2506.2,
-   "w": 222.0,
-   "h": 14,
-   "text": "context",
-   "anim": {},
-   "color": "mute",
-   "nav": "context"
-  },
-  {
-   "id": "cb034t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2506.2,
-   "w": 460.0,
-   "h": 14,
-   "text": "Secondary research",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb035t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2546.2,
-   "w": 460.0,
-   "h": 14,
-   "text": "Our initial assumptions about the future of learning were grounded in lived experience and speculative brainstorming. To validate and expand on these intuitions, we conducted a targeted literature review of global reports, educational research and foresight documents.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb037g",
-   "type": "group",
-   "x": 270.0,
-   "y": 2650.2,
-   "w": 301.33333333333337,
-   "h": 19.6,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb036t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 301.33333333333337,
-     "h": 16,
-     "text": "Bias towards expressive learners",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb039g",
-   "type": "group",
-   "x": 587.3333333333334,
-   "y": 2650.2,
-   "w": 301.33333333333337,
-   "h": 19.6,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb038t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 301.33333333333337,
-     "h": 16,
-     "text": "Attention fragmentation and quantified stress",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb041g",
-   "type": "group",
-   "x": 270.0,
-   "y": 2721.7999999999997,
-   "w": 301.33333333333337,
-   "h": 35.2,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb040t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 301.33333333333337,
-     "h": 16,
-     "text": "A rise in introversion, identity fatigue and digital loneliness",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb043g",
-   "type": "group",
-   "x": 587.3333333333334,
-   "y": 2721.7999999999997,
-   "w": 301.33333333333337,
-   "h": 19.6,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb042t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 301.33333333333337,
-     "h": 16,
-     "text": "A need for reflective, low-stimulation environments",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb044t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2778.9999999999995,
-   "w": 460.0,
-   "h": 14,
-   "text": "Sources include Harvard Business School, Pew Research Center, UNESCO, OECD, Stanford HAI and the World Economic Forum.",
-   "anim": {},
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "cb045t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2900.9999999999995,
-   "w": 460.0,
-   "h": 14,
-   "text": "Mapping the future: TESEEC",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb046t",
-   "type": "text",
-   "x": 270.0,
-   "y": 2940.9999999999995,
-   "w": 460.0,
-   "h": 14,
-   "text": "We adapted the PESTEL approach to the context of design education, developing TESEEC as a way to organise the forces that could shape learning at NID in 2030.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb049g",
-   "type": "group",
-   "x": 270.0,
-   "y": 3025.9999999999995,
-   "w": 222.0,
-   "h": 49.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb047t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "01",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb013g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 1026,
+      "w": 222,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb014t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "time",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb015t",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 38.6,
+          "text": "2-week speculative design sprint, 2025",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb048t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 20,
-     "text": "Technological",
-     "weight": 700,
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb052g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 3025.9999999999995,
-   "w": 222.0,
-   "h": 49.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb050t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "02",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb019g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 1120.8,
+      "w": 222,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb020t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "theme",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb021t",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "Future of Contextual Life",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb051t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 20,
-     "text": "Educational and Institutional",
-     "weight": 700,
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb055g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 3025.9999999999995,
-   "w": 222.0,
-   "h": 69.0,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb053t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "03",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb022g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 1120.8,
+      "w": 222,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb023t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "where",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb024t",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "National Institute of Design",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb054t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 20,
-     "text": "Environmental and Infrastructural",
-     "weight": 700,
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb058g",
-   "type": "group",
-   "x": 270.0,
-   "y": 3146.9999999999995,
-   "w": 222.0,
-   "h": 49.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb056t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "04",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb025t",
+      "type": "text",
+      "x": 32,
+      "y": 1390.4,
+      "w": 222,
+      "h": 25.2,
+      "text": "overview",
+      "anim": {},
+      "color": "mute",
+      "nav": "overview"
     },
     {
-     "id": "cb057t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 20,
-     "text": "Social and Psychological",
-     "weight": 700,
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb061g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 3146.9999999999995,
-   "w": 222.0,
-   "h": 49.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb059t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "05",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb026t",
+      "type": "text",
+      "x": 270,
+      "y": 1390.4,
+      "w": 460,
+      "h": 25.2,
+      "text": "Three directions we explored",
+      "anim": {},
+      "weight": 700
     },
     {
-     "id": "cb060t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 20,
-     "text": "Economic and Political",
-     "weight": 700,
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb064g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 3146.9999999999995,
-   "w": 222.0,
-   "h": 49.5,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb062t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "06",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb027t",
+      "type": "text",
+      "x": 270,
+      "y": 1430.4,
+      "w": 460,
+      "h": 38.6,
+      "text": "The project developed three concepts for collaborative learning at NID: a digital platform, a physical game and an AI-based mediator.",
+      "anim": {},
+      "size": "s"
     },
     {
-     "id": "cb063t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 20,
-     "text": "Cultural and Ethical",
-     "weight": 700,
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb065p",
-   "type": "image",
-   "x": 270.0,
-   "y": 3236.4999999999995,
-   "w": 698.0,
-   "h": 338,
-   "src": "projects/media/design-process/board-teseec.jpg",
-   "fit": "contain",
-   "alt": "The TESEEC board",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "The full TESEEC board. Click to enlarge.",
-   "capShow": true
-  },
-  {
-   "id": "cb066t",
-   "type": "text",
-   "x": 32.0,
-   "y": 3834.4999999999995,
-   "w": 222.0,
-   "h": 14,
-   "text": "research",
-   "anim": {},
-   "color": "mute",
-   "nav": "research"
-  },
-  {
-   "id": "cb067t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3834.4999999999995,
-   "w": 460.0,
-   "h": 14,
-   "text": "Understanding different learners",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb068t",
-   "type": "text",
-   "x": 270.0,
-   "y": 3874.4999999999995,
-   "w": 460.0,
-   "h": 14,
-   "text": "The Semantic Differential Scale framed expression as a learning spectrum. Seven axes were used to construct the survey, with reflective and expressive attributes positioned at opposite ends.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb069g",
-   "type": "group",
-   "x": 270.0,
-   "y": 3969.4999999999995,
-   "w": 222.0,
-   "h": 70,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "children": [
-    {
-     "id": "cb070t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 40,
-     "text": "40",
-     "size": "l",
-     "weight": 700,
-     "color": "accent",
-     "anim": {}
+      "id": "cb028p",
+      "type": "image",
+      "x": 270,
+      "y": 1500.4,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/design-process/commons-home.jpg",
+      "fit": "cover",
+      "alt": "NID Commons welcome screen",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "caption": "NID Commons: a digital platform for student collaboration.",
+      "capShow": true
     },
     {
-     "id": "cb071t",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222.0,
-     "h": 16,
-     "text": "survey responses",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb072t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4083.0999999999995,
-   "w": 222.0,
-   "h": 14,
-   "text": "reflective",
-   "anim": {},
-   "color": "mute",
-   "size": "s"
-  },
-  {
-   "id": "cb073t",
-   "type": "text",
-   "x": 746.0000000000001,
-   "y": 4083.0999999999995,
-   "w": 222.0,
-   "h": 14,
-   "text": "expressive",
-   "anim": {},
-   "color": "mute",
-   "align": "right",
-   "size": "s"
-  },
-  {
-   "id": "cb074g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4111.099999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb075t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Energy",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb029p",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 1500.4,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/design-process/game-components.jpg",
+      "fit": "cover",
+      "alt": "Empathy Game cards and pieces",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      },
+      "caption": "Empathy Game: a game exploring communication and collaboration between players.",
+      "capShow": true
     },
     {
-     "id": "cb076t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Drained",
-     "anim": {}
+      "id": "cb030p",
+      "type": "image",
+      "x": 746.0000000000001,
+      "y": 1500.4,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/design-process/mediator-storyboard-2.jpg",
+      "fit": "cover",
+      "alt": "Storyboard sketch of the Flow Mediator",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      },
+      "caption": "Flow Mediator: an AI-based mediator for group work, offering guidance and reflective prompts.",
+      "capShow": true
     },
     {
-     "id": "cb077b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb031e",
+      "type": "embed",
+      "x": 270,
+      "y": 1787.2,
+      "w": 698,
+      "h": 393,
+      "src": "https://drive.google.com/file/d/1WcE8NHoX6kwCOXNFY8-NPRZviR_tLLo3/view?usp=sharing",
+      "caption": "The project documentary, about 3 minutes.",
+      "capShow": true,
+      "anim": {}
     },
     {
-     "id": "cb078t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Energized",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb079g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4168.599999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb080t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Processing",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb032u",
+      "type": "button",
+      "look": "line",
+      "text": "Read the full presentation (PDF)",
+      "x": 270,
+      "y": 2234.2,
+      "w": 301.33333333333337,
+      "h": 42,
+      "link": {
+        "href": "projects/media/design-process/collaborative-by-design-presentation.pdf",
+        "newTab": true
+      },
+      "anim": {}
     },
     {
-     "id": "cb081t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Think or sketch quietly",
-     "anim": {}
+      "id": "cb033t",
+      "type": "text",
+      "x": 32,
+      "y": 2506.2,
+      "w": 222,
+      "h": 25.2,
+      "text": "context",
+      "anim": {},
+      "color": "mute",
+      "nav": "context"
     },
     {
-     "id": "cb082b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb034t",
+      "type": "text",
+      "x": 270,
+      "y": 2506.2,
+      "w": 460,
+      "h": 25.2,
+      "text": "Secondary research",
+      "anim": {},
+      "weight": 700
     },
     {
-     "id": "cb083t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Talk them through aloud",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb084g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4226.099999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb085t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Environment",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb035t",
+      "type": "text",
+      "x": 270,
+      "y": 2546.2,
+      "w": 460,
+      "h": 77.9,
+      "text": "Our initial assumptions about the future of learning were grounded in lived experience and speculative brainstorming. To validate and expand on these intuitions, we conducted a targeted literature review of global reports, educational research and foresight documents.",
+      "anim": {},
+      "size": "s"
     },
     {
-     "id": "cb086t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Quiet and contained",
-     "anim": {}
+      "id": "cb037g",
+      "type": "group",
+      "x": 270,
+      "y": 2650.2,
+      "w": 301.33333333333337,
+      "h": 19.6,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb036t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 301.33333333333337,
+          "h": 19.3,
+          "text": "Bias towards expressive learners",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb087b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb039g",
+      "type": "group",
+      "x": 587.3333333333334,
+      "y": 2650.2,
+      "w": 301.33333333333337,
+      "h": 19.6,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb038t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 301.33333333333337,
+          "h": 19.3,
+          "text": "Attention fragmentation and quantified stress",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb088t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Lively and social",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb089g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4283.599999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb090t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Feedback",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb041g",
+      "type": "group",
+      "x": 270,
+      "y": 2721.7999999999997,
+      "w": 301.33333333333337,
+      "h": 35.2,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb040t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 301.33333333333337,
+          "h": 38.6,
+          "text": "A rise in introversion, identity fatigue and digital loneliness",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb091t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Written / structured",
-     "anim": {}
+      "id": "cb043g",
+      "type": "group",
+      "x": 587.3333333333334,
+      "y": 2721.7999999999997,
+      "w": 301.33333333333337,
+      "h": 19.6,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb042t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 301.33333333333337,
+          "h": 38.6,
+          "text": "A need for reflective, low-stimulation environments",
+          "size": "s",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb092b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb044t",
+      "type": "text",
+      "x": 270,
+      "y": 2778.9999999999995,
+      "w": 460,
+      "h": 38.6,
+      "text": "Sources include Harvard Business School, Pew Research Center, UNESCO, OECD, Stanford HAI and the World Economic Forum.",
+      "anim": {},
+      "size": "s",
+      "color": "mute"
     },
     {
-     "id": "cb093t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Verbal / spontaneous",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb094g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4341.099999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb095t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Expression",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb045t",
+      "type": "text",
+      "x": 270,
+      "y": 2900.9999999999995,
+      "w": 460,
+      "h": 25.2,
+      "text": "Mapping the future: TESEEC",
+      "anim": {},
+      "weight": 700
     },
     {
-     "id": "cb096t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Making or writing",
-     "anim": {}
+      "id": "cb046t",
+      "type": "text",
+      "x": 270,
+      "y": 2940.9999999999995,
+      "w": 460,
+      "h": 57.9,
+      "text": "We adapted the PESTEL approach to the context of design education, developing TESEEC as a way to organise the forces that could shape learning at NID in 2030.",
+      "anim": {},
+      "size": "s"
     },
     {
-     "id": "cb097b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb049g",
+      "type": "group",
+      "x": 270,
+      "y": 3025.9999999999995,
+      "w": 222,
+      "h": 49.5,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb047t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb048t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Technological",
+          "weight": 700,
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb098t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Speaking or performing",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb099g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4398.599999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb100t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Participation",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb052g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 3025.9999999999995,
+      "w": 222,
+      "h": 49.5,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb050t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb051t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Educational and Institutional",
+          "weight": 700,
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb101t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Listening and absorbing",
-     "anim": {}
+      "id": "cb055g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 3025.9999999999995,
+      "w": 222,
+      "h": 69,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb053t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb054t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Environmental and Infrastructural",
+          "weight": 700,
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb102b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb058g",
+      "type": "group",
+      "x": 270,
+      "y": 3146.9999999999995,
+      "w": 222,
+      "h": 49.5,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb056t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "04",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb057t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Social and Psychological",
+          "weight": 700,
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb103t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "Speaking and debating",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb104g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4456.099999999999,
-   "w": 698.0,
-   "h": 40,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb105t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698.0,
-     "h": 16,
-     "text": "Stimulation",
-     "size": "s",
-     "color": "mute",
-     "align": "center",
-     "anim": {}
+      "id": "cb061g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 3146.9999999999995,
+      "w": 222,
+      "h": 49.5,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb059t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "05",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb060t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Economic and Political",
+          "weight": 700,
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb106t",
-     "type": "text",
-     "x": 0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "The space is calm and predictable",
-     "anim": {}
+      "id": "cb064g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 3146.9999999999995,
+      "w": 222,
+      "h": 49.5,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb062t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "06",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb063t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Cultural and Ethical",
+          "weight": 700,
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb107b",
-     "type": "box",
-     "fill": "faint",
-     "x": 238.0,
-     "y": 28,
-     "w": 222.0,
-     "h": 2,
-     "anim": {}
+      "id": "cb065p",
+      "type": "image",
+      "x": 270,
+      "y": 3236.4999999999995,
+      "w": 698,
+      "h": 338,
+      "src": "projects/media/design-process/board-teseec.jpg",
+      "fit": "contain",
+      "alt": "The TESEEC board",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "The full TESEEC board. Click to enlarge.",
+      "capShow": true
     },
     {
-     "id": "cb108t",
-     "type": "text",
-     "x": 476.0,
-     "y": 18,
-     "w": 222.0,
-     "h": 20,
-     "text": "There's energy and activity around",
-     "align": "right",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb109t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4533.099999999999,
-   "w": 460.0,
-   "h": 14,
-   "text": "Each axis had two questions. These are the ends of the first. (A version you can try yourself is coming.)",
-   "anim": {},
-   "color": "mute",
-   "size": "s"
-  },
-  {
-   "id": "cb110t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4623.099999999999,
-   "w": 460.0,
-   "h": 14,
-   "text": "Learner archetypes",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb111t",
-   "type": "text",
-   "x": 270.0,
-   "y": 4663.099999999999,
-   "w": 460.0,
-   "h": 14,
-   "text": "The survey responses were developed into seven learner archetypes. These are best understood as patterns in how people may express themselves and engage with learning, rather than fixed personality categories.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb112g",
-   "type": "group",
-   "x": 270.0,
-   "y": 4767.099999999999,
-   "w": 222.0,
-   "h": 70,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "children": [
-    {
-     "id": "cb113t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 40,
-     "text": "7",
-     "size": "l",
-     "weight": 700,
-     "color": "accent",
-     "anim": {}
+      "id": "cb066t",
+      "type": "text",
+      "x": 32,
+      "y": 3834.4999999999995,
+      "w": 222,
+      "h": 25.2,
+      "text": "research",
+      "anim": {},
+      "color": "mute",
+      "nav": "research"
     },
     {
-     "id": "cb114t",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222.0,
-     "h": 16,
-     "text": "learner archetypes",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb115s",
-   "type": "slides",
-   "x": 270.0,
-   "y": 4862.7,
-   "w": 698.0,
-   "h": 269,
-   "fit": "contain",
-   "mode": "click",
-   "trans": "fade",
-   "counter": true,
-   "every": 3,
-   "slides": [
-    {
-     "src": "projects/media/design-process/archetypes-1.jpg",
-     "alt": "Radar charts for the Quiet Contributor, Social Butterfly, Ambiguous Ambivert and Adaptive Performer"
+      "id": "cb067t",
+      "type": "text",
+      "x": 270,
+      "y": 3834.4999999999995,
+      "w": 460,
+      "h": 25.2,
+      "text": "Understanding different learners",
+      "anim": {},
+      "weight": 700
     },
     {
-     "src": "projects/media/design-process/archetypes-2.jpg",
-     "alt": "Radar charts for the Overwhelmed Learner, Mismatched Receiver and Consistent Introvert"
-    }
-   ],
-   "caption": "Quiet Contributor · Social Butterfly · Ambiguous Ambivert (the most common) · Adaptive Performer · Overwhelmed Learner · Mismatched Receiver · Consistent Introvert",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb116t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5261.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "Directed storytelling",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb117t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5301.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "Directed storytelling was then used to explore how students actually experience learning, belonging and collaboration at NID. Rather than relying only on direct questions, participants were encouraged to narrate personal experiences.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb118g",
-   "type": "group",
-   "x": 270.0,
-   "y": 5415.7,
-   "w": 222.0,
-   "h": 70,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "children": [
-    {
-     "id": "cb119t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 40,
-     "text": "18",
-     "size": "l",
-     "weight": 700,
-     "color": "accent",
-     "anim": {}
+      "id": "cb068t",
+      "type": "text",
+      "x": 270,
+      "y": 3874.4999999999995,
+      "w": 460,
+      "h": 57.9,
+      "text": "The Semantic Differential Scale framed expression as a learning spectrum. Seven axes were used to construct the survey, with reflective and expressive attributes positioned at opposite ends.",
+      "anim": {},
+      "size": "s"
     },
     {
-     "id": "cb120t",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222.0,
-     "h": 16,
-     "text": "students interviewed",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb121g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 5415.7,
-   "w": 222.0,
-   "h": 70,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.08,
-     "ease": "out"
-    }
-   },
-   "children": [
-    {
-     "id": "cb122t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 40,
-     "text": "120+",
-     "size": "l",
-     "weight": 700,
-     "color": "accent",
-     "anim": {}
+      "id": "cb069g",
+      "type": "group",
+      "x": 270,
+      "y": 3969.4999999999995,
+      "w": 222,
+      "h": 70,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "children": [
+        {
+          "id": "cb070t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 41.6,
+          "text": "40",
+          "size": "l",
+          "weight": 700,
+          "color": "accent",
+          "anim": {}
+        },
+        {
+          "id": "cb071t",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 19.3,
+          "text": "survey responses",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb123t",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222.0,
-     "h": 16,
-     "text": "quotes",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb124g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 5415.7,
-   "w": 222.0,
-   "h": 70,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.16,
-     "ease": "out"
-    }
-   },
-   "children": [
-    {
-     "id": "cb125t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 40,
-     "text": "11",
-     "size": "l",
-     "weight": 700,
-     "color": "accent",
-     "anim": {}
+      "id": "cb072t",
+      "type": "text",
+      "x": 270,
+      "y": 4083.0999999999995,
+      "w": 222,
+      "h": 19.3,
+      "text": "reflective",
+      "anim": {},
+      "color": "mute",
+      "size": "s"
     },
     {
-     "id": "cb126t",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222.0,
-     "h": 16,
-     "text": "emotional zones",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb127t",
-   "type": "text",
-   "x": 270.0,
-   "y": 5537.3,
-   "w": 460.0,
-   "h": 14,
-   "text": "The conversations were translated into empathy maps to organise what participants said, did, thought and felt. Recurring themes included overwhelm and difficulty finding a starting point; community, mentorship and social validation; the need for structure and actionable goals; creative block; feedback and peer review; and time constraints and focus.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb128p",
-   "type": "image",
-   "x": 270.0,
-   "y": 5661.3,
-   "w": 222.0,
-   "h": 178,
-   "src": "projects/media/design-process/empathy-map-1.jpg",
-   "fit": "contain",
-   "alt": "Empathy map for participant 1",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Participant 1",
-   "capShow": true
-  },
-  {
-   "id": "cb129p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 5661.3,
-   "w": 222.0,
-   "h": 178,
-   "src": "projects/media/design-process/empathy-map-2.jpg",
-   "fit": "contain",
-   "alt": "Empathy map for participant 2",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.06,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Participant 2",
-   "capShow": true
-  },
-  {
-   "id": "cb130p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 5661.3,
-   "w": 222.0,
-   "h": 178,
-   "src": "projects/media/design-process/empathy-map-3.jpg",
-   "fit": "contain",
-   "alt": "Empathy map for participant 3",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.12,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Participant 3",
-   "capShow": true
-  },
-  {
-   "id": "cb131p",
-   "type": "image",
-   "x": 270.0,
-   "y": 5885.3,
-   "w": 222.0,
-   "h": 178,
-   "src": "projects/media/design-process/empathy-map-4.jpg",
-   "fit": "contain",
-   "alt": "Empathy map for participant 4",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Participant 4",
-   "capShow": true
-  },
-  {
-   "id": "cb132p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 5885.3,
-   "w": 222.0,
-   "h": 178,
-   "src": "projects/media/design-process/empathy-map-5.jpg",
-   "fit": "contain",
-   "alt": "Empathy map for participant 5",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.06,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Participant 5",
-   "capShow": true
-  },
-  {
-   "id": "cb133p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 5885.3,
-   "w": 222.0,
-   "h": 178,
-   "src": "projects/media/design-process/empathy-map-6.jpg",
-   "fit": "contain",
-   "alt": "Empathy map for participant 6",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.12,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Participant 6",
-   "capShow": true
-  },
-  {
-   "id": "cb134t",
-   "type": "text",
-   "x": 270.0,
-   "y": 6113.3,
-   "w": 460.0,
-   "h": 14,
-   "text": "Six of the maps. Click any map to read it. Names are changed.",
-   "anim": {},
-   "color": "mute",
-   "size": "s"
-  },
-  {
-   "id": "cb135t",
-   "type": "text",
-   "x": 349.33333333333337,
-   "y": 6197.3,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "“I don't belong to any specific group.”",
-   "anim": {},
-   "align": "right",
-   "size": "l"
-  },
-  {
-   "id": "cb136t",
-   "type": "text",
-   "x": 349.33333333333337,
-   "y": 6291.3,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "a student, from directed storytelling",
-   "anim": {},
-   "color": "mute",
-   "align": "right",
-   "size": "s"
-  },
-  {
-   "id": "cb137t",
-   "type": "text",
-   "x": 270.0,
-   "y": 6389.3,
-   "w": 460.0,
-   "h": 14,
-   "text": "Observations were grouped through affinity mapping to identify recurring patterns across participants. A causal map then connected these barriers to underlying needs: structured paths, feedback and validation, practical application and flexibility.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb138p",
-   "type": "image",
-   "x": 270.0,
-   "y": 6493.3,
-   "w": 341.0,
-   "h": 192,
-   "src": "projects/media/design-process/board-affinity.jpg",
-   "fit": "contain",
-   "alt": "Affinity map",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Affinity map",
-   "capShow": true
-  },
-  {
-   "id": "cb139p",
-   "type": "image",
-   "x": 627.0,
-   "y": 6493.3,
-   "w": 341.0,
-   "h": 192,
-   "src": "projects/media/design-process/board-causal.jpg",
-   "fit": "contain",
-   "alt": "Causal map",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Causal map",
-   "capShow": true
-  },
-  {
-   "id": "cb140t",
-   "type": "text",
-   "x": 32.0,
-   "y": 6945.3,
-   "w": 222.0,
-   "h": 14,
-   "text": "insights",
-   "anim": {},
-   "color": "mute",
-   "nav": "insights"
-  },
-  {
-   "id": "cb141t",
-   "type": "text",
-   "x": 270.0,
-   "y": 6945.3,
-   "w": 460.0,
-   "h": 14,
-   "text": "Core insights",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb144g",
-   "type": "group",
-   "x": 270.0,
-   "y": 6995.3,
-   "w": 222.0,
-   "h": 97.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb142t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 20,
-     "text": "Expression is fluid and situational.",
-     "weight": 700,
-     "anim": {}
+      "id": "cb073t",
+      "type": "text",
+      "x": 746.0000000000001,
+      "y": 4083.0999999999995,
+      "w": 222,
+      "h": 19.3,
+      "text": "expressive",
+      "anim": {},
+      "color": "mute",
+      "align": "right",
+      "size": "s"
     },
     {
-     "id": "cb143t",
-     "type": "text",
-     "x": 0,
-     "y": 47.0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Students move between reflection and articulation depending on context, confidence and emotional safety.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb147g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 6995.3,
-   "w": 222.0,
-   "h": 97.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb145t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 20,
-     "text": "Visibility is not the same as participation.",
-     "weight": 700,
-     "anim": {}
+      "id": "cb074g",
+      "type": "group",
+      "x": 270,
+      "y": 4111.099999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb075t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Energy",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb076t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Drained",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb077b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb078t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Energized",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb146t",
-     "type": "text",
-     "x": 0,
-     "y": 47.0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Making, writing and observation can be meaningful contributions, even when they are not immediately visible.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb150g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 6995.3,
-   "w": 222.0,
-   "h": 97.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb148t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 20,
-     "text": "Collaboration styles are asymmetric.",
-     "weight": 700,
-     "anim": {}
+      "id": "cb079g",
+      "type": "group",
+      "x": 270,
+      "y": 4168.599999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb080t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Processing",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb081t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Think or sketch quietly",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb082b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb083t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Talk them through aloud",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb149t",
-     "type": "text",
-     "x": 0,
-     "y": 47.0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Students may contribute in different ways, such as structuring, organising or freely generating ideas.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb153g",
-   "type": "group",
-   "x": 270.0,
-   "y": 7145.1,
-   "w": 222.0,
-   "h": 62.7,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb151t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 20,
-     "text": "Feedback timing matters.",
-     "weight": 700,
-     "anim": {}
+      "id": "cb084g",
+      "type": "group",
+      "x": 270,
+      "y": 4226.099999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb085t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Environment",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb086t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Quiet and contained",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb087b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb088t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Lively and social",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb152t",
-     "type": "text",
-     "x": 0,
-     "y": 27.5,
-     "w": 222.0,
-     "h": 16,
-     "text": "Students have different preferences for when and how they receive feedback.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb156g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 7145.1,
-   "w": 222.0,
-   "h": 62.7,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb154t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 20,
-     "text": "Quietness can be misread.",
-     "weight": 700,
-     "anim": {}
+      "id": "cb089g",
+      "type": "group",
+      "x": 270,
+      "y": 4283.599999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb090t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Feedback",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb091t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Written / structured",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb092b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb093t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Verbal / spontaneous",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb155t",
-     "type": "text",
-     "x": 0,
-     "y": 27.5,
-     "w": 222.0,
-     "h": 16,
-     "text": "Silence may indicate reflection or observation rather than disengagement.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb159g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 7145.1,
-   "w": 222.0,
-   "h": 97.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb157t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 20,
-     "text": "Future learning needs adaptive collaboration.",
-     "weight": 700,
-     "anim": {}
+      "id": "cb094g",
+      "type": "group",
+      "x": 270,
+      "y": 4341.099999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb095t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Expression",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb096t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Making or writing",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb097b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb098t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Speaking or performing",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb158t",
-     "type": "text",
-     "x": 0,
-     "y": 47.0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Environments and tools should accommodate different paces and interaction styles.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb160t",
-   "type": "text",
-   "x": 349.33333333333337,
-   "y": 7314.900000000001,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "“Good ideas come after marinating.”",
-   "anim": {},
-   "align": "right",
-   "size": "l"
-  },
-  {
-   "id": "cb161t",
-   "type": "text",
-   "x": 349.33333333333337,
-   "y": 7367.900000000001,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "a student, from directed storytelling",
-   "anim": {},
-   "color": "mute",
-   "align": "right",
-   "size": "s"
-  },
-  {
-   "id": "cb162t",
-   "type": "text",
-   "x": 32.0,
-   "y": 7495.900000000001,
-   "w": 222.0,
-   "h": 14,
-   "text": "research question",
-   "anim": {},
-   "color": "mute"
-  },
-  {
-   "id": "cb163t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7495.900000000001,
-   "w": 698.0,
-   "h": 14,
-   "text": "How do we make learning more collaborative for individuals with different levels of expression at NID in 2030?",
-   "anim": {},
-   "weight": 700,
-   "color": "accent",
-   "size": "l"
-  },
-  {
-   "id": "cb164t",
-   "type": "text",
-   "x": 32.0,
-   "y": 7894.900000000001,
-   "w": 222.0,
-   "h": 14,
-   "text": "process",
-   "anim": {},
-   "color": "mute",
-   "nav": "process"
-  },
-  {
-   "id": "cb165t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7894.900000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "From research to concepts",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb166t",
-   "type": "text",
-   "x": 270.0,
-   "y": 7934.900000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "The initial ideation produced twelve directions, ranging from algorithmic group formation and collaboration platforms to mentor selection, self-reflection tools, scenario-based games, wearables, spatial partitions and AI support. Three directions were developed further.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb167p",
-   "type": "image",
-   "x": 270.0,
-   "y": 8048.900000000001,
-   "w": 460.0,
-   "h": 307,
-   "src": "projects/media/design-process/ideation-bodystorming.jpg",
-   "fit": "cover",
-   "alt": "The team bodystorming and sketching around a table",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "caption": "Bodystorming and roleplaying",
-   "capShow": true
-  },
-  {
-   "id": "cb168p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 8048.900000000001,
-   "w": 222.0,
-   "h": 130.5,
-   "src": "projects/media/design-process/sketch-studio.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch of an inclusive studio",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb169p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 8195.400000000001,
-   "w": 222.0,
-   "h": 130.5,
-   "src": "projects/media/design-process/sketch-mediator.jpg",
-   "fit": "cover",
-   "alt": "Concept sketch of the AI flow mediator",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.2,
-     "ease": "out"
-    }
-   },
-   "caption": "Concept sketches",
-   "capShow": true
-  },
-  {
-   "id": "cb170t",
-   "type": "text",
-   "x": 32.0,
-   "y": 8615.900000000001,
-   "w": 222.0,
-   "h": 14,
-   "text": "nid commons",
-   "anim": {},
-   "color": "mute",
-   "nav": "nid commons"
-  },
-  {
-   "id": "cb171t",
-   "type": "text",
-   "x": 270.0,
-   "y": 8615.900000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "NID Commons",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb172t",
-   "type": "text",
-   "x": 270.0,
-   "y": 8655.900000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "NID Commons explored how a digital platform could support student collaboration. The first prototype used learner profiles and a compatibility matrix to suggest groups.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb175g",
-   "type": "group",
-   "x": 270.0,
-   "y": 8744.900000000001,
-   "w": 222.0,
-   "h": 88.4,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb173t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Prototype 1.0",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb099g",
+      "type": "group",
+      "x": 270,
+      "y": 4398.599999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb100t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Participation",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb101t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Listening and absorbing",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb102b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb103t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "Speaking and debating",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb174t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 16,
-     "text": "An algorithmic compatibility matrix formed balanced teams. It visualised learner diversity, but failed to sustain engagement among reflective participants.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb178g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 8744.900000000001,
-   "w": 222.0,
-   "h": 88.4,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb176t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Prototype 1.1",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb104g",
+      "type": "group",
+      "x": 270,
+      "y": 4456.099999999999,
+      "w": 698,
+      "h": 40,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb105t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "Stimulation",
+          "size": "s",
+          "color": "mute",
+          "align": "center",
+          "anim": {}
+        },
+        {
+          "id": "cb106t",
+          "type": "text",
+          "x": 0,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "The space is calm and predictable",
+          "anim": {},
+          "size": "s"
+        },
+        {
+          "id": "cb107b",
+          "type": "box",
+          "fill": "faint",
+          "x": 238,
+          "y": 28,
+          "w": 222,
+          "h": 2,
+          "anim": {}
+        },
+        {
+          "id": "cb108t",
+          "type": "text",
+          "x": 476,
+          "y": 18,
+          "w": 222,
+          "h": 19.3,
+          "text": "There's energy and activity around",
+          "align": "right",
+          "anim": {},
+          "size": "s"
+        }
+      ]
     },
     {
-     "id": "cb177t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 16,
-     "text": "The SMART Goals framework improved clarity, accountability and participation balance, yet collaboration still depended on user initiative.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb181g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 8744.900000000001,
-   "w": 222.0,
-   "h": 88.4,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb179t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "Prototype 1.2",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb109t",
+      "type": "text",
+      "x": 270,
+      "y": 4533.1,
+      "w": 634.7,
+      "h": 19.3,
+      "text": "Each axis had two questions. These are the ends of the first. (A version you can try yourself is coming.)",
+      "anim": {},
+      "color": "mute",
+      "size": "s"
     },
     {
-     "id": "cb180t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 16,
-     "text": "Combined digital collaboration, adaptive campus mapping and reflective interaction tools, with a simpler, more inclusive user flow.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb182t",
-   "type": "text",
-   "x": 349.33333333333337,
-   "y": 8905.300000000001,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "“If we only match compatible people, are we really encouraging growth?”",
-   "anim": {},
-   "align": "right",
-   "size": "l"
-  },
-  {
-   "id": "cb183t",
-   "type": "text",
-   "x": 349.33333333333337,
-   "y": 8999.300000000001,
-   "w": 618.6666666666667,
-   "h": 14,
-   "text": "a critique during the project",
-   "anim": {},
-   "color": "mute",
-   "align": "right",
-   "size": "s"
-  },
-  {
-   "id": "cb184t",
-   "type": "text",
-   "x": 270.0,
-   "y": 9097.300000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "The platform offered ways to organise collaboration, but still depended on students arriving with an existing purpose. It exposed a gap between providing infrastructure for collaboration and helping people initiate it.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb185s",
-   "type": "slides",
-   "x": 270.0,
-   "y": 9186.300000000001,
-   "w": 698.0,
-   "h": 374,
-   "fit": "contain",
-   "mode": "click",
-   "trans": "fade",
-   "counter": true,
-   "every": 3,
-   "slides": [
-    {
-     "src": "projects/media/design-process/commons-v1-0.jpg",
-     "alt": "NID Commons prototype 1.0"
+      "id": "cb110t",
+      "type": "text",
+      "x": 270,
+      "y": 4623.099999999999,
+      "w": 460,
+      "h": 25.2,
+      "text": "Learner archetypes",
+      "anim": {},
+      "weight": 700
     },
     {
-     "src": "projects/media/design-process/commons-v1-1.jpg",
-     "alt": "NID Commons prototype 1.1 with SMART goals"
+      "id": "cb111t",
+      "type": "text",
+      "x": 270,
+      "y": 4663.099999999999,
+      "w": 460,
+      "h": 77.9,
+      "text": "The survey responses were developed into seven learner archetypes. These are best understood as patterns in how people may express themselves and engage with learning, rather than fixed personality categories.",
+      "anim": {},
+      "size": "s"
     },
     {
-     "src": "projects/media/design-process/commons-v1-2.jpg",
-     "alt": "NID Commons prototype 1.2 home screen"
+      "id": "cb112g",
+      "type": "group",
+      "x": 270,
+      "y": 4767.099999999999,
+      "w": 222,
+      "h": 70,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "children": [
+        {
+          "id": "cb113t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 41.6,
+          "text": "7",
+          "size": "l",
+          "weight": 700,
+          "color": "accent",
+          "anim": {}
+        },
+        {
+          "id": "cb114t",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 19.3,
+          "text": "learner archetypes",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        }
+      ]
     },
     {
-     "src": "projects/media/design-process/commons-map.jpg",
-     "alt": "NID Commons campus map of collaboration spots"
-    }
-   ],
-   "caption": "Prototypes 1.0, 1.1 and 1.2, and the campus map.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb186u",
-   "type": "button",
-   "look": "line",
-   "text": "Try the prototype",
-   "x": 270.0,
-   "y": 9614.300000000001,
-   "w": 222.0,
-   "h": 42,
-   "link": {
-    "href": "https://amount-hatch-73522679.figma.site",
-    "newTab": true
-   },
-   "anim": {}
-  },
-  {
-   "id": "cb187t",
-   "type": "text",
-   "x": 32.0,
-   "y": 9886.300000000001,
-   "w": 222.0,
-   "h": 14,
-   "text": "empathy game",
-   "anim": {},
-   "color": "mute",
-   "nav": "empathy game"
-  },
-  {
-   "id": "cb188t",
-   "type": "text",
-   "x": 270.0,
-   "y": 9886.300000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "Empathy Game",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb189t",
-   "type": "text",
-   "x": 270.0,
-   "y": 9926.300000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "Rather than only discussing different communication styles, players had to experience the effects of communication, interpretation and coordination while working towards a common goal.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb190t",
-   "type": "text",
-   "x": 270.0,
-   "y": 9997.300000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "Players had to describe information without revealing a hidden goal pattern, infer the pattern from cues and actions, and coordinate the timing of their contributions.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb191p",
-   "type": "image",
-   "x": 270.0,
-   "y": 10086.300000000001,
-   "w": 222.0,
-   "h": 278,
-   "src": "projects/media/design-process/game-cards-1.jpg",
-   "fit": "cover",
-   "alt": "Early paper prototypes of the game cards",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb192p",
-   "type": "image",
-   "x": 508.00000000000006,
-   "y": 10086.300000000001,
-   "w": 222.0,
-   "h": 278,
-   "src": "projects/media/design-process/game-cards-2.jpg",
-   "fit": "cover",
-   "alt": "Later iteration of the game cards",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb193p",
-   "type": "image",
-   "x": 746.0000000000001,
-   "y": 10086.300000000001,
-   "w": 222.0,
-   "h": 278,
-   "src": "projects/media/design-process/game-components.jpg",
-   "fit": "cover",
-   "alt": "Final game cards and pieces",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.2,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "cb194t",
-   "type": "text",
-   "x": 270.0,
-   "y": 10412.300000000001,
-   "w": 460.0,
-   "h": 14,
-   "text": "Testing revealed three outcomes:",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb197g",
-   "type": "group",
-   "x": 270.0,
-   "y": 10438.300000000001,
-   "w": 222.0,
-   "h": 57.2,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb195t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "01",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb115s",
+      "type": "slides",
+      "x": 270,
+      "y": 4862.7,
+      "w": 698,
+      "h": 269,
+      "fit": "contain",
+      "mode": "click",
+      "trans": "fade",
+      "counter": true,
+      "every": 3,
+      "slides": [
+        {
+          "src": "projects/media/design-process/archetypes-1.jpg",
+          "alt": "Radar charts for the Quiet Contributor, Social Butterfly, Ambiguous Ambivert and Adaptive Performer"
+        },
+        {
+          "src": "projects/media/design-process/archetypes-2.jpg",
+          "alt": "Radar charts for the Overwhelmed Learner, Mismatched Receiver and Consistent Introvert"
+        }
+      ],
+      "caption": "Quiet Contributor · Social Butterfly · Ambiguous Ambivert (the most common) · Adaptive Performer · Overwhelmed Learner · Mismatched Receiver · Consistent Introvert",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
     },
     {
-     "id": "cb196t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 16,
-     "text": "Teams could lose when communication broke down.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb200g",
-   "type": "group",
-   "x": 508.00000000000006,
-   "y": 10438.300000000001,
-   "w": 222.0,
-   "h": 72.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb198t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "02",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb116t",
+      "type": "text",
+      "x": 270,
+      "y": 5261.7,
+      "w": 460,
+      "h": 25.2,
+      "text": "Directed storytelling",
+      "anim": {},
+      "weight": 700
     },
     {
-     "id": "cb199t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 16,
-     "text": "A dominant player could complete the task while limiting meaningful collaboration.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb203g",
-   "type": "group",
-   "x": 746.0000000000001,
-   "y": 10438.300000000001,
-   "w": 222.0,
-   "h": 72.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "cb201t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222.0,
-     "h": 16,
-     "text": "03",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb117t",
+      "type": "text",
+      "x": 270,
+      "y": 5301.7,
+      "w": 460,
+      "h": 77.9,
+      "text": "Directed storytelling was then used to explore how students actually experience learning, belonging and collaboration at NID. Rather than relying only on direct questions, participants were encouraged to narrate personal experiences.",
+      "anim": {},
+      "size": "s"
     },
     {
-     "id": "cb202t",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222.0,
-     "h": 16,
-     "text": "Players could coordinate through strategic communication, specialised roles and shared understanding.",
-     "size": "s",
-     "anim": {}
-    }
-   ]
-  },
-  {
-   "id": "cb204t",
-   "type": "text",
-   "x": 270.0,
-   "y": 10547.1,
-   "w": 460.0,
-   "h": 14,
-   "text": "Completing the task did not necessarily mean the team had collaborated well.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb205x",
-   "type": "box",
-   "fill": "faint",
-   "round": 6,
-   "x": 270.0,
-   "y": 10623.1,
-   "w": 698.0,
-   "h": 90,
-   "text": "A playable version of the game will live here.",
-   "anim": {}
-  },
-  {
-   "id": "cb206t",
-   "type": "text",
-   "x": 32.0,
-   "y": 10943.1,
-   "w": 222.0,
-   "h": 14,
-   "text": "flow mediator",
-   "anim": {},
-   "color": "mute",
-   "nav": "flow mediator"
-  },
-  {
-   "id": "cb207t",
-   "type": "text",
-   "x": 270.0,
-   "y": 10943.1,
-   "w": 460.0,
-   "h": 14,
-   "text": "Flow Mediator",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb208t",
-   "type": "text",
-   "x": 270.0,
-   "y": 10983.1,
-   "w": 460.0,
-   "h": 14,
-   "text": "The AI Energy Flow Mediator explored how an AI-based companion could support group work through conversational guidance and adaptive lighting.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb209t",
-   "type": "text",
-   "x": 270.0,
-   "y": 11054.1,
-   "w": 460.0,
-   "h": 14,
-   "text": "The final Wizard of Oz test used a mock interface operated by human facilitators behind the scenes.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb210g",
-   "type": "group",
-   "x": 270.0,
-   "y": 11124.1,
-   "w": 460.0,
-   "h": 70,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.0,
-     "ease": "out"
-    }
-   },
-   "children": [
-    {
-     "id": "cb211t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 460.0,
-     "h": 40,
-     "text": "10",
-     "size": "l",
-     "weight": 700,
-     "color": "accent",
-     "anim": {}
+      "id": "cb118g",
+      "type": "group",
+      "x": 270,
+      "y": 5415.7,
+      "w": 222,
+      "h": 70,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "children": [
+        {
+          "id": "cb119t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 41.6,
+          "text": "18",
+          "size": "l",
+          "weight": 700,
+          "color": "accent",
+          "anim": {}
+        },
+        {
+          "id": "cb120t",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 19.3,
+          "text": "students interviewed",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        }
+      ]
     },
     {
-     "id": "cb212t",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 460.0,
-     "h": 16,
-     "text": "students with varied learner archetypes took part in the test",
-     "size": "s",
-     "color": "mute",
-     "anim": {}
+      "id": "cb121g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 5415.7,
+      "w": 222,
+      "h": 70,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.08,
+          "ease": "out"
+        }
+      },
+      "children": [
+        {
+          "id": "cb122t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 41.6,
+          "text": "120+",
+          "size": "l",
+          "weight": 700,
+          "color": "accent",
+          "anim": {}
+        },
+        {
+          "id": "cb123t",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 19.3,
+          "text": "quotes",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb124g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 5415.7,
+      "w": 222,
+      "h": 70,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.16,
+          "ease": "out"
+        }
+      },
+      "children": [
+        {
+          "id": "cb125t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 41.6,
+          "text": "11",
+          "size": "l",
+          "weight": 700,
+          "color": "accent",
+          "anim": {}
+        },
+        {
+          "id": "cb126t",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 19.3,
+          "text": "emotional zones",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb127t",
+      "type": "text",
+      "x": 270,
+      "y": 5537.3,
+      "w": 460,
+      "h": 97.2,
+      "text": "The conversations were translated into empathy maps to organise what participants said, did, thought and felt. Recurring themes included overwhelm and difficulty finding a starting point; community, mentorship and social validation; the need for structure and actionable goals; creative block; feedback and peer review; and time constraints and focus.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb128p",
+      "type": "image",
+      "x": 270,
+      "y": 5661.3,
+      "w": 222,
+      "h": 178,
+      "src": "projects/media/design-process/empathy-map-1.jpg",
+      "fit": "contain",
+      "alt": "Empathy map for participant 1",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Participant 1",
+      "capShow": true
+    },
+    {
+      "id": "cb129p",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 5661.3,
+      "w": 222,
+      "h": 178,
+      "src": "projects/media/design-process/empathy-map-2.jpg",
+      "fit": "contain",
+      "alt": "Empathy map for participant 2",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.06,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Participant 2",
+      "capShow": true
+    },
+    {
+      "id": "cb130p",
+      "type": "image",
+      "x": 746.0000000000001,
+      "y": 5661.3,
+      "w": 222,
+      "h": 178,
+      "src": "projects/media/design-process/empathy-map-3.jpg",
+      "fit": "contain",
+      "alt": "Empathy map for participant 3",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.12,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Participant 3",
+      "capShow": true
+    },
+    {
+      "id": "cb131p",
+      "type": "image",
+      "x": 270,
+      "y": 5885.3,
+      "w": 222,
+      "h": 178,
+      "src": "projects/media/design-process/empathy-map-4.jpg",
+      "fit": "contain",
+      "alt": "Empathy map for participant 4",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Participant 4",
+      "capShow": true
+    },
+    {
+      "id": "cb132p",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 5885.3,
+      "w": 222,
+      "h": 178,
+      "src": "projects/media/design-process/empathy-map-5.jpg",
+      "fit": "contain",
+      "alt": "Empathy map for participant 5",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.06,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Participant 5",
+      "capShow": true
+    },
+    {
+      "id": "cb133p",
+      "type": "image",
+      "x": 746.0000000000001,
+      "y": 5885.3,
+      "w": 222,
+      "h": 178,
+      "src": "projects/media/design-process/empathy-map-6.jpg",
+      "fit": "contain",
+      "alt": "Empathy map for participant 6",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.12,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Participant 6",
+      "capShow": true
+    },
+    {
+      "id": "cb134t",
+      "type": "text",
+      "x": 270,
+      "y": 6113.3,
+      "w": 460,
+      "h": 19.3,
+      "text": "Six of the maps. Click any map to read it. Names are changed.",
+      "anim": {},
+      "color": "mute",
+      "size": "s"
+    },
+    {
+      "id": "cb135t",
+      "type": "text",
+      "x": 349.33333333333337,
+      "y": 6197.3,
+      "w": 618.6666666666667,
+      "h": 83.1,
+      "text": "“I don't belong to any specific group.”",
+      "anim": {},
+      "align": "right",
+      "size": "l"
+    },
+    {
+      "id": "cb136t",
+      "type": "text",
+      "x": 349.33333333333337,
+      "y": 6291.3,
+      "w": 618.6666666666667,
+      "h": 19.3,
+      "text": "a student, from directed storytelling",
+      "anim": {},
+      "color": "mute",
+      "align": "right",
+      "size": "s"
+    },
+    {
+      "id": "cb137t",
+      "type": "text",
+      "x": 270,
+      "y": 6389.3,
+      "w": 460,
+      "h": 77.9,
+      "text": "Observations were grouped through affinity mapping to identify recurring patterns across participants. A causal map then connected these barriers to underlying needs: structured paths, feedback and validation, practical application and flexibility.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb138p",
+      "type": "image",
+      "x": 270,
+      "y": 6493.3,
+      "w": 341,
+      "h": 192,
+      "src": "projects/media/design-process/board-affinity.jpg",
+      "fit": "contain",
+      "alt": "Affinity map",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Affinity map",
+      "capShow": true
+    },
+    {
+      "id": "cb139p",
+      "type": "image",
+      "x": 627,
+      "y": 6493.3,
+      "w": 341,
+      "h": 192,
+      "src": "projects/media/design-process/board-causal.jpg",
+      "fit": "contain",
+      "alt": "Causal map",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Causal map",
+      "capShow": true
+    },
+    {
+      "id": "cb140t",
+      "type": "text",
+      "x": 32,
+      "y": 6945.3,
+      "w": 222,
+      "h": 25.2,
+      "text": "insights",
+      "anim": {},
+      "color": "mute",
+      "nav": "insights"
+    },
+    {
+      "id": "cb141t",
+      "type": "text",
+      "x": 270,
+      "y": 6945.3,
+      "w": 460,
+      "h": 25.2,
+      "text": "Core insights",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cb144g",
+      "type": "group",
+      "x": 270,
+      "y": 6995.3,
+      "w": 222,
+      "h": 97.8,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb142t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 49.7,
+          "text": "Expression is fluid and situational.",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cb143t",
+          "type": "text",
+          "x": 0,
+          "y": 47,
+          "w": 222,
+          "h": 78,
+          "text": "Students move between reflection and articulation depending on context, confidence and emotional safety.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb147g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 6995.3,
+      "w": 222,
+      "h": 97.8,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb145t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 49.7,
+          "text": "Visibility is not the same as participation.",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cb146t",
+          "type": "text",
+          "x": 0,
+          "y": 47,
+          "w": 222,
+          "h": 78,
+          "text": "Making, writing and observation can be meaningful contributions, even when they are not immediately visible.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb150g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 6995.3,
+      "w": 222,
+      "h": 97.8,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb148t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 49.7,
+          "text": "Collaboration styles are asymmetric.",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cb149t",
+          "type": "text",
+          "x": 0,
+          "y": 47,
+          "w": 222,
+          "h": 78,
+          "text": "Students may contribute in different ways, such as structuring, organising or freely generating ideas.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb153g",
+      "type": "group",
+      "x": 270,
+      "y": 7145.1,
+      "w": 222,
+      "h": 62.7,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb151t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "Feedback timing matters.",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cb152t",
+          "type": "text",
+          "x": 0,
+          "y": 27.5,
+          "w": 222,
+          "h": 57.9,
+          "text": "Students have different preferences for when and how they receive feedback.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb156g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 7145.1,
+      "w": 222,
+      "h": 62.7,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb154t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 25.2,
+          "text": "Quietness can be misread.",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cb155t",
+          "type": "text",
+          "x": 0,
+          "y": 27.5,
+          "w": 222,
+          "h": 57.9,
+          "text": "Silence may indicate reflection or observation rather than disengagement.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb159g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 7145.1,
+      "w": 222,
+      "h": 97.8,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb157t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 49.7,
+          "text": "Future learning needs adaptive collaboration.",
+          "weight": 700,
+          "anim": {}
+        },
+        {
+          "id": "cb158t",
+          "type": "text",
+          "x": 0,
+          "y": 47,
+          "w": 222,
+          "h": 57.9,
+          "text": "Environments and tools should accommodate different paces and interaction styles.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb160t",
+      "type": "text",
+      "x": 349.33333333333337,
+      "y": 7314.900000000001,
+      "w": 618.6666666666667,
+      "h": 41.5,
+      "text": "“Good ideas come after marinating.”",
+      "anim": {},
+      "align": "right",
+      "size": "l"
+    },
+    {
+      "id": "cb161t",
+      "type": "text",
+      "x": 349.33333333333337,
+      "y": 7367.900000000001,
+      "w": 618.6666666666667,
+      "h": 19.3,
+      "text": "a student, from directed storytelling",
+      "anim": {},
+      "color": "mute",
+      "align": "right",
+      "size": "s"
+    },
+    {
+      "id": "cb162t",
+      "type": "text",
+      "x": 32,
+      "y": 7495.900000000001,
+      "w": 222,
+      "h": 25.2,
+      "text": "research question",
+      "anim": {},
+      "color": "mute"
+    },
+    {
+      "id": "cb163t",
+      "type": "text",
+      "x": 270,
+      "y": 7495.900000000001,
+      "w": 698,
+      "h": 166.9,
+      "text": "How do we make learning more collaborative for individuals with different levels of expression at NID in 2030?",
+      "anim": {},
+      "weight": 700,
+      "color": "accent",
+      "size": "l"
+    },
+    {
+      "id": "cb164t",
+      "type": "text",
+      "x": 32,
+      "y": 7894.900000000001,
+      "w": 222,
+      "h": 25.2,
+      "text": "process",
+      "anim": {},
+      "color": "mute",
+      "nav": "process"
+    },
+    {
+      "id": "cb165t",
+      "type": "text",
+      "x": 270,
+      "y": 7894.900000000001,
+      "w": 460,
+      "h": 25.2,
+      "text": "From research to concepts",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cb166t",
+      "type": "text",
+      "x": 270,
+      "y": 7934.900000000001,
+      "w": 460,
+      "h": 77.9,
+      "text": "The initial ideation produced twelve directions, ranging from algorithmic group formation and collaboration platforms to mentor selection, self-reflection tools, scenario-based games, wearables, spatial partitions and AI support. Three directions were developed further.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb167p",
+      "type": "image",
+      "x": 270,
+      "y": 8048.900000000001,
+      "w": 460,
+      "h": 307,
+      "src": "projects/media/design-process/ideation-bodystorming.jpg",
+      "fit": "cover",
+      "alt": "The team bodystorming and sketching around a table",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "caption": "Bodystorming and roleplaying",
+      "capShow": true
+    },
+    {
+      "id": "cb168p",
+      "type": "image",
+      "x": 746.0000000000001,
+      "y": 8048.900000000001,
+      "w": 222,
+      "h": 130.5,
+      "src": "projects/media/design-process/sketch-studio.jpg",
+      "fit": "cover",
+      "alt": "Concept sketch of an inclusive studio",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cb169p",
+      "type": "image",
+      "x": 746.0000000000001,
+      "y": 8195.400000000001,
+      "w": 222,
+      "h": 130.5,
+      "src": "projects/media/design-process/sketch-mediator.jpg",
+      "fit": "cover",
+      "alt": "Concept sketch of the AI flow mediator",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      },
+      "caption": "Concept sketches",
+      "capShow": true
+    },
+    {
+      "id": "cb170t",
+      "type": "text",
+      "x": 32,
+      "y": 8615.900000000001,
+      "w": 222,
+      "h": 25.2,
+      "text": "nid commons",
+      "anim": {},
+      "color": "mute",
+      "nav": "nid commons"
+    },
+    {
+      "id": "cb171t",
+      "type": "text",
+      "x": 270,
+      "y": 8615.900000000001,
+      "w": 460,
+      "h": 25.2,
+      "text": "NID Commons",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cb172t",
+      "type": "text",
+      "x": 270,
+      "y": 8655.900000000001,
+      "w": 460,
+      "h": 57.9,
+      "text": "NID Commons explored how a digital platform could support student collaboration. The first prototype used learner profiles and a compatibility matrix to suggest groups.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb175g",
+      "type": "group",
+      "x": 270,
+      "y": 8744.900000000001,
+      "w": 222,
+      "h": 88.4,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb173t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Prototype 1.0",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb174t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 97.3,
+          "text": "An algorithmic compatibility matrix formed balanced teams. It visualised learner diversity, but failed to sustain engagement among reflective participants.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb178g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 8744.900000000001,
+      "w": 222,
+      "h": 88.4,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb176t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Prototype 1.1",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb177t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 97.3,
+          "text": "The SMART Goals framework improved clarity, accountability and participation balance, yet collaboration still depended on user initiative.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb181g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 8744.900000000001,
+      "w": 222,
+      "h": 88.4,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb179t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Prototype 1.2",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb180t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 78,
+          "text": "Combined digital collaboration, adaptive campus mapping and reflective interaction tools, with a simpler, more inclusive user flow.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb184t",
+      "type": "text",
+      "x": 270,
+      "y": 8904,
+      "w": 460,
+      "h": 57.9,
+      "text": "The platform offered ways to organise collaboration, but still depended on students arriving with an existing purpose. It exposed a gap between providing infrastructure for collaboration and helping people initiate it.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb185s",
+      "type": "slides",
+      "x": 270,
+      "y": 8993,
+      "w": 698,
+      "h": 374,
+      "fit": "contain",
+      "mode": "click",
+      "trans": "fade",
+      "counter": true,
+      "every": 3,
+      "slides": [
+        {
+          "src": "projects/media/design-process/commons-v1-0.jpg",
+          "alt": "NID Commons prototype 1.0"
+        },
+        {
+          "src": "projects/media/design-process/commons-v1-1.jpg",
+          "alt": "NID Commons prototype 1.1 with SMART goals"
+        },
+        {
+          "src": "projects/media/design-process/commons-v1-2.jpg",
+          "alt": "NID Commons prototype 1.2 home screen"
+        },
+        {
+          "src": "projects/media/design-process/commons-map.jpg",
+          "alt": "NID Commons campus map of collaboration spots"
+        }
+      ],
+      "caption": "Prototypes 1.0, 1.1 and 1.2, and the campus map.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cb186u",
+      "type": "button",
+      "look": "line",
+      "text": "Try the prototype",
+      "x": 270,
+      "y": 9421,
+      "w": 222,
+      "h": 42,
+      "link": {
+        "href": "https://amount-hatch-73522679.figma.site",
+        "newTab": true
+      },
+      "anim": {}
+    },
+    {
+      "id": "cb187t",
+      "type": "text",
+      "x": 32,
+      "y": 9718.3,
+      "w": 222,
+      "h": 25.2,
+      "text": "empathy game",
+      "anim": {},
+      "color": "mute",
+      "nav": "empathy game"
+    },
+    {
+      "id": "cb188t",
+      "type": "text",
+      "x": 270,
+      "y": 9718.3,
+      "w": 460,
+      "h": 25.2,
+      "text": "Empathy Game",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cb189t",
+      "type": "text",
+      "x": 270,
+      "y": 9758.3,
+      "w": 460,
+      "h": 57.9,
+      "text": "Rather than only discussing different communication styles, players had to experience the effects of communication, interpretation and coordination while working towards a common goal.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb190t",
+      "type": "text",
+      "x": 270,
+      "y": 9829.3,
+      "w": 460,
+      "h": 57.9,
+      "text": "Players had to describe information without revealing a hidden goal pattern, infer the pattern from cues and actions, and coordinate the timing of their contributions.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb191p",
+      "type": "image",
+      "x": 270,
+      "y": 9918.3,
+      "w": 222,
+      "h": 278,
+      "src": "projects/media/design-process/game-cards-1.jpg",
+      "fit": "cover",
+      "alt": "Early paper prototypes of the game cards",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cb192p",
+      "type": "image",
+      "x": 508.00000000000006,
+      "y": 9918.3,
+      "w": 222,
+      "h": 278,
+      "src": "projects/media/design-process/game-cards-2.jpg",
+      "fit": "cover",
+      "alt": "Later iteration of the game cards",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cb193p",
+      "type": "image",
+      "x": 746.0000000000001,
+      "y": 9918.3,
+      "w": 222,
+      "h": 278,
+      "src": "projects/media/design-process/game-components.jpg",
+      "fit": "cover",
+      "alt": "Final game cards and pieces",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.2,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "cb194t",
+      "type": "text",
+      "x": 270,
+      "y": 10244.3,
+      "w": 460,
+      "h": 19.3,
+      "text": "Testing revealed three outcomes:",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb197g",
+      "type": "group",
+      "x": 270,
+      "y": 10270.3,
+      "w": 222,
+      "h": 57.2,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb195t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb196t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 38.6,
+          "text": "Teams could lose when communication broke down.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb200g",
+      "type": "group",
+      "x": 508.00000000000006,
+      "y": 10270.3,
+      "w": 222,
+      "h": 72.8,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb198t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb199t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 57.9,
+          "text": "A dominant player could complete the task while limiting meaningful collaboration.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb203g",
+      "type": "group",
+      "x": 746.0000000000001,
+      "y": 10270.3,
+      "w": 222,
+      "h": 72.8,
+      "anim": {},
+      "children": [
+        {
+          "id": "cb201t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        },
+        {
+          "id": "cb202t",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 78,
+          "text": "Players could coordinate through strategic communication, specialised roles and shared understanding.",
+          "size": "s",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb204t",
+      "type": "text",
+      "x": 270,
+      "y": 10379.1,
+      "w": 460,
+      "h": 38.6,
+      "text": "Completing the task did not necessarily mean the team had collaborated well.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb205x",
+      "type": "box",
+      "fill": "faint",
+      "round": 6,
+      "x": 270,
+      "y": 10455.1,
+      "w": 698,
+      "h": 72.9,
+      "text": "A playable version of the game will live here.",
+      "anim": {}
+    },
+    {
+      "id": "cb206t",
+      "type": "text",
+      "x": 32,
+      "y": 10775.1,
+      "w": 222,
+      "h": 25.2,
+      "text": "flow mediator",
+      "anim": {},
+      "color": "mute",
+      "nav": "flow mediator"
+    },
+    {
+      "id": "cb207t",
+      "type": "text",
+      "x": 270,
+      "y": 10775.1,
+      "w": 460,
+      "h": 25.2,
+      "text": "Flow Mediator",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cb208t",
+      "type": "text",
+      "x": 270,
+      "y": 10815.1,
+      "w": 460,
+      "h": 57.9,
+      "text": "The AI Energy Flow Mediator explored how an AI-based companion could support group work through conversational guidance and adaptive lighting.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb209t",
+      "type": "text",
+      "x": 270,
+      "y": 10886.1,
+      "w": 460,
+      "h": 38.6,
+      "text": "The final Wizard of Oz test used a mock interface operated by human facilitators behind the scenes.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb210g",
+      "type": "group",
+      "x": 270,
+      "y": 10948,
+      "w": 460,
+      "h": 70,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "children": [
+        {
+          "id": "cb211t",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 460,
+          "h": 41.5,
+          "text": "10",
+          "size": "l",
+          "weight": 700,
+          "color": "accent",
+          "anim": {}
+        },
+        {
+          "id": "cb212t",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 38.6,
+          "text": "students with varied learner archetypes took part in the test",
+          "size": "s",
+          "color": "mute",
+          "anim": {}
+        }
+      ]
+    },
+    {
+      "id": "cb213t",
+      "type": "text",
+      "x": 270,
+      "y": 11061.7,
+      "w": 460,
+      "h": 57.9,
+      "text": "Reflective learners appreciated the non-judgmental text dialogue, while expressive learners valued quick motivational feedback. The test also raised concerns about overreliance on automated empathy.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb214t",
+      "type": "text",
+      "x": 270,
+      "y": 11132.7,
+      "w": 460,
+      "h": 38.6,
+      "text": "The exploration suggested that AI could supplement human mentorship, but should not replace it.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb215p",
+      "type": "image",
+      "x": 270,
+      "y": 11202.7,
+      "w": 341,
+      "h": 241,
+      "src": "projects/media/design-process/mediator-storyboard-1.jpg",
+      "fit": "cover",
+      "alt": "Storyboard of a group session with the Flow Mediator",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "caption": "Storyboard",
+      "capShow": true
+    },
+    {
+      "id": "cb216p",
+      "type": "image",
+      "x": 627,
+      "y": 11202.7,
+      "w": 341,
+      "h": 241,
+      "src": "projects/media/design-process/mediator-woz.jpg",
+      "fit": "cover",
+      "alt": "A student during the Wizard of Oz test session",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0.1,
+          "ease": "out"
+        }
+      },
+      "caption": "The Wizard of Oz test",
+      "capShow": true
+    },
+    {
+      "id": "cb217t",
+      "type": "text",
+      "x": 32,
+      "y": 11703.7,
+      "w": 222,
+      "h": 25.2,
+      "text": "reflection",
+      "anim": {},
+      "color": "mute",
+      "nav": "reflection"
+    },
+    {
+      "id": "cb218t",
+      "type": "text",
+      "x": 270,
+      "y": 11703.7,
+      "w": 460,
+      "h": 25.2,
+      "text": "Reflection",
+      "anim": {},
+      "weight": 700
+    },
+    {
+      "id": "cb219t",
+      "type": "text",
+      "x": 270,
+      "y": 11743.7,
+      "w": 460,
+      "h": 116.5,
+      "text": "The project made me more comfortable working with ambiguity. Rather than trying to predict what NID might look like in 2030, we used speculative design to explore possibilities and ask better questions. It also made me think differently about collaboration: participation is not always loud or visible, and productive disagreement can be just as important as compatibility.",
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "cb222u",
+      "type": "button",
+      "look": "line",
+      "text": "Read the full presentation (PDF)",
+      "x": 270,
+      "y": 11886,
+      "w": 301.33333333333337,
+      "h": 42,
+      "link": {
+        "href": "projects/media/design-process/collaborative-by-design-presentation.pdf",
+        "newTab": true
+      },
+      "anim": {}
     }
-   ]
-  },
-  {
-   "id": "cb213t",
-   "type": "text",
-   "x": 270.0,
-   "y": 11229.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "Reflective learners appreciated the non-judgmental text dialogue, while expressive learners valued quick motivational feedback. The test also raised concerns about overreliance on automated empathy.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb214t",
-   "type": "text",
-   "x": 270.0,
-   "y": 11300.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "The exploration suggested that AI could supplement human mentorship, but should not replace it.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb215p",
-   "type": "image",
-   "x": 270.0,
-   "y": 11370.7,
-   "w": 341.0,
-   "h": 241,
-   "src": "projects/media/design-process/mediator-storyboard-1.jpg",
-   "fit": "cover",
-   "alt": "Storyboard of a group session with the Flow Mediator",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "caption": "Storyboard",
-   "capShow": true
-  },
-  {
-   "id": "cb216p",
-   "type": "image",
-   "x": 627.0,
-   "y": 11370.7,
-   "w": 341.0,
-   "h": 241,
-   "src": "projects/media/design-process/mediator-woz.jpg",
-   "fit": "cover",
-   "alt": "A student during the Wizard of Oz test session",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0.1,
-     "ease": "out"
-    }
-   },
-   "caption": "The Wizard of Oz test",
-   "capShow": true
-  },
-  {
-   "id": "cb217t",
-   "type": "text",
-   "x": 32.0,
-   "y": 11871.7,
-   "w": 222.0,
-   "h": 14,
-   "text": "reflection",
-   "anim": {},
-   "color": "mute",
-   "nav": "reflection"
-  },
-  {
-   "id": "cb218t",
-   "type": "text",
-   "x": 270.0,
-   "y": 11871.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "Reflection",
-   "anim": {},
-   "weight": 700
-  },
-  {
-   "id": "cb219t",
-   "type": "text",
-   "x": 270.0,
-   "y": 11911.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "The project made me more comfortable working with ambiguity. Rather than trying to predict what NID might look like in 2030, we used speculative design to explore possibilities and ask better questions. It also made me think differently about collaboration: participation is not always loud or visible, and productive disagreement can be just as important as compatibility.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb220t",
-   "type": "text",
-   "x": 270.0,
-   "y": 12081.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "My contribution",
-   "anim": {},
-   "weight": 700,
-   "size": "s"
-  },
-  {
-   "id": "cb221t",
-   "type": "text",
-   "x": 270.0,
-   "y": 12110.7,
-   "w": 460.0,
-   "h": 14,
-   "text": "I helped create the survey and conducted it with several participants, and assisted in other sessions by taking notes and supporting. I helped brainstorm everything from the frameworks to the archetypes, played a big role in synthesising the research and recognising patterns, and was closely involved in the Empathy Game and AI Flow Mediator ideas.",
-   "anim": {},
-   "size": "s"
-  },
-  {
-   "id": "cb222u",
-   "type": "button",
-   "look": "line",
-   "text": "Read the full presentation (PDF)",
-   "x": 270.0,
-   "y": 12250.7,
-   "w": 301.33333333333337,
-   "h": 42,
-   "link": {
-    "href": "projects/media/design-process/collaborative-by-design-presentation.pdf",
-    "newTab": true
-   },
-   "anim": {}
-  }
- ]
+  ],
+  "secGap": 150
 }
