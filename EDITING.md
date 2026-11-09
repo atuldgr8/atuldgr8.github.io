@@ -103,6 +103,10 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 - Motion (the swell on/off) is at the very bottom of the work-list editor. The blue **swell** button
   (next to **edit**) shows on the visitor pages on your laptop, not inside the editor.
 
+## Changing several things at once
+
+- Shift-click (or drag a box around) several things **of the same kind**, say four text boxes or three pictures. Under "Change all … at once" in the panel, any setting you change (size, colour, weight, tilt, shadow, caption setting, animation switches…) goes to all of them. Their place, size, file and words stay their own.
+
 ## Breaking the grid a little
 
 - Any block: **tilt (degrees)** turns it slightly (try -3 to 3), **drop shadow** gives it a soft shadow that follows its shape. A picture with its background removed (a .png or .webp with see-through background) gets a cut-out shadow.

@@ -1269,8 +1269,26 @@
     h('summary', '', d, title);
     return d;
   }
+  // Several things of the same kind selected: the panel edits the first one, and whatever setting
+  // you change is copied to the others too (never their place, size, file or words).
+  let mirror = null;
+  const NOCOPY = new Set(['id', 'x', 'y', 'w', 'h', 'src', 'slides', 'children', 'ref', 'text', 'nav']);
+  const mirrored = set => {
+    const m = mirror;                 // remembered when the control is made, used when it's clicked
+    if (!m) return set;
+    return v => {
+    const before = JSON.stringify(m.lead);
+    set(v);
+    const was = JSON.parse(before), now = m.lead;
+    for (const k of new Set([...Object.keys(was), ...Object.keys(now)])) {
+      if (NOCOPY.has(k) || JSON.stringify(was[k]) === JSON.stringify(now[k])) continue;
+      for (const o of m.rest) { if (k in now) o[k] = structuredClone(now[k]); else delete o[k]; }
+    }
+    };
+  };
   function row(parent, label) { const r = h('label', 'ed-row', parent); h('span', 'ed-lab', r, label); return r; }
   function num(parent, label, get, set, step = 1, live = true) {
+    set = mirrored(set);
     const r = row(parent, label), i = h('input', '', r);
     i.type = 'number'; i.step = step; i.value = fmt(get());
     i.oninput = () => { const v = parseFloat(i.value); if (!isNaN(v)) { set(v); if (live) render(true); } };
@@ -1278,6 +1296,7 @@
     return i;
   }
   function text(parent, label, get, set, ph = '') {
+    set = mirrored(set);
     const r = row(parent, label), i = h('input', '', r);
     i.type = 'text'; i.value = get() || ''; i.placeholder = ph;
     i.oninput = () => { set(i.value); render(true); };
@@ -1285,6 +1304,7 @@
     return i;
   }
   function choose(parent, label, opts, get, set) {
+    set = mirrored(set);
     const r = row(parent, label), s = h('select', '', r);
     for (const [v, l] of Object.entries(opts)) { const o = h('option', '', s, l); o.value = v; }
     s.value = get() ?? Object.keys(opts)[0];
@@ -1292,6 +1312,7 @@
     return s;
   }
   function seg(parent, label, opts, get, set) {   // a row of small toggle buttons
+    set = mirrored(set);
     const r = row(parent, label), g = h('span', 'ed-seg', r);
     for (const [v, l] of Object.entries(opts)) {
       const b = h('button', get() == v ? 'on' : '', g, l); b.type = 'button';
@@ -1299,6 +1320,7 @@
     }
   }
   function check(parent, label, get, set, onlyPref) {
+    set = mirrored(set);
     const r = h('label', 'ed-row ed-check', parent), i = h('input', '', r);
     i.type = 'checkbox'; i.checked = !!get(); h('span', '', r, label);
     i.onchange = () => { set(i.checked); onlyPref ? (paintToggles(), render()) : commit(); };
@@ -1311,6 +1333,7 @@
   const SWATCHES = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'teal', 'bg'];
   // named colours (ink, grey…) plus any colour at all
   function colourField(parent, label, tokens, get, set) {
+    set = mirrored(set);
     const r = row(parent, label), g = h('span', 'ed-seg ed-col', r);
     const cur = get();
     for (const [v, l] of Object.entries(tokens)) {
@@ -1446,13 +1469,21 @@
     actions(s, [['top', () => align('top')], ['middle', () => align('middle')], ['bottom', () => align('bottom')]]);
     actions(s, [['space evenly ↔', () => distribute('x')], ['space evenly ↕', () => distribute('y')]]);
     actions(sec('Together'), [['group  ⌘G', group], ['make component  ⌥⌘K', makeComponent], ['snap all to grid', () => { its.forEach(fitGrid); commit(); }], ['duplicate', duplicate], ['delete', () => removeItems([...sel])]]);
+    // all the same kind? then their settings can be changed together
+    const kind = its[0].type;
+    if (its.every(i => i.type === kind) && kind !== 'marker' && kind !== 'instance') {
+      mirror = { lead: its[0], rest: its.slice(1) };
+      try { itemPanel(its[0], its.length); } finally { mirror = null; }
+    }
   }
 
   const NAMES = { text: 'Text', image: 'Picture', video: 'Video', embed: 'Embed', box: 'Box', group: 'Group', button: 'Button', slides: 'Slideshow', instance: 'Component', marker: 'Section marker' };
-  function itemPanel(it) {
+  function itemPanel(it, many = 0) {
     const c = it.type === 'instance' && comp(it.ref);
-    h('p', 'ed-head', panel, (c ? `Component · ${c.name}` : NAMES[it.type]) + (scope.length ? ' · inside' : ''));
+    if (many) h('p', 'ed-head', panel, `Change all ${many} at once`);
+    else h('p', 'ed-head', panel, (c ? `Component · ${c.name}` : NAMES[it.type]) + (scope.length ? ' · inside' : ''));
 
+    if (!many) {
     const L = keyed(sec('Position'), 'pos');
     const grid4 = h('div', 'ed-4', L);
     num(grid4, 'x', () => it.x, v => it.x = v);
@@ -1461,6 +1492,7 @@
     if (it.type !== 'text' && it.type !== 'instance') num(grid4, 'h', () => it.h, v => it.h = v);
     actions(L, [['snap to grid', () => { fitGrid(it); commit(); }, 'Pull onto the nearest columns and rows'], ['front', () => order(true), ']'], ['back', () => order(false), '[']]);
     actions(L, [['more space below', () => moveBelow(it, 56), 'Push everything underneath down'], ['less space below', () => moveBelow(it, -56), 'Pull everything underneath up']]);
+    }
 
     const S = keyed(sec(c ? 'Component' : NAMES[it.type]), 'kind');
     if (it.type === 'text') {
