@@ -116,6 +116,7 @@ window.Canvas = (() => {
       else { m.muted = true; m.loop = true; m.autoplay = true; m.playsInline = true; m.setAttribute('muted', ''); m.setAttribute('playsinline', ''); }
       if (o.onMediaError) m.addEventListener('error', () => o.onMediaError(m, it.src), { once: true });
       m.src = o.src(it.src);
+      if (tag === 'img' && it.zoom && !o.edit) { pos.classList.add('zoomable'); m.addEventListener('click', () => enlarge(m)); }
       if (it.round) m.style.borderRadius = `calc(var(--u) * ${it.round})`;
     };
 
@@ -130,6 +131,7 @@ window.Canvas = (() => {
         const t = h('div', 'txt', inner);
         if (it.weight == 700) t.classList.add('w-700');
         if (it.size === 's' || it.size === 'l') t.classList.add('sz-' + it.size);
+        if (it.bg) { t.classList.add('has-bg'); t.style.background = it.bg === 'faint' ? 'var(--ghost)' : 'var(--accent, var(--fg))'; if (it.bg === 'accent' && !it.color) t.style.color = 'var(--bg)'; }
         if (palCss(it.color)) t.style.color = palCss(it.color);
         else if (it.color && it.color !== 'fg') t.classList.add('c-' + it.color);
         if (it.align && it.align !== 'left') t.classList.add('a-' + it.align);
@@ -217,6 +219,16 @@ window.Canvas = (() => {
 
   const narrow = matchMedia('(max-width: 700px)');
 
+  // a picture marked "click to enlarge": opens over everything, click or Esc to close
+  function enlarge(img) {
+    const ov = document.createElement('div'); ov.className = 'zoom-ov';
+    const big = document.createElement('img'); big.src = img.currentSrc || img.src; big.alt = img.alt;
+    ov.appendChild(big); document.body.appendChild(ov);
+    requestAnimationFrame(() => ov.classList.add('on'));
+    const close = () => { ov.classList.remove('on'); removeEventListener('keydown', key); setTimeout(() => ov.remove(), 300); };
+    const key = e => { if (e.key === 'Escape') close(); };
+    ov.addEventListener('click', close); addEventListener('keydown', key);
+  }
   function render(cv, doc, o = {}) {
     o = { edit: false, src: s => s, ...o };
     cv._opts = o;

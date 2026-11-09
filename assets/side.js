@@ -102,13 +102,37 @@ window.SideNav = (() => {
       });
       s.a = a;
     }
-    // which section are we in: the last one whose top has passed 40% of the screen
+    // which section are we in: the last one whose start has passed 40% of the screen.
+    // At the very bottom of the page the last section wins, even if it's too short to get that far.
+    const restTop = el => el.getBoundingClientRect().top - (el._pin || 0);
     const spy = () => {
       let at = 0;
-      secs.forEach((s, i) => { if (s.el && s.el.getBoundingClientRect().top < innerHeight * .4) at = i; });
+      secs.forEach((s, i) => { if (s.el && restTop(s.el) < innerHeight * .4) at = i; });
+      if (scrollY + innerHeight >= document.documentElement.scrollHeight - 4) at = secs.length - 1;
       secs.forEach((s, i) => s.a.classList.toggle('on', i === at));
     };
-    if (secs.length) { addEventListener('scroll', spy, { passive: true }); spy(); unspy = () => removeEventListener('scroll', spy); }
+    // section names that are words (not pictures or invisible markers) stay pinned level with the
+    // top bar while you're in their section, and get pushed up when the next one arrives
+    const pins = edit ? [] : secs.filter(s => s.el && s.el._item.type === 'text');
+    const pin = () => {
+      if (!pins.length) return;
+      const flow = cv.classList.contains('flow');
+      const bar = document.querySelector('.top a, .top span');
+      const line = bar ? bar.getBoundingClientRect().top : 24;
+      const ends = secs.map(s => s.el ? restTop(s.el) : -Infinity);
+      pins.forEach(s => {
+        const el = s.el, top = restTop(el), i = secs.indexOf(s);
+        const next = ends.slice(i + 1).find(t => t > top);
+        const room = (next == null ? cv.getBoundingClientRect().bottom : next) - top - el.offsetHeight - el.offsetHeight * .8;
+        const d = flow ? 0 : Math.max(0, Math.min(line - top, room));
+        if (d !== (el._pin || 0)) { el._pin = d; el.style.translate = d ? `0 ${d.toFixed(1)}px` : ''; el.classList.toggle('pinned', d > 0); }
+      });
+    };
+    const both = () => { pin(); spy(); };
+    if (secs.length) {
+      addEventListener('scroll', both, { passive: true }); addEventListener('resize', both);
+      both(); unspy = () => { removeEventListener('scroll', both); removeEventListener('resize', both); };
+    }
     Dock(nav, { max: .14, reach: 2 });
     return nav;
   }

@@ -159,8 +159,8 @@ a.lnk:hover .btn.b-fill { background: var(--bg); color: var(--fg); outline: 1px 
 .sl-slide > img { opacity: 1; transition: transform .8s cubic-bezier(.65,0,.35,1); }
 .sl-slide > img.before { transform: translateX(-100%); }
 .sl-slide > img.after { transform: translateX(100%); }
-.sl-n { position: absolute; left: .7em; bottom: .7em; color: #fff; mix-blend-mode: difference;
-        font-size: max(14px, calc(var(--u) * 13.67 * var(--tk, 1))); pointer-events: none; }
+.sl-n { position: absolute; right: .9em; bottom: .7em; color: #fff; opacity: .75; mix-blend-mode: difference;
+        font-size: max(11px, calc(var(--u) * 13.67 * var(--tk, 1) * .7)); letter-spacing: 0; pointer-events: none; }
 a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decoration: none; }
 .t-text a.lnk { height: auto; }
 
@@ -193,7 +193,7 @@ nav.side a {
   transform: translateY(var(--dy, 0px)) scale(var(--s, 1)); transform-origin: 0 50%; transition: color .2s;
 }
 nav.side a.on { color: var(--accent, var(--fg)); }   /* the section you're in, in the project's colour */
-nav.side a.near { color: var(--c, var(--hc, var(--fg))); }
+nav.side a.near, nav.side a:hover, nav.side a.hc { color: var(--accent, var(--c, var(--hc, var(--fg)))) !important; }   /* the project's colour, current and pointed-at */
 nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; }
 @media (max-width: 700px) {
   nav.side { display: none; }
@@ -220,10 +220,22 @@ nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; 
 .top.blend a.hc { color: var(--hci) !important; }
 
 /* captions: quiet, under the thing. Either always there, or they appear when you point at it */
-.it > .cap { position: absolute; left: 0; right: 0; top: 100%; padding-top: .45em; color: var(--mute); line-height: 1.3; pointer-events: none; }
+.it > .cap { position: absolute; left: 0; right: 0; top: 100%; padding-top: .6em; color: var(--mute); line-height: 1.35; pointer-events: none;
+             font-size: max(12px, calc(var(--u) * 13.67 * var(--tk, 1) * .78)); letter-spacing: var(--ls-read); }   /* captions: the small size */
 .it > .cap:not(.always) { opacity: 0; transform: translateY(-3px); transition: opacity .25s, transform .35s var(--pop, ease); }
 .it:hover > .cap { opacity: 1; transform: none; }
 @media (hover: none) { .it > .cap:not(.always) { opacity: 1; transform: none; } }   /* phones can't point: show them all */
 .cv.flow > .it > .cap { opacity: 1; transform: none; }   /* phones: captions always show, hanging under the picture */
 .top .star { color: var(--mute); padding-left: .05em; cursor: pointer; }
 .top .star:hover { color: var(--fg); }
+
+/* text with a background: a little padding so the colour isn't tight on the words */
+.txt.has-bg { padding: .35em .55em; }
+/* "click to enlarge" pictures */
+.it.zoomable .media { cursor: zoom-in; }
+.zoom-ov { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 4vmin;
+           background: color-mix(in srgb, var(--bg) 92%, transparent); cursor: zoom-out; opacity: 0; transition: opacity .25s; }
+.zoom-ov.on { opacity: 1; }
+.zoom-ov img { width: 100%; height: 100%; object-fit: contain; transform: scale(.97); transition: transform .35s cubic-bezier(.2,.8,.3,1); }
+.zoom-ov.on img { transform: none; }
+.it.pinned { z-index: 5; }

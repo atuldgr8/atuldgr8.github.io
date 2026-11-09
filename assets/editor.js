@@ -194,6 +194,23 @@
   const pageEnd = () => Math.max(0, ...doc.items.map(it => it.y + (it.h || 0)));
   function sectionOf(y, secs = sections()) { let k = 0; secs.forEach((s, i) => { if (s.y <= y + .5) k = i; }); return k; }
   let focusSec = -1;
+  function evenSections(gap) {
+    const u = parseFloat(cv.style.getPropertyValue('--u')) || 1;
+    const hOf = it => { const el = elOf(it.id); return el ? Math.max(it.h || 0, el.getBoundingClientRect().height / u) : (it.h || 0); };
+    const hs = new Map(doc.items.map(it => [it, it.type === 'marker' ? 0 : hOf(it)]));
+    for (const s of sections()) {
+      if (!s.it || !doc.items.includes(s.it)) continue;         // the first section, or a section start inside a group
+      const start = s.it.y;
+      const above = doc.items.filter(it => it.y < start - .5 && it.type !== 'marker');
+      if (!above.length) continue;
+      const bottom = Math.max(...above.map(it => it.y + hs.get(it)));
+      const d = r1(bottom + gap - start);
+      if (Math.abs(d) < .5) continue;
+      for (const it of doc.items) if (it.y >= start - .5) it.y = r1(it.y + d);
+    }
+    commit(true);
+    toast('Sections evened out', 2000);
+  }
   // swap section i with the one above (dir -1) or below (+1): everything in both moves together
   function moveSection(i, dir) {
     const secs = sections(), a = Math.min(i, i + dir), b = a + 1;
@@ -426,6 +443,8 @@
 
   /* ---------------- render ---------------- */
   function render(keepPanel) {
+    // the project's colour, so "project" bits show it while editing too
+    if (meta && meta.color) document.documentElement.style.setProperty('--accent', meta.color[0] === '#' ? meta.color : `var(--${meta.color})`);
     if (previewing) return;
     C.render(cv, doc, { edit: true, src: resolve, onMediaError, lib: libMap(), slideAt });
     mountSide(true);
@@ -1383,6 +1402,9 @@
       focusSec = -1;
       toast('New section starts at the pink line. Drag the line to move where it starts.', 4000);
     }, 'Starts a new section at what you have selected (or where you are), with an invisible marker']]);
+    // the same generous gap before every section: measures what's really on the page (text that grew included)
+    num(sd, 'space before each section', () => doc.secGap || 200, v => { if (v > 0) doc.secGap = Math.round(v); }, 10, false);
+    actions(sd, [['even out the space between sections', () => evenSections(doc.secGap || 200), 'Every section starts the same distance below the one before; everything inside moves with it']]);
 
     const gr = keyed(sec('Grid'), 'grid');
     const g = G(), setG = (k, v) => { doc.grid = { ...(doc.grid || {}), [k]: v }; drawGrid(); };
@@ -1445,6 +1467,7 @@
       seg(S, 'size', { s: 'small', m: 'medium', l: 'large' }, () => it.size || 'm', v => { if (v === 'm') delete it.size; else it.size = v; });
       seg(S, 'weight', { 400: 'regular', 700: 'bold' }, () => it.weight || 400, v => it.weight = +v);
       colourField(S, 'colour', { fg: 'ink', mute: 'grey', faint: 'faint', accent: 'project' }, () => it.color || 'fg', v => it.color = v);
+      seg(S, 'background', { none: 'none', accent: 'project', faint: 'grey' }, () => it.bg || 'none', v => { if (v === 'none') delete it.bg; else it.bg = v; });
       seg(S, 'align', { left: 'left', center: 'centre', right: 'right' }, () => it.align || 'left', v => it.align = v);
       actions(S, [['edit text  ↵', () => startText(elOf(it.id), it)]]);
     }
@@ -1461,6 +1484,7 @@
         ['use as hover picture', () => { meta.thumb = it.src; commit(true); toast('This is now the hover picture on the work page'); }],
         ['true proportions', async () => { if (!it.src) return; it.h = r1(it.w / await ratio(resolve(it.src), it.type)); commit(); }],
       ]);
+      if (it.type === 'image') check(S, 'click to enlarge', () => !!it.zoom, v => { if (v) it.zoom = true; else delete it.zoom; });
       if (it.src) h('p', 'ed-note', S, it.src.startsWith('blob:') ? 'not saved into the folder yet' : it.src);
     }
     if (it.type === 'slides') slidesPanel(it, S);
