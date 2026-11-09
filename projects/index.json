@@ -28,7 +28,7 @@
       "tags": "Architecural Design, Ethnographic Research",
       "summary": "",
       "thumb": "",
-      "hidden": true,
+      "hidden": false,
       "color": "#ff00bb",
       "soon": true
     },
@@ -39,7 +39,7 @@
       "tags": "Graphic Design, Editorial Design, Illustrations, Data Visualisation",
       "summary": "",
       "thumb": "",
-      "hidden": true,
+      "hidden": false,
       "soon": true,
       "color": "#ff0000"
     },
@@ -50,7 +50,7 @@
       "tags": "",
       "summary": "",
       "thumb": "",
-      "hidden": true,
+      "hidden": false,
       "soon": true
     },
     {
@@ -60,7 +60,7 @@
       "tags": "UI/UX Design",
       "summary": "",
       "thumb": "",
-      "hidden": true,
+      "hidden": false,
       "soon": true
     },
     {
@@ -70,7 +70,7 @@
       "tags": "Experiential Design, Storytelling",
       "summary": "",
       "thumb": "",
-      "hidden": true,
+      "hidden": false,
       "soon": true,
       "fun": true
     },
@@ -81,7 +81,7 @@
       "tags": "Experiential Design, Storytelling",
       "summary": "",
       "thumb": "",
-      "hidden": true,
+      "hidden": false,
       "soon": true,
       "fun": true
     },
