@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TESEEC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Sized in "units" so it scales with its frame the way the case-study page does (frame = 698 units wide). */
+  :root { --u: calc(100vw / 698); --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --ghost: #f6f6f6; --accent: #ebb800;
+          --m: max(13px, calc(var(--u) * 13.67)); --s: max(11px, calc(var(--u) * 10.66)); --l: max(22px, calc(var(--u) * 26)); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--fg); }
+  body { font: 400 var(--m)/1.42 Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif; overflow: hidden; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+
+  .w { height: 100%; display: grid; grid-template-rows: auto 1fr; border: 1px solid var(--faint); border-radius: calc(var(--u) * 6); overflow: hidden; }
+
+  .tabs { display: grid; grid-template-columns: repeat(6, 1fr); border-bottom: 1px solid var(--faint); }
+  .tab { padding: calc(var(--u) * 18) calc(var(--u) * 16) calc(var(--u) * 14); border-left: 1px solid var(--faint); transition: background .25s; }
+  .tab:first-child { border-left: 0; }
+  .tab b { display: block; font-size: var(--l); line-height: 1; font-weight: 700; transition: color .25s; }
+  .tab span { display: block; margin-top: calc(var(--u) * 8); font-size: var(--s); color: var(--mute); transition: color .25s; }
+  .tab:hover { background: var(--ghost); }
+  .tab[aria-selected="true"] b, .tab[aria-selected="true"] span { color: var(--accent); }
+  .tab[aria-selected="true"] { background: var(--ghost); }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .panel { display: grid; grid-template-columns: 1fr calc(var(--u) * 300); gap: calc(var(--u) * 24); padding: calc(var(--u) * 20) calc(var(--u) * 20) calc(var(--u) * 20) calc(var(--u) * 16); min-height: 0; }
+  .txt { align-self: start; animation: in .35s ease both; }
+  .num { font-size: var(--s); color: var(--mute); }
+  .num i { font-style: normal; color: var(--accent); margin-right: .5em; }
+  h2 { font-size: var(--m); font-weight: 700; margin: calc(var(--u) * 10) 0 calc(var(--u) * 6); }
+  p { font-size: var(--s); max-width: 34em; }
+
+  .notes { position: relative; min-height: 0; border-radius: calc(var(--u) * 4); overflow: hidden; background: var(--ghost); cursor: zoom-in; animation: in .35s ease both; }
+  .notes img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .notes .mag { position: absolute; right: calc(var(--u) * 8); bottom: calc(var(--u) * 8); width: max(26px, calc(var(--u) * 26)); height: max(26px, calc(var(--u) * 26));
+                border-radius: 50%; background: var(--bg); display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+  .notes .mag svg { width: 55%; height: 55%; }
+
+  .big { position: fixed; inset: 0; background: rgba(255,255,255,.97); display: none; z-index: 5; }
+  .big.on { display: block; }
+  .big .stage { position: absolute; inset: 0; overflow: hidden; cursor: grab; touch-action: none; }
+  .big .stage.drag { cursor: grabbing; }
+  .big img { position: absolute; left: 0; top: 0; transform-origin: 0 0; user-select: none; -webkit-user-drag: none; max-width: none; }
+  .big .ctl { position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; }
+  .big .ctl button { width: 30px; height: 30px; border-radius: 50%; background: var(--fg); color: var(--bg); font-size: 16px; line-height: 30px; text-align: center; }
+  .big .hint { position: absolute; left: 8px; bottom: 8px; font-size: 11px; color: var(--mute); background: var(--bg); padding: 2px 8px; border-radius: 10px; }
+
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* narrow frames (phones): words only, the sticky notes open on a button */
+  @media (max-width: 520px) {
+    body { overflow: auto; }
+    .tab { padding: 12px 6px 10px; } .tab span { display: none; }
+    .panel { grid-template-columns: 1fr; padding: 14px; }
+    .notes { height: 150px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .txt, .notes { animation: none; } }
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="tabs" role="tablist" aria-label="The six TESEEC forces"></div>
+  <div class="panel" role="tabpanel"></div>
+</div>
+<div class="big" role="dialog" aria-label="Sticky notes, enlarged"><div class="stage"><img alt="" draggable="false"></div>
+  <div class="ctl"><button class="zo" aria-label="Zoom out">−</button><button class="zi" aria-label="Zoom in">+</button><button class="x" aria-label="Close">×</button></div>
+  <div class="hint">Scroll or pinch to zoom, drag to move.</div></div>
+<script>
+const F = [
+  ['T', 'technological', 'Technological', 'AI-driven personalization, datafication, and emotional surveillance redefining how students learn and are assessed.', 't'],
+  ['E', 'educational', 'Educational and Institutional', 'Persistent “quiet bias” and the need for inclusive, reflective learning models that value varied expressions of engagement.', 'e-edu'],
+  ['S', 'social', 'Social and Psychological', 'Shifting peer dynamics, digital isolation, and the erosion of spontaneous community among students.', 's'],
+  ['E', 'environmental', 'Environmental and Infrastructural', 'Cognitive overload and overstimulation, calling for hybrid and sensory-balanced studio environments.', 'e-env'],
+  ['E', 'economic', 'Economic and Political', 'Platformization and privatization of learning, deepening inequalities in educational access and autonomy.', 'e-eco'],
+  ['C', 'cultural', 'Cultural and Ethical', 'Changing norms of expression and identity, revaluing introspection, and authenticity as valid modes of participation.', 'c'],
+];
+const tabs = document.querySelector('.tabs'), panel = document.querySelector('.panel'), big = document.querySelector('.big');
+const pad = n => String(n).padStart(2, '0');
+F.forEach((f, i) => {
+  const b = document.createElement('button');
+  b.className = 'tab'; b.role = 'tab'; b.id = 'tab' + i; b.innerHTML = `<b>${f[0]}</b><span>${f[1]}</span>`;
+  b.setAttribute('aria-label', f[2]);
+  b.onclick = () => show(i);
+  b.onkeydown = e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { const j = (i + d + F.length) % F.length; show(j); tabs.children[j].focus(); } };
+  tabs.appendChild(b);
+  new Image().src = f[4] + '.jpg';   // warm the pictures
+});
+function show(i) {
+  const f = F[i];
+  [...tabs.children].forEach((b, j) => { b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; });
+  panel.setAttribute('aria-labelledby', 'tab' + i);
+  panel.innerHTML = `<div class="txt"><div class="num"><i>${pad(i + 1)}</i>of ${pad(F.length)}</div><h2>${f[2]}</h2><p>${f[3]}</p></div>
+    <button class="notes" aria-label="Enlarge the sticky notes for ${f[2]}"><img src="${f[4]}.jpg" alt="Sticky notes from the TESEEC board under ${f[2]}">
+    <span class="mag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg></span></button>`;
+  panel.querySelector('.notes').onclick = () => open(f);
+}
+const stage = big.querySelector('.stage'), bimg = big.querySelector('img');
+let z = 1, fit = 1, tx = 0, ty = 0;
+function apply() { bimg.style.transform = `translate(${tx}px, ${ty}px) scale(${z})`; }
+function clamp() {
+  const W = stage.clientWidth, H = stage.clientHeight, w = bimg.naturalWidth * z, h = bimg.naturalHeight * z;
+  tx = w <= W ? (W - w) / 2 : Math.min(0, Math.max(W - w, tx));
+  ty = h <= H ? (H - h) / 2 : Math.min(0, Math.max(H - h, ty));
+}
+function zoomAt(f, cx, cy) {
+  const nz = Math.min(fit * 6, Math.max(fit, z * f));
+  tx = cx - (cx - tx) * nz / z; ty = cy - (cy - ty) * nz / z; z = nz; clamp(); apply();
+}
+function reset() { fit = Math.min(stage.clientWidth / bimg.naturalWidth, stage.clientHeight / bimg.naturalHeight) * .94; z = fit; clamp(); apply(); }
+function open(f) {
+  bimg.onload = reset; bimg.src = f[4] + '.jpg'; bimg.alt = 'Sticky notes under ' + f[2];
+  big.classList.add('on'); if (bimg.complete) reset(); big.querySelector('.x').focus();
+}
+function close() { big.classList.remove('on'); }
+big.querySelector('.x').onclick = close;
+big.querySelector('.zi').onclick = () => zoomAt(1.4, stage.clientWidth / 2, stage.clientHeight / 2);
+big.querySelector('.zo').onclick = () => zoomAt(1 / 1.4, stage.clientWidth / 2, stage.clientHeight / 2);
+stage.addEventListener('wheel', e => { e.preventDefault(); const r = stage.getBoundingClientRect(); zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+const pts = new Map(); let last = null, pinch = 0;
+stage.addEventListener('pointerdown', e => { stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); last = [e.clientX, e.clientY]; stage.classList.add('drag'); });
+stage.addEventListener('pointermove', e => {
+  if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, [e.clientX, e.clientY]);
+  if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]), r = stage.getBoundingClientRect();
+    if (pinch) zoomAt(d / pinch, (a[0] + b[0]) / 2 - r.left, (a[1] + b[1]) / 2 - r.top); pinch = d; return; }
+  tx += e.clientX - last[0]; ty += e.clientY - last[1]; last = [e.clientX, e.clientY]; clamp(); apply();
+});
+const up = e => { pts.delete(e.pointerId); pinch = 0; if (!pts.size) stage.classList.remove('drag'); else last = [...pts.values()][0]; };
+stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+stage.addEventListener('dblclick', e => { const r = stage.getBoundingClientRect(); z > fit * 1.05 ? reset() : zoomAt(2.2, e.clientX - r.left, e.clientY - r.top); });
+addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+show(0);
+</script>
+</body>
+</html>
