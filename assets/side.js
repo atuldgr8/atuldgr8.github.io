@@ -97,7 +97,8 @@ window.SideNav = (() => {
       a.addEventListener('click', e => {
         e.preventDefault();
         if (edit) return;
-        const y = s.el ? s.el.getBoundingClientRect().top + scrollY - innerHeight * .2 : 0;
+        // measure where the section really starts: a pinned section name is drawn lower than where it sits
+        const y = s.el ? s.el.getBoundingClientRect().top - (s.el._pin || 0) + scrollY - innerHeight * .2 : 0;
         scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
       });
       s.a = a;
