@@ -1,2244 +1,2236 @@
 {
- "v": 2,
- "side": "sections",
- "intro": "intro",
- "secGap": 200,
- "guides": {
-  "x": [],
-  "y": []
- },
- "items": [
-  {
-   "id": "t001",
-   "type": "text",
-   "x": 32,
-   "y": 196,
-   "w": 698,
-   "h": 43.6,
-   "text": "The Weave",
-   "size": "l",
-   "weight": 700,
-   "color": "accent",
-   "anim": {}
-  },
-  {
-   "id": "t002",
-   "type": "text",
-   "x": 32,
-   "y": 266,
-   "w": 460,
-   "h": 99.7,
-   "text": "Narayanpet Weaver’s Training Facility. The architecture, with its simple style and humble materials, acts as a canvas to showcase and celebrate the various crafts of Telangana, more importantly weaving.",
-   "anim": {}
-  },
-  {
-   "id": "t003",
-   "type": "text",
-   "x": 32,
-   "y": 385.7,
-   "w": 698,
-   "h": 19.6,
-   "text": "Architectural Design · Ethnographic Research",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "p004",
-   "type": "image",
-   "x": 32,
-   "y": 449.0,
-   "w": 936,
-   "h": 526,
-   "src": "projects/media/narayanpet-weavers-centre/render-05.jpg",
-   "fit": "cover",
-   "alt": "Render: school children walking through a shaded street of the centre, past tall printed cloth panels",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "g007",
-   "type": "group",
-   "x": 32,
-   "y": 1033.0,
-   "w": 460,
-   "h": 77.9,
-   "children": [
-    {
-     "id": "t005",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 460,
-     "h": 19.6,
-     "text": "my role",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t006",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 460,
-     "h": 57.9,
-     "text": "Started as an intern on the project and later became its project architect. Site visit, research, diagrams, renders and plans, and coordination with IAS officers, government officials, consultants and engineers.",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g010",
-   "type": "group",
-   "x": 508,
-   "y": 1033.0,
-   "w": 222,
-   "h": 39.6,
-   "children": [
-    {
-     "id": "t008",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "team",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t009",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 19.6,
-     "text": "Studio Chintala",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g013",
-   "type": "group",
-   "x": 746,
-   "y": 1033.0,
-   "w": 222,
-   "h": 77.9,
-   "children": [
-    {
-     "id": "t011",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "time",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t012",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 57.9,
-     "text": "Concept design in about a month, 2021. Phase 1 is now nearing completion.",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g016",
-   "type": "group",
-   "x": 508,
-   "y": 1146.9,
-   "w": 222,
-   "h": 59.2,
-   "children": [
-    {
-     "id": "t014",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "client",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t015",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 39.2,
-     "text": "Government of Telangana, TSCO Handlooms",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g019",
-   "type": "group",
-   "x": 746,
-   "y": 1146.9,
-   "w": 222,
-   "h": 39.6,
-   "children": [
-    {
-     "id": "t017",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "where",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t018",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 19.6,
-     "text": "Narayanpet, Telangana",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "t020",
-   "type": "text",
-   "x": 32,
-   "y": 1406.1000000000001,
-   "w": 222,
-   "h": 24.9,
-   "text": "overview",
-   "color": "mute",
-   "nav": "overview",
-   "anim": {}
-  },
-  {
-   "id": "t021",
-   "type": "text",
-   "x": 270,
-   "y": 1406.1000000000001,
-   "w": 460,
-   "h": 24.9,
-   "text": "A place inclusive for all",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "t022",
-   "type": "text",
-   "x": 270,
-   "y": 1447.0000000000002,
-   "w": 460,
-   "h": 77.5,
-   "text": "While the Narayanpet weaving style would be the main focus, the center will also display and celebrate the various other crafts of Telangana. It will also act as a community space where people from all walks of life come together to celebrate life, and a learning hub for our younger generation.",
-   "size": "s",
-   "anim": {}
-  },
-  {
-   "id": "p023",
-   "type": "image",
-   "x": 270,
-   "y": 1554.5000000000002,
-   "w": 222,
-   "h": 166,
-   "src": "projects/media/narayanpet-weavers-centre/render-01.jpg",
-   "fit": "cover",
-   "alt": "Render: children among printed cloth panels in the central street",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "p024",
-   "type": "image",
-   "x": 508,
-   "y": 1554.5000000000002,
-   "w": 222,
-   "h": 166,
-   "src": "projects/media/narayanpet-weavers-centre/render-04.jpg",
-   "fit": "cover",
-   "alt": "Render: a colonnaded walk with families and schoolchildren",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "p025",
-   "type": "image",
-   "x": 746,
-   "y": 1554.5000000000002,
-   "w": 222,
-   "h": 166,
-   "src": "projects/media/narayanpet-weavers-centre/render-07.jpg",
-   "fit": "cover",
-   "alt": "Render: the courtyard plaza with a reflecting pool",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "u026",
-   "type": "button",
-   "look": "line",
-   "text": "Read the full presentation (PDF)",
-   "x": 270,
-   "y": 1760.5000000000002,
-   "w": 250,
-   "h": 35,
-   "link": {
-    "href": "projects/media/narayanpet-weavers-centre/the-weave-presentation.pdf",
-    "newTab": true
-   },
-   "anim": {}
-  },
-  {
-   "id": "t027",
-   "type": "text",
-   "x": 32,
-   "y": 1995.5000000000002,
-   "w": 222,
-   "h": 24.9,
-   "text": "context",
-   "color": "mute",
-   "nav": "context",
-   "anim": {}
-  },
-  {
-   "id": "t028",
-   "type": "text",
-   "x": 270,
-   "y": 1995.5000000000002,
-   "w": 460,
-   "h": 24.9,
-   "text": "Where are we?",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "t029",
-   "type": "text",
-   "x": 270,
-   "y": 2036.4000000000003,
-   "w": 460,
-   "h": 49.9,
-   "text": "“Weavers, weaving at break of day,<br>Why do you weave a garment so gay?”",
-   "anim": {}
-  },
-  {
-   "id": "t030",
-   "type": "text",
-   "x": 270,
-   "y": 2092.3,
-   "w": 460,
-   "h": 19.6,
-   "text": "Sarojini Naidu, <em>Indian Weavers</em>. The presentation opened with it.",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "t031",
-   "type": "text",
-   "x": 270,
-   "y": 2147.6000000000004,
-   "w": 460,
-   "h": 77.5,
-   "text": "There is a major dilemma between the craft and the machines on how to coexist in this world where technology is advancing with every passing day. With the powerlooms taking over, what then happens to the craft of weaving and how relevant is it to today’s society?",
-   "size": "s",
-   "anim": {}
-  },
-  {
-   "id": "p032",
-   "type": "image",
-   "x": 270,
-   "y": 2255.1000000000004,
-   "w": 341,
-   "h": 213,
-   "src": "projects/media/narayanpet-weavers-centre/loom-1.jpg",
-   "fit": "cover",
-   "alt": "A weaver in a white cap working at a handloom",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "p033",
-   "type": "image",
-   "x": 627,
-   "y": 2255.1000000000004,
-   "w": 341,
-   "h": 213,
-   "src": "projects/media/narayanpet-weavers-centre/loom-2.jpg",
-   "fit": "cover",
-   "alt": "A woman weaving at a wooden handloom",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t034",
-   "type": "text",
-   "x": 270,
-   "y": 2504.1000000000004,
-   "w": 460,
-   "h": 77.5,
-   "text": "We believe the only way to move ahead would be to elevate the craft of Handloom and create awareness about its essence and beauty. It’s more than just a commodity. Along with the physical effort, it also takes creativity and human connection to create every product.",
-   "size": "s",
-   "anim": {}
-  },
-  {
-   "id": "t035",
-   "type": "text",
-   "x": 32,
-   "y": 2641.6000000000004,
-   "w": 222,
-   "h": 24.9,
-   "text": "the question",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "t036",
-   "type": "text",
-   "x": 270,
-   "y": 2641.6000000000004,
-   "w": 698,
-   "h": 85.5,
-   "text": "So how do we revive weaving before it becomes extinct?",
-   "size": "l",
-   "weight": 700,
-   "color": "accent",
-   "anim": {}
-  },
-  {
-   "id": "t037",
-   "type": "text",
-   "x": 32,
-   "y": 2927.1000000000004,
-   "w": 222,
-   "h": 24.9,
-   "text": "research",
-   "color": "mute",
-   "nav": "research",
-   "anim": {}
-  },
-  {
-   "id": "t038",
-   "type": "text",
-   "x": 270,
-   "y": 2927.1000000000004,
-   "w": 460,
-   "h": 24.9,
-   "text": "What we heard?",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "t039",
-   "type": "text",
-   "x": 270,
-   "y": 2968.0000000000005,
-   "w": 460,
-   "h": 19.6,
-   "text": "Weavers and townspeople of Narayanpet.",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "p040",
-   "type": "image",
-   "x": 270,
-   "y": 3011.3000000000006,
-   "w": 341,
-   "h": 378,
-   "src": "projects/media/narayanpet-weavers-centre/weaver.jpg",
-   "fit": "cover",
-   "alt": "An elderly man in white seated on a bench in a Narayanpet house",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t041",
-   "type": "text",
-   "x": 627,
-   "y": 3131.3000000000006,
-   "w": 341,
-   "h": 74.8,
-   "text": "“We’re all lost. Our houses and livelihood is designed around the functioning of a loom. We work and live here only.”",
-   "anim": {}
-  },
-  {
-   "id": "t042",
-   "type": "text",
-   "x": 627,
-   "y": 3212.100000000001,
-   "w": 341,
-   "h": 39.2,
-   "text": "Homes in Narayanpet are built around the loom, which is where the architecture starts.",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "t043",
-   "type": "text",
-   "x": 270,
-   "y": 3449.3000000000006,
-   "w": 301,
-   "h": 124.7,
-   "text": "“Since 1980, our importance started declining and the younger generation doesn’t want to continue the traditions anymore. They can earn more by working for just 2 hours in the city.”",
-   "anim": {}
-  },
-  {
-   "id": "t044",
-   "type": "text",
-   "x": 618,
-   "y": 3497.3000000000006,
-   "w": 350,
-   "h": 74.8,
-   "text": "“People are migrating to bigger cities for better job opportunities and pay as they don’t see a future in weaving.”",
-   "align": "right",
-   "anim": {}
-  },
-  {
-   "id": "t045",
-   "type": "text",
-   "x": 270,
-   "y": 3588.0000000000005,
-   "w": 460,
-   "h": 19.6,
-   "text": "Two people, the same story: the young are leaving the loom for the city.",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "t046",
-   "type": "text",
-   "x": 349,
-   "y": 3677.3000000000006,
-   "w": 619,
-   "h": 127.3,
-   "text": "“The situation is very dire and we feel like we’re on the verge of dying almost like on ventilators.”",
-   "size": "l",
-   "align": "right",
-   "anim": {}
-  },
-  {
-   "id": "t047",
-   "type": "text",
-   "x": 349,
-   "y": 3812.600000000001,
-   "w": 619,
-   "h": 19.6,
-   "text": "How the weavers described where the craft stands today.",
-   "size": "s",
-   "color": "mute",
-   "align": "right",
-   "anim": {}
-  },
-  {
-   "id": "t048",
-   "type": "text",
-   "x": 270,
-   "y": 3891.900000000001,
-   "w": 460,
-   "h": 74.8,
-   "text": "“If people start getting paid better, the situation will slowly will start getting better and the weavers will come back to weaving.”",
-   "anim": {}
-  },
-  {
-   "id": "t049",
-   "type": "text",
-   "x": 270,
-   "y": 3972.700000000001,
-   "w": 460,
-   "h": 19.6,
-   "text": "What would bring them back.",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "t050",
-   "type": "text",
-   "x": 270,
-   "y": 4102.000000000001,
-   "w": 460,
-   "h": 24.9,
-   "text": "Understanding the urban texture of Narayanpet",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "t051",
-   "type": "text",
-   "x": 270,
-   "y": 4142.900000000001,
-   "w": 460,
-   "h": 57.9,
-   "text": "Narrow streets, colonnade spaces, courtyard houses, jharokhas, raised plinths, colourful fenestrations and walls, weaving looms in every household, and goldsmith shops.",
-   "size": "s",
-   "anim": {}
-  },
-  {
-   "id": "s052",
-   "type": "slides",
-   "x": 270,
-   "y": 4224.8,
-   "w": 698,
-   "h": 300,
-   "mode": "row",
-   "show": 3,
-   "gap": 16,
-   "fit": "cover",
-   "slides": [
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-01.jpg",
-     "alt": "A narrow street between whitewashed houses"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-02.jpg",
-     "alt": "Red colonnade along a street"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-03.jpg",
-     "alt": "Looking up into a courtyard house"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-04.jpg",
-     "alt": "A carved wooden jharokha"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-05.jpg",
-     "alt": "A raised plinth with red columns"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-06.jpg",
-     "alt": "Blue and violet doors on a pink wall"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-07.jpg",
-     "alt": "A blue doorway with a carved wooden frame"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-08.jpg",
-     "alt": "An orange verandah with a carved wooden column"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-09.jpg",
-     "alt": "A handloom inside a house"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-10.jpg",
-     "alt": "A goldsmith at work"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-11.jpg",
-     "alt": "Men at a shopfront"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-12.jpg",
-     "alt": "A worn wooden door handle"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/texture-13.jpg",
-     "alt": "A carved wooden ceiling"
-    }
-   ],
-   "caption": "From the site visit. Use the arrows or swipe for more; click any picture to enlarge.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t053",
-   "type": "text",
-   "x": 270,
-   "y": 4628.8,
-   "w": 460,
-   "h": 24.9,
-   "text": "Narayanpet motifs",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "p054",
-   "type": "image",
-   "x": 270,
-   "y": 4669.7,
-   "w": 698,
-   "h": 280,
-   "src": "projects/media/narayanpet-weavers-centre/motifs.jpg",
-   "fit": "contain",
-   "alt": "Four Narayanpet sari motifs: Rudraksha, criss-cross pattern, Ruiphool and temple border",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Rudraksha · Criss-cross pattern · Ruiphool · Temple border",
-   "capShow": true
-  },
-  {
-   "id": "t055",
-   "type": "text",
-   "x": 270,
-   "y": 5053.7,
-   "w": 460,
-   "h": 24.9,
-   "text": "Site analysis",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "v056",
-   "type": "video",
-   "x": 270,
-   "y": 5094.599999999999,
-   "w": 698,
-   "h": 381,
-   "src": "projects/media/narayanpet-weavers-centre/site-analysis.mp4",
-   "caption": "Context, sun path, views, prevailing winds, site access, then all of it together.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t057",
-   "type": "text",
-   "x": 32,
-   "y": 5709.599999999999,
-   "w": 222,
-   "h": 24.9,
-   "text": "vision",
-   "color": "mute",
-   "nav": "vision",
-   "anim": {}
-  },
-  {
-   "id": "t058",
-   "type": "text",
-   "x": 270,
-   "y": 5709.599999999999,
-   "w": 460,
-   "h": 24.9,
-   "text": "The Vision",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "g061",
-   "type": "group",
-   "x": 270,
-   "y": 5750.499999999999,
-   "w": 222,
-   "h": 75.9,
-   "children": [
-    {
-     "id": "t059",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "01",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t060",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Showcase the essence and beauty of weaving",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g064",
-   "type": "group",
-   "x": 508,
-   "y": 5750.499999999999,
-   "w": 222,
-   "h": 100.8,
-   "children": [
-    {
-     "id": "t062",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "02",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t063",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 74.8,
-     "text": "Bring focus on the creativity and human effort behind every product",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g067",
-   "type": "group",
-   "x": 746,
-   "y": 5750.499999999999,
-   "w": 222,
-   "h": 100.8,
-   "children": [
-    {
-     "id": "t065",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "03",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t066",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 74.8,
-     "text": "Promote weaving as an art form that adds value to one’s life",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g070",
-   "type": "group",
-   "x": 270,
-   "y": 5879.299999999999,
-   "w": 222,
-   "h": 75.9,
-   "children": [
-    {
-     "id": "t068",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "04",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t069",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Provide opportunities for training and learning",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g073",
-   "type": "group",
-   "x": 508,
-   "y": 5879.299999999999,
-   "w": 222,
-   "h": 100.8,
-   "children": [
-    {
-     "id": "t071",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "05",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t072",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 74.8,
-     "text": "Establish it as a fashionable piece of clothing",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g077",
-   "type": "group",
-   "x": 746,
-   "y": 5879.299999999999,
-   "w": 222,
-   "h": 115.1,
-   "children": [
-    {
-     "id": "t074",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "06",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t075",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Educational study tours for school children",
-     "weight": 700
-    },
-    {
-     "id": "t076",
-     "type": "text",
-     "x": 0,
-     "y": 75.9,
-     "w": 222,
-     "h": 39.2,
-     "text": "that help develop interest in weaving at a younger age",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g080",
-   "type": "group",
-   "x": 270,
-   "y": 6022.4,
-   "w": 222,
-   "h": 75.9,
-   "children": [
-    {
-     "id": "t078",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "07",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t079",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Inspire people to take it up as a hobby",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "t081",
-   "type": "text",
-   "x": 270,
-   "y": 6178.299999999999,
-   "w": 460,
-   "h": 57.9,
-   "text": "This center becomes a precedent for a chain of future centers which forms a network and creates a connected experience creating awareness about the different crafts of Telangana.",
-   "size": "s",
-   "anim": {}
-  },
-  {
-   "id": "p082",
-   "type": "image",
-   "x": 270,
-   "y": 6266.199999999999,
-   "w": 341,
-   "h": 299,
-   "src": "projects/media/narayanpet-weavers-centre/crafts-network.jpg",
-   "fit": "contain",
-   "alt": "Map of Telangana linking Narayanpet handlooms to eight other craft centres",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Narayanpet and the other crafts of Telangana.",
-   "capShow": true
-  },
-  {
-   "id": "p083",
-   "type": "image",
-   "x": 627,
-   "y": 6306.199999999999,
-   "w": 341,
-   "h": 179,
-   "src": "projects/media/narayanpet-weavers-centre/day-trip.jpg",
-   "fit": "cover",
-   "alt": "A mock-up of a travel site listing the centre as the top day trip from Hyderabad",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "tilt": -2,
-   "shadow": true,
-   "caption": "We aspire it to become the most popular day trip.",
-   "capShow": true
-  },
-  {
-   "id": "t084",
-   "type": "text",
-   "x": 32,
-   "y": 6799.199999999999,
-   "w": 222,
-   "h": 24.9,
-   "text": "design",
-   "color": "mute",
-   "nav": "design",
-   "anim": {}
-  },
-  {
-   "id": "t085",
-   "type": "text",
-   "x": 270,
-   "y": 6799.199999999999,
-   "w": 460,
-   "h": 24.9,
-   "text": "Design Attributes",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "g089",
-   "type": "group",
-   "x": 270,
-   "y": 6840.0999999999985,
-   "w": 222,
-   "h": 90.1,
-   "children": [
-    {
-     "id": "t086",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "01",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t087",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Urban community space",
-     "weight": 700
-    },
-    {
-     "id": "t088",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 39.2,
-     "text": "that brings together people and also acts as a tourist destination",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g093",
-   "type": "group",
-   "x": 508,
-   "y": 6840.0999999999985,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t090",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "02",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t091",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Focusing the spotlight",
-     "weight": 700
-    },
-    {
-     "id": "t092",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "on the various crafts of Telangana",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g096",
-   "type": "group",
-   "x": 746,
-   "y": 6840.0999999999985,
-   "w": 222,
-   "h": 50.9,
-   "children": [
-    {
-     "id": "t094",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "03",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t095",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Inclusive for all",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g100",
-   "type": "group",
-   "x": 270,
-   "y": 6958.199999999999,
-   "w": 222,
-   "h": 90.1,
-   "children": [
-    {
-     "id": "t097",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "04",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t098",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Climatology",
-     "weight": 700
-    },
-    {
-     "id": "t099",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 39.2,
-     "text": "Using waterbodies for evaporative cooling",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g104",
-   "type": "group",
-   "x": 508,
-   "y": 6958.199999999999,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t101",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "05",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t102",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Narayanpet motifs",
-     "weight": 700
-    },
-    {
-     "id": "t103",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "as pieces of art",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g107",
-   "type": "group",
-   "x": 746,
-   "y": 6958.199999999999,
-   "w": 222,
-   "h": 75.9,
-   "children": [
-    {
-     "id": "t105",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "06",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t106",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Replicating the urban texture of Narayanpet",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g111",
-   "type": "group",
-   "x": 270,
-   "y": 7076.299999999999,
-   "w": 222,
-   "h": 115.1,
-   "children": [
-    {
-     "id": "t108",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "07",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t109",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Simple and functional architectural style",
-     "weight": 700
-    },
-    {
-     "id": "t110",
-     "type": "text",
-     "x": 0,
-     "y": 75.9,
-     "w": 222,
-     "h": 39.2,
-     "text": "allowing for larger than life display of crafts",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g114",
-   "type": "group",
-   "x": 508,
-   "y": 7076.299999999999,
-   "w": 222,
-   "h": 50.9,
-   "children": [
-    {
-     "id": "t112",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "08",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t113",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Hierarchy of green spaces",
-     "weight": 700
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g118",
-   "type": "group",
-   "x": 746,
-   "y": 7076.299999999999,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t115",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "09",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t116",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Locally available materials",
-     "weight": 700
-    },
-    {
-     "id": "t117",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "and construction techniques",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g122",
-   "type": "group",
-   "x": 270,
-   "y": 7219.4,
-   "w": 222,
-   "h": 95.5,
-   "children": [
-    {
-     "id": "t119",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "10",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t120",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Shaded transitionary spaces",
-     "weight": 700
-    },
-    {
-     "id": "t121",
-     "type": "text",
-     "x": 0,
-     "y": 75.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "with Loggia",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "t123",
-   "type": "text",
-   "x": 270,
-   "y": 7424.9,
-   "w": 460,
-   "h": 24.9,
-   "text": "Diagrams",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "v124",
-   "type": "video",
-   "x": 270,
-   "y": 7465.799999999999,
-   "w": 698,
-   "h": 441,
-   "src": "projects/media/narayanpet-weavers-centre/design-diagrams.mp4",
-   "caption": "The programme, main axis, central spine, street network, massing, public to private, circulation, climate, solar panels, loggias, the water tank, retail, the plaza, movement, nodes, vehicles and phasing.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t125",
-   "type": "text",
-   "x": 270,
-   "y": 8070.799999999999,
-   "w": 460,
-   "h": 49.9,
-   "text": "Courtyard typology inspired by traditional courtyard houses",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "s126",
-   "type": "slides",
-   "x": 270,
-   "y": 8136.699999999999,
-   "w": 698,
-   "h": 309,
-   "mode": "click",
-   "trans": "fade",
-   "counter": true,
-   "every": 3,
-   "fit": "contain",
-   "slides": [
-    {
-     "src": "projects/media/narayanpet-weavers-centre/section-1.jpg",
-     "alt": "Section through a courtyard building"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/section-2.jpg",
-     "alt": "Ground floor uses, coloured"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/section-3.jpg",
-     "alt": "First floor uses, coloured"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/section-4.jpg",
-     "alt": "Air circulation through the courtyard"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/section-5.jpg",
-     "alt": "Shading from the loggia"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/section-6.jpg",
-     "alt": "Light penetration into the courtyard"
-    }
-   ],
-   "caption": "Click to step through: section, ground floor, first floor, air, shade and light.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t127",
-   "type": "text",
-   "x": 270,
-   "y": 8589.699999999999,
-   "w": 460,
-   "h": 24.9,
-   "text": "Floor plans",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "s128",
-   "type": "slides",
-   "x": 270,
-   "y": 8630.599999999999,
-   "w": 698,
-   "h": 396,
-   "mode": "row",
-   "show": 1,
-   "gap": 16,
-   "fit": "contain",
-   "slides": [
-    {
-     "src": "projects/media/narayanpet-weavers-centre/plan-ground.jpg",
-     "alt": "Ground floor plan of the eight buildings on the triangular site, with the area statement"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/plan-first.jpg",
-     "alt": "First floor plan with the area statement"
-    }
-   ],
-   "caption": "Ground floor, then first floor. Click to enlarge.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "g132",
-   "type": "group",
-   "x": 270,
-   "y": 9100.599999999999,
-   "w": 222,
-   "h": 108.8,
-   "children": [
-    {
-     "id": "t129",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "01",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t130",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Shop + B to B Center",
-     "weight": 700
-    },
-    {
-     "id": "t131",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 57.9,
-     "text": "Storage, post weaving facilities; design studio and classrooms above. G+1, 710 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g136",
-   "type": "group",
-   "x": 508,
-   "y": 9100.599999999999,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t133",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "02",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t134",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Information Center",
-     "weight": 700
-    },
-    {
-     "id": "t135",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "Shops and admin. 208 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g140",
-   "type": "group",
-   "x": 746,
-   "y": 9100.599999999999,
-   "w": 222,
-   "h": 90.1,
-   "children": [
-    {
-     "id": "t137",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "03",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t138",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Foodcourt + Kitchen",
-     "weight": 700
-    },
-    {
-     "id": "t139",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 39.2,
-     "text": "Shops; weaving hub (40 looms) above. G+1, 625 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g144",
-   "type": "group",
-   "x": 270,
-   "y": 9237.399999999998,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t141",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "04",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t142",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Shops x 6",
-     "weight": 700
-    },
-    {
-     "id": "t143",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "165 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g148",
-   "type": "group",
-   "x": 508,
-   "y": 9237.399999999998,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t145",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "05",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t146",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Craft Museum",
-     "weight": 700
-    },
-    {
-     "id": "t147",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "Special exhibit above. G+1, 570 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g152",
-   "type": "group",
-   "x": 746,
-   "y": 9237.399999999998,
-   "w": 222,
-   "h": 90.1,
-   "children": [
-    {
-     "id": "t149",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "06",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t150",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Weaving Hub (60 Looms)",
-     "weight": 700
-    },
-    {
-     "id": "t151",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 39.2,
-     "text": "Over pre-weaving facilities and shops. G+1, 989 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g156",
-   "type": "group",
-   "x": 270,
-   "y": 9355.499999999998,
-   "w": 222,
-   "h": 95.5,
-   "children": [
-    {
-     "id": "t153",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "07",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t154",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 49.9,
-     "text": "Practical Weaving Room (20 Looms)",
-     "weight": 700
-    },
-    {
-     "id": "t155",
-     "type": "text",
-     "x": 0,
-     "y": 75.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "Guest house above. G+1, 391 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "g160",
-   "type": "group",
-   "x": 508,
-   "y": 9355.499999999998,
-   "w": 222,
-   "h": 70.5,
-   "children": [
-    {
-     "id": "t157",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.6,
-     "text": "08",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "t158",
-     "type": "text",
-     "x": 0,
-     "y": 22,
-     "w": 222,
-     "h": 24.9,
-     "text": "Natural Dyeing Centre",
-     "weight": 700
-    },
-    {
-     "id": "t159",
-     "type": "text",
-     "x": 0,
-     "y": 50.9,
-     "w": 222,
-     "h": 19.6,
-     "text": "242 sqm",
-     "size": "s"
-    }
-   ],
-   "anim": {}
-  },
-  {
-   "id": "t161",
-   "type": "text",
-   "x": 270,
-   "y": 9474.999999999998,
-   "w": 460,
-   "h": 19.6,
-   "text": "Numbers are the buildings on the plan. Total area 3,900 sqm.",
-   "size": "s",
-   "color": "mute",
-   "anim": {}
-  },
-  {
-   "id": "t162",
-   "type": "text",
-   "x": 32,
-   "y": 9694.299999999997,
-   "w": 222,
-   "h": 24.9,
-   "text": "renders",
-   "color": "mute",
-   "nav": "renders",
-   "anim": {}
-  },
-  {
-   "id": "t163",
-   "type": "text",
-   "x": 270,
-   "y": 9694.299999999997,
-   "w": 460,
-   "h": 24.9,
-   "text": "Visualization",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "p164",
-   "type": "image",
-   "x": 0,
-   "y": 9735.199999999997,
-   "w": 1000,
-   "h": 536,
-   "bleed": true,
-   "src": "projects/media/narayanpet-weavers-centre/render-09.jpg",
-   "fit": "cover",
-   "alt": "Render: the centre seen from the road, with the water tank marking the entrance",
-   "anim": {
-    "scroll": {
-     "on": true,
-     "keys": [
-      {
-       "at": 100,
-       "s": {
-        "scale": 1.08
-       },
-       "ease": "linear"
-      },
-      {
-       "at": 30,
-       "s": {
-        "scale": 1
-       },
-       "ease": "linear"
+  "v": 2,
+  "intro": "intro",
+  "secGap": 200,
+  "guides": {
+    "x": [],
+    "y": []
+  },
+  "items": [
+    {
+      "id": "t001",
+      "type": "text",
+      "x": 32,
+      "y": 196,
+      "w": 698,
+      "h": 41.5,
+      "text": "The Weave",
+      "size": "l",
+      "weight": 700,
+      "color": "accent",
+      "anim": {}
+    },
+    {
+      "id": "t002",
+      "type": "text",
+      "x": 32,
+      "y": 266,
+      "w": 460,
+      "h": 99.4,
+      "text": "Narayanpet Weaver’s Training Facility. The architecture, with its simple style and humble materials, acts as a canvas to showcase and celebrate the craft of weaving, along with other crafts of Telangana",
+      "anim": {}
+    },
+    {
+      "id": "t003",
+      "type": "text",
+      "x": 32,
+      "y": 385.7,
+      "w": 698,
+      "h": 19.3,
+      "text": "Architectural Design · Ethnographic Research",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "p004",
+      "type": "image",
+      "x": 32,
+      "y": 449,
+      "w": 936,
+      "h": 526,
+      "src": "projects/media/narayanpet-weavers-centre/render-05.jpg",
+      "fit": "cover",
+      "alt": "Render: school children walking through a shaded street of the centre, past tall printed cloth panels",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
       }
-     ]
+    },
+    {
+      "id": "g007",
+      "type": "group",
+      "x": 32,
+      "y": 1033,
+      "w": 460,
+      "h": 77.9,
+      "children": [
+        {
+          "id": "t005",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 460,
+          "h": 19.3,
+          "text": "my role",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t006",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 460,
+          "h": 77.9,
+          "text": "Started as an intern on the project and later became its project architect. Site visit, ethnographic research, surveys, presentations, diagrams, renders and plans, and coordination government officials, consultants and engineers.",
+          "size": "s",
+          "anim": {}
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g010",
+      "type": "group",
+      "x": 508,
+      "y": 1033,
+      "w": 222,
+      "h": 39.6,
+      "children": [
+        {
+          "id": "t008",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "team",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t009",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "Studio Chintala",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g013",
+      "type": "group",
+      "x": 746,
+      "y": 1033,
+      "w": 222,
+      "h": 77.9,
+      "children": [
+        {
+          "id": "t011",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "time",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t012",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 57.9,
+          "text": "Concept design in about a month, 2021. <br>Phase 1 now nearing completion.",
+          "size": "s",
+          "anim": {}
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g016",
+      "type": "group",
+      "x": 508,
+      "y": 1146.9,
+      "w": 222,
+      "h": 59.2,
+      "children": [
+        {
+          "id": "t014",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "client",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t015",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 38.6,
+          "text": "Government of Telangana, <br>TSCO Handlooms",
+          "size": "s",
+          "anim": {}
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g019",
+      "type": "group",
+      "x": 746,
+      "y": 1146.9,
+      "w": 222,
+      "h": 39.6,
+      "children": [
+        {
+          "id": "t017",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "where",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t018",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "Narayanpet, Telangana",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "t020",
+      "type": "text",
+      "x": 32,
+      "y": 1406.1000000000001,
+      "w": 222,
+      "h": 25.2,
+      "text": "overview",
+      "color": "mute",
+      "nav": "overview",
+      "anim": {}
+    },
+    {
+      "id": "t021",
+      "type": "text",
+      "x": 270,
+      "y": 1406.1000000000001,
+      "w": 460,
+      "h": 25.2,
+      "text": "A place inclusive for all",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "t022",
+      "type": "text",
+      "x": 270,
+      "y": 1447.0000000000002,
+      "w": 460,
+      "h": 77.9,
+      "text": "While the Narayanpet weaving style would be the main focus, the center will also display and celebrate the various other crafts of Telangana. It will also act as a community space where people from all walks of life come together to celebrate life, and a learning hub for our younger generation.",
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "p023",
+      "type": "image",
+      "x": 270,
+      "y": 1554.5000000000002,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/narayanpet-weavers-centre/render-01.jpg",
+      "fit": "cover",
+      "alt": "Render: children among printed cloth panels in the central street",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "p024",
+      "type": "image",
+      "x": 508,
+      "y": 1554.5000000000002,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/narayanpet-weavers-centre/render-04.jpg",
+      "fit": "cover",
+      "alt": "Render: a colonnaded walk with families and schoolchildren",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "p025",
+      "type": "image",
+      "x": 746,
+      "y": 1554.5000000000002,
+      "w": 222,
+      "h": 166,
+      "src": "projects/media/narayanpet-weavers-centre/render-07.jpg",
+      "fit": "cover",
+      "alt": "Render: the courtyard plaza with a reflecting pool",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "u026",
+      "type": "button",
+      "look": "line",
+      "text": "Read the full presentation (PDF)",
+      "x": 270,
+      "y": 1760.5000000000002,
+      "w": 250,
+      "h": 35,
+      "link": {
+        "href": "projects/media/narayanpet-weavers-centre/the-weave-presentation.pdf",
+        "newTab": true
+      },
+      "anim": {},
+      "size": "s"
+    },
+    {
+      "id": "t027",
+      "type": "text",
+      "x": 32,
+      "y": 1995.5000000000002,
+      "w": 222,
+      "h": 25.2,
+      "text": "context",
+      "color": "mute",
+      "nav": "context",
+      "anim": {}
+    },
+    {
+      "id": "t028",
+      "type": "text",
+      "x": 270,
+      "y": 1995.5000000000002,
+      "w": 460,
+      "h": 25.2,
+      "text": "Where are we?",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "t029",
+      "type": "text",
+      "x": 270,
+      "y": 2036.4000000000003,
+      "w": 460,
+      "h": 49.7,
+      "text": "“Weavers, weaving at break of day,<br>Why do you weave a garment so gay?”",
+      "anim": {}
+    },
+    {
+      "id": "t030",
+      "type": "text",
+      "x": 270,
+      "y": 2092.3,
+      "w": 460,
+      "h": 19.3,
+      "text": "Sarojini Naidu, <em>Indian Weavers</em>. The presentation opened with it.",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "t031",
+      "type": "text",
+      "x": 270,
+      "y": 2147.6000000000004,
+      "w": 460,
+      "h": 77.9,
+      "text": "There is a major dilemma between the craft and the machines on how to coexist in this world where technology is advancing with every passing day. With the powerlooms taking over, what then happens to the craft of weaving and how relevant is it to today’s society?",
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "p032",
+      "type": "image",
+      "x": 270,
+      "y": 2255.1000000000004,
+      "w": 341,
+      "h": 213,
+      "src": "projects/media/narayanpet-weavers-centre/loom-1.jpg",
+      "fit": "cover",
+      "alt": "A weaver in a white cap working at a handloom",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "p033",
+      "type": "image",
+      "x": 627,
+      "y": 2255.1000000000004,
+      "w": 341,
+      "h": 213,
+      "src": "projects/media/narayanpet-weavers-centre/loom-2.jpg",
+      "fit": "cover",
+      "alt": "A woman weaving at a wooden handloom",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t034",
+      "type": "text",
+      "x": 270,
+      "y": 2504.1000000000004,
+      "w": 460,
+      "h": 97.2,
+      "text": "Through brainstorming, interviews, and researched, we concluded that  the only way to move ahead would be to elevate the craft of Handloom and create awareness about its essence and beauty. It’s more than just a commodity. Along with the physical effort, it also takes creativity and human connection to create every product.",
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "t035",
+      "type": "text",
+      "x": 32,
+      "y": 2641.6000000000004,
+      "w": 222,
+      "h": 25.2,
+      "text": "the question",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "t036",
+      "type": "text",
+      "x": 270,
+      "y": 2641.6000000000004,
+      "w": 698,
+      "h": 124.6,
+      "text": "How might we elevate the craft of Handloom and create awareness about its essence and beauty? ",
+      "size": "l",
+      "weight": 700,
+      "color": "accent",
+      "anim": {}
+    },
+    {
+      "id": "t037",
+      "type": "text",
+      "x": 32,
+      "y": 2927.1000000000004,
+      "w": 222,
+      "h": 25.2,
+      "text": "research",
+      "color": "mute",
+      "nav": "research",
+      "anim": {}
+    },
+    {
+      "id": "t038",
+      "type": "text",
+      "x": 270,
+      "y": 2927.1000000000004,
+      "w": 460,
+      "h": 25.2,
+      "text": "What we heard?",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "t039",
+      "type": "text",
+      "x": 270,
+      "y": 2968.0000000000005,
+      "w": 460,
+      "h": 19.3,
+      "text": "Weavers and townspeople of Narayanpet.",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "p040",
+      "type": "image",
+      "x": 270,
+      "y": 3011.3000000000006,
+      "w": 341,
+      "h": 378,
+      "src": "projects/media/narayanpet-weavers-centre/weaver.jpg",
+      "fit": "cover",
+      "alt": "An elderly man in white seated on a bench in a Narayanpet house",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t041",
+      "type": "text",
+      "x": 627,
+      "y": 3131.3000000000006,
+      "w": 341,
+      "h": 74.9,
+      "text": "“We’re all lost. Our houses and livelihood is designed around the functioning of a loom. We work and live here.”",
+      "anim": {}
+    },
+    {
+      "id": "t042",
+      "type": "text",
+      "x": 627,
+      "y": 3212.100000000001,
+      "w": 341,
+      "h": 38.5,
+      "text": "Homes in Narayanpet are built around the loom, which is where the architecture starts.",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "t043",
+      "type": "text",
+      "x": 270,
+      "y": 3449.3000000000006,
+      "w": 301,
+      "h": 124.6,
+      "text": "“Since 1980, our importance started declining and the younger generation doesn’t want to continue the traditions anymore. They can earn more by working for just 2 hours in the city.”",
+      "anim": {}
+    },
+    {
+      "id": "t044",
+      "type": "text",
+      "x": 618,
+      "y": 3497.3000000000006,
+      "w": 350,
+      "h": 74.9,
+      "text": "“People are migrating to bigger cities for better job opportunities and pay as they don’t see a future in weaving.”",
+      "align": "right",
+      "anim": {}
+    },
+    {
+      "id": "t045",
+      "type": "text",
+      "x": 270,
+      "y": 3588.0000000000005,
+      "w": 460,
+      "h": 19.3,
+      "text": "Two people, the same story: the young are leaving the loom for the city.",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "t046",
+      "type": "text",
+      "x": 349,
+      "y": 3677.3000000000006,
+      "w": 619,
+      "h": 124.7,
+      "text": "“The situation is very dire and we feel like we’re on the verge of dying, almost like on ventilators.”",
+      "size": "l",
+      "align": "right",
+      "anim": {}
+    },
+    {
+      "id": "t047",
+      "type": "text",
+      "x": 349,
+      "y": 3812.600000000001,
+      "w": 619,
+      "h": 19.3,
+      "text": "How the weavers described where the craft stands today.",
+      "size": "s",
+      "color": "mute",
+      "align": "right",
+      "anim": {}
+    },
+    {
+      "id": "t048",
+      "type": "text",
+      "x": 270,
+      "y": 3891.900000000001,
+      "w": 460,
+      "h": 74.9,
+      "text": "“If people start getting paid better, the situation will slowly will start getting better and the weavers will come back to weaving.”",
+      "anim": {}
+    },
+    {
+      "id": "t049",
+      "type": "text",
+      "x": 270,
+      "y": 3972.700000000001,
+      "w": 460,
+      "h": 19.3,
+      "text": "What would bring them back.",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "t050",
+      "type": "text",
+      "x": 270,
+      "y": 4102.000000000001,
+      "w": 460,
+      "h": 25.2,
+      "text": "Understanding the urban texture of Narayanpet",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "t051",
+      "type": "text",
+      "x": 270,
+      "y": 4142.900000000001,
+      "w": 460,
+      "h": 57.9,
+      "text": "Narrow streets, colonnade spaces, courtyard houses, jharokhas, raised plinths, colourful fenestrations and walls, weaving looms in every household, and goldsmith shops.",
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "s052",
+      "type": "slides",
+      "x": 270,
+      "y": 4224.8,
+      "w": 698,
+      "h": 300,
+      "mode": "row",
+      "show": 3,
+      "gap": 16,
+      "fit": "cover",
+      "slides": [
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-01.jpg",
+          "alt": "A narrow street between whitewashed houses"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-02.jpg",
+          "alt": "Red colonnade along a street"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-03.jpg",
+          "alt": "Looking up into a courtyard house"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-04.jpg",
+          "alt": "A carved wooden jharokha"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-05.jpg",
+          "alt": "A raised plinth with red columns"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-06.jpg",
+          "alt": "Blue and violet doors on a pink wall"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-07.jpg",
+          "alt": "A blue doorway with a carved wooden frame"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-08.jpg",
+          "alt": "An orange verandah with a carved wooden column"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-09.jpg",
+          "alt": "A handloom inside a house"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-10.jpg",
+          "alt": "A goldsmith at work"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-11.jpg",
+          "alt": "Men at a shopfront"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-12.jpg",
+          "alt": "A worn wooden door handle"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/texture-13.jpg",
+          "alt": "A carved wooden ceiling"
+        }
+      ],
+      "caption": "From the site visit. Use the arrows or swipe for more; click any picture to enlarge.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t053",
+      "type": "text",
+      "x": 270,
+      "y": 4628.8,
+      "w": 460,
+      "h": 25.2,
+      "text": "Narayanpet motifs",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "p054",
+      "type": "image",
+      "x": 270,
+      "y": 4669.7,
+      "w": 698,
+      "h": 280,
+      "src": "projects/media/narayanpet-weavers-centre/motifs.jpg",
+      "fit": "contain",
+      "alt": "Four Narayanpet sari motifs: Rudraksha, criss-cross pattern, Ruiphool and temple border",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Rudraksha · Criss-cross pattern · Ruiphool · Temple border",
+      "capShow": true
+    },
+    {
+      "id": "t055",
+      "type": "text",
+      "x": 270,
+      "y": 5053.7,
+      "w": 460,
+      "h": 25.2,
+      "text": "Site analysis",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "v056",
+      "type": "video",
+      "x": 270,
+      "y": 5094.599999999999,
+      "w": 698,
+      "h": 381,
+      "src": "projects/media/narayanpet-weavers-centre/site-analysis.mp4",
+      "caption": "Context, sun path, views, prevailing winds, site access, then all of it together.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t057",
+      "type": "text",
+      "x": 32,
+      "y": 5709.599999999999,
+      "w": 222,
+      "h": 25.2,
+      "text": "vision",
+      "color": "mute",
+      "nav": "vision",
+      "anim": {}
+    },
+    {
+      "id": "t058",
+      "type": "text",
+      "x": 270,
+      "y": 5709.599999999999,
+      "w": 460,
+      "h": 25.2,
+      "text": "The Vision",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "g061",
+      "type": "group",
+      "x": 270,
+      "y": 5750.499999999999,
+      "w": 222,
+      "h": 75.9,
+      "children": [
+        {
+          "id": "t059",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t060",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Showcase the essence and beauty of weaving",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g064",
+      "type": "group",
+      "x": 508,
+      "y": 5750.499999999999,
+      "w": 222,
+      "h": 100.8,
+      "children": [
+        {
+          "id": "t062",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t063",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 75,
+          "text": "Bring focus on the creativity and human effort behind every product",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g067",
+      "type": "group",
+      "x": 746,
+      "y": 5750.499999999999,
+      "w": 222,
+      "h": 100.8,
+      "children": [
+        {
+          "id": "t065",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t066",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 75,
+          "text": "Promote weaving as an art form that adds value to one’s life",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g070",
+      "type": "group",
+      "x": 270,
+      "y": 5879.299999999999,
+      "w": 222,
+      "h": 75.9,
+      "children": [
+        {
+          "id": "t068",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "04",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t069",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Provide opportunities for training and learning",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g073",
+      "type": "group",
+      "x": 508,
+      "y": 5879.299999999999,
+      "w": 222,
+      "h": 100.8,
+      "children": [
+        {
+          "id": "t071",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "05",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t072",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 75,
+          "text": "Establish it as a fashionable piece of clothing",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g077",
+      "type": "group",
+      "x": 746,
+      "y": 5879.299999999999,
+      "w": 222,
+      "h": 115.1,
+      "children": [
+        {
+          "id": "t074",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "06",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t075",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Educational study tours for school children",
+          "weight": 700
+        },
+        {
+          "id": "t076",
+          "type": "text",
+          "x": 0,
+          "y": 75.9,
+          "w": 222,
+          "h": 38.6,
+          "text": "that help develop interest in weaving at a younger age",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g080",
+      "type": "group",
+      "x": 270,
+      "y": 6022.4,
+      "w": 222,
+      "h": 75.9,
+      "children": [
+        {
+          "id": "t078",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "07",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t079",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Inspire people to take it up as a hobby",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "t081",
+      "type": "text",
+      "x": 270,
+      "y": 6178.299999999999,
+      "w": 460,
+      "h": 57.9,
+      "text": "This center becomes a precedent for a chain of future centers which forms a network and creates a connected experience creating awareness about the different crafts of Telangana.",
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "p082",
+      "type": "image",
+      "x": 270,
+      "y": 6266.199999999999,
+      "w": 341,
+      "h": 299,
+      "src": "projects/media/narayanpet-weavers-centre/crafts-network.jpg",
+      "fit": "contain",
+      "alt": "Map of Telangana linking Narayanpet handlooms to eight other craft centres",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Narayanpet and the other crafts of Telangana.",
+      "capShow": true
+    },
+    {
+      "id": "p083",
+      "type": "image",
+      "x": 627,
+      "y": 6306.199999999999,
+      "w": 341,
+      "h": 179,
+      "src": "projects/media/narayanpet-weavers-centre/day-trip.jpg",
+      "fit": "cover",
+      "alt": "A mock-up of a travel site listing the centre as the top day trip from Hyderabad",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "tilt": -2,
+      "shadow": true,
+      "caption": "Aspiration for it to become the most popular day trip.",
+      "capShow": true
+    },
+    {
+      "id": "t084",
+      "type": "text",
+      "x": 32,
+      "y": 6799.199999999999,
+      "w": 222,
+      "h": 25.2,
+      "text": "design",
+      "color": "mute",
+      "nav": "design",
+      "anim": {}
+    },
+    {
+      "id": "t085",
+      "type": "text",
+      "x": 270,
+      "y": 6799.199999999999,
+      "w": 460,
+      "h": 25.2,
+      "text": "Design Attributes",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "g089",
+      "type": "group",
+      "x": 270,
+      "y": 6840.0999999999985,
+      "w": 222,
+      "h": 90.1,
+      "children": [
+        {
+          "id": "t086",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t087",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Urban community space",
+          "weight": 700
+        },
+        {
+          "id": "t088",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 38.6,
+          "text": "that brings together people and also acts as a tourist destination",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g093",
+      "type": "group",
+      "x": 508,
+      "y": 6840.0999999999985,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t090",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t091",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Focusing the spotlight",
+          "weight": 700
+        },
+        {
+          "id": "t092",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "on the various crafts of Telangana",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g096",
+      "type": "group",
+      "x": 746,
+      "y": 6840.0999999999985,
+      "w": 222,
+      "h": 50.9,
+      "children": [
+        {
+          "id": "t094",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t095",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Inclusive for all",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g100",
+      "type": "group",
+      "x": 270,
+      "y": 6958.199999999999,
+      "w": 222,
+      "h": 90.1,
+      "children": [
+        {
+          "id": "t097",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "04",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t098",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Climatology",
+          "weight": 700
+        },
+        {
+          "id": "t099",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 38.6,
+          "text": "Using waterbodies for evaporative cooling",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g104",
+      "type": "group",
+      "x": 508,
+      "y": 6958.199999999999,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t101",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "05",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t102",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Narayanpet motifs",
+          "weight": 700
+        },
+        {
+          "id": "t103",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "as pieces of art",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g107",
+      "type": "group",
+      "x": 746,
+      "y": 6958.199999999999,
+      "w": 222,
+      "h": 75.9,
+      "children": [
+        {
+          "id": "t105",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "06",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t106",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Replicating the urban texture of Narayanpet",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g111",
+      "type": "group",
+      "x": 270,
+      "y": 7076.299999999999,
+      "w": 222,
+      "h": 115.1,
+      "children": [
+        {
+          "id": "t108",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "07",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t109",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Simple and functional architectural style",
+          "weight": 700
+        },
+        {
+          "id": "t110",
+          "type": "text",
+          "x": 0,
+          "y": 75.9,
+          "w": 222,
+          "h": 38.6,
+          "text": "allowing for larger than life display of crafts",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g114",
+      "type": "group",
+      "x": 508,
+      "y": 7076.299999999999,
+      "w": 222,
+      "h": 50.9,
+      "children": [
+        {
+          "id": "t112",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "08",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t113",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Hierarchy of green spaces",
+          "weight": 700
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g118",
+      "type": "group",
+      "x": 746,
+      "y": 7076.299999999999,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t115",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "09",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t116",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Locally available materials",
+          "weight": 700
+        },
+        {
+          "id": "t117",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "and construction techniques",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g122",
+      "type": "group",
+      "x": 270,
+      "y": 7219.4,
+      "w": 222,
+      "h": 95.5,
+      "children": [
+        {
+          "id": "t119",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "10",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t120",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Shaded transitionary spaces",
+          "weight": 700
+        },
+        {
+          "id": "t121",
+          "type": "text",
+          "x": 0,
+          "y": 75.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "with Loggia",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "t123",
+      "type": "text",
+      "x": 270,
+      "y": 7424.9,
+      "w": 460,
+      "h": 25.2,
+      "text": "Diagrams",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "v124",
+      "type": "video",
+      "x": 270,
+      "y": 7465.799999999999,
+      "w": 698,
+      "h": 441,
+      "src": "projects/media/narayanpet-weavers-centre/design-diagrams.mp4",
+      "caption": "The programme, main axis, central spine, street network, massing, public to private, circulation, climate, solar panels, loggias, the water tank, retail, the plaza, movement, nodes, vehicles and phasing.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t125",
+      "type": "text",
+      "x": 270,
+      "y": 8070.799999999999,
+      "w": 460,
+      "h": 49.7,
+      "text": "Courtyard typology inspired by traditional courtyard houses",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "s126",
+      "type": "slides",
+      "x": 270,
+      "y": 8136.699999999999,
+      "w": 698,
+      "h": 309,
+      "mode": "click",
+      "trans": "fade",
+      "counter": true,
+      "every": 3,
+      "fit": "contain",
+      "slides": [
+        {
+          "src": "projects/media/narayanpet-weavers-centre/section-1.jpg",
+          "alt": "Section through a courtyard building"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/section-2.jpg",
+          "alt": "Ground floor uses, coloured"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/section-3.jpg",
+          "alt": "First floor uses, coloured"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/section-4.jpg",
+          "alt": "Air circulation through the courtyard"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/section-5.jpg",
+          "alt": "Shading from the loggia"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/section-6.jpg",
+          "alt": "Light penetration into the courtyard"
+        }
+      ],
+      "caption": "Click to step through: section, ground floor, first floor, air, shade and light.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t127",
+      "type": "text",
+      "x": 270,
+      "y": 8589.699999999999,
+      "w": 460,
+      "h": 25.2,
+      "text": "Floor plans",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "s128",
+      "type": "slides",
+      "x": 270,
+      "y": 8630.599999999999,
+      "w": 698,
+      "h": 396,
+      "mode": "row",
+      "show": 1,
+      "gap": 16,
+      "fit": "contain",
+      "slides": [
+        {
+          "src": "projects/media/narayanpet-weavers-centre/plan-ground.jpg",
+          "alt": "Ground floor plan of the eight buildings on the triangular site, with the area statement"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/plan-first.jpg",
+          "alt": "First floor plan with the area statement"
+        }
+      ],
+      "caption": "Ground floor, then first floor. Click to enlarge.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "g132",
+      "type": "group",
+      "x": 270,
+      "y": 9100.599999999999,
+      "w": 222,
+      "h": 108.8,
+      "children": [
+        {
+          "id": "t129",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t130",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Shop + B to B Center",
+          "weight": 700
+        },
+        {
+          "id": "t131",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 57.9,
+          "text": "Storage, post weaving facilities; design studio and classrooms above. G+1, 710 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g136",
+      "type": "group",
+      "x": 508,
+      "y": 9100.599999999999,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t133",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t134",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Information Center",
+          "weight": 700
+        },
+        {
+          "id": "t135",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "Shops and admin. 208 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g140",
+      "type": "group",
+      "x": 746,
+      "y": 9100.599999999999,
+      "w": 222,
+      "h": 90.1,
+      "children": [
+        {
+          "id": "t137",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t138",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Foodcourt + Kitchen",
+          "weight": 700
+        },
+        {
+          "id": "t139",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 38.6,
+          "text": "Shops; weaving hub (40 looms) above. G+1, 625 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g144",
+      "type": "group",
+      "x": 270,
+      "y": 9237.399999999998,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t141",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "04",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t142",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Shops x 6",
+          "weight": 700
+        },
+        {
+          "id": "t143",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "165 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g148",
+      "type": "group",
+      "x": 508,
+      "y": 9237.399999999998,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t145",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "05",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t146",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Craft Museum",
+          "weight": 700
+        },
+        {
+          "id": "t147",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "Special exhibit above. G+1, 570 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g152",
+      "type": "group",
+      "x": 746,
+      "y": 9237.399999999998,
+      "w": 222,
+      "h": 90.1,
+      "children": [
+        {
+          "id": "t149",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "06",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t150",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Weaving Hub (60 Looms)",
+          "weight": 700
+        },
+        {
+          "id": "t151",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 38.6,
+          "text": "Over pre-weaving facilities and shops. G+1, 989 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g156",
+      "type": "group",
+      "x": 270,
+      "y": 9355.499999999998,
+      "w": 222,
+      "h": 95.5,
+      "children": [
+        {
+          "id": "t153",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "07",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t154",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 49.7,
+          "text": "Practical Weaving Room (20 Looms)",
+          "weight": 700
+        },
+        {
+          "id": "t155",
+          "type": "text",
+          "x": 0,
+          "y": 75.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "Guest house above. G+1, 391 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "g160",
+      "type": "group",
+      "x": 508,
+      "y": 9355.499999999998,
+      "w": 222,
+      "h": 70.5,
+      "children": [
+        {
+          "id": "t157",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "08",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "t158",
+          "type": "text",
+          "x": 0,
+          "y": 22,
+          "w": 222,
+          "h": 25.2,
+          "text": "Natural Dyeing Centre",
+          "weight": 700
+        },
+        {
+          "id": "t159",
+          "type": "text",
+          "x": 0,
+          "y": 50.9,
+          "w": 222,
+          "h": 19.3,
+          "text": "242 sqm",
+          "size": "s"
+        }
+      ],
+      "anim": {}
+    },
+    {
+      "id": "t161",
+      "type": "text",
+      "x": 270,
+      "y": 9474.999999999998,
+      "w": 460,
+      "h": 19.3,
+      "text": "Numbers are the buildings on the plan. Total area 3,900 sqm.",
+      "size": "s",
+      "color": "mute",
+      "anim": {}
+    },
+    {
+      "id": "t162",
+      "type": "text",
+      "x": 32,
+      "y": 9694.299999999997,
+      "w": 222,
+      "h": 25.2,
+      "text": "renders",
+      "color": "mute",
+      "nav": "renders",
+      "anim": {}
+    },
+    {
+      "id": "t163",
+      "type": "text",
+      "x": 270,
+      "y": 9694.299999999997,
+      "w": 460,
+      "h": 25.2,
+      "text": "Visualization",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "p164",
+      "type": "image",
+      "x": 0,
+      "y": 9735.199999999997,
+      "w": 1000,
+      "h": 536,
+      "bleed": true,
+      "src": "projects/media/narayanpet-weavers-centre/render-09.jpg",
+      "fit": "cover",
+      "alt": "Render: the centre seen from the road, with the water tank marking the entrance",
+      "anim": {
+        "scroll": {
+          "on": true,
+          "keys": [
+            {
+              "at": 100,
+              "s": {
+                "scale": 1.08
+              },
+              "ease": "linear"
+            },
+            {
+              "at": 30,
+              "s": {
+                "scale": 1
+              },
+              "ease": "linear"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s165",
+      "type": "slides",
+      "x": 270,
+      "y": 10311.199999999997,
+      "w": 698,
+      "h": 192,
+      "mode": "row",
+      "show": 2,
+      "gap": 16,
+      "fit": "cover",
+      "slides": [
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-01.jpg",
+          "alt": "Render of the centre"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-02.jpg",
+          "alt": "Render of the centre"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-03.jpg",
+          "alt": "Render of the centre"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-04.jpg",
+          "alt": "Render of the centre"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-06.jpg",
+          "alt": "Render of the centre"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-07.jpg",
+          "alt": "Render of the centre"
+        },
+        {
+          "src": "projects/media/narayanpet-weavers-centre/render-08.jpg",
+          "alt": "Render of the centre"
+        }
+      ],
+      "caption": "Use the arrows or swipe for more; click any render to enlarge.",
+      "capShow": true,
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      }
+    },
+    {
+      "id": "t166",
+      "type": "text",
+      "x": 32,
+      "y": 10737.199999999997,
+      "w": 222,
+      "h": 25.2,
+      "text": "today",
+      "color": "mute",
+      "nav": "today",
+      "anim": {}
+    },
+    {
+      "id": "t167",
+      "type": "text",
+      "x": 270,
+      "y": 10737.199999999997,
+      "w": 460,
+      "h": 25.2,
+      "text": "Phasing",
+      "weight": 700,
+      "anim": {}
+    },
+    {
+      "id": "p168",
+      "type": "image",
+      "x": 270,
+      "y": 10778.099999999997,
+      "w": 460,
+      "h": 345,
+      "src": "projects/media/narayanpet-weavers-centre/phasing.jpg",
+      "fit": "contain",
+      "alt": "Phasing diagram: phase 1 buildings in blue, phase 2 in pink",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "zoom": true,
+      "caption": "Phase 1 in blue, phase 2 in pink.",
+      "capShow": true
+    },
+    {
+      "id": "t169",
+      "type": "text",
+      "x": 270,
+      "y": 11167.099999999997,
+      "w": 460,
+      "h": 19.3,
+      "text": "Phase 1 is nearing completion.",
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "u171",
+      "type": "button",
+      "look": "line",
+      "text": "Read the full presentation (PDF)",
+      "x": 270,
+      "y": 11242,
+      "w": 250,
+      "h": 35,
+      "link": {
+        "href": "projects/media/narayanpet-weavers-centre/the-weave-presentation.pdf",
+        "newTab": true
+      },
+      "anim": {},
+      "size": "s"
     }
-   }
-  },
-  {
-   "id": "s165",
-   "type": "slides",
-   "x": 270,
-   "y": 10311.199999999997,
-   "w": 698,
-   "h": 192,
-   "mode": "row",
-   "show": 2,
-   "gap": 16,
-   "fit": "cover",
-   "slides": [
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-01.jpg",
-     "alt": "Render of the centre"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-02.jpg",
-     "alt": "Render of the centre"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-03.jpg",
-     "alt": "Render of the centre"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-04.jpg",
-     "alt": "Render of the centre"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-06.jpg",
-     "alt": "Render of the centre"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-07.jpg",
-     "alt": "Render of the centre"
-    },
-    {
-     "src": "projects/media/narayanpet-weavers-centre/render-08.jpg",
-     "alt": "Render of the centre"
-    }
-   ],
-   "caption": "Use the arrows or swipe for more; click any render to enlarge.",
-   "capShow": true,
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   }
-  },
-  {
-   "id": "t166",
-   "type": "text",
-   "x": 32,
-   "y": 10737.199999999997,
-   "w": 222,
-   "h": 24.9,
-   "text": "today",
-   "color": "mute",
-   "nav": "today",
-   "anim": {}
-  },
-  {
-   "id": "t167",
-   "type": "text",
-   "x": 270,
-   "y": 10737.199999999997,
-   "w": 460,
-   "h": 24.9,
-   "text": "Phasing",
-   "weight": 700,
-   "anim": {}
-  },
-  {
-   "id": "p168",
-   "type": "image",
-   "x": 270,
-   "y": 10778.099999999997,
-   "w": 460,
-   "h": 345,
-   "src": "projects/media/narayanpet-weavers-centre/phasing.jpg",
-   "fit": "contain",
-   "alt": "Phasing diagram: phase 1 buildings in blue, phase 2 in pink",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
-    }
-   },
-   "zoom": true,
-   "caption": "Phase 1 in blue, phase 2 in pink.",
-   "capShow": true
-  },
-  {
-   "id": "t169",
-   "type": "text",
-   "x": 270,
-   "y": 11167.099999999997,
-   "w": 460,
-   "h": 19.6,
-   "text": "Phase 1 is nearing completion.",
-   "size": "s",
-   "anim": {}
-  },
-  {
-   "id": "x170",
-   "type": "box",
-   "fill": "faint",
-   "round": 6,
-   "x": 270,
-   "y": 11226.699999999997,
-   "w": 698,
-   "h": 73,
-   "text": "A reflection will live here.",
-   "anim": {}
-  },
-  {
-   "id": "u171",
-   "type": "button",
-   "look": "line",
-   "text": "Read the full presentation (PDF)",
-   "x": 270,
-   "y": 11339.699999999997,
-   "w": 250,
-   "h": 35,
-   "link": {
-    "href": "projects/media/narayanpet-weavers-centre/the-weave-presentation.pdf",
-    "newTab": true
-   },
-   "anim": {}
-  }
- ]
+  ]
 }
