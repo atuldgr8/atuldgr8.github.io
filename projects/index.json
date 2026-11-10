@@ -19,7 +19,7 @@
       "thumb": "projects/media/spanda/hover.jpg",
       "hidden": false,
       "soon": false,
-      "color": "pink"
+      "color": "#ff00ae"
     },
     {
       "slug": "narayanpet-weavers-centre",
@@ -29,7 +29,7 @@
       "summary": "",
       "thumb": "projects/media/narayanpet-weavers-centre/hover.jpg",
       "hidden": false,
-      "color": "#b9243e",
+      "color": "#ff0000",
       "soon": false
     },
     {
@@ -41,13 +41,13 @@
       "thumb": "",
       "hidden": false,
       "soon": true,
-      "color": "#ff0000"
+      "color": "#00ccff"
     },
     {
       "slug": "prototyping-experiences",
       "title": "Prototyping Experiences",
       "year": "2026",
-      "tags": "",
+      "tags": "Experiential Design, Rapid Prototyping",
       "summary": "",
       "thumb": "",
       "hidden": false,
