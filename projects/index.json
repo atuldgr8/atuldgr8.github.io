@@ -14,12 +14,12 @@
       "slug": "spanda",
       "title": "Spanda",
       "year": "2026",
-      "tags": "Problem Solving, Human-Animal Interaction",
+      "tags": "Problem Solving, Human-Animal Interaction, Machine Learning, Computer Vision",
       "summary": "",
       "thumb": "projects/media/spanda/hero-logo.jpg",
       "hidden": false,
       "soon": false,
-      "color": "#f5008f"
+      "color": "#e00083"
     },
     {
       "slug": "narayanpet-weavers-centre",
