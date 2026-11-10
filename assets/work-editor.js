@@ -145,8 +145,10 @@
       const ext = (f.name.match(/\.[^.]+$/) || ['.jpg'])[0].toLowerCase();
       const base = f.name.toLowerCase().replace(/\.[^.]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'cover';
       let path, n = 0;
-      do { path = `projects/media/${p.slug}/${base}${n ? '-' + n : ''}${ext}`; n++; } while (await FS.exists(path));
-      await FS.write(path, f);
+      try {
+        do { path = `projects/media/${p.slug}/${base}${n ? '-' + n : ''}${ext}`; n++; } while (await FS.exists(path));
+        await FS.write(path, f);
+      } catch (err) { console.error(err); return toast(`Couldn't copy into your site folder (${err && (err.name || err.message)}). Click the folder name at the bottom to reconnect, then try again.`, 9000); }
       p.thumb = path; mark(p, 'thumb'); touch(); draw();
       toast('Picture set. Press save.');
     };
@@ -201,7 +203,8 @@
         const files = [...i.files]; if (!files.length) return;
         if (!FS.root && FS.supported) { await FS.connect(); paint(); }
         if (!FS.root) return toast('Connect your site folder first, so the pictures can be copied into it', 4000);
-        for (const f of files) slides.push({ src: await copyIn(f, 'tldr') });
+        try { for (const f of files) slides.push({ src: await copyIn(f, 'tldr') }); }
+        catch (err) { console.error(err); return toast(`Couldn't copy into your site folder (${err && (err.name || err.message)}). Click the folder name at the bottom to reconnect, then try again.`, 9000); }
         setTop('tldrSlides'); draw();
         toast(`${files.length} picture${files.length > 1 ? 's' : ''} added. Press save.`);
       };

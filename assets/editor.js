@@ -320,15 +320,33 @@
     file = await FS.shrink(file);
     if (file.shrunkFrom) toast(`${file.name}: shrunk from ${FS.kb(file.shrunkFrom)} to ${FS.kb(file.size)}`, 3500);
     const url = URL.createObjectURL(file);
-    if (FS.root) { const p = await keepFile(file); cache.set(p, url); return { src: p, url }; }
+    if (FS.root) {
+      try { const p = await keepFile(file); cache.set(p, url); return { src: p, url }; }
+      catch (err) {
+        // couldn't write into the folder: keep the picture in memory so nothing is lost, and say why
+        console.error('Could not copy into the site folder:', err);
+        toast(`Couldn't copy "${file.name}" into your site folder (${err && (err.name || err.message) || 'unknown error'}). It's on the page for now; click the folder name at the bottom and reconnect, then save.`, 9000);
+        blobs.set(url, file); return { src: url, url };
+      }
+    }
     blobs.set(url, file);
     if (!warned) toast('Connect your site folder or new pictures are lost on reload', 4000);
     warned = true;
     return { src: url, url };
   }
   async function addFiles(files, at, target) {
-    files = [...files].filter(f => /^(image|video)\//.test(f.type));
-    if (!files.length) return;
+    try { await addFilesInner(files, at, target); }
+    catch (err) { console.error('Adding a file failed:', err); toast(`Couldn't add that file: ${err && (err.message || err.name) || 'unknown error'}`, 9000); }
+  }
+  async function addFilesInner(files, at, target) {
+    const all = [...files];
+    files = all.filter(f => /^(image|video)\//.test(f.type) && !/heic|heif/i.test(f.type));
+    if (!files.length) {
+      if (all.length) toast(all.some(f => /heic|heif/i.test(f.type) || /\.hei[cf]$/i.test(f.name))
+        ? 'HEIC photos (from iPhones) don\'t show in browsers. Export them as JPG first.'
+        : `"${all[0].name}" isn't a picture or video this editor can use.`, 6000);
+      return;
+    }
     // onto a slideshow: they become more slides
     if (target && target.type === 'slides') {
       target.slides = target.slides || [];
