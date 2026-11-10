@@ -3391,8 +3391,8 @@
       "x": 270,
       "y": 17856.9,
       "w": 460,
-      "h": 77.9,
-      "text": "I scored candidate behaviours on Frequency (how often it happens), Gap (how invisible or misread it is to visitors) and Viability (whether it can be sensed and felt). An early map suggested a purr for contentment; tigers and leopards don’t purr, so it went.",
+      "h": 57.9,
+      "text": "I scored candidate behaviours on Frequency (how often it happens), Gap (how invisible or misread it is to visitors) and Viability (whether it can be sensed and felt). ",
       "anim": {},
       "size": "s"
     },
@@ -3696,7 +3696,7 @@
       "y": 18336,
       "w": 460,
       "h": 57.9,
-      "text": "My first test was a phone app: point the camera at an animal, and I would Wizard-of-Oz a haptic response from a laptop. I never got it fully working, but it showed me the problem with it.",
+      "text": "My first test was a phone app: point the camera at an animal, and I would Wizard-of-Oz a haptic response from a laptop. The visitors who used this seemed disconnected, the phone gets in the way. ",
       "anim": {},
       "size": "s"
     },
@@ -5879,7 +5879,7 @@
       "id": "sz043t",
       "type": "text",
       "x": 32,
-      "y": 17743,
+      "y": 17701.4,
       "w": 222,
       "h": 19.3,
       "text": "narrowing down",
@@ -5894,7 +5894,7 @@
       "y": 17740,
       "w": 460,
       "h": 99.4,
-      "text": "To keep the proof of concept controlled and actionable, I narrowed it to one animal, the leopard, and studied its ethogram. From the sensory map, I shortlisted ten behaviours, then scored the candidates:",
+      "text": "To keep the proof of concept controlled and actionable, I narrowed it to one animal, the tiger, and studied its ethogram. From the sensory map, I shortlisted ten behaviours, then scored the candidates:",
       "anim": {}
     },
     {
