@@ -48,7 +48,7 @@
       "y": 442,
       "w": 936,
       "h": 526,
-      "src": "projects/media/design-process/hero-gameplay.jpg",
+      "src": "projects/media/design-process/copy-of-img-7771.webp",
       "fit": "cover",
       "alt": "Students playing the Empathy Game around a table",
       "anim": {
@@ -368,7 +368,8 @@
         "href": "projects/media/design-process/collaborative-by-design-presentation.pdf",
         "newTab": true
       },
-      "anim": {}
+      "anim": {},
+      "size": "s"
     },
     {
       "id": "cc001t",
@@ -2730,7 +2731,8 @@
         "href": "https://amount-hatch-73522679.figma.site",
         "newTab": true
       },
-      "anim": {}
+      "anim": {},
+      "size": "s"
     },
     {
       "id": "cc244t",
@@ -2979,7 +2981,7 @@
       "y": 13474.6,
       "w": 698,
       "h": 73,
-      "text": "A playable version of the game will live here.",
+      "text": "<span class=\"sz-s\">A playable version of the game will live here.</span>",
       "anim": {}
     },
     {
@@ -3182,7 +3184,8 @@
         "href": "projects/media/design-process/collaborative-by-design-presentation.pdf",
         "newTab": true
       },
-      "anim": {}
+      "anim": {},
+      "size": "s"
     },
     {
       "id": "ccsketches",
