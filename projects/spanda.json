@@ -588,7 +588,7 @@
    "y": 5276.7,
    "w": 460,
    "h": 213.7,
-   "text": "Zoo visits are mostly about 'recognizing' and 'identifying' animals, rather than 'relating' to them. This creates a distance where visitors are disengaged, behave inappropriately in order to incite a spectacle, and animals are treated like objects of spectacle, making the visit feel shallow and disconnected.<br><br>Kankaria Zoo in Ahmedabad draws over 2 million visitors a year, up to 20,000 a day at peak, at ₹20 a ticket (₹10 for children). Ambient noise of 70–75 dB has been linked to higher cortisol and more pacing in leopards. In February 2026, the Central Zoo Authority mandated that zoos move from “display centres” to spaces for “research, learning, and inspiring empathy”.",
+   "text": "Zoo visits are mostly about 'recognizing' and 'identifying' animals, rather than 'relating' to them. This creates a distance where visitors are disengaged, behave inappropriately in order to incite a spectacle, and animals are treated like objects of spectacle, making the visit feel shallow and disconnected.<br><br>Kankaria Zoo in Ahmedabad draws over 2 million visitors a year, up to 20,000 a day at peak, at ₹20 a ticket (₹10 for children). Ambient noise of 70–75 dB has been linked to higher cortisol and more pacing in tigers. In February 2026, the Central Zoo Authority mandated that zoos move from “display centres” to spaces for “research, learning, and inspiring empathy”.",
    "anim": {},
    "size": "s"
   },
@@ -944,7 +944,7 @@
      "y": 51.3,
      "w": 222,
      "h": 78,
-     "text": "ambient noise, with a documented correlation with increased cortisol and pacing in leopards (ResearchGate 2025)",
+     "text": "ambient noise, with a documented correlation with increased cortisol and pacing in tigers (ResearchGate 2025)",
      "anim": {},
      "size": "s"
     }
@@ -1524,7 +1524,7 @@
    "y": 8697.9,
    "w": 460,
    "h": 49.7,
-   "text": "Leopards operate in infrasound and spatial acoustic maps imperceptible to humans. The gap is hardware.",
+   "text": "Tigers operate in infrasound and spatial acoustic maps imperceptible to humans. The gap is hardware.",
    "anim": {},
    "weight": 700,
    "color": "accent"
@@ -1727,7 +1727,7 @@
      "y": 24,
      "w": 222,
      "h": 75,
-     "text": "The leopard responded differently to different people.",
+     "text": "The tiger responded differently to different people.",
      "anim": {},
      "weight": 700
     },
@@ -1783,7 +1783,7 @@
      "y": 105.7,
      "w": 222,
      "h": 57.9,
-     "text": "He had known the leopard since it was a cub. The leopard snuggled with him across the fence!",
+     "text": "He had known the tiger since it was a cub. The tiger snuggled with him across the fence!",
      "anim": {},
      "size": "s"
     }
@@ -1907,9 +1907,9 @@
      "ease": "out"
     }
    },
-   "alt": "Visitors at the leopard enclosure fence",
+   "alt": "Visitors at the tiger enclosure fence",
    "zoom": true,
-   "caption": "Visitors at the leopard enclosure.",
+   "caption": "Visitors at the tiger enclosure.",
    "capShow": true
   },
   {
@@ -1933,7 +1933,7 @@
    "y": 11672.6,
    "w": 619,
    "h": 19.3,
-   "text": "At the leopard enclosure, Kankaria.",
+   "text": "At the tiger enclosure, Kankaria.",
    "anim": {},
    "size": "s",
    "color": "mute",
@@ -2205,7 +2205,7 @@
    "y": 14110.3,
    "w": 460,
    "h": 38.6,
-   "text": "Western Ghats leopard and tiger deity. The animal is a presence to be respected. Territorial boundaries acknowledged before approach.",
+   "text": "Western Ghats tiger deity. The animal is a presence to be respected. Territorial boundaries acknowledged before approach.",
    "anim": {},
    "size": "s"
   },
@@ -4874,7 +4874,7 @@
    "y": 27730.3,
    "w": 460,
    "h": 38.6,
-   "text": "In place of “Indian Leopard, Panthera pardus fusca”: Prathap. 7 years old. Currently resting. Signage that makes the animal a subject.",
+   "text": "In place of “Bengal Tiger, Panthera tigris”: Prathap. 7 years old. Currently resting. Signage that makes the animal a subject.",
    "anim": {},
    "size": "s"
   },
@@ -5061,7 +5061,7 @@
    "h": 256.3,
    "src": "projects/media/spanda/signage-concept.png",
    "fit": "contain",
-   "alt": "Wireframe of a sign: Hi, I am Prathap. Indian leopard, 7 years old. Right now: resting. Who I am, how to read me, what I sense, be good company, a note from the keeper, and the scientific name at the bottom",
+   "alt": "Wireframe of a sign: Hi, I am Prathap. Bengal tiger, 7 years old. Right now: resting. Who I am, how to read me, what I sense, be good company, a note from the keeper, and the scientific name at the bottom",
    "anim": {
     "enter": {
      "on": true,
@@ -5157,7 +5157,7 @@
    "h": 151.4,
    "src": "projects/media/spanda/storyboard-3.png",
    "fit": "cover",
-   "alt": "Walk: The paws hang on lanyards on the way to the leopards.",
+   "alt": "Walk: The paws hang on lanyards on the way to the tigers.",
    "zoom": true,
    "anim": {
     "enter": {
@@ -5268,7 +5268,7 @@
      "y": 22.4,
      "w": 222,
      "h": 38.6,
-     "text": "The paws hang on lanyards on the way to the leopards.",
+     "text": "The paws hang on lanyards on the way to the tigers.",
      "anim": {},
      "size": "s"
     }
@@ -5818,7 +5818,7 @@
    "y": 7943.3,
    "w": 460,
    "h": 57.9,
-   "text": "Jakob von Uexküll called each animal’s perceptual world its umwelt: the slice of reality its senses can reach. A leopard’s includes infrasound, scent maps and an acoustic map of every footfall around it. Ours doesn’t.",
+   "text": "Jakob von Uexküll called each animal’s perceptual world its umwelt: the slice of reality its senses can reach. A tiger’s includes infrasound, scent maps and an acoustic map of every footfall around it. Ours doesn’t.",
    "anim": {},
    "size": "s"
   },
@@ -5994,7 +5994,7 @@
    "y": 24510.2,
    "w": 460,
    "h": 78.6,
-   "text": "For the prototype, I ran the pipeline on leopard and tiger videos from online animal behaviour datasets, and trained the behaviour model on clips labelled with the six behaviours. A keeper panel let me confirm or override the state, and whatever was chosen went straight to the paw.",
+   "text": "For the prototype, I ran the pipeline on tiger videos from online animal behaviour datasets, and trained the behaviour model on clips labelled with the six behaviours. A keeper panel let me confirm or override the state, and whatever was chosen went straight to the paw.",
    "anim": {},
    "size": "s"
   },
@@ -6062,7 +6062,7 @@
    "y": 24985.7,
    "w": 460,
    "h": 117.4,
-   "text": "SPANDA is trained on individuals. It starts from public behaviour video, then each model is fine-tuned on one named animal, using the observations its keepers already log every day. The hero animal for each enclosure is the one the child will feel: Prathap, one named leopard. This is what makes attribution possible, and attribution is what makes empathy possible.",
+   "text": "SPANDA is trained on individuals. It starts from public behaviour video, then each model is fine-tuned on one named animal, using the observations its keepers already log every day. The hero animal for each enclosure is the one the child will feel: Prathap, one named tiger. This is what makes attribution possible, and attribution is what makes empathy possible.",
    "anim": {},
    "size": "s"
   },
@@ -6122,7 +6122,7 @@
    "y": 18262.0,
    "w": 460,
    "h": 125.5,
-   "text": "To keep the proof of concept controlled and actionable, I narrowed it to one animal, the leopard, and studied its ethogram. From the sensory map and the ethogram, I shortlisted the behaviours a visitor could actually watch, then scored them:",
+   "text": "To keep the proof of concept controlled and actionable, I narrowed it to one animal, the tiger, and studied its ethogram. From the sensory map and the ethogram, I shortlisted the behaviours a visitor could actually watch, then scored them:",
    "anim": {}
   },
   {
