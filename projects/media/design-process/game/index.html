@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empathy Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Sized in page units: the frame is 698 units wide, so the game scales with the case-study page. */
+  :root {
+    --u: calc(100vw / 698);
+    --fg: #000; --bg: #fff; --mute: #909090; --faint: #d0d0d0; --ghost: #f4f4f4; --accent: #ebb800;
+    --m: max(13px, calc(var(--u) * 13.67)); --s: max(11px, calc(var(--u) * 10.66)); --xs: max(10px, calc(var(--u) * 9.5));
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-io: cubic-bezier(0.77, 0, 0.175, 1);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) { :root { --fg: #f4f4f4; --bg: #0d0d0d; --mute: #7a7a7a; --faint: #3a3a3a; --ghost: #181818; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--fg); }
+  body { font: 400 var(--m)/1.42 Inter, -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif; overflow: hidden;
+         -webkit-tap-highlight-color: transparent; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  .app { position: relative; height: 100%; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden;
+         border-radius: calc(var(--u) * 6); box-shadow: inset 0 0 0 1px var(--faint); }
+
+  /* ---------- top: the challenge card and the score ---------- */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 16);
+         padding: calc(var(--u) * 14) calc(var(--u) * 16) 0; }
+  .challenge { display: flex; align-items: center; gap: calc(var(--u) * 12); }
+  .challenge .lbl { font-size: var(--s); color: var(--mute); }
+  .mini { display: flex; gap: calc(var(--u) * 5); padding: calc(var(--u) * 6) calc(var(--u) * 8); border-radius: calc(var(--u) * 6); background: var(--ghost); }
+  .mini svg { width: calc(var(--u) * 20); height: calc(var(--u) * 20); }
+  .score { text-align: right; font-size: var(--s); color: var(--mute); }
+  .score b { color: var(--fg); font-weight: 700; }
+
+  /* ---------- the table, in light 3D ---------- */
+  .stage { position: relative; display: grid; place-items: center; perspective: calc(var(--u) * 900); min-height: 0; }
+  .table { position: relative; transform: rotateX(26deg); transform-style: preserve-3d; height: calc(var(--u) * 80); }
+  .slot { opacity: .8; position: absolute; top: 0; width: calc(var(--u) * 80); height: calc(var(--u) * 80); border-radius: calc(var(--u) * 12);
+          background: var(--ghost); display: grid; place-items: center; color: var(--faint); transform: translateZ(0); }
+  .slot svg { width: 100%; height: 100%; transition: opacity 200ms ease; }
+  .slot.ok svg { opacity: 0; }
+  .tok { position: absolute; top: 0; left: 0; width: calc(var(--u) * 80); height: calc(var(--u) * 80); display: grid; place-items: center;
+         transform-style: preserve-3d; color: var(--fg); border-radius: calc(var(--u) * 10); outline: none; touch-action: manipulation; }
+  .tok .shape { width: 72%; height: 72%; transition: transform 300ms var(--ease-io), color 160ms ease; transform: translateZ(calc(var(--u) * 2)); }
+  .tok .shape svg { width: 100%; height: 100%; display: block; }
+  .tok.ok .shape { color: var(--accent); }
+  .tok .ring { position: absolute; inset: calc(var(--u) * -3); border-radius: calc(var(--u) * 12); box-shadow: 0 0 0 2px var(--accent);
+               opacity: 0; transform: scale(0.96); transition: opacity 160ms ease, transform 160ms var(--ease-out); pointer-events: none; }
+  .tok.pick .ring, .tok.can .ring { opacity: 1; transform: scale(1); }
+  .tok.can .ring { box-shadow: 0 0 0 2px var(--accent); opacity: .55; }
+  .tok:focus-visible .ring { opacity: 1; transform: scale(1); box-shadow: 0 0 0 2px var(--fg); }
+  .tok.dim { opacity: .35; transition: opacity 160ms ease; }
+  .stage .hint { position: absolute; bottom: calc(var(--u) * 6); left: 0; right: 0; text-align: center; font-size: var(--s); color: var(--mute);
+                 transition: opacity 160ms ease; }
+
+  /* ---------- the team ---------- */
+  .team { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1fr; gap: calc(var(--u) * 10); padding: 0 calc(var(--u) * 16) calc(var(--u) * 16);
+          perspective: calc(var(--u) * 800); }
+  .card { position: relative; border-radius: calc(var(--u) * 10); padding: calc(var(--u) * 11) calc(var(--u) * 12) calc(var(--u) * 12);
+          background: var(--bg); box-shadow: 0 0 0 1px var(--faint), 0 calc(var(--u) * 6) calc(var(--u) * 16) calc(var(--u) * -10) rgba(0,0,0,.25);
+          transform-style: preserve-3d; will-change: transform; overflow: hidden; }
+  .card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--u) * 4); background: var(--c); }
+  .card .who { font-size: var(--xs); color: var(--mute); display: flex; justify-content: space-between; gap: 6px; }
+  .card .who .n { font-variant-numeric: tabular-nums; }
+  .card .name { font-size: var(--s); font-weight: 700; color: var(--c); margin: calc(var(--u) * 2) 0 calc(var(--u) * 8); line-height: 1.2; }
+  .card .opts { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 5); }
+  .chip { display: inline-flex; align-items: center; gap: calc(var(--u) * 4); font-size: var(--xs); line-height: 1.15; flex-wrap: wrap; max-width: 100%;
+          padding: calc(var(--u) * 6) calc(var(--u) * 8); border-radius: 999px; background: var(--ghost); color: var(--fg);
+          transition: transform 140ms var(--ease-out), background-color 160ms ease, color 160ms ease; }
+  .chip svg { width: 1.25em; height: 1.25em; flex-shrink: 0; }
+  .chip .or { color: var(--mute); }
+  .you .chip { cursor: pointer; }
+  .you .chip:active { transform: scale(0.97); }
+  .you .chip[aria-pressed="true"] { background: var(--c); color: #fff; }
+  .card .act { font-size: var(--xs); color: var(--mute); margin-top: calc(var(--u) * 8); min-height: 1.3em; transition: opacity 160ms ease; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card.moving { transition: transform 160ms var(--ease-out); transform: translateY(calc(var(--u) * -4)); }
+
+  /* ---------- panels: start and finish ---------- */
+  .panel { position: absolute; inset: 0; display: grid; place-items: center; background: color-mix(in srgb, var(--bg) 88%, transparent);
+           backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 5;
+           transition: opacity 200ms var(--ease-out); }
+  .panel[hidden] { display: none; }
+  .panel.out { opacity: 0; pointer-events: none; }
+  .box { width: min(92%, calc(var(--u) * 440)); text-align: left; transform: translateY(0); transition: transform 240ms var(--ease-out), opacity 240ms var(--ease-out); }
+  .panel.out .box { transform: translateY(calc(var(--u) * 8)); opacity: 0; }
+  .box h2 { font-size: var(--m); font-weight: 700; margin-bottom: calc(var(--u) * 6); }
+  .box p { font-size: var(--s); margin-bottom: calc(var(--u) * 8); }
+  .box p.mute { color: var(--mute); }
+  .box .row { display: flex; gap: calc(var(--u) * 8); margin-top: calc(var(--u) * 14); flex-wrap: wrap; }
+  .btn { font-size: var(--s); padding: calc(var(--u) * 9) calc(var(--u) * 16); border-radius: 999px; background: var(--fg); color: var(--bg);
+         transition: transform 140ms var(--ease-out); }
+  .btn.ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px var(--faint); }
+  .btn:active { transform: scale(0.97); }
+  .tally { display: grid; gap: calc(var(--u) * 5); margin: calc(var(--u) * 10) 0 calc(var(--u) * 4); }
+  .tally .r { display: grid; grid-template-columns: calc(var(--u) * 170) 1fr calc(var(--u) * 50); align-items: center; gap: calc(var(--u) * 10); font-size: var(--xs); }
+  .tally .bar { height: calc(var(--u) * 6); border-radius: 99px; background: var(--ghost); overflow: hidden; }
+  .tally .bar i { display: block; height: 100%; width: 100%; background: var(--c); transform-origin: left; transform: scaleX(0);
+                  transition: transform 600ms var(--ease-out); }
+  .tally .r b { color: var(--c); font-weight: 700; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tok.can:hover .ring, .tok.pick:hover .ring { opacity: 1; }
+    .you .chip:hover { background: color-mix(in srgb, var(--c) 16%, var(--ghost)); }
+    .you .chip[aria-pressed="true"]:hover { background: var(--c); }
+  }
+
+  /* phones: a bigger unit, the team in two rows, scroll if needed */
+  @media (max-width: 520px) {
+    :root { --u: calc(100vw / 470); }
+    body { overflow: auto; }
+    .app { grid-template-rows: auto auto auto; min-height: 100%; }
+    .stage { height: calc(var(--u) * 170); }
+    .stage .hint { bottom: 0; }
+    .team { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .card.you { grid-column: 1 / -1; }
+    .card:not(.you) .opts { display: none; }
+    .card:not(.you) .name { margin-bottom: 2px; }
+    .card .act { margin-top: 2px; }
+    .tally .r { grid-template-columns: 1fr 1fr auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tok .shape { transition: color 160ms ease; }
+    .table { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="challenge"><span class="lbl">Challenge <span class="num" id="cn">1</span>/4</span><div class="mini" id="mini" aria-label="The pattern to recreate"></div></div>
+    <div class="score"><b class="num" id="inplace">0</b> of <span class="num" id="total">0</span> in place · <span class="num" id="moves">0 moves</span></div>
+  </div>
+  <div class="stage"><div class="table" id="table"></div><div class="hint" id="hint" aria-live="polite"></div></div>
+  <div class="team" id="team"></div>
+
+  <div class="panel" id="start">
+    <div class="box">
+      <h2>Recreate the pattern on the challenge card.</h2>
+      <p>You've been dealt one learner archetype. It lets you make only certain moves. Three teammates hold other archetypes and play at the same time, using moves you don't have.</p>
+      <p class="mute">Pick one of your moves, then tap the shapes. Every move is final.</p>
+      <div class="row"><button class="btn" id="go">Start</button><button class="btn ghost" id="redeal">Deal new cards</button></div>
+    </div>
+  </div>
+  <div class="panel" id="done" hidden>
+    <div class="box">
+      <h2 id="doneTitle">Pattern complete.</h2>
+      <p class="mute" id="doneSub"></p>
+      <div class="tally" id="tally"></div>
+      <div class="row"><button class="btn" id="next">Next challenge</button><button class="btn ghost" id="again">Deal new cards</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- match the page around this frame (light/dark mode, project colour) ---------- */
+(function themeFromPage() {
+  let host; try { host = window.frameElement; } catch (e) {}
+  if (!host) return;
+  const doc = host.ownerDocument, keys = ['--fg', '--bg', '--mute', '--faint', '--ghost', '--accent'];
+  const pull = () => { const cs = getComputedStyle(host); keys.forEach(k => { const v = cs.getPropertyValue(k).trim(); if (v) document.documentElement.style.setProperty(k, v); }); };
+  pull();
+  new MutationObserver(pull).observe(doc.documentElement, { attributes: true, attributeFilter: ['data-theme', 'style', 'class'] });
+  new MutationObserver(pull).observe(doc.body, { attributes: true, attributeFilter: ['data-theme', 'style', 'class'] });
+  doc.defaultView.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(pull, 30));
+})();
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+/* ---------- shapes ---------- */
+const SVG = {
+  t: '<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,12 90,84 10,84" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>',
+  r: '<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="8" y="33" width="84" height="34" rx="6" fill="currentColor"/></svg>',
+  c: '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34" fill="currentColor"/></svg>',
+};
+const NAME = { t: 'triangle', r: 'bar', c: 'circle' };
+const DIR = ['pointing up', 'pointing right', 'pointing down', 'pointing left'];
+const mod = (a, n) => ((a % n) + n) % n;
+function describe(tk) { return tk.type === 'c' ? 'circle' : tk.type === 'r' ? (mod(tk.o, 2) ? 'standing bar' : 'lying bar') : 'triangle ' + DIR[mod(tk.o, 4)]; }
+
+/* ---------- the four challenge cards (from the printed deck) ---------- */
+// t: 0 up, 1 right, 2 down, 3 left · r: 0 lying, 1 standing · c: any
+const CHALLENGES = [
+  [['r',1],['r',0],['t',3],['c',0],['t',3],['t',0]],
+  [['r',1],['r',0],['t',3],['c',0],['t',0],['r',1],['t',2]],
+  [['r',0],['c',0],['c',0],['t',0],['r',1]],
+  [['t',3],['r',1],['c',0],['t',2],['c',0],['r',0]],
+];
+
+/* ---------- the seven archetype cards ---------- */
+const S = d => ({ k: 'swap', d }), R = n => ({ k: 'rot', n });
+const ARCH = [
+  { id: 'adaptive',    name: 'The Adaptive Performer',  c: '#a855f7', opts: [[S(1)], [R(1)]] },
+  { id: 'overwhelmed', name: 'The Overwhelmed Learner', c: '#e8930c', opts: [[R(2)], [R(-2)]] },
+  { id: 'butterfly',   name: 'The Social Butterfly',    c: '#16a34a', opts: [[S(1)], [S(2)], [S(3)]] },
+  { id: 'ambivert',    name: 'The Ambiguous Ambivert',  c: '#0891b2', opts: [[R(-1), S(2)], [S(1), R(1)]] },
+  { id: 'quiet',       name: 'The Quiet Contributor',   c: '#3b6cf6', opts: [[R(3)], [R(-3)]] },
+  { id: 'introvert',   name: 'The Consistent Introvert',c: '#ef5b3a', opts: [[R(1)], [R(-1)]] },
+  { id: 'mismatched',  name: 'The Mismatched Receiver', c: '#db2777', opts: [[S(2)], [S(1)]] },
+];
+const ICON = {
+  swap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10c4-4 12-4 16 0"/><path d="M17 6l3 4-4 1"/><path d="M20 14c-4 4-12 4-16 0"/><path d="M7 18l-3-4 4-1"/></svg>',
+  cw: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12a7 7 0 1 1-2.05-4.95"/><path d="M19 4v4h-4"/></svg>',
+  ccw: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 1 0 2.05-4.95"/><path d="M5 4v4h4"/></svg>',
+};
+function stepLabel(s) {
+  if (s.k === 'swap') return `${s.d > 1 ? s.d + '× ' : ''}Swap ${ICON.swap}`;
+  const n = Math.abs(s.n); return `${n > 1 ? n + '× ' : ''}Rotate ${s.n > 0 ? ICON.cw : ICON.ccw}`;
+}
+function optLabel(opt) { return opt.map(stepLabel).join('<span class="or">+</span>'); }
+function stepText(s) { return s.k === 'swap' ? (s.d > 1 ? s.d + '× swap' : 'swap') : (Math.abs(s.n) > 1 ? Math.abs(s.n) + '× ' : '') + 'rotate ' + (s.n > 0 ? '↻' : '↺'); }
+
+/* ---------- state ---------- */
+let target = [], slots = [], team = [], ci = 0, moves = 0, running = false, won = false, lastAct = 0, tokEls = {}, nextId = 0;
+let you = null, sel = { opt: 0, step: 0, a: null };
+const $ = id => document.getElementById(id);
+const PR = new Intl.PluralRules('en');
+const mv = n => `${n} ${PR.select(n) === 'one' ? 'move' : 'moves'}`;
+
+function matches(i) {
+  const g = target[i], t = slots[i];
+  if (g[0] !== t.type) return false;
+  if (g[0] === 'c') return true;
+  return g[0] === 'r' ? mod(t.o, 2) === g[1] : mod(t.o, 4) === g[1];
+}
+function cost(arr) {          // lower is better; partial credit for turning the right shape the right way
+  let c = 0;
+  arr.forEach((t, i) => {
+    const g = target[i];
+    if (g[0] !== t.type) { c += 2; return; }
+    if (g[0] === 't') { const d = mod(t.o - g[1], 4); c += Math.min(d, 4 - d) * 0.5; }
+    else if (g[0] === 'r') c += mod(t.o - g[1], 2) * 0.5;
+  });
+  return c;
+}
+function applyStep(arr, s, i, j) {
+  if (s.k === 'swap') { const x = arr[i]; arr[i] = arr[j]; arr[j] = x; }
+  else arr[i] = { ...arr[i], o: arr[i].o + s.n };
+}
+// every concrete way to play one option: a list of [i, j] per step
+function plays(opt, n) {
+  const per = opt.map(s => {
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      if (s.k === 'rot') out.push([i, null]);
+      else if (i + s.d < n) out.push([i, i + s.d]);
+    }
+    return out;
+  });
+  return per.reduce((acc, list) => acc.flatMap(a => list.map(b => [...a, b])), [[]]);
+}
+const rand = n => Math.floor(Math.random() * n);
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = rand(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+/* ---------- dealing ---------- */
+function deal() {
+  let pick;
+  do {
+    pick = shuffle([...ARCH]).slice(0, 4);
+    var swaps = pick.some(a => a.opts.some(o => o.some(s => s.k === 'swap')));
+    var odd = pick.some(a => a.opts.some(o => o.some(s => s.k === 'rot' && Math.abs(s.n) % 2)));
+  } while (!swaps || !odd);
+  team = pick.map((a, i) => ({ a, you: i === 0, n: 0, helped: 0, timer: 0, idle: 0, last: null }));
+  you = team[0];
+}
+function setup() {
+  won = false; moves = 0; running = false;
+  target = CHALLENGES[ci];
+  // start from the solution and scramble it with this team's own moves, so the team can always solve it
+  let arr;
+  do {
+    arr = target.map(([type, o]) => ({ id: nextId++, type, o: type === 'c' ? 0 : o }));
+    for (let k = 0; k < 16; k++) {
+      const m = team[rand(team.length)].a, opt = m.opts[rand(m.opts.length)], ps = plays(opt, arr.length), p = ps[rand(ps.length)];
+      opt.forEach((s, x) => applyStep(arr, s, p[x][0], p[x][1]));
+    }
+  } while (cost(arr) < target.length * 0.9);
+  slots = arr;
+  sel = { opt: 0, step: 0, a: null };
+  build();
+}
+
+/* ---------- drawing ---------- */
+let U = 1, PITCH = 94;
+function measure() { U = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--u')) || (innerWidth / 698); }
+function xFor(i) { return i * PITCH * U; }
+function build() {
+  measure();
+  const n = target.length, table = $('table');
+  table.style.width = ((n - 1) * PITCH + 80) * U + 'px';
+  table.innerHTML = '';
+  tokEls = {};
+  $('mini').innerHTML = target.map(([t, o]) => `<span style="display:grid;transform:rotate(${t === 'c' ? 0 : o * 90}deg)">${SVG[t]}</span>`).join('');
+  target.forEach(([t, o], i) => {
+    const s = document.createElement('div');
+    s.className = 'slot'; s.style.left = xFor(i) + 'px';
+    s.innerHTML = `<span style="display:grid;width:72%;height:72%;transform:rotate(${t === 'c' ? 0 : o * 90}deg)">${SVG[t]}</span>`;
+    s.querySelectorAll('svg *').forEach(e => { e.setAttribute('fill', 'none'); e.setAttribute('stroke', 'currentColor'); e.setAttribute('stroke-width', '3'); e.setAttribute('stroke-dasharray', '6 5'); });
+    table.appendChild(s);
+  });
+  slots.forEach((tk, i) => {
+    const b = document.createElement('button');
+    b.className = 'tok'; b.dataset.id = tk.id;
+    b.innerHTML = `<span class="ring"></span><span class="shape">${SVG[tk.type]}</span>`;
+    b.querySelector('.shape').style.transform = `translateZ(${2 * U}px) rotate(${tk.o * 90}deg)`;
+    b.style.transform = `translate3d(${xFor(i)}px,0,0)`;
+    b.addEventListener('click', () => tap(tk.id));
+    table.appendChild(b);
+    tokEls[tk.id] = b;
+  });
+  drawTeam();
+  refresh();
+}
+function drawTeam() {
+  $('team').innerHTML = '';
+  team.forEach((m, k) => {
+    const el = document.createElement('div');
+    el.className = 'card' + (m.you ? ' you' : '');
+    el.style.setProperty('--c', m.a.c);
+    el.innerHTML = `<div class="who"><span>${m.you ? 'you' : 'teammate'}</span><span class="n">${mv(m.n)}</span></div>
+      <div class="name">${m.a.name}</div>
+      <div class="opts">${m.a.opts.map((o, i) => m.you ? `<button class="chip" aria-pressed="${i === sel.opt}" data-i="${i}">${optLabel(o)}</button>` : `<span class="chip">${optLabel(o)}</span>`).join('')}</div>
+      <div class="act">${m.you ? '' : 'Waiting to start'}</div>`;
+    if (m.you) el.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => { sel = { opt: +c.dataset.i, step: 0, a: null }; refresh(); }));
+    m.el = el;
+    $('team').appendChild(el);
+    if (!reduce) el.animate([{ transform: 'rotateY(-70deg) translateZ(0)', opacity: 0 }, { transform: 'rotateY(0deg)', opacity: 1 }],
+      { duration: 420, delay: 60 + k * 70, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' });
+    if (m.you && fine && !reduce) tilt(el);
+  });
+}
+// your card leans toward the pointer; a lerp gives it a little spring instead of snapping
+function tilt(el) {
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+  const loop = () => { x += (tx - x) * 0.14; y += (ty - y) * 0.14; el.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    if (Math.abs(tx - x) > 0.01 || Math.abs(ty - y) > 0.01) raf = requestAnimationFrame(loop); else raf = 0; };
+  const go = () => { if (!raf) raf = requestAnimationFrame(loop); };
+  el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); tx = ((e.clientX - r.left) / r.width - 0.5) * 10; ty = -((e.clientY - r.top) / r.height - 0.5) * 10; go(); });
+  el.addEventListener('pointerleave', () => { tx = 0; ty = 0; go(); });
+}
+
+function refresh() {
+  const n = slots.length, opt = you.a.opts[sel.opt], step = opt[sel.step];
+  let ok = 0;
+  slots.forEach((tk, i) => {
+    const el = tokEls[tk.id], m = matches(i);
+    if (m) ok++;
+    el.classList.toggle('ok', m);
+    $('table').children[i].classList.toggle('ok', m);
+    el.setAttribute('aria-label', `Place ${i + 1}: ${describe(tk)}${m ? ', in place' : ''}`);
+    const pick = sel.a === i;
+    const can = running && !won && (step.k === 'rot' ? sel.a === null : sel.a === null ? (i + step.d < n || i - step.d >= 0) : Math.abs(i - sel.a) === step.d);
+    el.classList.toggle('pick', pick);
+    el.classList.toggle('can', can && !pick && sel.a !== null);
+    el.classList.toggle('dim', running && !won && sel.a !== null && !can && !pick);
+  });
+  $('inplace').textContent = ok; $('total').textContent = n; $('moves').textContent = mv(moves);
+  you.el && you.el.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', +c.dataset.i === sel.opt));
+  let h = '';
+  if (running && !won) {
+    const pre = opt.length > 1 ? `Step ${sel.step + 1} of ${opt.length}: ` : '';
+    h = step.k === 'rot' ? `${pre}tap a shape to ${stepText(step)} it`
+      : sel.a === null ? `${pre}tap a shape to ${stepText(step)}`
+      : `${pre}now tap the shape ${step.d} place${step.d > 1 ? 's' : ''} away`;
+  }
+  $('hint').textContent = h;
+}
+
+/* ---------- playing a move ---------- */
+function tap(id) {
+  if (!running || won) return;
+  const i = slots.findIndex(t => t.id === id), opt = you.a.opts[sel.opt], step = opt[sel.step];
+  if (step.k === 'rot') return commit(you, step, i, null);
+  if (sel.a === null) { sel.a = i; return refresh(); }
+  if (sel.a === i) { sel.a = null; return refresh(); }
+  if (Math.abs(i - sel.a) !== step.d) { sel.a = i; return refresh(); }
+  commit(you, step, Math.min(i, sel.a), Math.max(i, sel.a));
+}
+function commit(m, step, i, j) {
+  const before = cost(slots);
+  doStep(step, i, j);
+  if (m.you) {
+    const opt = m.a.opts[sel.opt];
+    if (sel.step + 1 < opt.length) { sel = { opt: sel.opt, step: sel.step + 1, a: null }; refresh(); return; }
+    sel = { opt: sel.opt, step: 0, a: null };
+    finishMove(m, before);
+  }
+}
+function finishMove(m, before) {
+  moves++; m.n++; if (cost(slots) < before) m.helped++;
+  m.el.querySelector('.n').textContent = mv(m.n);
+  lastAct = performance.now();
+  refresh();
+  if (slots.every((_, i) => matches(i))) win();
+}
+function doStep(step, i, j) {
+  if (step.k === 'swap') {
+    const A = slots[i], B = slots[j];
+    slots[i] = B; slots[j] = A;
+    hop(tokEls[A.id], xFor(i), xFor(j), 1); hop(tokEls[B.id], xFor(j), xFor(i), -1);
+  } else {
+    const t = slots[i] = { ...slots[i] };
+    // keep the token object in place in the array, update its turn
+    t.o += step.n;
+    const el = tokEls[t.id], sh = el.querySelector('.shape');
+    sh.style.transform = `translateZ(${2 * U}px) rotate(${t.o * 90}deg)`;
+    if (!reduce) el.animate([{ transform: `translate3d(${xFor(i)}px,0,0)` }, { transform: `translate3d(${xFor(i)}px,0,${18 * U}px)` }, { transform: `translate3d(${xFor(i)}px,0,0)` }],
+      { duration: 300, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' });
+  }
+}
+// a swap lifts both shapes off the table and passes one over the other
+function hop(el, x0, x1, side) {
+  el.getAnimations().forEach(a => a.finish());
+  el.style.transform = `translate3d(${x1}px,0,0)`;
+  if (reduce) return;
+  const lift = (side > 0 ? 34 : 14) * U, dy = (side > 0 ? -10 : 8) * U;
+  el.animate([
+    { transform: `translate3d(${x0}px,0,0)` },
+    { transform: `translate3d(${(x0 + x1) / 2}px,${dy}px,${lift}px)`, offset: 0.5 },
+    { transform: `translate3d(${x1}px,0,0)` },
+  ], { duration: 340, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' });
+}
+
+/* ---------- computer teammates: they only play moves that help ---------- */
+function aiTurn(m) {
+  if (!running || won) return;
+  if (performance.now() - lastAct < 700) return schedule(m, 500);
+  const n = slots.length, base = cost(slots);
+  let best = null, bestC = base, neutral = [];
+  m.a.opts.forEach((opt, oi) => plays(opt, n).forEach(p => {
+    const arr = slots.slice();
+    opt.forEach((s, x) => applyStep(arr, s, p[x][0], p[x][1]));
+    const c = cost(arr);
+    if (c < bestC - 1e-9 || (best && Math.abs(c - bestC) < 1e-9 && Math.random() < 0.3)) { bestC = c; best = { oi, p }; }
+    else if (Math.abs(c - base) < 1e-9) neutral.push({ oi, p });
+  }));
+  let play = best;
+  if (!play) { m.idle++; if (m.idle >= 3 && neutral.length) { play = neutral[rand(neutral.length)]; m.idle = 0; } }
+  if (!play) { say(m, 'Nothing helpful to do yet'); return schedule(m); }
+  m.idle = 0;
+  const opt = m.a.opts[play.oi], before = base;
+  opt.forEach((s, x) => doStep(s, play.p[x][0], play.p[x][1]));
+  say(m, opt.map((s, x) => s.k === 'swap' ? `${stepText(s)} ${play.p[x][0] + 1} ↔ ${play.p[x][1] + 1}` : `${stepText(s)} ${play.p[x][0] + 1}`).join(', then '));
+  m.el.classList.add('moving'); setTimeout(() => m.el.classList.remove('moving'), 260);
+  finishMove(m, before);
+  // the player's half-finished selection may point at shapes that just moved
+  if (sel.a !== null) { sel.a = null; refresh(); }
+  schedule(m);
+}
+function say(m, text) { const a = m.el.querySelector('.act'); a.textContent = text; }
+function schedule(m, ms) { clearTimeout(m.timer); m.timer = setTimeout(() => aiTurn(m), ms || 2800 + Math.random() * 1800); }
+
+function start() {
+  running = true;
+  closePanel($('start'));
+  team.forEach((m, k) => { if (!m.you) { say(m, 'Looking for a move…'); schedule(m, 2200 + k * 900 + Math.random() * 600); } });
+  refresh();
+}
+function stop() { running = false; team.forEach(m => clearTimeout(m.timer)); }
+function win() {
+  won = true; stop(); refresh();
+  if (!reduce) slots.forEach((tk, i) => tokEls[tk.id].animate([{ transform: `translate3d(${xFor(i)}px,0,0)` }, { transform: `translate3d(${xFor(i)}px,0,${22 * U}px)` }, { transform: `translate3d(${xFor(i)}px,0,0)` }],
+    { duration: 420, delay: 160 + i * 55, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' }));
+  const yours = you.n, share = moves ? Math.round(yours / moves * 100) : 0;
+  $('doneTitle').textContent = `Pattern complete in ${mv(moves)}.`;
+  $('doneSub').textContent = `You made ${yours} of them (${share}%). Here's who did what:`;
+  $('tally').innerHTML = team.map(m => `<div class="r" style="--c:${m.a.c}"><b>${m.you ? 'You · ' : ''}${m.a.name.replace('The ', '')}</b><div class="bar"><i style="--w:${moves ? m.n / moves : 0}"></i></div><span class="num">${mv(m.n)}</span></div>`).join('');
+  setTimeout(() => {
+    openPanel($('done'));
+    requestAnimationFrame(() => requestAnimationFrame(() => $('tally').querySelectorAll('.bar i').forEach(b => b.style.transform = `scaleX(${b.style.getPropertyValue('--w')})`)));
+  }, reduce ? 200 : 900);
+}
+function openPanel(p) { p.hidden = false; p.classList.add('out'); requestAnimationFrame(() => requestAnimationFrame(() => p.classList.remove('out'))); }
+function closePanel(p) { p.classList.add('out'); setTimeout(() => { p.hidden = true; }, 220); }
+
+$('go').onclick = start;
+$('redeal').onclick = () => { deal(); setup(); };
+$('next').onclick = () => { ci = (ci + 1) % CHALLENGES.length; $('cn').textContent = ci + 1; team.forEach(m => { m.n = 0; m.helped = 0; }); setup(); closePanel($('done')); setTimeout(start, 250); };
+$('again').onclick = () => { deal(); setup(); closePanel($('done')); openPanel($('start')); };
+addEventListener('keydown', e => { if (e.key === 'Escape' && sel.a !== null) { sel.a = null; refresh(); } });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { const keepRun = running; build(); running = keepRun; refresh(); }, 120); });
+
+deal(); setup();
+</script>
+</body>
+</html>
