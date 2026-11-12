@@ -1881,9 +1881,9 @@
      "ease": "out"
     }
    },
-   "alt": "A tiger asleep on the grass behind a chain-link fence",
+   "alt": "A tiger sleeping at Kankaria, to the disappointment of many visitors",
    "zoom": true,
-   "caption": "Kankaria.",
+   "caption": "Tiger sleeping at Kankaria, to the disappointment of many visitors.",
    "capShow": true
   },
   {
@@ -1907,9 +1907,9 @@
      "ease": "out"
     }
    },
-   "alt": "Visitors at the tiger enclosure fence",
+   "alt": "Visitors teasing the leopard at Indroda Nature Park. A common sighting.",
    "zoom": true,
-   "caption": "Visitors at the leopard enclosure.",
+   "caption": "Visitors teasing the leopard at Indroda Nature Park. A common sighting.",
    "capShow": true
   },
   {
@@ -2161,7 +2161,7 @@
    "y": 13973.1,
    "w": 460,
    "h": 38.6,
-   "text": "This knowledge existed. We designed it out. Indigenous and traditional communities did not have this gap.",
+   "text": "This knowledge exists (Traditional Ecological Knowledge), but has been lost in modern societies. Indigenous and traditional communities did not have this gap.",
    "anim": {},
    "size": "s"
   },
@@ -2183,7 +2183,7 @@
    "y": 14066.8,
    "w": 460,
    "h": 38.6,
-   "text": "Humans and animals depicted at equal scale, in shared ecological space. Cohabitation.",
+   "text": "Humans and animals depicted at equal scale, in shared ecological space — cohabitation.",
    "anim": {},
    "size": "s"
   },
@@ -2205,7 +2205,7 @@
    "y": 14158.5,
    "w": 460,
    "h": 38.6,
-   "text": "Western Ghats leopard deity. The animal is a presence to be respected. Territorial boundaries acknowledged before approach.",
+   "text": "Western Ghats leopard deity. The animal is a presence to be respected. Territorial boundaries acknowledged before approach. Elaborate rituals are performed in reverence to the deity.",
    "anim": {},
    "size": "s"
   },
@@ -2693,7 +2693,7 @@
      "y": 24,
      "w": 222,
      "h": 25.2,
-     "text": "Presence is a choice",
+     "text": "Presence as a choice",
      "anim": {},
      "weight": 700
     },
@@ -2705,51 +2705,6 @@
      "w": 222,
      "h": 38.6,
      "text": "To receive another’s presence, you must first choose to be present.",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp266g",
-   "type": "group",
-   "x": 270,
-   "y": 16022.9,
-   "w": 222,
-   "h": 76.3,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp260t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "04",
-     "anim": {},
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "sp261t",
-     "type": "text",
-     "x": 0,
-     "y": 24,
-     "w": 222,
-     "h": 25.2,
-     "text": "Transparency as consent",
-     "anim": {},
-     "weight": 700
-    },
-    {
-     "id": "sp262t",
-     "type": "text",
-     "x": 0,
-     "y": 55.9,
-     "w": 222,
-     "h": 19.3,
-     "text": "The child sees it working.",
      "anim": {},
      "size": "s"
     }
@@ -2835,7 +2790,7 @@
     }
    },
    "zoom": true,
-   "caption": "5W + H: who it is for, where and when it activates, and how the interaction works. Click to enlarge.",
+   "caption": "5W + H: who it is for, where and when it activates, and how the interaction could work. Click to enlarge.",
    "capShow": true
   },
   {
@@ -3123,7 +3078,7 @@
    "y": 17459.7,
    "w": 341,
    "h": 38.5,
-   "text": "Translucent by design. The child sees it working. Transparency as consent.",
+   "text": "Translucent by design. The child sees it working.",
    "anim": {},
    "size": "s"
   },
@@ -3870,7 +3825,7 @@
    "y": 19989.9,
    "w": 460,
    "h": 38.6,
-   "text": "SPANDA is also a support device for a tour guide, so nothing arrives out of context. There will be instructions as well.",
+   "text": "SPANDA is also a support device for a tour guide, so nothing arrives out of context. Additional context would be received through instruction boards placed at the enclosures.",
    "anim": {},
    "size": "s"
   },
@@ -4119,7 +4074,8 @@
    "h": 25.2,
    "text": "How the whole system works",
    "anim": {},
-   "weight": 700
+   "weight": 700,
+   "color": "accent"
   },
   {
    "id": "sp368p",
@@ -4349,138 +4305,6 @@
    "anim": {}
   },
   {
-   "id": "sp413g",
-   "type": "group",
-   "x": 270.3,
-   "y": 25861.1,
-   "w": 698,
-   "h": 39.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp410t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Haptic patterns",
-     "anim": {},
-     "size": "s",
-     "weight": 700
-    },
-    {
-     "id": "sp411t",
-     "type": "text",
-     "x": 238,
-     "y": 0,
-     "w": 460,
-     "h": 38.6,
-     "text": "Biomimetic patterns reach calm states; abstract codes fail. (Shim & Tan, 2020)",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp412b",
-   "type": "box",
-   "fill": "faint",
-   "x": 270.3,
-   "y": 25912.9,
-   "w": 698,
-   "h": 1,
-   "anim": {}
-  },
-  {
-   "id": "sp417g",
-   "type": "group",
-   "x": 270.3,
-   "y": 25926.9,
-   "w": 698,
-   "h": 39.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp414t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Pattern accuracy",
-     "anim": {},
-     "size": "s",
-     "weight": 700
-    },
-    {
-     "id": "sp415t",
-     "type": "text",
-     "x": 238,
-     "y": 0,
-     "w": 460,
-     "h": 38.6,
-     "text": "The torso yields 99–100% pattern recognition accuracy. (Jones et al., 2009)",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp416b",
-   "type": "box",
-   "fill": "faint",
-   "x": 270.3,
-   "y": 25978.7,
-   "w": 698,
-   "h": 1,
-   "anim": {}
-  },
-  {
-   "id": "sp421g",
-   "type": "group",
-   "x": 270.3,
-   "y": 25992.7,
-   "w": 698,
-   "h": 39.8,
-   "anim": {},
-   "children": [
-    {
-     "id": "sp418t",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Valence",
-     "anim": {},
-     "size": "s",
-     "weight": 700
-    },
-    {
-     "id": "sp419t",
-     "type": "text",
-     "x": 238,
-     "y": 0,
-     "w": 460,
-     "h": 38.6,
-     "text": "Vibration conveys valence without projection. (Ju & Minamizawa, CHI EA 2023)",
-     "anim": {},
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "sp420b",
-   "type": "box",
-   "fill": "faint",
-   "x": 270.3,
-   "y": 26044.5,
-   "w": 698,
-   "h": 1,
-   "anim": {}
-  },
-  {
    "id": "sp425g",
    "type": "group",
    "x": 270.3,
@@ -4587,7 +4411,7 @@
    "y": 26393.3,
    "w": 460,
    "h": 25.2,
-   "text": "FAQs (frequently asked to me, by me)",
+   "text": "FAQs",
    "anim": {},
    "weight": 700
   },
@@ -4763,7 +4587,7 @@
    "y": 27184.6,
    "w": 460,
    "h": 38.6,
-   "text": "SPANDA supports a tour guide, so nothing arrives out of context. There will be instructions as well.",
+   "text": "SPANDA supports a tour guide, so nothing arrives out of context. Additional context is provided through instruction boards placed at the enclosures.",
    "anim": {},
    "size": "s"
   },
@@ -5048,7 +4872,7 @@
    "y": 22529.3,
    "w": 460,
    "h": 57.9,
-   "text": "A sign that introduces the animal as an individual: who they are, how to read them, what they sense, and how they are right now. The scientific name moves to the bottom. Inspired by Korkeasaari Zoo, Helsinki.",
+   "text": "A sign that introduces the animal as an individual: who they are, how to read them, what they sense, and how they are right now. The scientific name moves to the bottom.",
    "anim": {},
    "size": "s"
   },
@@ -6144,7 +5968,7 @@
    "y": 12676.7,
    "w": 460,
    "h": 77.9,
-   "text": "Before I settled on the zoo, I spoke to people about their relationships with animals: what they fear, why they care, and how close they like to get. Some were afraid of animals, some cared deeply, some liked to watch from a distance, and a few were activists.",
+   "text": "Before I settled on the zoo, I interviewed people about their relationships with animals: what they fear, why they care, and how close they like to get. Some were afraid of animals, some cared deeply, some liked to watch from a distance, and a few were activists.",
    "anim": {},
    "size": "s"
   },
@@ -6259,7 +6083,7 @@
    "y": 13207.6,
    "w": 460,
    "h": 49.7,
-   "text": "The guides and programmes already exist, so SPANDA is designed to support a guide.",
+   "text": "Capitalise on existing systems and infrastructure: guides and programmes already exist on the ground.",
    "anim": {},
    "weight": 700,
    "color": "accent"
