@@ -1,2096 +1,2097 @@
 {
- "v": 2,
- "intro": "intro",
- "guides": {
-  "x": [],
-  "y": []
- },
- "secGap": 150,
- "items": [
-  {
-   "id": "tt001t",
-   "type": "text",
-   "x": 32,
-   "y": 196,
-   "w": 698,
-   "h": 41.5,
-   "text": "Tomatone",
-   "weight": 700,
-   "size": "l",
-   "color": "accent"
+  "v": 2,
+  "intro": "intro",
+  "guides": {
+    "x": [],
+    "y": []
   },
-  {
-   "id": "tt002t",
-   "type": "text",
-   "x": 32,
-   "y": 266,
-   "w": 460,
-   "h": 50,
-   "text": "A musical timer that turns time into sound for people who lose track of it."
-  },
-  {
-   "id": "tt003t",
-   "type": "text",
-   "x": 32,
-   "y": 345,
-   "w": 698,
-   "h": 19.3,
-   "text": "Calm Technology · Interaction Design · Physical Computing · Sensory Augmentation · Design Assessment",
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "tt004p",
-   "type": "image",
-   "x": 32,
-   "y": 400,
-   "w": 936,
-   "h": 580,
-   "src": "projects/media/tomatone/photo-desk.jpg",
-   "fit": "cover",
-   "alt": "Tomatone cube resting on a student study desk beside notebooks and pens",
-   "anim": {
-    "enter": {
-     "on": true,
-     "from": {
-      "opacity": 0,
-      "y": 40
-     },
-     "dur": 0.9,
-     "delay": 0,
-     "ease": "out"
+  "secGap": 150,
+  "items": [
+    {
+      "id": "tt001t",
+      "type": "text",
+      "x": 32,
+      "y": 196,
+      "w": 698,
+      "h": 41.5,
+      "text": "Tomatone",
+      "weight": 700,
+      "size": "l",
+      "color": "accent"
+    },
+    {
+      "id": "tt002t",
+      "type": "text",
+      "x": 32,
+      "y": 266,
+      "w": 460,
+      "h": 49.7,
+      "text": "A musical timer that turns time into sound for people who lose track of it."
+    },
+    {
+      "id": "tt003t",
+      "type": "text",
+      "x": 32,
+      "y": 345,
+      "w": 698,
+      "h": 19.3,
+      "text": "Calm Technology · Interaction Design · Physical Computing · Sensory Augmentation · Design Assessment",
+      "size": "s",
+      "color": "mute"
+    },
+    {
+      "id": "tt004p",
+      "type": "image",
+      "x": 32,
+      "y": 400,
+      "w": 936,
+      "h": 580,
+      "src": "projects/media/tomatone/photo-desk.jpg",
+      "fit": "cover",
+      "alt": "Tomatone cube resting on a student study desk beside notebooks and pens",
+      "anim": {
+        "enter": {
+          "on": true,
+          "from": {
+            "opacity": 0,
+            "y": 40
+          },
+          "dur": 0.9,
+          "delay": 0,
+          "ease": "out"
+        }
+      },
+      "caption": "Tomatone on a study desk. Screenless, quiet, and designed to sit in the peripheral field.",
+      "capShow": true
+    },
+    {
+      "id": "tt005g",
+      "type": "group",
+      "x": 32,
+      "y": 1060,
+      "w": 460,
+      "h": 59.8,
+      "children": [
+        {
+          "id": "tt005a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 460,
+          "h": 19.3,
+          "text": "my role",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt005b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 460,
+          "h": 38.6,
+          "text": "Concept, interaction design, hardware gesture language, sound pacing curve, web prototype",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt006g",
+      "type": "group",
+      "x": 508,
+      "y": 1060,
+      "w": 222,
+      "h": 40.4,
+      "children": [
+        {
+          "id": "tt006a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "team",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt006b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "Solo project",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt007g",
+      "type": "group",
+      "x": 746,
+      "y": 1060,
+      "w": 222,
+      "h": 40.4,
+      "children": [
+        {
+          "id": "tt007a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "time",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt007b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "24-hour design assessment, 2025",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt008g",
+      "type": "group",
+      "x": 508,
+      "y": 1150,
+      "w": 222,
+      "h": 59.8,
+      "children": [
+        {
+          "id": "tt008a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "context",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt008b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "Cohesity Design Assessment",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt009g",
+      "type": "group",
+      "x": 746,
+      "y": 1150,
+      "w": 222,
+      "h": 40.4,
+      "children": [
+        {
+          "id": "tt009a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "where",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt009b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 19.3,
+          "text": "New Media Design, NID",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt010b",
+      "type": "box",
+      "fill": "faint",
+      "x": 32,
+      "y": 1240,
+      "w": 936,
+      "h": 1
+    },
+    {
+      "id": "tt011t",
+      "type": "text",
+      "x": 32,
+      "y": 1320,
+      "w": 222,
+      "h": 25.2,
+      "text": "overview",
+      "color": "mute",
+      "nav": "overview"
+    },
+    {
+      "id": "tt012t",
+      "type": "text",
+      "x": 270,
+      "y": 1320,
+      "w": 460,
+      "h": 25.2,
+      "text": "What Tomatone is",
+      "weight": 700
+    },
+    {
+      "id": "tt013t",
+      "type": "text",
+      "x": 270,
+      "y": 1370,
+      "w": 698,
+      "h": 152.1,
+      "text": "Your playlist, turned into a clock you can hear, and over time, one you can sense.",
+      "size": "l",
+      "bg": "accent"
+    },
+    {
+      "id": "tt014t",
+      "type": "text",
+      "x": 270,
+      "y": 1560,
+      "w": 460,
+      "h": 116.5,
+      "text": "Tomatone is a single-purpose musical timer that translates the passage of time into an evolving auditory experience. Instead of an abrasive buzzer or a countdown clock, your playlist and an underlying pulse speed up as your deadline nears. Through repeated exposure, users learn to recognise and internalise the musical cues, gradually developing an intuitive relationship with time.",
+      "size": "s"
+    },
+    {
+      "id": "tt015p",
+      "type": "image",
+      "x": 270,
+      "y": 1680,
+      "w": 341,
+      "h": 340,
+      "src": "projects/media/tomatone/photo-palm.jpg",
+      "fit": "cover",
+      "alt": "Tomatone resting in an open palm",
+      "round": 8,
+      "zoom": true,
+      "caption": "Screenless form factor held in hand.",
+      "capShow": true
+    },
+    {
+      "id": "tt016p",
+      "type": "image",
+      "x": 627,
+      "y": 1680,
+      "w": 341,
+      "h": 340,
+      "src": "projects/media/tomatone/photo-button.jpg",
+      "fit": "cover",
+      "alt": "Finger pressing olive button on top of Tomatone",
+      "round": 8,
+      "zoom": true,
+      "caption": "Olive-green top button for pairing and silent haptic mode.",
+      "capShow": true
+    },
+    {
+      "id": "tt017t",
+      "type": "text",
+      "x": 270,
+      "y": 2080,
+      "w": 460,
+      "h": 57.9,
+      "text": "Why a tomato? The name, the red colour, and the kitchen vocabulary come from the Pomodoro Technique, which was originally named after a tomato-shaped kitchen timer.",
+      "size": "s",
+      "color": "mute"
+    },
+    {
+      "id": "tt020t",
+      "type": "text",
+      "x": 32,
+      "y": 2260,
+      "w": 222,
+      "h": 25.2,
+      "text": "brief & words",
+      "color": "mute",
+      "nav": "brief & words"
+    },
+    {
+      "id": "tt021t",
+      "type": "text",
+      "x": 270,
+      "y": 2260,
+      "w": 460,
+      "h": 25.2,
+      "text": "Map, Extend, Panoramic",
+      "weight": 700
+    },
+    {
+      "id": "tt022t",
+      "type": "text",
+      "x": 270,
+      "y": 2305,
+      "w": 460,
+      "h": 38.6,
+      "text": "The prompt asked to pick a noun, an adjective, and a verb from a random generator, define a problem, and design a solution.",
+      "size": "s"
+    },
+    {
+      "id": "tt023g",
+      "type": "group",
+      "x": 270,
+      "y": 2370,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt023a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01 / Noun",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt023b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "MAP",
+          "weight": 700
+        },
+        {
+          "id": "tt023c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Shape, route, trace, plan. Mapping the structure of a session across the day.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt024g",
+      "type": "group",
+      "x": 508,
+      "y": 2370,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt024a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02 / Verb",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt024b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "EXTEND",
+          "weight": 700
+        },
+        {
+          "id": "tt024c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Stretch, add, reach beyond. Adding a perceptual channel to sense time passing.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt025g",
+      "type": "group",
+      "x": 746,
+      "y": 2370,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt025a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03 / Adjective",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt025b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "PANORAMIC",
+          "weight": 700
+        },
+        {
+          "id": "tt025c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Whole, wide, all at once. Perceiving elapsed time and remaining time in the periphery.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt026b",
+      "type": "box",
+      "fill": "faint",
+      "round": 8,
+      "x": 270,
+      "y": 2530,
+      "w": 698,
+      "h": 50,
+      "text": "Making the passage and structure of time more perceptible."
+    },
+    {
+      "id": "tt030t",
+      "type": "text",
+      "x": 32,
+      "y": 2680,
+      "w": 222,
+      "h": 25.2,
+      "text": "problem",
+      "color": "mute",
+      "nav": "problem"
+    },
+    {
+      "id": "tt031t",
+      "type": "text",
+      "x": 270,
+      "y": 2680,
+      "w": 460,
+      "h": 25.2,
+      "text": "Losing hours while absorbed",
+      "weight": 700
+    },
+    {
+      "id": "tt032t",
+      "type": "text",
+      "x": 270,
+      "y": 2730,
+      "w": 698,
+      "h": 110.5,
+      "text": "“I sit down to work for twenty minutes. I look up and it's been three hours.”",
+      "size": "l",
+      "bg": "accent"
+    },
+    {
+      "id": "tt033t",
+      "type": "text",
+      "x": 270,
+      "y": 2860,
+      "w": 460,
+      "h": 77.9,
+      "text": "Nothing interrupts you, you just never felt the time go. People with ADHD call this time blindness, and most students know a milder version of it. A friend of mine lives with the full version, and watching it up close was frustrating for both of us.",
+      "size": "s"
+    },
+    {
+      "id": "tt034t",
+      "type": "text",
+      "x": 270,
+      "y": 2965,
+      "w": 460,
+      "h": 38.6,
+      "text": "Clocks, timers, and calendars all work. But each requires remembering to look. And looking is least likely exactly when you are most absorbed.",
+      "size": "s"
+    },
+    {
+      "id": "tt035b",
+      "type": "box",
+      "fill": "line",
+      "round": 8,
+      "x": 270,
+      "y": 3060,
+      "w": 698,
+      "h": 115,
+      "text": "<span class=\"c-mute sz-s\">Problem statement</span><br><br><span class=\"w-700\">How might we help students become more aware of time passing while they're absorbed in their work, so they notice drift before it costs them?</span>"
+    },
+    {
+      "id": "tt040t",
+      "type": "text",
+      "x": 32,
+      "y": 3300,
+      "w": 222,
+      "h": 25.2,
+      "text": "secondary research",
+      "color": "mute",
+      "nav": "secondary research"
+    },
+    {
+      "id": "tt041t",
+      "type": "text",
+      "x": 270,
+      "y": 3300,
+      "w": 460,
+      "h": 25.2,
+      "text": "Time perception and music as an interface",
+      "weight": 700
+    },
+    {
+      "id": "tt042g",
+      "type": "group",
+      "x": 270,
+      "y": 3360,
+      "w": 341,
+      "h": 140,
+      "children": [
+        {
+          "id": "tt042a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 25.2,
+          "text": "Pleasant music shortens perceived time",
+          "weight": 700
+        },
+        {
+          "id": "tt042b",
+          "type": "text",
+          "x": 0,
+          "y": 50,
+          "w": 341,
+          "h": 57.8,
+          "text": "Tempo and pleasantness distort time judgment. Pleasant music makes durations feel shorter—which is why waiting rooms play it.",
+          "size": "s"
+        },
+        {
+          "id": "tt042c",
+          "type": "text",
+          "x": 0,
+          "y": 115,
+          "w": 341,
+          "h": 19.3,
+          "text": "Droit-Volet et al. (2013), Frontiers in Psychology",
+          "size": "s",
+          "color": "mute"
+        }
+      ]
+    },
+    {
+      "id": "tt043g",
+      "type": "group",
+      "x": 627,
+      "y": 3360,
+      "w": 341,
+      "h": 140,
+      "children": [
+        {
+          "id": "tt043a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 25.2,
+          "text": "Consistent timing deficits in ADHD",
+          "weight": 700
+        },
+        {
+          "id": "tt043b",
+          "type": "text",
+          "x": 0,
+          "y": 50,
+          "w": 341,
+          "h": 57.8,
+          "text": "A meta-analysis of 55 studies confirms significant timing deficits across duration discrimination and reproduction tasks.",
+          "size": "s"
+        },
+        {
+          "id": "tt043c",
+          "type": "text",
+          "x": 0,
+          "y": 115,
+          "w": 341,
+          "h": 19.3,
+          "text": "Marx et al. (2021), JAACAP",
+          "size": "s",
+          "color": "mute"
+        }
+      ]
+    },
+    {
+      "id": "tt044g",
+      "type": "group",
+      "x": 270,
+      "y": 3520,
+      "w": 341,
+      "h": 140,
+      "children": [
+        {
+          "id": "tt044a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 49.7,
+          "text": "Background music as an ADHD study habit",
+          "weight": 700
+        },
+        {
+          "id": "tt044b",
+          "type": "text",
+          "x": 0,
+          "y": 50,
+          "w": 341,
+          "h": 57.8,
+          "text": "Young adults with ADHD report listening to background music while studying significantly more than neurotypical peers, preferring stimulating tracks.",
+          "size": "s"
+        },
+        {
+          "id": "tt044c",
+          "type": "text",
+          "x": 0,
+          "y": 115,
+          "w": 341,
+          "h": 19.3,
+          "text": "Lachance, Pelland-Goulet & Gosselin (2024)",
+          "size": "s",
+          "color": "mute"
+        }
+      ]
+    },
+    {
+      "id": "tt045g",
+      "type": "group",
+      "x": 627,
+      "y": 3520,
+      "w": 341,
+      "h": 140,
+      "children": [
+        {
+          "id": "tt045a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 49.7,
+          "text": "Tempo communicates urgency without volume",
+          "weight": 700
+        },
+        {
+          "id": "tt045b",
+          "type": "text",
+          "x": 0,
+          "y": 50,
+          "w": 341,
+          "h": 57.8,
+          "text": "Acoustic rate is the most efficient parameter communicating urgency. Speeding up makes time feel heavier, while volume only adds annoyance.",
+          "size": "s"
+        },
+        {
+          "id": "tt045c",
+          "type": "text",
+          "x": 0,
+          "y": 115,
+          "w": 341,
+          "h": 19.3,
+          "text": "Hellier, Edworthy & Dennis (1993), Ergonomics",
+          "size": "s",
+          "color": "mute"
+        }
+      ]
+    },
+    {
+      "id": "tt046t",
+      "type": "text",
+      "x": 270,
+      "y": 3700,
+      "w": 698,
+      "h": 110.5,
+      "text": "The music they study to is the very thing making their time disappear.",
+      "size": "l",
+      "bg": "accent"
+    },
+    {
+      "id": "tt050t",
+      "type": "text",
+      "x": 32,
+      "y": 3920,
+      "w": 222,
+      "h": 25.2,
+      "text": "precedents",
+      "color": "mute",
+      "nav": "precedents"
+    },
+    {
+      "id": "tt051t",
+      "type": "text",
+      "x": 270,
+      "y": 3920,
+      "w": 460,
+      "h": 25.2,
+      "text": "What already exists",
+      "weight": 700
+    },
+    {
+      "id": "tt052g",
+      "type": "group",
+      "x": 270,
+      "y": 3975,
+      "w": 222,
+      "h": 135,
+      "children": [
+        {
+          "id": "tt052a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01 / Takt (CHI 2016)",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt052b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Wearable haptic pulse",
+          "weight": 700
+        },
+        {
+          "id": "tt052c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 78,
+          "text": "Taught: sensing time through the body. Shortfall: a steady pulse fades into the background through sensory habituation.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt053g",
+      "type": "group",
+      "x": 508,
+      "y": 3975,
+      "w": 222,
+      "h": 135,
+      "children": [
+        {
+          "id": "tt053a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02 / Endel & Brain.fm",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt053b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Generative focus audio",
+          "weight": 700
+        },
+        {
+          "id": "tt053c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 78,
+          "text": "Taught: soundscapes anchor deep work. Shortfall: Pomodoro timer sits beside music; sound itself doesn't carry time.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt054g",
+      "type": "group",
+      "x": 746,
+      "y": 3975,
+      "w": 222,
+      "h": 135,
+      "children": [
+        {
+          "id": "tt054a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03 / Time Timer",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt054b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Physical shrinking disk",
+          "weight": 700
+        },
+        {
+          "id": "tt054c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 78,
+          "text": "Taught: glanceable remaining time. Shortfall: requires direct line-of-sight; fails when absorbed in work on screen.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt055b",
+      "type": "box",
+      "fill": "line",
+      "round": 8,
+      "x": 270,
+      "y": 4140,
+      "w": 698,
+      "h": 60,
+      "text": "The open space: an object that doesn't just tell you, but lets you feel how far through a session you are, using sound."
+    },
+    {
+      "id": "tt060t",
+      "type": "text",
+      "x": 32,
+      "y": 4340,
+      "w": 222,
+      "h": 25.2,
+      "text": "principles",
+      "color": "mute",
+      "nav": "principles"
+    },
+    {
+      "id": "tt061t",
+      "type": "text",
+      "x": 270,
+      "y": 4340,
+      "w": 460,
+      "h": 25.2,
+      "text": "From research to design",
+      "weight": 700
+    },
+    {
+      "id": "tt062g",
+      "type": "group",
+      "x": 270,
+      "y": 4395,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt062a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt062b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Peripheral",
+          "weight": 700
+        },
+        {
+          "id": "tt062c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Zero screen or countdown digits to glance at while working. Sound sits quietly in the background.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt063g",
+      "type": "group",
+      "x": 508,
+      "y": 4395,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt063a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt063b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Learnable",
+          "weight": 700
+        },
+        {
+          "id": "tt063c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "A progressive sensory curve that users internalise over repeated sessions, rebuilding time intuition.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt064g",
+      "type": "group",
+      "x": 746,
+      "y": 4395,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt064a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt064b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Personal",
+          "weight": 700
+        },
+        {
+          "id": "tt064c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "You choose your own music jars, and you control the heat if urgency feels too strong.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt065t",
+      "type": "text",
+      "x": 270,
+      "y": 4550,
+      "w": 460,
+      "h": 38.6,
+      "text": "The parking-sensor insight: steady signals disappear. The change itself must be the signal, quickening as the deadline approaches.",
+      "size": "s",
+      "color": "mute"
+    },
+    {
+      "id": "tt070t",
+      "type": "text",
+      "x": 32,
+      "y": 4730,
+      "w": 222,
+      "h": 25.2,
+      "text": "gestures",
+      "color": "mute",
+      "nav": "gestures"
+    },
+    {
+      "id": "tt071t",
+      "type": "text",
+      "x": 270,
+      "y": 4730,
+      "w": 460,
+      "h": 25.2,
+      "text": "Tactile physical companion",
+      "weight": 700
+    },
+    {
+      "id": "tt072t",
+      "type": "text",
+      "x": 270,
+      "y": 4775,
+      "w": 460,
+      "h": 77.9,
+      "text": "Tomatone is a screenless tactile cube with an internal inertial sensor. Because it has a front speaker grille, full rolls would muffle sound. All interactions use natural rocking and tilting gestures that always return to its feet.",
+      "size": "s"
+    },
+    {
+      "id": "tt073g",
+      "type": "group",
+      "x": 270,
+      "y": 4860,
+      "w": 222,
+      "h": 135,
+      "children": [
+        {
+          "id": "tt073a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Setting up",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt073b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Rock forward / back",
+          "weight": 700
+        },
+        {
+          "id": "tt073c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "+5 / −5 minutes per notch, mirrored live by the dial in the app. Set down to start.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt074g",
+      "type": "group",
+      "x": 508,
+      "y": 4860,
+      "w": 222,
+      "h": 135,
+      "children": [
+        {
+          "id": "tt074a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "During session",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt074b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Tilt left / right",
+          "weight": 700
+        },
+        {
+          "id": "tt074c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Turn down or up the heat (urgency). Shake to shuffle mood. Flip upside down to finish early.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt075g",
+      "type": "group",
+      "x": 746,
+      "y": 4860,
+      "w": 222,
+      "h": 135,
+      "children": [
+        {
+          "id": "tt075a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Anytime",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt075b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Double-tap",
+          "weight": 700
+        },
+        {
+          "id": "tt075c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 78,
+          "text": "Time-left chime: plays current pulse speed for 2 seconds. Double-press button toggles silent vibration mode.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt080t",
+      "type": "text",
+      "x": 32,
+      "y": 5130,
+      "w": 222,
+      "h": 25.2,
+      "text": "sound architecture",
+      "color": "mute",
+      "nav": "sound architecture"
+    },
+    {
+      "id": "tt081t",
+      "type": "text",
+      "x": 270,
+      "y": 5130,
+      "w": 460,
+      "h": 25.2,
+      "text": "How time becomes music",
+      "weight": 700
+    },
+    {
+      "id": "tt082g",
+      "type": "group",
+      "x": 270,
+      "y": 5185,
+      "w": 341,
+      "h": 100,
+      "children": [
+        {
+          "id": "tt082a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt082b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Prep (first ~10%)",
+          "weight": 700
+        },
+        {
+          "id": "tt082c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "Familiar seed songs ease task-initiation inertia and lower startup friction.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt083g",
+      "type": "group",
+      "x": 627,
+      "y": 5185,
+      "w": 341,
+      "h": 100,
+      "children": [
+        {
+          "id": "tt083a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt083b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Simmer (the long middle)",
+          "weight": 700
+        },
+        {
+          "id": "tt083c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "Steady mid-tempo beat; background pulse holds steady out of the way.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt084g",
+      "type": "group",
+      "x": 270,
+      "y": 5305,
+      "w": 341,
+      "h": 100,
+      "children": [
+        {
+          "id": "tt084a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt084b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Boil (last ~25%)",
+          "weight": 700
+        },
+        {
+          "id": "tt084c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "Faster tracks, a faster pulse, and a soft tick on the off-beat signal the approaching end.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt085g",
+      "type": "group",
+      "x": 627,
+      "y": 5305,
+      "w": 341,
+      "h": 100,
+      "children": [
+        {
+          "id": "tt085a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "04",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt085b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Plate (the close)",
+          "weight": 700
+        },
+        {
+          "id": "tt085c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "One closing track and a harmonic resolution chord resolve the piece.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt086g",
+      "type": "group",
+      "x": 270,
+      "y": 5440,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt086a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Layer 1",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt086b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Your music",
+          "weight": 700
+        },
+        {
+          "id": "tt086c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Your songs, ordered by rising tempo, never unnaturally sped up or distorted.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt087g",
+      "type": "group",
+      "x": 508,
+      "y": 5440,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt087a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Layer 2",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt087b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Pulse underneath",
+          "weight": 700
+        },
+        {
+          "id": "tt087c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Runs quietly throughout the session. Steady in Simmer, speeds up in Boil. Faster, never louder.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt088g",
+      "type": "group",
+      "x": 746,
+      "y": 5440,
+      "w": 222,
+      "h": 125,
+      "children": [
+        {
+          "id": "tt088a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "Layer 3",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt088b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "A soft tick",
+          "weight": 700
+        },
+        {
+          "id": "tt088c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 38.6,
+          "text": "Joins the pulse on the off-beat, only during Boil.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt089t",
+      "type": "text",
+      "x": 270,
+      "y": 5600,
+      "w": 460,
+      "h": 19.3,
+      "text": "Too much, or too subtle? Tilt left to lower the heat, tilt right to push.",
+      "size": "s",
+      "color": "mute"
+    },
+    {
+      "id": "tt090t",
+      "type": "text",
+      "x": 32,
+      "y": 5770,
+      "w": 222,
+      "h": 25.2,
+      "text": "critical flow",
+      "color": "mute",
+      "nav": "critical flow"
+    },
+    {
+      "id": "tt091t",
+      "type": "text",
+      "x": 270,
+      "y": 5770,
+      "w": 460,
+      "h": 25.2,
+      "text": "Ira's 90-minute thesis session",
+      "weight": 700
+    },
+    {
+      "id": "tt092g",
+      "type": "group",
+      "x": 270,
+      "y": 5825,
+      "w": 341,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt092a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "01 · Her day",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt092b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Kitchen view",
+          "weight": 700
+        },
+        {
+          "id": "tt092c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "4:30 pm. Thesis draft due at 6:00 pm. Cube sits on her desk beside her laptop.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt093g",
+      "type": "group",
+      "x": 627,
+      "y": 5825,
+      "w": 341,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt093a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "02 · Pick it up",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt093b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Dial setup",
+          "weight": 700
+        },
+        {
+          "id": "tt093c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "Lifting cube opens dial setup on phone. She rocks the cube to set 90 minutes.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt094g",
+      "type": "group",
+      "x": 270,
+      "y": 5950,
+      "w": 341,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt094a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "03 · Set it down",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt094b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Prep phase",
+          "weight": 700
+        },
+        {
+          "id": "tt094c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "Setting cube down starts the session. Seed songs play as a quiet pulse begins.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt095g",
+      "type": "group",
+      "x": 627,
+      "y": 5950,
+      "w": 341,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt095a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "04 · Simmer & distraction",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt095b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Calm audio ducking",
+          "weight": 700
+        },
+        {
+          "id": "tt095c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "She picks up her phone. The music dips softly instead of buzzing. Putting the phone down restores it.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt096g",
+      "type": "group",
+      "x": 270,
+      "y": 6075,
+      "w": 341,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt096a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "05 · Boil",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt096b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Heat adjustment",
+          "weight": 700
+        },
+        {
+          "id": "tt096c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 38.5,
+          "text": "Tracks get brighter, pulse accelerates, tick appears. Feeling overwhelmed, she tilts cube left to ease off.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt097g",
+      "type": "group",
+      "x": 627,
+      "y": 6075,
+      "w": 341,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt097a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 341,
+          "h": 19.3,
+          "text": "06 · Plate",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt097b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 341,
+          "h": 25.2,
+          "text": "Guess before reveal",
+          "weight": 700
+        },
+        {
+          "id": "tt097c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 341,
+          "h": 57.8,
+          "text": "Music resolves. Prompt asks: “How long do you think that session was?” She guesses 1 h 10 min, then locks it in.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt098g",
+      "type": "group",
+      "x": 270,
+      "y": 6200,
+      "w": 698,
+      "h": 105,
+      "children": [
+        {
+          "id": "tt098a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 698,
+          "h": 19.3,
+          "text": "07 · Notebook",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt098b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 698,
+          "h": 25.2,
+          "text": "Longitudinal reflection",
+          "weight": 700
+        },
+        {
+          "id": "tt098c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 698,
+          "h": 38.6,
+          "text": "Actual: 1 h 35 min (off by 25 min). Over weeks of sessions, the Notebook's error trend shrinks as her internal sense of time sharpens.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt100t",
+      "type": "text",
+      "x": 32,
+      "y": 6440,
+      "w": 222,
+      "h": 25.2,
+      "text": "prototype",
+      "color": "mute",
+      "nav": "prototype"
+    },
+    {
+      "id": "tt101t",
+      "type": "text",
+      "x": 270,
+      "y": 6440,
+      "w": 460,
+      "h": 25.2,
+      "text": "Interactive simulator",
+      "weight": 700
+    },
+    {
+      "id": "tt102t",
+      "type": "text",
+      "x": 270,
+      "y": 6485,
+      "w": 460,
+      "h": 57.9,
+      "text": "The interactive prototype pairs the companion mobile screen with a 3D simulated cube and Web Audio synthesizer. Try stepping through the flow below.",
+      "size": "s"
+    },
+    {
+      "id": "tt103e",
+      "type": "embed",
+      "src": "https://assignment1-nine-omega.vercel.app/prototype.html",
+      "x": 32,
+      "y": 6545,
+      "w": 936,
+      "h": 680,
+      "round": 8,
+      "caption": "Live interactive simulator: step from Onboarding through Kitchen, Setup, Simmer, Boil, and the Plated reflection reflex.",
+      "capShow": true
+    },
+    {
+      "id": "tt104u",
+      "type": "button",
+      "look": "line",
+      "text": "Open prototype in new window",
+      "x": 32,
+      "y": 7280,
+      "w": 250,
+      "h": 35,
+      "link": {
+        "href": "https://assignment1-nine-omega.vercel.app/prototype.html",
+        "newTab": true
+      },
+      "size": "s",
+      "anim": {}
+    },
+    {
+      "id": "tt110t",
+      "type": "text",
+      "x": 32,
+      "y": 7470,
+      "w": 222,
+      "h": 25.2,
+      "text": "learning a sense",
+      "color": "mute",
+      "nav": "learning a sense"
+    },
+    {
+      "id": "tt111t",
+      "type": "text",
+      "x": 270,
+      "y": 7470,
+      "w": 460,
+      "h": 25.2,
+      "text": "David Eagleman sensory substitution hypothesis",
+      "weight": 700
+    },
+    {
+      "id": "tt112t",
+      "type": "text",
+      "x": 270,
+      "y": 7520,
+      "w": 698,
+      "h": 110.5,
+      "text": "The goal is to need Tomatone less over time.",
+      "size": "l",
+      "bg": "accent"
+    },
+    {
+      "id": "tt113t",
+      "type": "text",
+      "x": 270,
+      "y": 7660,
+      "w": 460,
+      "h": 57.9,
+      "text": "Following David Eagleman's sensory-substitution research, the brain learns any input channel that carries consistent, changing information. Over weeks, users progress through three stages:",
+      "size": "s"
+    },
+    {
+      "id": "tt114g",
+      "type": "group",
+      "x": 270,
+      "y": 7760,
+      "w": 222,
+      "h": 120,
+      "children": [
+        {
+          "id": "tt114a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "01",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt114b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Exposure",
+          "weight": 700
+        },
+        {
+          "id": "tt114c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 38.6,
+          "text": "Listening to study sessions, noticing the four cooking phases.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt115g",
+      "type": "group",
+      "x": 508,
+      "y": 7760,
+      "w": 222,
+      "h": 120,
+      "children": [
+        {
+          "id": "tt115a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "02",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt115b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Association",
+          "weight": 700
+        },
+        {
+          "id": "tt115c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 38.6,
+          "text": "Linking rising tempo and tick rates to elapsed time.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt116g",
+      "type": "group",
+      "x": 746,
+      "y": 7760,
+      "w": 222,
+      "h": 120,
+      "children": [
+        {
+          "id": "tt116a",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 222,
+          "h": 19.3,
+          "text": "03",
+          "size": "s",
+          "color": "mute"
+        },
+        {
+          "id": "tt116b",
+          "type": "text",
+          "x": 0,
+          "y": 20,
+          "w": 222,
+          "h": 25.2,
+          "text": "Internalisation",
+          "weight": 700
+        },
+        {
+          "id": "tt116c",
+          "type": "text",
+          "x": 0,
+          "y": 46,
+          "w": 222,
+          "h": 57.9,
+          "text": "Developing an intuitive bodily feel for time passing without needing any device.",
+          "size": "s"
+        }
+      ]
+    },
+    {
+      "id": "tt117t",
+      "type": "text",
+      "x": 270,
+      "y": 7910,
+      "w": 460,
+      "h": 57.9,
+      "text": "Next steps include testing the Notebook estimation curve across a longitudinal 4-week cohort, and exploring licensed adaptive audio partnerships with calm soundscape platforms.",
+      "size": "s",
+      "color": "mute"
+    },
+    {
+      "id": "tt120t",
+      "type": "text",
+      "x": 32,
+      "y": 8080,
+      "w": 222,
+      "h": 25.2,
+      "text": "references",
+      "color": "mute",
+      "nav": "references"
+    },
+    {
+      "id": "tt121t",
+      "type": "text",
+      "x": 270,
+      "y": 8080,
+      "w": 460,
+      "h": 25.2,
+      "text": "Literature and citations",
+      "weight": 700
+    },
+    {
+      "id": "tt122t",
+      "type": "text",
+      "x": 270,
+      "y": 8125,
+      "w": 698,
+      "h": 271.5,
+      "text": "Droit-Volet, S., Ramos, D., Bueno, J. L., & Bigand, E. (2013). Music, emotion, and time perception. <i>Frontiers in Psychology</i>.<br><br>Marx, I. et al. (2021). Time perception in children and adolescents with ADHD: A meta-analysis. <i>JAACAP</i>.<br><br>Lachance, M., Pelland-Goulet, P., & Gosselin, N. (2024). Background music preferences and studying in ADHD. <i>Frontiers in Psychology</i>.<br><br>Hellier, E. J., Edworthy, J., & Dennis, I. (1993). Improving auditory warning design: Quantifying acoustic parameters. <i>Ergonomics</i>.<br><br>Muranaka, Y. et al. (2021). Peripheral auditory displays for task awareness. <i>ICAD</i>.<br><br>Takt (2016). A wearable timepiece for sensing time through the body. <i>CHI '16 Extended Abstracts</i>.",
+      "size": "s",
+      "color": "mute"
     }
-   },
-   "caption": "Tomatone on a study desk. Screenless, quiet, and designed to sit in the peripheral field.",
-   "capShow": true
-  },
-  {
-   "id": "tt005g",
-   "type": "group",
-   "x": 32,
-   "y": 1060,
-   "w": 460,
-   "h": 59.8,
-   "children": [
-    {
-     "id": "tt005a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 460,
-     "h": 19.3,
-     "text": "my role",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt005b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 460,
-     "h": 38.6,
-     "text": "Concept, interaction design, hardware gesture language, sound pacing curve, web prototype",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt006g",
-   "type": "group",
-   "x": 508,
-   "y": 1060,
-   "w": 222,
-   "h": 40.4,
-   "children": [
-    {
-     "id": "tt006a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "team",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt006b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 19.3,
-     "text": "Solo project",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt007g",
-   "type": "group",
-   "x": 746,
-   "y": 1060,
-   "w": 222,
-   "h": 40.4,
-   "children": [
-    {
-     "id": "tt007a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "time",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt007b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 19.3,
-     "text": "24-hour design assessment, 2025",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt008g",
-   "type": "group",
-   "x": 508,
-   "y": 1150,
-   "w": 222,
-   "h": 59.8,
-   "children": [
-    {
-     "id": "tt008a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "context",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt008b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 38.6,
-     "text": "Cohesity Design Assessment",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt009g",
-   "type": "group",
-   "x": 746,
-   "y": 1150,
-   "w": 222,
-   "h": 40.4,
-   "children": [
-    {
-     "id": "tt009a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "where",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt009b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 19.3,
-     "text": "New Media Design, NID",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt010b",
-   "type": "box",
-   "fill": "faint",
-   "x": 32,
-   "y": 1240,
-   "w": 936,
-   "h": 1
-  },
-  {
-   "id": "tt011t",
-   "type": "text",
-   "x": 32,
-   "y": 1320,
-   "w": 222,
-   "h": 25.2,
-   "text": "overview",
-   "color": "mute",
-   "nav": "overview"
-  },
-  {
-   "id": "tt012t",
-   "type": "text",
-   "x": 270,
-   "y": 1320,
-   "w": 460,
-   "h": 25.2,
-   "text": "What Tomatone is",
-   "weight": 700
-  },
-  {
-   "id": "tt013t",
-   "type": "text",
-   "x": 270,
-   "y": 1370,
-   "w": 698,
-   "h": 120,
-   "text": "Your playlist, turned into a clock you can hear, and over time, one you can sense.",
-   "size": "l",
-   "bg": "accent"
-  },
-  {
-   "id": "tt014t",
-   "type": "text",
-   "x": 270,
-   "y": 1560,
-   "w": 460,
-   "h": 80,
-   "text": "Tomatone is a single-purpose musical timer that translates the passage of time into an evolving auditory experience. Instead of an abrasive buzzer or a countdown clock, your playlist and an underlying pulse speed up as your deadline nears. Through repeated exposure, users learn to recognise and internalise the musical cues, gradually developing an intuitive relationship with time.",
-   "size": "s"
-  },
-  {
-   "id": "tt015p",
-   "type": "image",
-   "x": 270,
-   "y": 1680,
-   "w": 341,
-   "h": 340,
-   "src": "projects/media/tomatone/photo-palm.jpg",
-   "fit": "cover",
-   "alt": "Tomatone resting in an open palm",
-   "round": 8,
-   "zoom": true,
-   "caption": "Screenless form factor held in hand.",
-   "capShow": true
-  },
-  {
-   "id": "tt016p",
-   "type": "image",
-   "x": 627,
-   "y": 1680,
-   "w": 341,
-   "h": 340,
-   "src": "projects/media/tomatone/photo-button.jpg",
-   "fit": "cover",
-   "alt": "Finger pressing olive button on top of Tomatone",
-   "round": 8,
-   "zoom": true,
-   "caption": "Olive-green top button for pairing and silent haptic mode.",
-   "capShow": true
-  },
-  {
-   "id": "tt017t",
-   "type": "text",
-   "x": 270,
-   "y": 2080,
-   "w": 460,
-   "h": 45,
-   "text": "Why a tomato? The name, the red colour, and the kitchen vocabulary come from the Pomodoro Technique, which was originally named after a tomato-shaped kitchen timer.",
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "tt020t",
-   "type": "text",
-   "x": 32,
-   "y": 2260,
-   "w": 222,
-   "h": 25.2,
-   "text": "brief & words",
-   "color": "mute",
-   "nav": "brief & words"
-  },
-  {
-   "id": "tt021t",
-   "type": "text",
-   "x": 270,
-   "y": 2260,
-   "w": 460,
-   "h": 25.2,
-   "text": "Map, Extend, Panoramic",
-   "weight": 700
-  },
-  {
-   "id": "tt022t",
-   "type": "text",
-   "x": 270,
-   "y": 2305,
-   "w": 460,
-   "h": 40,
-   "text": "The prompt asked to pick a noun, an adjective, and a verb from a random generator, define a problem, and design a solution.",
-   "size": "s"
-  },
-  {
-   "id": "tt023g",
-   "type": "group",
-   "x": 270,
-   "y": 2370,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt023a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "01 / Noun",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt023b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "MAP",
-     "weight": 700
-    },
-    {
-     "id": "tt023c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Shape, route, trace, plan. Mapping the structure of a session across the day.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt024g",
-   "type": "group",
-   "x": 508,
-   "y": 2370,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt024a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "02 / Verb",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt024b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "EXTEND",
-     "weight": 700
-    },
-    {
-     "id": "tt024c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Stretch, add, reach beyond. Adding a perceptual channel to sense time passing.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt025g",
-   "type": "group",
-   "x": 746,
-   "y": 2370,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt025a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "03 / Adjective",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt025b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "PANORAMIC",
-     "weight": 700
-    },
-    {
-     "id": "tt025c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Whole, wide, all at once. Perceiving elapsed time and remaining time in the periphery.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt026b",
-   "type": "box",
-   "fill": "faint",
-   "round": 8,
-   "x": 270,
-   "y": 2530,
-   "w": 698,
-   "h": 50,
-   "text": "Making the passage and structure of time more perceptible."
-  },
-  {
-   "id": "tt030t",
-   "type": "text",
-   "x": 32,
-   "y": 2680,
-   "w": 222,
-   "h": 25.2,
-   "text": "problem",
-   "color": "mute",
-   "nav": "problem"
-  },
-  {
-   "id": "tt031t",
-   "type": "text",
-   "x": 270,
-   "y": 2680,
-   "w": 460,
-   "h": 25.2,
-   "text": "Losing hours while absorbed",
-   "weight": 700
-  },
-  {
-   "id": "tt032t",
-   "type": "text",
-   "x": 270,
-   "y": 2730,
-   "w": 698,
-   "h": 85,
-   "text": "“I sit down to work for twenty minutes. I look up and it's been three hours.”",
-   "size": "l",
-   "bg": "accent"
-  },
-  {
-   "id": "tt033t",
-   "type": "text",
-   "x": 270,
-   "y": 2860,
-   "w": 460,
-   "h": 80,
-   "text": "Nothing interrupts you, you just never felt the time go. People with ADHD call this time blindness, and most students know a milder version of it. A friend of mine lives with the full version, and watching it up close was frustrating for both of us.",
-   "size": "s"
-  },
-  {
-   "id": "tt034t",
-   "type": "text",
-   "x": 270,
-   "y": 2965,
-   "w": 460,
-   "h": 60,
-   "text": "Clocks, timers, and calendars all work. But each requires remembering to look. And looking is least likely exactly when you are most absorbed.",
-   "size": "s"
-  },
-  {
-   "id": "tt035b",
-   "type": "box",
-   "fill": "line",
-   "round": 8,
-   "x": 270,
-   "y": 3060,
-   "w": 698,
-   "h": 115,
-   "text": "<span class=\"c-mute sz-s\">Problem statement</span><br><br><span class=\"w-700\">How might we help students become more aware of time passing while they're absorbed in their work, so they notice drift before it costs them?</span>"
-  },
-  {
-   "id": "tt040t",
-   "type": "text",
-   "x": 32,
-   "y": 3300,
-   "w": 222,
-   "h": 25.2,
-   "text": "secondary research",
-   "color": "mute",
-   "nav": "secondary research"
-  },
-  {
-   "id": "tt041t",
-   "type": "text",
-   "x": 270,
-   "y": 3300,
-   "w": 460,
-   "h": 25.2,
-   "text": "Time perception and music as an interface",
-   "weight": 700
-  },
-  {
-   "id": "tt042g",
-   "type": "group",
-   "x": 270,
-   "y": 3360,
-   "w": 341,
-   "h": 140,
-   "children": [
-    {
-     "id": "tt042a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 45,
-     "text": "Pleasant music shortens perceived time",
-     "weight": 700
-    },
-    {
-     "id": "tt042b",
-     "type": "text",
-     "x": 0,
-     "y": 50,
-     "w": 341,
-     "h": 58,
-     "text": "Tempo and pleasantness distort time judgment. Pleasant music makes durations feel shorter—which is why waiting rooms play it.",
-     "size": "s"
-    },
-    {
-     "id": "tt042c",
-     "type": "text",
-     "x": 0,
-     "y": 115,
-     "w": 341,
-     "h": 20,
-     "text": "Droit-Volet et al. (2013), Frontiers in Psychology",
-     "size": "s",
-     "color": "mute"
-    }
-   ]
-  },
-  {
-   "id": "tt043g",
-   "type": "group",
-   "x": 627,
-   "y": 3360,
-   "w": 341,
-   "h": 140,
-   "children": [
-    {
-     "id": "tt043a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 45,
-     "text": "Consistent timing deficits in ADHD",
-     "weight": 700
-    },
-    {
-     "id": "tt043b",
-     "type": "text",
-     "x": 0,
-     "y": 50,
-     "w": 341,
-     "h": 58,
-     "text": "A meta-analysis of 55 studies confirms significant timing deficits across duration discrimination and reproduction tasks.",
-     "size": "s"
-    },
-    {
-     "id": "tt043c",
-     "type": "text",
-     "x": 0,
-     "y": 115,
-     "w": 341,
-     "h": 20,
-     "text": "Marx et al. (2021), JAACAP",
-     "size": "s",
-     "color": "mute"
-    }
-   ]
-  },
-  {
-   "id": "tt044g",
-   "type": "group",
-   "x": 270,
-   "y": 3520,
-   "w": 341,
-   "h": 140,
-   "children": [
-    {
-     "id": "tt044a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 45,
-     "text": "Background music as an ADHD study habit",
-     "weight": 700
-    },
-    {
-     "id": "tt044b",
-     "type": "text",
-     "x": 0,
-     "y": 50,
-     "w": 341,
-     "h": 58,
-     "text": "Young adults with ADHD report listening to background music while studying significantly more than neurotypical peers, preferring stimulating tracks.",
-     "size": "s"
-    },
-    {
-     "id": "tt044c",
-     "type": "text",
-     "x": 0,
-     "y": 115,
-     "w": 341,
-     "h": 20,
-     "text": "Lachance, Pelland-Goulet & Gosselin (2024)",
-     "size": "s",
-     "color": "mute"
-    }
-   ]
-  },
-  {
-   "id": "tt045g",
-   "type": "group",
-   "x": 627,
-   "y": 3520,
-   "w": 341,
-   "h": 140,
-   "children": [
-    {
-     "id": "tt045a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 45,
-     "text": "Tempo communicates urgency without volume",
-     "weight": 700
-    },
-    {
-     "id": "tt045b",
-     "type": "text",
-     "x": 0,
-     "y": 50,
-     "w": 341,
-     "h": 58,
-     "text": "Acoustic rate is the most efficient parameter communicating urgency. Speeding up makes time feel heavier, while volume only adds annoyance.",
-     "size": "s"
-    },
-    {
-     "id": "tt045c",
-     "type": "text",
-     "x": 0,
-     "y": 115,
-     "w": 341,
-     "h": 20,
-     "text": "Hellier, Edworthy & Dennis (1993), Ergonomics",
-     "size": "s",
-     "color": "mute"
-    }
-   ]
-  },
-  {
-   "id": "tt046t",
-   "type": "text",
-   "x": 270,
-   "y": 3700,
-   "w": 698,
-   "h": 75,
-   "text": "The music they study to is the very thing making their time disappear.",
-   "size": "l",
-   "bg": "accent"
-  },
-  {
-   "id": "tt050t",
-   "type": "text",
-   "x": 32,
-   "y": 3920,
-   "w": 222,
-   "h": 25.2,
-   "text": "precedents",
-   "color": "mute",
-   "nav": "precedents"
-  },
-  {
-   "id": "tt051t",
-   "type": "text",
-   "x": 270,
-   "y": 3920,
-   "w": 460,
-   "h": 25.2,
-   "text": "What already exists",
-   "weight": 700
-  },
-  {
-   "id": "tt052g",
-   "type": "group",
-   "x": 270,
-   "y": 3975,
-   "w": 222,
-   "h": 135,
-   "children": [
-    {
-     "id": "tt052a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "01 / Takt (CHI 2016)",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt052b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Wearable haptic pulse",
-     "weight": 700
-    },
-    {
-     "id": "tt052c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 77.9,
-     "text": "Taught: sensing time through the body. Shortfall: a steady pulse fades into the background through sensory habituation.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt053g",
-   "type": "group",
-   "x": 508,
-   "y": 3975,
-   "w": 222,
-   "h": 135,
-   "children": [
-    {
-     "id": "tt053a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "02 / Endel & Brain.fm",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt053b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Generative focus audio",
-     "weight": 700
-    },
-    {
-     "id": "tt053c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 77.9,
-     "text": "Taught: soundscapes anchor deep work. Shortfall: Pomodoro timer sits beside music; sound itself doesn't carry time.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt054g",
-   "type": "group",
-   "x": 746,
-   "y": 3975,
-   "w": 222,
-   "h": 135,
-   "children": [
-    {
-     "id": "tt054a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "03 / Time Timer",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt054b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Physical shrinking disk",
-     "weight": 700
-    },
-    {
-     "id": "tt054c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 77.9,
-     "text": "Taught: glanceable remaining time. Shortfall: requires direct line-of-sight; fails when absorbed in work on screen.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt055b",
-   "type": "box",
-   "fill": "line",
-   "round": 8,
-   "x": 270,
-   "y": 4140,
-   "w": 698,
-   "h": 60,
-   "text": "The open space: an object that doesn't just tell you, but lets you feel how far through a session you are, using sound."
-  },
-  {
-   "id": "tt060t",
-   "type": "text",
-   "x": 32,
-   "y": 4340,
-   "w": 222,
-   "h": 25.2,
-   "text": "principles",
-   "color": "mute",
-   "nav": "principles"
-  },
-  {
-   "id": "tt061t",
-   "type": "text",
-   "x": 270,
-   "y": 4340,
-   "w": 460,
-   "h": 25.2,
-   "text": "From research to design",
-   "weight": 700
-  },
-  {
-   "id": "tt062g",
-   "type": "group",
-   "x": 270,
-   "y": 4395,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt062a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "01",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt062b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Peripheral",
-     "weight": 700
-    },
-    {
-     "id": "tt062c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 58,
-     "text": "Zero screen or countdown digits to glance at while working. Sound sits quietly in the background.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt063g",
-   "type": "group",
-   "x": 508,
-   "y": 4395,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt063a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "02",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt063b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Learnable",
-     "weight": 700
-    },
-    {
-     "id": "tt063c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 58,
-     "text": "A progressive sensory curve that users internalise over repeated sessions, rebuilding time intuition.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt064g",
-   "type": "group",
-   "x": 746,
-   "y": 4395,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt064a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "03",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt064b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Personal",
-     "weight": 700
-    },
-    {
-     "id": "tt064c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 58,
-     "text": "You choose your own music jars, and you control the heat if urgency feels too strong.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt065t",
-   "type": "text",
-   "x": 270,
-   "y": 4550,
-   "w": 460,
-   "h": 45,
-   "text": "The parking-sensor insight: steady signals disappear. The change itself must be the signal, quickening as the deadline approaches.",
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "tt070t",
-   "type": "text",
-   "x": 32,
-   "y": 4730,
-   "w": 222,
-   "h": 25.2,
-   "text": "gestures",
-   "color": "mute",
-   "nav": "gestures"
-  },
-  {
-   "id": "tt071t",
-   "type": "text",
-   "x": 270,
-   "y": 4730,
-   "w": 460,
-   "h": 25.2,
-   "text": "Tactile physical companion",
-   "weight": 700
-  },
-  {
-   "id": "tt072t",
-   "type": "text",
-   "x": 270,
-   "y": 4775,
-   "w": 460,
-   "h": 65,
-   "text": "Tomatone is a screenless tactile cube with an internal inertial sensor. Because it has a front speaker grille, full rolls would muffle sound. All interactions use natural rocking and tilting gestures that always return to its feet.",
-   "size": "s"
-  },
-  {
-   "id": "tt073g",
-   "type": "group",
-   "x": 270,
-   "y": 4860,
-   "w": 222,
-   "h": 135,
-   "children": [
-    {
-     "id": "tt073a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Setting up",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt073b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Rock forward / back",
-     "weight": 700
-    },
-    {
-     "id": "tt073c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 77.9,
-     "text": "+5 / −5 minutes per notch, mirrored live by the dial in the app. Set down to start.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt074g",
-   "type": "group",
-   "x": 508,
-   "y": 4860,
-   "w": 222,
-   "h": 135,
-   "children": [
-    {
-     "id": "tt074a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "During session",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt074b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Tilt left / right",
-     "weight": 700
-    },
-    {
-     "id": "tt074c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 77.9,
-     "text": "Turn down or up the heat (urgency). Shake to shuffle mood. Flip upside down to finish early.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt075g",
-   "type": "group",
-   "x": 746,
-   "y": 4860,
-   "w": 222,
-   "h": 135,
-   "children": [
-    {
-     "id": "tt075a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Anytime",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt075b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Double-tap",
-     "weight": 700
-    },
-    {
-     "id": "tt075c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 77.9,
-     "text": "Time-left chime: plays current pulse speed for 2 seconds. Double-press button toggles silent vibration mode.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt080t",
-   "type": "text",
-   "x": 32,
-   "y": 5130,
-   "w": 222,
-   "h": 25.2,
-   "text": "sound architecture",
-   "color": "mute",
-   "nav": "sound architecture"
-  },
-  {
-   "id": "tt081t",
-   "type": "text",
-   "x": 270,
-   "y": 5130,
-   "w": 460,
-   "h": 25.2,
-   "text": "How time becomes music",
-   "weight": 700
-  },
-  {
-   "id": "tt082g",
-   "type": "group",
-   "x": 270,
-   "y": 5185,
-   "w": 341,
-   "h": 100,
-   "children": [
-    {
-     "id": "tt082a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "01",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt082b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Prep (first ~10%)",
-     "weight": 700
-    },
-    {
-     "id": "tt082c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 45,
-     "text": "Familiar seed songs ease task-initiation inertia and lower startup friction.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt083g",
-   "type": "group",
-   "x": 627,
-   "y": 5185,
-   "w": 341,
-   "h": 100,
-   "children": [
-    {
-     "id": "tt083a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "02",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt083b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Simmer (the long middle)",
-     "weight": 700
-    },
-    {
-     "id": "tt083c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 45,
-     "text": "Steady mid-tempo beat; background pulse holds steady out of the way.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt084g",
-   "type": "group",
-   "x": 270,
-   "y": 5305,
-   "w": 341,
-   "h": 100,
-   "children": [
-    {
-     "id": "tt084a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "03",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt084b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Boil (last ~25%)",
-     "weight": 700
-    },
-    {
-     "id": "tt084c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 45,
-     "text": "Faster tracks, a faster pulse, and a soft tick on the off-beat signal the approaching end.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt085g",
-   "type": "group",
-   "x": 627,
-   "y": 5305,
-   "w": 341,
-   "h": 100,
-   "children": [
-    {
-     "id": "tt085a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "04",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt085b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Plate (the close)",
-     "weight": 700
-    },
-    {
-     "id": "tt085c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 45,
-     "text": "One closing track and a harmonic resolution chord resolve the piece.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt086g",
-   "type": "group",
-   "x": 270,
-   "y": 5440,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt086a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Layer 1",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt086b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Your music",
-     "weight": 700
-    },
-    {
-     "id": "tt086c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Your songs, ordered by rising tempo, never unnaturally sped up or distorted.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt087g",
-   "type": "group",
-   "x": 508,
-   "y": 5440,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt087a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Layer 2",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt087b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Pulse underneath",
-     "weight": 700
-    },
-    {
-     "id": "tt087c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Runs quietly throughout the session. Steady in Simmer, speeds up in Boil. Faster, never louder.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt088g",
-   "type": "group",
-   "x": 746,
-   "y": 5440,
-   "w": 222,
-   "h": 125,
-   "children": [
-    {
-     "id": "tt088a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "Layer 3",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt088b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "A soft tick",
-     "weight": 700
-    },
-    {
-     "id": "tt088c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Joins the pulse on the off-beat, only during Boil.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt089t",
-   "type": "text",
-   "x": 270,
-   "y": 5600,
-   "w": 460,
-   "h": 35,
-   "text": "Too much, or too subtle? Tilt left to lower the heat, tilt right to push.",
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "tt090t",
-   "type": "text",
-   "x": 32,
-   "y": 5770,
-   "w": 222,
-   "h": 25.2,
-   "text": "critical flow",
-   "color": "mute",
-   "nav": "critical flow"
-  },
-  {
-   "id": "tt091t",
-   "type": "text",
-   "x": 270,
-   "y": 5770,
-   "w": 460,
-   "h": 25.2,
-   "text": "Ira's 90-minute thesis session",
-   "weight": 700
-  },
-  {
-   "id": "tt092g",
-   "type": "group",
-   "x": 270,
-   "y": 5825,
-   "w": 341,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt092a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "01 · Her day",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt092b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Kitchen view",
-     "weight": 700
-    },
-    {
-     "id": "tt092c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 50,
-     "text": "4:30 pm. Thesis draft due at 6:00 pm. Cube sits on her desk beside her laptop.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt093g",
-   "type": "group",
-   "x": 627,
-   "y": 5825,
-   "w": 341,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt093a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "02 · Pick it up",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt093b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Dial setup",
-     "weight": 700
-    },
-    {
-     "id": "tt093c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 50,
-     "text": "Lifting cube opens dial setup on phone. She rocks the cube to set 90 minutes.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt094g",
-   "type": "group",
-   "x": 270,
-   "y": 5950,
-   "w": 341,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt094a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "03 · Set it down",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt094b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Prep phase",
-     "weight": 700
-    },
-    {
-     "id": "tt094c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 50,
-     "text": "Setting cube down starts the session. Seed songs play as a quiet pulse begins.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt095g",
-   "type": "group",
-   "x": 627,
-   "y": 5950,
-   "w": 341,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt095a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "04 · Simmer & distraction",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt095b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Calm audio ducking",
-     "weight": 700
-    },
-    {
-     "id": "tt095c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 50,
-     "text": "She picks up her phone. The music dips softly instead of buzzing. Putting the phone down restores it.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt096g",
-   "type": "group",
-   "x": 270,
-   "y": 6075,
-   "w": 341,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt096a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "05 · Boil",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt096b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Heat adjustment",
-     "weight": 700
-    },
-    {
-     "id": "tt096c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 50,
-     "text": "Tracks get brighter, pulse accelerates, tick appears. Feeling overwhelmed, she tilts cube left to ease off.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt097g",
-   "type": "group",
-   "x": 627,
-   "y": 6075,
-   "w": 341,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt097a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 341,
-     "h": 19.3,
-     "text": "06 · Plate",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt097b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 341,
-     "h": 22,
-     "text": "Guess before reveal",
-     "weight": 700
-    },
-    {
-     "id": "tt097c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 341,
-     "h": 50,
-     "text": "Music resolves. Prompt asks: “How long do you think that session was?” She guesses 1 h 10 min, then locks it in.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt098g",
-   "type": "group",
-   "x": 270,
-   "y": 6200,
-   "w": 698,
-   "h": 105,
-   "children": [
-    {
-     "id": "tt098a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 698,
-     "h": 19.3,
-     "text": "07 · Notebook",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt098b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 698,
-     "h": 22,
-     "text": "Longitudinal reflection",
-     "weight": 700
-    },
-    {
-     "id": "tt098c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 698,
-     "h": 50,
-     "text": "Actual: 1 h 35 min (off by 25 min). Over weeks of sessions, the Notebook's error trend shrinks as her internal sense of time sharpens.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt100t",
-   "type": "text",
-   "x": 32,
-   "y": 6440,
-   "w": 222,
-   "h": 25.2,
-   "text": "prototype",
-   "color": "mute",
-   "nav": "prototype"
-  },
-  {
-   "id": "tt101t",
-   "type": "text",
-   "x": 270,
-   "y": 6440,
-   "w": 460,
-   "h": 25.2,
-   "text": "Interactive simulator",
-   "weight": 700
-  },
-  {
-   "id": "tt102t",
-   "type": "text",
-   "x": 270,
-   "y": 6485,
-   "w": 460,
-   "h": 40,
-   "text": "The interactive prototype pairs the companion mobile screen with a 3D simulated cube and Web Audio synthesizer. Try stepping through the flow below.",
-   "size": "s"
-  },
-  {
-   "id": "tt103e",
-   "type": "embed",
-   "src": "https://assignment1-nine-omega.vercel.app/prototype.html",
-   "x": 32,
-   "y": 6545,
-   "w": 936,
-   "h": 680,
-   "round": 8,
-   "caption": "Live interactive simulator: step from Onboarding through Kitchen, Setup, Simmer, Boil, and the Plated reflection reflex.",
-   "capShow": true
-  },
-  {
-   "id": "tt104u",
-   "type": "button",
-   "look": "line",
-   "text": "Open prototype in new window",
-   "x": 270,
-   "y": 7300,
-   "w": 250,
-   "h": 35,
-   "link": {
-    "href": "https://assignment1-nine-omega.vercel.app/prototype.html",
-    "newTab": true
-   },
-   "size": "s"
-  },
-  {
-   "id": "tt110t",
-   "type": "text",
-   "x": 32,
-   "y": 7470,
-   "w": 222,
-   "h": 25.2,
-   "text": "learning a sense",
-   "color": "mute",
-   "nav": "learning a sense"
-  },
-  {
-   "id": "tt111t",
-   "type": "text",
-   "x": 270,
-   "y": 7470,
-   "w": 460,
-   "h": 25.2,
-   "text": "David Eagleman sensory substitution hypothesis",
-   "weight": 700
-  },
-  {
-   "id": "tt112t",
-   "type": "text",
-   "x": 270,
-   "y": 7520,
-   "w": 698,
-   "h": 100,
-   "text": "The goal is to need Tomatone less over time.",
-   "size": "l",
-   "bg": "accent"
-  },
-  {
-   "id": "tt113t",
-   "type": "text",
-   "x": 270,
-   "y": 7660,
-   "w": 460,
-   "h": 60,
-   "text": "Following David Eagleman's sensory-substitution research, the brain learns any input channel that carries consistent, changing information. Over weeks, users progress through three stages:",
-   "size": "s"
-  },
-  {
-   "id": "tt114g",
-   "type": "group",
-   "x": 270,
-   "y": 7760,
-   "w": 222,
-   "h": 120,
-   "children": [
-    {
-     "id": "tt114a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "01",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt114b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Exposure",
-     "weight": 700
-    },
-    {
-     "id": "tt114c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Listening to study sessions, noticing the four cooking phases.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt115g",
-   "type": "group",
-   "x": 508,
-   "y": 7760,
-   "w": 222,
-   "h": 120,
-   "children": [
-    {
-     "id": "tt115a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "02",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt115b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Association",
-     "weight": 700
-    },
-    {
-     "id": "tt115c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Linking rising tempo and tick rates to elapsed time.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt116g",
-   "type": "group",
-   "x": 746,
-   "y": 7760,
-   "w": 222,
-   "h": 120,
-   "children": [
-    {
-     "id": "tt116a",
-     "type": "text",
-     "x": 0,
-     "y": 0,
-     "w": 222,
-     "h": 19.3,
-     "text": "03",
-     "size": "s",
-     "color": "mute"
-    },
-    {
-     "id": "tt116b",
-     "type": "text",
-     "x": 0,
-     "y": 20,
-     "w": 222,
-     "h": 22,
-     "text": "Internalisation",
-     "weight": 700
-    },
-    {
-     "id": "tt116c",
-     "type": "text",
-     "x": 0,
-     "y": 46,
-     "w": 222,
-     "h": 68,
-     "text": "Developing an intuitive bodily feel for time passing without needing any device.",
-     "size": "s"
-    }
-   ]
-  },
-  {
-   "id": "tt117t",
-   "type": "text",
-   "x": 270,
-   "y": 7910,
-   "w": 460,
-   "h": 40,
-   "text": "Next steps include testing the Notebook estimation curve across a longitudinal 4-week cohort, and exploring licensed adaptive audio partnerships with calm soundscape platforms.",
-   "size": "s",
-   "color": "mute"
-  },
-  {
-   "id": "tt120t",
-   "type": "text",
-   "x": 32,
-   "y": 8080,
-   "w": 222,
-   "h": 25.2,
-   "text": "references",
-   "color": "mute",
-   "nav": "references"
-  },
-  {
-   "id": "tt121t",
-   "type": "text",
-   "x": 270,
-   "y": 8080,
-   "w": 460,
-   "h": 25.2,
-   "text": "Literature and citations",
-   "weight": 700
-  },
-  {
-   "id": "tt122t",
-   "type": "text",
-   "x": 270,
-   "y": 8125,
-   "w": 698,
-   "h": 180,
-   "text": "Droit-Volet, S., Ramos, D., Bueno, J. L., & Bigand, E. (2013). Music, emotion, and time perception. <i>Frontiers in Psychology</i>.<br><br>Marx, I. et al. (2021). Time perception in children and adolescents with ADHD: A meta-analysis. <i>JAACAP</i>.<br><br>Lachance, M., Pelland-Goulet, P., & Gosselin, N. (2024). Background music preferences and studying in ADHD. <i>Frontiers in Psychology</i>.<br><br>Hellier, E. J., Edworthy, J., & Dennis, I. (1993). Improving auditory warning design: Quantifying acoustic parameters. <i>Ergonomics</i>.<br><br>Muranaka, Y. et al. (2021). Peripheral auditory displays for task awareness. <i>ICAD</i>.<br><br>Takt (2016). A wearable timepiece for sensing time through the body. <i>CHI '16 Extended Abstracts</i>.",
-   "size": "s",
-   "color": "mute"
-  }
- ]
+  ]
 }
