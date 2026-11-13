@@ -3122,14 +3122,12 @@
   },
   {
    "id": "cc273p",
-   "type": "image",
+   "type": "embed",
    "x": 627,
    "y": 14623.6,
    "w": 341,
    "h": 241,
-   "src": "projects/media/design-process/mediator-woz.jpg",
-   "fit": "cover",
-   "alt": "A student during the Wizard of Oz test session",
+   "src": "https://drive.google.com/file/d/14Yxf1g1hjmxKabPtfHULwd1U-ddwLFFM/view?usp=sharing",
    "anim": {
     "enter": {
      "on": true,
@@ -3142,7 +3140,7 @@
      "ease": "out"
     }
    },
-   "caption": "The Wizard of Oz test",
+   "caption": "WoZ prototype",
    "capShow": true
   },
   {

@@ -39,6 +39,12 @@
   - Removed `zoom: true` from `cc228p` (`concept-scoring.jpg`).
   - Cleaned up the caption from *"Every concept, scored. Click to enlarge."* &rarr; *"Every concept, scored."*
 
+### Flow Mediator
+- **Comment 7: [cc273p] Wizard of Oz video**
+  - Converted `cc273p` from a static image to an embedded Google Drive video player (`type: "embed"`).
+  - Embedded drive link: `https://drive.google.com/file/d/14Yxf1g1hjmxKabPtfHULwd1U-ddwLFFM/view?usp=sharing`.
+  - Updated caption to **"WoZ prototype"** with `capShow: true`.
+
 ---
 
 ## 2. What was left for Atul / Claude (and what is needed)
@@ -60,11 +66,6 @@
   - **DRAFT `cb029p`:** *"Empathy Game: a physical card-and-token game played before group work to surface differing communication styles and build mutual trust."*
   - **DRAFT `cb030p`:** *"Flow Mediator: an ambient AI tool that observes group rhythm, flagging imbalance and prompting reflective pauses without interrupting discussion."*
 
-### Comment 7: [cc273p] — Add Wizard of Oz video
-- **Comment note:** *"ADD VIDEO, hosted on google drive already"*
-- **Why left:** The Google Drive link for this specific video is not in the repository files or media folder.
-- **What is needed from Atul:** Share the Google Drive share link (set to *"Anyone with the link can view"*). Once shared, I or Claude will convert `cc273p` into an embedded video box (`type: "embed"`).
-
 ### Comment 8: [empty space @ 54, 15286] — Reflection section
 - **Comment note:** *"need to highlight insights, make it easier to glance through the project"*
-- **Status:** The core insights and design goals are now highlighted in yellow (Comments 4 & 5). If you also want a bulleted takeaway list or visual callout in the Reflection section at the bottom, let Claude or me know what points you'd like included.
+- **Status:** The core insights and design goals are highlighted in yellow (Comments 4 & 5). If you also want a bulleted takeaway list or visual callout in the Reflection section at the bottom, let Claude or me know what points you'd like included.
