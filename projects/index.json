@@ -22,6 +22,17 @@
       "color": "#e00083"
     },
     {
+      "slug": "tomatone",
+      "title": "Tomatone",
+      "year": "2026",
+      "tags": "Calm Technology, Interaction Design, Physical Computing, Rhythmic Auditory Stimulation",
+      "summary": "A musical timer and tactile companion that turns time into sound for people with ADHD.",
+      "thumb": "projects/media/tomatone/photo-desk.jpg",
+      "hidden": false,
+      "soon": false,
+      "color": "#e03a2f"
+    },
+    {
       "slug": "narayanpet-weavers-centre",
       "title": "Narayanpet Weavers' Centre",
       "year": "2026",

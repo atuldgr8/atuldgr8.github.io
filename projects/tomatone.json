@@ -1,0 +1,1135 @@
+{
+ "v": 2,
+ "intro": "intro",
+ "guides": {
+  "x": [],
+  "y": []
+ },
+ "secGap": 150,
+ "items": [
+  {
+   "id": "tt001t",
+   "type": "text",
+   "x": 32,
+   "y": 196,
+   "w": 698,
+   "h": 41.5,
+   "text": "Tomatone",
+   "weight": 700,
+   "size": "l",
+   "color": "accent"
+  },
+  {
+   "id": "tt002t",
+   "type": "text",
+   "x": 32,
+   "y": 266,
+   "w": 460,
+   "h": 50,
+   "text": "A musical timer and tactile companion that turns time into sound for people with ADHD."
+  },
+  {
+   "id": "tt003t",
+   "type": "text",
+   "x": 32,
+   "y": 345,
+   "w": 698,
+   "h": 19.3,
+   "text": "Calm Technology · Interaction Design · Physical Computing · Rhythmic Auditory Stimulation",
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "tt004p",
+   "type": "image",
+   "x": 32,
+   "y": 400,
+   "w": 936,
+   "h": 580,
+   "src": "projects/media/tomatone/photo-desk.jpg",
+   "fit": "cover",
+   "alt": "Tomatone cube resting on a student study desk beside notebooks and pens",
+   "anim": {
+    "enter": {
+     "on": true,
+     "from": {
+      "opacity": 0,
+      "y": 40
+     },
+     "dur": 0.9,
+     "delay": 0,
+     "ease": "out"
+    }
+   },
+   "caption": "Tomatone on a study desk. Screenless, quiet, and designed to sit in the peripheral field.",
+   "capShow": true
+  },
+  {
+   "id": "tt005g",
+   "type": "group",
+   "x": 32,
+   "y": 1040,
+   "w": 460,
+   "h": 59.8,
+   "children": [
+    {
+     "id": "tt005a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 460,
+     "h": 19.3,
+     "text": "my role",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt005b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 460,
+     "h": 38.6,
+     "text": "Concept, interaction design, hardware gesture language, sound pacing curve, web prototype",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt006g",
+   "type": "group",
+   "x": 508,
+   "y": 1040,
+   "w": 222,
+   "h": 40.4,
+   "children": [
+    {
+     "id": "tt006a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "team",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt006b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 19.3,
+     "text": "Solo project",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt007g",
+   "type": "group",
+   "x": 746,
+   "y": 1040,
+   "w": 222,
+   "h": 40.4,
+   "children": [
+    {
+     "id": "tt007a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "time",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt007b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 19.3,
+     "text": "2 weeks, 2026",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt008g",
+   "type": "group",
+   "x": 508,
+   "y": 1130,
+   "w": 222,
+   "h": 59.8,
+   "children": [
+    {
+     "id": "tt008a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "course",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt008b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 38.6,
+     "text": "Assignment 1, New Media Design",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt009g",
+   "type": "group",
+   "x": 746,
+   "y": 1130,
+   "w": 222,
+   "h": 40.4,
+   "children": [
+    {
+     "id": "tt009a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "where",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt009b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 19.3,
+     "text": "NID Gandhinagar",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt010b",
+   "type": "box",
+   "fill": "faint",
+   "x": 32,
+   "y": 1220,
+   "w": 936,
+   "h": 1
+  },
+  {
+   "id": "tt011t",
+   "type": "text",
+   "x": 32,
+   "y": 1280,
+   "w": 222,
+   "h": 25.2,
+   "text": "overview",
+   "color": "mute",
+   "nav": "overview"
+  },
+  {
+   "id": "tt012t",
+   "type": "text",
+   "x": 270,
+   "y": 1280,
+   "w": 460,
+   "h": 25.2,
+   "text": "What Tomatone is",
+   "weight": 700
+  },
+  {
+   "id": "tt013t",
+   "type": "text",
+   "x": 270,
+   "y": 1320,
+   "w": 698,
+   "h": 65,
+   "text": "A gentle way to feel time pass for people who can't.",
+   "size": "l",
+   "bg": "accent"
+  },
+  {
+   "id": "tt014t",
+   "type": "text",
+   "x": 270,
+   "y": 1410,
+   "w": 460,
+   "h": 57.9,
+   "text": "Most timers show counting numbers. For someone with ADHD, watching numbers count down creates anxiety, or gets forgotten entirely. Tomatone removes numeric displays completely.",
+   "size": "s"
+  },
+  {
+   "id": "tt015t",
+   "type": "text",
+   "x": 270,
+   "y": 1480,
+   "w": 460,
+   "h": 57.9,
+   "text": "It combines a small wooden-feel cube with a music stream. Instead of an alarm buzzer at the end, the music speeds up slightly and adds subtle rhythmic syncopation. You feel the end approaching without breaking focus.",
+   "size": "s"
+  },
+  {
+   "id": "tt016p",
+   "type": "image",
+   "x": 270,
+   "y": 1560,
+   "w": 341,
+   "h": 340,
+   "src": "projects/media/tomatone/photo-palm.jpg",
+   "fit": "cover",
+   "alt": "Tomatone resting in an open palm",
+   "round": 8,
+   "zoom": true,
+   "caption": "Screenless form factor held in hand.",
+   "capShow": true
+  },
+  {
+   "id": "tt017p",
+   "type": "image",
+   "x": 627,
+   "y": 1560,
+   "w": 341,
+   "h": 340,
+   "src": "projects/media/tomatone/photo-button.jpg",
+   "fit": "cover",
+   "alt": "Finger pressing olive button on top of Tomatone",
+   "round": 8,
+   "zoom": true,
+   "caption": "Olive-green top button for silent haptic chimes.",
+   "capShow": true
+  },
+  {
+   "id": "tt020t",
+   "type": "text",
+   "x": 32,
+   "y": 1970,
+   "w": 222,
+   "h": 25.2,
+   "text": "problem",
+   "color": "mute",
+   "nav": "problem"
+  },
+  {
+   "id": "tt021t",
+   "type": "text",
+   "x": 270,
+   "y": 1970,
+   "w": 460,
+   "h": 25.2,
+   "text": "Deadline cliff and time agnosia",
+   "weight": 700
+  },
+  {
+   "id": "tt022t",
+   "type": "text",
+   "x": 270,
+   "y": 2010,
+   "w": 460,
+   "h": 57.9,
+   "text": "Time in ADHD is experienced in two states: 'now' and 'not now'. When an impending deadline is hours away, it feels distant; when it arrives, it creates an immediate crisis.",
+   "size": "s"
+  },
+  {
+   "id": "tt023g",
+   "type": "group",
+   "x": 270,
+   "y": 2090,
+   "w": 222,
+   "h": 115,
+   "children": [
+    {
+     "id": "tt023a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "01",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt023b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 22,
+     "text": "Alarm panic",
+     "weight": 700
+    },
+    {
+     "id": "tt023c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 222,
+     "h": 58,
+     "text": "Sudden beeps trigger an acute fight-or-flight response, interrupting flow rather than closing it.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt024g",
+   "type": "group",
+   "x": 508,
+   "y": 2090,
+   "w": 222,
+   "h": 115,
+   "children": [
+    {
+     "id": "tt024a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "02",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt024b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 22,
+     "text": "Clock watching",
+     "weight": 700
+    },
+    {
+     "id": "tt024c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 222,
+     "h": 58,
+     "text": "Visible countdown digits keep working memory vigilant and pull attention away from work.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt025g",
+   "type": "group",
+   "x": 746,
+   "y": 2090,
+   "w": 222,
+   "h": 115,
+   "children": [
+    {
+     "id": "tt025a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "03",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt025b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 22,
+     "text": "Guilt mechanics",
+     "weight": 700
+    },
+    {
+     "id": "tt025c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 222,
+     "h": 58,
+     "text": "Apps that kill virtual plants or dock points produce shame instead of sustainable habits.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt030t",
+   "type": "text",
+   "x": 32,
+   "y": 2280,
+   "w": 222,
+   "h": 25.2,
+   "text": "research",
+   "color": "mute",
+   "nav": "research"
+  },
+  {
+   "id": "tt031t",
+   "type": "text",
+   "x": 270,
+   "y": 2280,
+   "w": 460,
+   "h": 25.2,
+   "text": "Rhythm entrainment and sensory substitution",
+   "weight": 700
+  },
+  {
+   "id": "tt032t",
+   "type": "text",
+   "x": 270,
+   "y": 2320,
+   "w": 460,
+   "h": 77.9,
+   "text": "Neuroscience research shows dopamine deficits in prefrontal-striatal circuits impair temporal pulse generation in the basal ganglia. But the human auditory cortex syncs naturally to motor rhythms. Moving time tracking from the visual field into background audio bypasses working memory load.",
+   "size": "s"
+  },
+  {
+   "id": "tt033b",
+   "type": "box",
+   "fill": "line",
+   "round": 8,
+   "x": 270,
+   "y": 2420,
+   "w": 341,
+   "h": 125,
+   "text": "“The brain does not count seconds in abstract numbers. It feels intervals through cadence and sensory shift.”<br><br><span class=\"c-mute sz-s\">Dr. Paul Bach-y-Rita · Sensory Substitution research</span>"
+  },
+  {
+   "id": "tt034b",
+   "type": "box",
+   "fill": "line",
+   "round": 8,
+   "x": 627,
+   "y": 2420,
+   "w": 341,
+   "h": 125,
+   "text": "“I either spend forty minutes staring at the Pomodoro circle shrink, or I tune it out until it yells at me.”<br><br><span class=\"c-mute sz-s\">Ira · 21, design student with combined-type ADHD</span>"
+  },
+  {
+   "id": "tt040t",
+   "type": "text",
+   "x": 32,
+   "y": 2620,
+   "w": 222,
+   "h": 25.2,
+   "text": "concept",
+   "color": "mute",
+   "nav": "concept"
+  },
+  {
+   "id": "tt041t",
+   "type": "text",
+   "x": 270,
+   "y": 2620,
+   "w": 460,
+   "h": 25.2,
+   "text": "Kitchen cooking ritual",
+   "weight": 700
+  },
+  {
+   "id": "tt042t",
+   "type": "text",
+   "x": 270,
+   "y": 2660,
+   "w": 460,
+   "h": 57.9,
+   "text": "Instead of treating study sessions like a clinical medical intervention, Tomatone frames focus as cooking a meal. Music lives in pantry jars, work intensity is heat, and sessions end by plating.",
+   "size": "s"
+  },
+  {
+   "id": "tt043g",
+   "type": "group",
+   "x": 270,
+   "y": 2740,
+   "w": 341,
+   "h": 95,
+   "children": [
+    {
+     "id": "tt043a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 341,
+     "h": 19.3,
+     "text": "01",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt043b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 341,
+     "h": 22,
+     "text": "Prep (0–15%)",
+     "weight": 700
+    },
+    {
+     "id": "tt043c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 341,
+     "h": 38.6,
+     "text": "Seed songs play to overcome task-initiation inertia and lower startup friction.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt044g",
+   "type": "group",
+   "x": 627,
+   "y": 2740,
+   "w": 341,
+   "h": 95,
+   "children": [
+    {
+     "id": "tt044a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 341,
+     "h": 19.3,
+     "text": "02",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt044b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 341,
+     "h": 22,
+     "text": "Simmer (15–80%)",
+     "weight": 700
+    },
+    {
+     "id": "tt044c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 341,
+     "h": 38.6,
+     "text": "A steady, low-friction rhythmic pulse anchors deep concentration.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt045g",
+   "type": "group",
+   "x": 270,
+   "y": 2860,
+   "w": 341,
+   "h": 95,
+   "children": [
+    {
+     "id": "tt045a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 341,
+     "h": 19.3,
+     "text": "03",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt045b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 341,
+     "h": 22,
+     "text": "Boil (80–100%)",
+     "weight": 700
+    },
+    {
+     "id": "tt045c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 341,
+     "h": 38.6,
+     "text": "Tempo increases subtly with light syncopation, signaling the approaching end without an alarm.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt046g",
+   "type": "group",
+   "x": 627,
+   "y": 2860,
+   "w": 341,
+   "h": 95,
+   "children": [
+    {
+     "id": "tt046a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 341,
+     "h": 19.3,
+     "text": "04",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt046b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 341,
+     "h": 22,
+     "text": "Plate (100%)",
+     "weight": 700
+    },
+    {
+     "id": "tt046c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 341,
+     "h": 38.6,
+     "text": "A harmonic resolution chord completes the piece. Time to step back and reflect.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt050t",
+   "type": "text",
+   "x": 32,
+   "y": 3040,
+   "w": 222,
+   "h": 25.2,
+   "text": "hardware",
+   "color": "mute",
+   "nav": "hardware"
+  },
+  {
+   "id": "tt051t",
+   "type": "text",
+   "x": 270,
+   "y": 3040,
+   "w": 460,
+   "h": 25.2,
+   "text": "Tactile physical companion",
+   "weight": 700
+  },
+  {
+   "id": "tt052t",
+   "type": "text",
+   "x": 270,
+   "y": 3080,
+   "w": 460,
+   "h": 57.9,
+   "text": "The physical cube sits on the desk with no screen or numeric display. An internal inertial sensor translates natural physical manipulations into timer controls.",
+   "size": "s"
+  },
+  {
+   "id": "tt053g",
+   "type": "group",
+   "x": 270,
+   "y": 3160,
+   "w": 222,
+   "h": 115,
+   "children": [
+    {
+     "id": "tt053a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "01",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt053b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 22,
+     "text": "Rock forward or back",
+     "weight": 700
+    },
+    {
+     "id": "tt053c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 222,
+     "h": 58,
+     "text": "Adds or removes 5 minutes per notch with a quiet physical haptic click.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt054g",
+   "type": "group",
+   "x": 508,
+   "y": 3160,
+   "w": 222,
+   "h": 115,
+   "children": [
+    {
+     "id": "tt054a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "02",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt054b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 22,
+     "text": "Double tap",
+     "weight": 700
+    },
+    {
+     "id": "tt054c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 222,
+     "h": 58,
+     "text": "Plays a brief ascending or descending melodic chime that signals remaining time.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt055g",
+   "type": "group",
+   "x": 746,
+   "y": 3160,
+   "w": 222,
+   "h": 115,
+   "children": [
+    {
+     "id": "tt055a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 222,
+     "h": 19.3,
+     "text": "03",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt055b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 222,
+     "h": 22,
+     "text": "Flip upside down",
+     "weight": 700
+    },
+    {
+     "id": "tt055c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 222,
+     "h": 58,
+     "text": "Ends or pauses the session immediately without alarm beeps or guilt popups.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt056t",
+   "type": "text",
+   "x": 270,
+   "y": 3290,
+   "w": 460,
+   "h": 38.6,
+   "text": "In libraries or shared study rooms, silent mode replaces music with progressive micro-vibrations across the four cooking stages.",
+   "size": "s",
+   "color": "mute"
+  },
+  {
+   "id": "tt060t",
+   "type": "text",
+   "x": 32,
+   "y": 3400,
+   "w": 222,
+   "h": 25.2,
+   "text": "companion app",
+   "color": "mute",
+   "nav": "companion app"
+  },
+  {
+   "id": "tt061t",
+   "type": "text",
+   "x": 270,
+   "y": 3400,
+   "w": 460,
+   "h": 25.2,
+   "text": "Pantry jars and calm distraction handling",
+   "weight": 700
+  },
+  {
+   "id": "tt062t",
+   "type": "text",
+   "x": 270,
+   "y": 3440,
+   "w": 460,
+   "h": 77.9,
+   "text": "The companion mobile app manages music jars and session scheduling. When a student picks up their phone during a session, Tomatone does not trigger a punitive warning or kill a plant. Instead, the music dips softly. Putting the phone down brings the audio back.",
+   "size": "s"
+  },
+  {
+   "id": "tt070t",
+   "type": "text",
+   "x": 32,
+   "y": 3590,
+   "w": 222,
+   "h": 25.2,
+   "text": "prototype",
+   "color": "mute",
+   "nav": "prototype"
+  },
+  {
+   "id": "tt071t",
+   "type": "text",
+   "x": 270,
+   "y": 3590,
+   "w": 460,
+   "h": 25.2,
+   "text": "Interactive simulator",
+   "weight": 700
+  },
+  {
+   "id": "tt072t",
+   "type": "text",
+   "x": 270,
+   "y": 3630,
+   "w": 460,
+   "h": 38.6,
+   "text": "The interactive prototype pairs the companion mobile screen with a 3D simulated cube and Web Audio synthesizer. Try stepping through the flow below.",
+   "size": "s"
+  },
+  {
+   "id": "tt073e",
+   "type": "embed",
+   "src": "https://assignment1-nine-omega.vercel.app/prototype.html",
+   "x": 32,
+   "y": 3690,
+   "w": 936,
+   "h": 680,
+   "round": 8,
+   "caption": "Live interactive simulator: step from Onboarding through Kitchen, Setup, Simmer, Boil, and the Plated reflection reflex.",
+   "capShow": true
+  },
+  {
+   "id": "tt074u",
+   "type": "button",
+   "look": "line",
+   "text": "Open prototype in new window",
+   "x": 270,
+   "y": 4420,
+   "w": 250,
+   "h": 35,
+   "link": {
+    "href": "https://assignment1-nine-omega.vercel.app/prototype.html",
+    "newTab": true
+   },
+   "size": "s"
+  },
+  {
+   "id": "tt080t",
+   "type": "text",
+   "x": 32,
+   "y": 4530,
+   "w": 222,
+   "h": 25.2,
+   "text": "calibration",
+   "color": "mute",
+   "nav": "calibration"
+  },
+  {
+   "id": "tt081t",
+   "type": "text",
+   "x": 270,
+   "y": 4530,
+   "w": 460,
+   "h": 25.2,
+   "text": "Post-session reflection reflex",
+   "weight": 700
+  },
+  {
+   "id": "tt082t",
+   "type": "text",
+   "x": 270,
+   "y": 4570,
+   "w": 698,
+   "h": 75,
+   "text": "Guess first, then reveal. That order keeps the notebook honest.",
+   "size": "l",
+   "bg": "accent"
+  },
+  {
+   "id": "tt083t",
+   "type": "text",
+   "x": 270,
+   "y": 4690,
+   "w": 460,
+   "h": 57.9,
+   "text": "When a session plates, Tomatone does not show elapsed time right away. It asks Ira to estimate how long she worked using a tactile slider.",
+   "size": "s"
+  },
+  {
+   "id": "tt084t",
+   "type": "text",
+   "x": 270,
+   "y": 4765,
+   "w": 460,
+   "h": 57.9,
+   "text": "Locking in the guess reveals the actual duration and logs the delta in the Notebook. Over 10+ sessions, estimation error trends downward from 40% to ~20%, helping retrain internal temporal awareness.",
+   "size": "s"
+  },
+  {
+   "id": "tt085g",
+   "type": "group",
+   "x": 270,
+   "y": 4850,
+   "w": 341,
+   "h": 95,
+   "children": [
+    {
+     "id": "tt085a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 341,
+     "h": 19.3,
+     "text": "01",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt085b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 341,
+     "h": 22,
+     "text": "Active recall",
+     "weight": 700
+    },
+    {
+     "id": "tt085c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 341,
+     "h": 38.6,
+     "text": "Estimating duration before seeing the clock forces temporal reconstruction instead of passive recognition.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt086g",
+   "type": "group",
+   "x": 627,
+   "y": 4850,
+   "w": 341,
+   "h": 95,
+   "children": [
+    {
+     "id": "tt086a",
+     "type": "text",
+     "x": 0,
+     "y": 0,
+     "w": 341,
+     "h": 19.3,
+     "text": "02",
+     "size": "s",
+     "color": "mute"
+    },
+    {
+     "id": "tt086b",
+     "type": "text",
+     "x": 0,
+     "y": 20,
+     "w": 341,
+     "h": 22,
+     "text": "Longitudinal calibration",
+     "weight": 700
+    },
+    {
+     "id": "tt086c",
+     "type": "text",
+     "x": 0,
+     "y": 46,
+     "w": 341,
+     "h": 38.6,
+     "text": "The error curve shrinks over weeks, turning external sensory scaffolding into internal confidence.",
+     "size": "s"
+    }
+   ]
+  },
+  {
+   "id": "tt090t",
+   "type": "text",
+   "x": 32,
+   "y": 5060,
+   "w": 222,
+   "h": 25.2,
+   "text": "reflection",
+   "color": "mute",
+   "nav": "reflection"
+  },
+  {
+   "id": "tt091t",
+   "type": "text",
+   "x": 270,
+   "y": 5060,
+   "w": 460,
+   "h": 25.2,
+   "text": "Designing for neurodivergence",
+   "weight": 700
+  },
+  {
+   "id": "tt092t",
+   "type": "text",
+   "x": 270,
+   "y": 5100,
+   "w": 460,
+   "h": 77.9,
+   "text": "Tools built for neurotypical cognition often amplify dysfunction when handed to neurodivergent users. By replacing visual countdown vigilance with ambient sound curves, Tomatone demonstrates how calm hardware can guide attention with dignity.",
+   "size": "s"
+  }
+ ]
+}
