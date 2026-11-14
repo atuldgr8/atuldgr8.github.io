@@ -701,6 +701,27 @@ bulb.addEventListener('pointerdown', e => {
   if (typeof stopNudging === 'function') stopNudging(true);
   const sx = e.clientX, sy = e.clientY;
   let moving = false, done = false, t0 = 0, raf;
+  // staring at the figure with the light for a few seconds starts a game of kick-ups
+  let lx = sx, ly = sy, stare = 0, stareT = 0, stareRaf = 0, said = 0;
+  const stareLoop = now => {
+    if (done) return;
+    const dt = Math.min(.1, (now - (stareT || now)) / 1000); stareT = now;
+    const fr = thing.querySelector('.lit .fig').getBoundingClientRect();
+    const inside = isDark() && lx > fr.left - 20 && lx < fr.right + 20 && ly > fr.top - 20 && ly < fr.bottom;
+    stare = inside ? stare + dt : Math.max(0, stare - dt * 1.5);
+    if (inside && stare > .9 && said < 1) { said = 1; show('oh. hi'); }
+    if (inside && stare > 2.1 && said < 2) { said = 2; show('wanna play?'); }
+    if (stare > 3.2) return play(fr);
+    stareRaf = requestAnimationFrame(stareLoop);
+  };
+  const play = fr => {
+    finish(); dragged = true; hush();
+    try { btn.releasePointerCapture(e.pointerId); } catch (err) {}
+    const svg = thing.querySelector('.lit .fig svg').outerHTML;
+    const go = () => Kickups.start({ from: fr, svg, mail: document.querySelector('.bar .hi').href, resume: document.querySelector('.bar .resume').href });
+    if (window.Kickups) return go();
+    const sc = document.createElement('script'); sc.src = 'assets/kickups.js'; sc.onload = go; document.head.appendChild(sc);
+  };
   btn.setPointerCapture(e.pointerId);
   const vmin = Math.min(innerWidth, innerHeight);
   const grow = now => {
@@ -712,7 +733,7 @@ bulb.addEventListener('pointerdown', e => {
     if (p < 1) raf = requestAnimationFrame(grow);
   };
   const finish = () => {
-    done = true; cancelAnimationFrame(raf);
+    done = true; cancelAnimationFrame(raf); cancelAnimationFrame(stareRaf);
     btn.classList.remove('dragging'); thing.classList.remove('torch'); glowEl.classList.remove('on');
     warmAt(null); lightAt(null); lastHint = null; hideT = setTimeout(hush, 1200);
     document.body.classList.remove('torching');
@@ -727,9 +748,11 @@ bulb.addEventListener('pointerdown', e => {
       moving = true; btn.classList.add('dragging'); thing.classList.remove('glimpse'); thing.classList.add('torch');
       glowEl.classList.add('on'); document.body.classList.add('torching'); hush(); lastHint = null;
       t0 = performance.now(); raf = requestAnimationFrame(grow);
+      stareRaf = requestAnimationFrame(stareLoop);
     }
     bulb.style.transform = `translate(${dx}px, ${dy}px)`;
     const r = bulb.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    lx = cx; ly = cy;
     setv('--tx', cx + 'px'); setv('--ty', cy + 'px');
     warmAt(cx, cy); lightAt(cx, cy); hintAt(cx, cy);
     // shine (or warm) it near "resume" and the boring one turns up, and stays put so you can click it

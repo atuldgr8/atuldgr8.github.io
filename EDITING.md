@@ -135,3 +135,8 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 
 - All of them live near the bottom of `index.html`, under "the bulb talks": `TOPICS` (the conversation, each line in a lights-off and a lights-on version), `FLIP` (what it says when the lights change), `STROBE` / `CLICKY` (switching like crazy, clicking everything), `HINTS` (what it says about whatever its light lands on while dragged) and `CALLS` (the attention sequence). They're plain text: edit, save, done.
 - The bubble uses Press Start 2P. To compare, add `?font=geist` or `?font=bytesized` to the address.
+
+## Kick-ups (the game)
+
+- On the landing, in the dark: drag the bulb onto the figure and hold the light on it for about 3 seconds. The #OPENTOWORK ring turns into a ball and the figure starts kicking it to you. Click (or tap) the ball to send it back. Each of your touches changes the room's colour. Let it drop and the card says "guess you'll have to hire me". After 8 touches the figure can slip up too, so visitors can win.
+- The game lives in `assets/kickups.js` and only loads when someone starts it. Esc or × to stop.
