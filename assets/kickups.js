@@ -49,6 +49,9 @@ window.Kickups = (() => {
     const fig = h('div', 'ku-fig', ov); fig.innerHTML = FIGURE;
     const svg = fig.querySelector('svg'), ring = fig.querySelector('.ring'), tag = fig.querySelector('.tag');
     const ball = h('div', 'ku-ball', ov); ball.hidden = true;
+    ball.innerHTML = `<svg viewBox="-50 -50 100 100"><defs><path id="ku-barc" d="M-38 0 A38 38 0 0 0 38 0"/></defs>
+      <circle r="38" fill="none" stroke="#4c9a3f" stroke-width="11"/>
+      <text dominant-baseline="middle"><textPath href="#ku-barc" startOffset="50%" text-anchor="middle">#OPENTOWORK</textPath></text></svg>`;
     // the words, on the right: right edge on the grid's edge, top level with the intro
     const say = h('div', 'ku-say', body);
     function placeSay() {
@@ -85,9 +88,9 @@ window.Kickups = (() => {
     requestAnimationFrame(() => ov.classList.add('in'));
 
     // ---------- ball ----------
-    const R = () => Math.max(16, figH() * .058);
+    const R = () => Math.max(22, figH() * .085);
     const b = { x: 0, y: 0, vx: 0, vy: 0, spin: 0 };
-    let state = 'intro', touches = 0, g = 0, raf = 0, last = 0, colour = -1, slips = false, foot = 'r';
+    let state = 'intro', touches = 0, g = 0, raf = 0, last = 0, colour = -1, slips = false, foot = 'r', bounces = 0, rollFrom = 0;
     const gravity = () => H() * (2.1 + Math.min(touches, 25) * .045);
     function launch(tx, apexY) {
       g = gravity();
@@ -100,16 +103,26 @@ window.Kickups = (() => {
     const rnd = (a, z) => a + Math.random() * (z - a);
     const figR = () => fig.getBoundingClientRect();
     const kickY = () => floor() - figH() * .26;      // about knee height: where a foot meets the ball
+    // a squashy, wobbly ball: it stretches along its flight, squashes and jiggles when kicked or when it lands
+    let sqT = -1, sqDir = 0;
+    const SIZE = r => r * 2 * 50 / 43.5;                 // the frame's ring + stroke fills the box
+    function squash(dir) { sqT = performance.now(); sqDir = dir; }
     function draw() {
-      const r = R();
-      ball.style.width = ball.style.height = r * 2 + 'px';
-      ball.style.transform = `translate(${b.x - r}px, ${b.y - r}px) rotate(${b.spin}deg)`;
+      const r = R(), S = SIZE(r);
+      ball.style.width = ball.style.height = S + 'px';
+      const speed = Math.hypot(b.vx, b.vy), a = Math.atan2(b.vy, b.vx) * 180 / Math.PI;
+      const k = Math.min(.28, speed / (H() * 9));        // stretch with speed
+      let q = 0;
+      if (sqT >= 0) { const t = (performance.now() - sqT) / 1000; q = Math.exp(-t * 7) * Math.cos(t * 34) * .38; if (t > .9) sqT = -1; }
+      ball.style.transform = `translate(${b.x - S / 2}px, ${b.y - S / 2}px) rotate(${sqDir}deg) scale(${1 + q}, ${1 - q}) rotate(${-sqDir}deg)`
+        + ` rotate(${a}deg) scale(${1 + k}, ${1 - k * .8}) rotate(${-a}deg) rotate(${b.spin}deg)`;
     }
     function figureKick() {
       // the foot nearer the ball swings up; alternate when it's straight down the middle
       const fr = figR(), mid = fr.left + fr.width / 2;
       foot = Math.abs(b.x - mid) < fr.width * .08 ? (foot === 'r' ? 'l' : 'r') : (b.x < mid ? 'l' : 'r');
       svg.classList.remove('kick-l', 'kick-r'); void svg.offsetWidth; svg.classList.add('kick-' + foot);
+      squash(0); b.spin += (foot === 'l' ? -1 : 1) * 25;
       if (slips && Math.random() < .07) { state = 'slip'; b.vx = rnd(-80, 80); b.vy = 160; return; }
       state = 'you';
       launch(rnd(W() * .1, W() * .44), rnd(H() * .16, H() * .38));
@@ -121,9 +134,14 @@ window.Kickups = (() => {
       if (touches >= 8) slips = true;
       // the room changes colour with every touch; the words go dark so they stay readable
       colour = (colour + 1 + Math.floor(Math.random() * (PAL.length - 1))) % PAL.length;
-      root.style.setProperty('--bg', PAL[colour] || '#ddd');
-      root.style.setProperty('--fg', '#111'); root.style.setProperty('--line', '#111');
-      root.style.setProperty('--mute', 'rgba(17,17,17,.6)'); root.style.setProperty('--faint', 'rgba(17,17,17,.25)');
+      const c = PAL[colour] || '#ddd';
+      root.style.setProperty('--bg', c);
+      // text takes a deep shade of the same colour (not plain black), the quiet bits a lighter one
+      root.style.setProperty('--fg', `color-mix(in oklch, ${c} 28%, black)`);
+      root.style.setProperty('--line', `color-mix(in oklch, ${c} 28%, black)`);
+      root.style.setProperty('--mute', `color-mix(in oklch, ${c} 55%, black)`);
+      root.style.setProperty('--faint', `color-mix(in oklch, ${c} 78%, black)`);
+      squash(90);
       state = 'figure';
       const fr = figR();
       launch(fr.left + fr.width / 2 + rnd(-fr.width * .25, fr.width * .25), rnd(H() * .12, H() * .32));
@@ -135,8 +153,12 @@ window.Kickups = (() => {
       if (state === 'figure' && b.vy > 0 && b.y >= kickY()) figureKick();
       else if (b.y >= floor() - R()) {
         b.y = floor() - R(); draw();
-        if (state === 'you') return end(false);
-        if (state === 'slip') return end(true);
+        if (state === 'you' || state === 'slip') { state = state === 'you' ? 'drop' : 'slipdrop'; bounces = 0; }
+        if (state === 'drop' || state === 'slipdrop') {
+          squash(0);
+          if (bounces++ < 3 && Math.abs(b.vy) > 120) { b.vy = -Math.abs(b.vy) * .45; b.vx *= .8; }
+          else { const won = state === 'slipdrop'; b.vy = 0; state = 'rolling'; rollFrom = now; return end(won); }
+        }
       }
       draw();
       raf = requestAnimationFrame(step);
@@ -157,8 +179,8 @@ window.Kickups = (() => {
       const fr = figR(), s = fr.height / 300, r0 = 38 * s;
       b.x = fr.left + 50 * s; b.y = fr.top + 40 * s;
       ball.hidden = false; ball.classList.add('grow');
-      ball.style.width = ball.style.height = r0 * 2 + 'px';
-      ball.style.transform = `translate(${b.x - r0}px, ${b.y - r0}px)`;
+      ball.style.width = ball.style.height = SIZE(r0) + 'px';
+      ball.style.transform = `translate(${b.x - SIZE(r0) / 2}px, ${b.y - SIZE(r0) / 2}px)`;
       ring.style.opacity = 0; tag.style.opacity = 0;
       requestAnimationFrame(draw);
       setTimeout(() => {
@@ -169,8 +191,16 @@ window.Kickups = (() => {
       }, 700);
     }, 950);
 
+    function roll(now) {
+      const dt = Math.min(.033, (now - (last || now)) / 1000); last = now;
+      b.vx *= Math.pow(.35, dt); b.x += b.vx * dt; b.spin += b.vx * dt * 2.2;
+      draw();
+      if (Math.abs(b.vx) > 4 && state === 'over') raf = requestAnimationFrame(roll);
+    }
     function end(won) {
       state = 'over'; cancelAnimationFrame(raf);
+      if (Math.abs(b.vx) < 60) b.vx = (b.x < innerWidth / 2 ? -1 : 1) * 160;
+      raf = requestAnimationFrame(roll);
       if (touches > best) { best = touches; try { localStorage.setItem(BEST, best); } catch (e) {} }
       const lines = won ? SAY.won(touches) : SAY.lost(touches);
       words([...lines, SAY.count(touches, best)], [
@@ -200,7 +230,6 @@ window.Kickups = (() => {
   const st = document.createElement('style');
   st.textContent = `
   .ku-playing #thing, .ku-playing #glow, .ku-playing .psst { visibility: hidden; }
-  html.ku-playing, html.ku-playing body { transition: background-color .2s steps(2); }
   .ku { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0; transition: opacity .3s; }
   .ku.in { opacity: 1; }
   .ku-fig { position: absolute; color: var(--fg); }
@@ -218,9 +247,9 @@ window.Kickups = (() => {
   @keyframes kuR { 35% { transform: rotate(34deg) scaleY(.84); } }
   .ku-fig svg.kick-l, .ku-fig svg.kick-r { animation: kuDip .34s ease-out; }
   @keyframes kuDip { 35% { transform: translateY(1.5%); } }
-  .ku-ball { position: absolute; left: 0; top: 0; border-radius: 50%; box-sizing: border-box;
-             border: max(3px, .28em) solid #4c9a3f; background: #fff;
-             background-image: radial-gradient(circle at 50% 50%, #4c9a3f 0 18%, transparent 19%); }
+  .ku-ball { position: absolute; left: 0; top: 0; will-change: transform; }
+  .ku-ball svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .ku-ball text { font: 700 7.6px Inter, system-ui, sans-serif; letter-spacing: .1em; fill: #fff; }
   .ku-ball.grow { transition: width .6s cubic-bezier(.2,.8,.3,1), height .6s cubic-bezier(.2,.8,.3,1), transform .6s cubic-bezier(.2,.8,.3,1); }
   /* the words: the landing's own type, right-aligned on the right */
   .ku-say { position: fixed; z-index: 31; text-align: right; max-width: 34ch; color: var(--fg);
