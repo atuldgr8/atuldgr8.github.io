@@ -139,4 +139,5 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 ## Kick-ups (the game)
 
 - On the landing, in the dark: drag the bulb onto the figure and hold the light on it for about 3 seconds. The #OPENTOWORK ring turns into a ball and the figure starts kicking it to you. Click (or tap) the ball to send it back. Each of your touches changes the room's colour. Let it drop and the card says "guess you'll have to hire me". After 8 touches the figure can slip up too, so visitors can win.
-- The game lives in `assets/kickups.js` and only loads when someone starts it. Esc or × to stop.
+- The page stays on screen; each touch repaints the background. What it says sits on the right, set like the landing text; change the lines under `SAY` at the top of `assets/kickups.js`.
+- The game only loads when someone starts it. Esc or "done" to stop.
