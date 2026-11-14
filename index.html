@@ -158,6 +158,7 @@
      then it becomes one flowing sentence instead */
   /* the landing reads a touch tighter than the case studies: about a quarter less air */
   .intro, .ink p { --lh-land: 1.32; }
+  .ink p { --lh-land: 1.26; }
   .intro { line-height: var(--lh-land); letter-spacing: var(--ls-read); }
   .intro .l1 { white-space: nowrap; }
   .intro.flow .l1 { white-space: normal; }
@@ -188,7 +189,7 @@
            --r: 15vmin; --tx: -100vw; --ty: -100vh; --a: .045; --l: 32%; }
   #thing .layer { position: absolute; inset: 0; opacity: 0; }
   /* anchored at the middle of the ring (around the head), so it can grow into a giant head */
-  #thing .fig { position: absolute; right: 12vw; bottom: 0; height: 46vh; transform-origin: 50% 13.33%; }
+  #thing .fig { position: absolute; right: 30vw; bottom: 0; height: 46vh; transform-origin: 50% 13.33%; }
   #thing svg { height: 100%; width: auto; display: block; overflow: visible; }
   #thing .ring { fill: none; stroke: #4c9a3f; stroke-width: 11; }
   #thing .tag { font: 700 7.6px Inter, system-ui, sans-serif; letter-spacing: .1em; fill: #fff; }
@@ -210,7 +211,7 @@
   /* ---------- the ink: words about me under the landing text ----------
      In the dark they're written one shade off black, and the torch reads them.
      With the lights on it's invisible ink: hold the warm bulb near and it browns into view. */
-  .ink { grid-column: 1 / span 7; max-width: 43ch; position: relative; pointer-events: none; user-select: none; }
+  .ink { grid-column: 1 / span 8; max-width: 52ch; position: relative; pointer-events: none; user-select: none; }
   .ink .base { color: transparent; }             /* truly invisible until the bulb finds it */
   .ink .lit { position: absolute; inset: 0; opacity: 0; transition: opacity .3s;
     --ix: -999px; --iy: -999px; --r: 15vmin;
@@ -244,8 +245,10 @@
   /* ---------- the bulb talks (in its own voice, not mine) ---------- */
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
   @font-face { font-family: 'Geist Pixel'; src: url(assets/fonts/GeistPixel-Square.woff2) format('woff2'); font-display: swap; }
-  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 34px); max-width: min(16em, 80vw);
-          padding: 8px 14px 10px; font: 400 24px/normal 'Geist Pixel', ui-monospace, monospace;
+  @font-face { font-family: 'Bytesized'; src: url(assets/fonts/Bytesized.woff2) format('woff2'); font-display: swap; }
+  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 34px); max-width: min(620px, 80vw);
+          padding: 8px 14px 10px; font: 400 var(--psst-size, 32px)/1.15 var(--psst-font, 'Bytesized'), 'Geist Pixel', ui-monospace, monospace;
+          transition: opacity .15s steps(2), left .25s, bottom .25s;
           color: var(--pc); background: var(--bg); pointer-events: none;
           /* a 1px pixel border with its corners knocked out */
           box-shadow: 0 -2px 0 var(--pc), 0 2px 0 var(--pc), -2px 0 0 var(--pc), 2px 0 0 var(--pc);
@@ -259,7 +262,7 @@
   .psst.on { opacity: 1; }
   body.past .psst { display: none; }
   /* lights on: a one-frame glimpse, barely darker than white */
-  #thing.glimpse .lit { color: #ededed; -webkit-mask-image: none; mask-image: none; animation: blink .035s steps(1) both; }
+  #thing.glimpse .lit { color: #bdbdbd; -webkit-mask-image: none; mask-image: none; animation: blink .07s steps(1) both; }
   #thing.glimpse .ring { opacity: .3; }
   @keyframes blink { from { opacity: 1; } to { opacity: 0; } }
 
@@ -280,6 +283,15 @@
     40%, 60% { color: var(--warm); filter: drop-shadow(0 0 calc(.25em + var(--k) * .3em) rgba(245, 197, 24, calc(.3 + var(--k) * .15))); scale: calc(1 + var(--k) * .06); }
   }
   @keyframes callglow { 0%, 100% { opacity: var(--g0); } 40%, 60% { opacity: 1; } }
+  #theme.call .bulb { animation-duration: 2.4s; }
+  #theme.call .bulb .glow { animation-duration: 2.4s; }
+  #theme.blink .bulb { animation: blinkbulb calc(.9s / var(--n, 2)) steps(1) var(--n, 2) both; }
+  #theme.blink .bulb .glow { animation: blinkglow calc(.9s / var(--n, 2)) steps(1) var(--n, 2) both; }
+  @keyframes blinkbulb {
+    0% { color: var(--warm); filter: drop-shadow(0 0 calc(.3em + var(--k) * .35em) rgba(245, 197, 24, calc(.35 + var(--k) * .15))); scale: calc(1 + var(--k) * .07); }
+    50% { color: inherit; filter: none; scale: 1; }
+  }
+  @keyframes blinkglow { 0% { opacity: 1; } 50% { opacity: var(--g0); } }
   :root[data-dark] #theme { --g0: 0; }
   :root:not([data-dark]) #theme { --g0: 1; }
   /* ...and if that doesn't work, the whole room flickers between light and dark */
@@ -588,7 +600,7 @@ function nearer() {
     const H = f.offsetHeight;
     const hx = f.offsetLeft + f.offsetWidth / 2, hy = f.offsetTop + H * HEAD;   // head, before moving
     const groundY = innerHeight - H * (1 - HEAD) * k;    // head height if its feet were on the floor
-    const tx = hx + (innerWidth * .56 - hx) * t;         // drift towards the empty middle...
+    const tx = hx + (innerWidth * .5 - hx) * t;          // drift towards the middle...
     const ty = groundY + (innerHeight * .45 - groundY) * t;
     f.style.transform = `translate(${tx - hx}px, ${ty - hy}px) scale(${k})`;
   });
@@ -684,7 +696,7 @@ function heatFrame(now) {
 function warmAt(x, y) { heatAt = x == null ? null : [x, y]; if (!heatRaf) heatRaf = requestAnimationFrame(heatFrame); }
 const setv = (k, v) => { thing.style.setProperty(k, v); glowEl.style.setProperty(k, v); inkLit.style.setProperty(k, v); };
 bulb.addEventListener('pointerdown', e => {
-  if (typeof stopNudging === 'function') stopNudging();
+  if (typeof stopNudging === 'function') stopNudging(true);
   const sx = e.clientX, sy = e.clientY;
   let moving = false, done = false, t0 = 0, raf;
   btn.setPointerCapture(e.pointerId);
@@ -700,7 +712,7 @@ bulb.addEventListener('pointerdown', e => {
   const finish = () => {
     done = true; cancelAnimationFrame(raf);
     btn.classList.remove('dragging'); thing.classList.remove('torch'); glowEl.classList.remove('on');
-    warmAt(null); lightAt(null);
+    warmAt(null); lightAt(null); lastHint = null; hideT = setTimeout(hush, 1200);
     document.body.classList.remove('torching');
     bulb.style.transform = '';
     ['--r', '--a', '--l'].forEach(v => { thing.style.removeProperty(v); glowEl.style.removeProperty(v); });
@@ -711,13 +723,13 @@ bulb.addEventListener('pointerdown', e => {
     if (!moving && Math.hypot(dx, dy) < 6) return;
     if (!moving) {
       moving = true; btn.classList.add('dragging'); thing.classList.remove('glimpse'); thing.classList.add('torch');
-      glowEl.classList.add('on'); document.body.classList.add('torching'); hush();
+      glowEl.classList.add('on'); document.body.classList.add('torching'); hush(); lastHint = null;
       t0 = performance.now(); raf = requestAnimationFrame(grow);
     }
     bulb.style.transform = `translate(${dx}px, ${dy}px)`;
     const r = bulb.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     setv('--tx', cx + 'px'); setv('--ty', cy + 'px');
-    warmAt(cx, cy); lightAt(cx, cy);
+    warmAt(cx, cy); lightAt(cx, cy); hintAt(cx, cy);
     // shine (or warm) it near "resume" and the boring one turns up, and stays put so you can click it
     const ats = document.querySelector('.bar .ats');
     if (ats && !ats.hidden && !ats.classList.contains('found')) {
@@ -743,66 +755,171 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply);
 apply(); nearer();
 
 /* ---------- the bulb talks ----------
-   Point at it and it says something (a different line each time). Its own voice:
-   it talks about "him", not "me". Change the lines here. */
-const LINES = {
-  dark:  ['let there be light', 'press and hold, it gets brighter', 'there’s more to me than the intro lets on',
-          'throw some light on who i am', 'hover away over everything', 'especially the colourful words',
-          'there’s a more boring version of my resume', '*cough* ats *cough*'],
-  light: ['let there be light. oh, wait.', 'press and hold. it warms up.', 'hold this bulb under the intro',
-          'i wrote some bits with lemon juice', 'when life gives you lemons',
-          'there’s a more boring version of my resume', '*cough* ats *cough*'],
+   One conversation, told in topics. Each line exists in a "lights off" and a "lights on" version,
+   so flipping the light never breaks the thread: the next line picks up where it left off,
+   in the words that fit the room now. All lines are DRAFT: change them freely, they're just text.
+     - point at the bulb: the next line. Keep pointing: it carries on by itself.
+     - click: the lights flip, the bulb reacts to that, then carries on with the topic.
+     - drag it around: it tells you about whatever its light lands on.  */
+const TOPICS = [
+  { dark: ['let there be light'],
+    light: ['let there be light. oh, wait.'] },
+  { dark: ['press and hold, it gets brighter'],
+    light: ['press and hold. it warms up.'] },
+  { dark: ['there’s more to me than the intro lets on', 'throw some light on who i am'],
+    light: ['hold this bulb under the intro', 'i wrote some bits with lemon juice', 'when life gives you lemons'] },
+  { dark: ['hover away over everything', 'especially the colourful words'],
+    light: ['hover away over everything', 'especially the colourful words'] },
+  { dark: ['there’s a more boring version of my resume', '*cough* ats *cough*'],
+    light: ['there’s a more boring version of my resume', '*cough* ats *cough*'] },
+];
+// what it says when the lights flip (it knows which way they went)
+const FLIP = {
+  dark:  ['ah. much better', 'my time to shine', 'now we’re talking'],
+  light: ['ow. my eyes', 'and we’re back', 'too bright. anyway'],
 };
+// flipping it on and off like a maniac / clicking everything in sight
+const STROBE = ['easy. i’m a bulb, not a strobe light', 'okay, okay. i’m awake', 'you’re going to blow my fuse'];
+const CLICKY = ['someone’s click-happy', 'you can also just hover, you know'];
+// what it says about whatever its light lands on while you drag it (matched in this order)
+const HINTS = [
+  ['.bar .hi',          'click to say hi. i’ll pass it on'],
+  ['#name',             'point at my name. i’ll tell you how to say it'],
+  ['.bar .work',        'the actual work. the * hides the fun stuff'],
+  ['.bar .ats',         'the one robots like'],
+  ['.bar .resume',      'the nice one. three columns and everything'],
+  ['.intro .door[data-win="fish"]', 'click. you’ll meet my favourite building'],
+  ['.intro .struck',    'struck out for a reason. click if you’re curious'],
+  ['.intro .door[data-win="nid"]', 'where i am now. click'],
+  ['.intro .door:not([data-win])', 'says the guy hiding stuff on his website'],
+  ['.ink',              { dark: 'keep going. it’s all written here', light: 'warm it up. it’s lemon juice' }],
+];
 // no plain ATS resume on the site? then the bulb doesn't mention it
-if (document.querySelector('.bar .ats').hidden) for (const k in LINES) LINES[k] = LINES[k].filter(t => !/resume|ats/.test(t));
+if (document.querySelector('.bar .ats').hidden) TOPICS.splice(TOPICS.findIndex(t => /resume/.test(t.dark[0])), 1);
+
 const psst = document.querySelector('.psst');
-const said = { dark: 0, light: 0 };   // each mode remembers where it got to
-let psstT;
-function hush() { clearTimeout(psstT); psst.classList.remove('on'); }
-function say(wait) {
-  clearTimeout(psstT);
+// compare fonts: add ?font=geist to the address to see the old bubble font
+if (/[?&]font=geist/.test(location.search)) { psst.style.setProperty('--psst-font', "'Geist Pixel'"); psst.style.setProperty('--psst-size', '24px'); }
+const mode = () => isDark() ? 'dark' : 'light';
+const pick = l => l[Math.floor(Math.random() * l.length)];
+let topic = 0, step = 0, psstT, autoT, hideT;
+function show(text, ms) {             // put words in the bubble (near the bulb, wherever it is)
+  clearTimeout(psstT); clearTimeout(hideT);
+  const b = bulb.getBoundingClientRect();
+  psst.textContent = text;
+  if (btn.classList.contains('dragging')) {
+    // being carried around: sit just below and to the right of the bulb, out of the light's way
+    const w = psst.offsetWidth || 300, right = b.right + 18 + w > innerWidth - 8;
+    psst.style.left = (right ? b.left - 18 - w : b.right + 18) + 'px';
+    psst.style.top = Math.min(innerHeight - psst.offsetHeight - 8, b.bottom + 18) + 'px'; psst.style.bottom = 'auto';
+  } else {
+    psst.style.top = 'auto';
+    psst.style.left = Math.max(8, Math.min(innerWidth - 260, b.left - 4)) + 'px';
+    psst.style.bottom = Math.max(8, innerHeight - b.top + 12) + 'px';
+  }
+  psst.classList.add('on');
+  if (ms) hideT = setTimeout(hush, ms);
+}
+function hush() { clearTimeout(psstT); clearTimeout(autoT); clearTimeout(hideT); psst.classList.remove('on'); }
+function next() {                     // the next line of the conversation, worded for the room as it is now
+  const t = TOPICS[topic % TOPICS.length], lines = t[mode()];
+  if (step >= lines.length) { topic++; step = 0; return next(); }
+  const line = lines[step++];
+  if (step >= lines.length) { topic++; step = 0; }
+  return line;
+}
+function talk(wait) {                 // say the next line, and keep talking while you keep pointing
+  clearTimeout(psstT); clearTimeout(autoT);
   psstT = setTimeout(() => {
-    const k = isDark() ? 'dark' : 'light', l = LINES[k];
-    psst.textContent = l[said[k]++ % l.length];
-    psst.classList.add('on');
+    show(next());
+    autoT = setTimeout(function more() {
+      if (!btn.matches(':hover') || btn.classList.contains('dragging')) return;
+      show(next()); autoT = setTimeout(more, 3200);
+    }, 3200);
   }, wait);
 }
 btn.addEventListener('pointerenter', e => {
   if (e.pointerType !== 'mouse' || btn.classList.contains('dragging')) return;
-  stopNudging();
-  say(250);
+  stopNudging(false);
+  talk(250);
 });
-// every click (that isn't the end of a drag) flips the light and moves on to the next line
+btn.addEventListener('pointerleave', () => { if (!btn.classList.contains('dragging')) hush(); });
+
+// clicks: react to the flip (and to someone flipping it like a strobe light)
 let clickWasDrag = false;
+const flips = [];
 btn.addEventListener('click', () => { clickWasDrag = dragged; }, true);
-btn.addEventListener('click', () => { if (!clickWasDrag && btn.matches(':hover')) say(60); });
-btn.addEventListener('pointerleave', hush);
+btn.addEventListener('click', () => {
+  if (clickWasDrag) return;
+  stopNudging(true);
+  const now = Date.now(); flips.push(now); while (flips.length && now - flips[0] > 2500) flips.shift();
+  clearTimeout(autoT); clearTimeout(psstT);
+  if (flips.length >= 4) { flips.length = 0; show(pick(STROBE), 2600); return; }
+  show(pick(FLIP[mode()]));
+  // then back to the conversation, worded for the new room
+  autoT = setTimeout(() => { if (btn.matches(':hover')) talk(0); else hush(); }, 1800);
+});
+// someone clicking all over the page
+const pageClicks = [];
+document.addEventListener('click', e => {
+  if (e.target.closest('#theme') || scrollY > innerHeight * .5) return;
+  const now = Date.now(); pageClicks.push(now); while (pageClicks.length && now - pageClicks[0] > 3000) pageClicks.shift();
+  if (pageClicks.length >= 7) { pageClicks.length = 0; show(pick(CLICKY), 2600); }
+});
+
+// while dragging: a guide to whatever the light is on
+let lastHint = null;
+function hintAt(x, y) {
+  const reach = Math.min(innerWidth, innerHeight) * .09;
+  let found = null, best = reach;       // whichever thing is nearest the light
+  for (const [sel, words] of HINTS) {
+    for (const el of document.querySelectorAll(sel)) {
+      if (el.hidden || !el.getClientRects().length) continue;
+      const r = el.getBoundingClientRect();
+      const dx = Math.max(r.left - x, 0, x - r.right), dy = Math.max(r.top - y, 0, y - r.bottom), d = Math.hypot(dx, dy);
+      if (d < best) { best = d; found = [sel, typeof words === 'string' ? words : words[mode()]]; }
+    }
+  }
+  if (!found) { if (lastHint) { lastHint = null; hideT = setTimeout(hush, 900); } return; }
+  if (found[0] !== lastHint) { lastHint = found[0]; show(found[1]); }
+  else { clearTimeout(hideT); show(found[1]); }
+}
 
 /* ---------- getting your attention ----------
-   Left alone on the landing, the bulb calls out: it glows and fades at 5s, then again
-   every 5s, a little more urgently each time. At 25s the whole room flickers between
-   light and dark. The moment you point at the bulb (or pick it up), it stops for good. */
+   Left alone on the landing: a slow glow and a "psst" at 4s, two blinks at 10s,
+   faster brighter blinks at 16s, and at 24s the whole room flickers. It talks each time.
+   Pointing at it or picking it up stops it; it starts over on the next visit
+   unless you actually clicked or dragged it. With "reduce motion" on: glows and words, no flicker. */
+const CALLS = [
+  { at: 4000,  kind: 'glow',  dark: 'psst', light: 'psst' },
+  { at: 10000, kind: 'blink', n: 2, dark: 'down here', light: 'down here' },
+  { at: 16000, kind: 'blink', n: 4, dark: 'hello?', light: 'hello? bottom left' },
+  { at: 24000, kind: 'flash', dark: 'sorry. had to', light: 'sorry. had to' },
+];
 let nudged = false;
 try { nudged = !!sessionStorage.getItem('bulb-met'); } catch (e) {}
 const nudgeT = [];
-function stopNudging() { nudged = true; nudgeT.forEach(clearTimeout); try { sessionStorage.setItem('bulb-met', '1'); } catch (e) {} }
+function stopNudging(forGood) {
+  nudged = true; nudgeT.forEach(clearTimeout); nudgeT.length = 0;
+  btn.classList.remove('call', 'blink');
+  if (forGood) try { sessionStorage.setItem('bulb-met', '1'); } catch (e) {}
+}
 const away = () => nudged || scrollY > innerHeight * .3 || document.hidden;
-function call(k) {
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function call(c, k) {
   if (away()) return;
-  btn.style.setProperty('--k', k); btn.style.setProperty('--cd', 1.6 - k * .15 + 's');
-  btn.classList.remove('call'); void btn.offsetWidth; btn.classList.add('call');
-  btn.addEventListener('animationend', () => btn.classList.remove('call'), { once: true });
+  btn.style.setProperty('--k', k);
+  const cls = c.kind === 'blink' && !calm ? 'blink' : 'call';
+  btn.style.setProperty('--n', c.n || 1);
+  btn.classList.remove('call', 'blink'); void btn.offsetWidth; btn.classList.add(cls);
+  btn.addEventListener('animationend', () => btn.classList.remove(cls), { once: true });
+  if (c.kind === 'flash' && !calm) {
+    root.classList.remove('flash'); void root.offsetWidth; root.classList.add('flash');
+    setTimeout(() => root.classList.remove('flash'), 1400);
+  }
+  show(c[mode()], 2400);
 }
-function flash() {
-  if (away()) return;
-  const r = document.documentElement;
-  r.classList.remove('flash'); void r.offsetWidth; r.classList.add('flash');
-  setTimeout(() => r.classList.remove('flash'), 1400);
-}
-if (!nudged && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  [1, 2, 3, 4].forEach(k => nudgeT.push(setTimeout(() => call(k), k * 5000)));
-  nudgeT.push(setTimeout(flash, 25000));
-}
+if (!nudged) CALLS.forEach((c, i) => nudgeT.push(setTimeout(() => call(c, i + 1), c.at)));
 </script>
 <script src="assets/side.js"></script>
 <script src="assets/home.js"></script>

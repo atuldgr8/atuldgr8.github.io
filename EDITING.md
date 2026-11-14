@@ -130,3 +130,8 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 - **Enter** saves, Shift+Enter makes a new line, Esc cancels. Click a red numbered pin to edit or delete that comment.
 - The bar at the bottom: **list** shows all comments by section (click one to jump to it), **download** saves them as a Markdown file you can hand to a chat.
 - Comments are kept in that browser only, until you delete them.
+
+## The bulb's lines
+
+- All of them live near the bottom of `index.html`, under "the bulb talks": `TOPICS` (the conversation, each line in a lights-off and a lights-on version), `FLIP` (what it says when the lights change), `STROBE` / `CLICKY` (switching like crazy, clicking everything), `HINTS` (what it says about whatever its light lands on while dragged) and `CALLS` (the attention sequence). They're plain text: edit, save, done.
+- To compare the old bubble font, add `?font=geist` to the address.

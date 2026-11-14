@@ -28,6 +28,11 @@ main { position: relative; z-index: 2; }
 .fun-open:hover, .fun-open.open { color: var(--fg); }
 .fun-open[hidden], .list.fun[hidden] { display: none; }
 .list.fun { margin-top: calc(var(--step) / 2); }
+.list.fun.unfold > * { animation: unfold .5s var(--pop, cubic-bezier(.2,.8,.3,1)) both; }
+.list.fun.unfold > :nth-child(2) { animation-delay: .05s; } .list.fun.unfold > :nth-child(3) { animation-delay: .1s; }
+.list.fun.unfold > :nth-child(4) { animation-delay: .15s; } .list.fun.unfold > :nth-child(n+5) { animation-delay: .2s; }
+@keyframes unfold { from { opacity: 0; transform: translateY(-.4em); } }
+@media (prefers-reduced-motion: reduce) { .list.fun.unfold > * { animation: none; } }
 .tldr-open { position: absolute; left: 0; bottom: var(--gutter); color: var(--mute); text-decoration: none; }
 .tldr-open[hidden] { display: none; }
 .tldr-open .note { margin-left: 1.5em; color: var(--mute); opacity: .7; transition: opacity .2s; }

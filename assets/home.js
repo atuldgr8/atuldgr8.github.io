@@ -121,8 +121,11 @@ window.Home = (() => {
   const funBtn = $('.fun-open'), funList = $('.list.fun');
   function openFun(go) {
     if (!funs.length) return;
+    const was = funList.hidden;
     funList.hidden = false; funBtn.classList.add('open');
-    if (go) glide(topOf(funBtn) - innerHeight * .3);
+    if (was) { funList.classList.remove('unfold'); void funList.offsetWidth; funList.classList.add('unfold'); }
+    // lands where "work" lands; the fun list simply unfolds under the work, no jump further down
+    if (go) glide(topOf(document.getElementById('work')));
   }
   if (funs.length) {
     const star = document.createElement('span'); star.className = 'star'; star.textContent = '*';
