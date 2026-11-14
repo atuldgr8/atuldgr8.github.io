@@ -134,4 +134,4 @@ Press **Ctrl + Shift + R** (Mac: **⌘ + Shift + R**) on the page once. That mak
 ## The bulb's lines
 
 - All of them live near the bottom of `index.html`, under "the bulb talks": `TOPICS` (the conversation, each line in a lights-off and a lights-on version), `FLIP` (what it says when the lights change), `STROBE` / `CLICKY` (switching like crazy, clicking everything), `HINTS` (what it says about whatever its light lands on while dragged) and `CALLS` (the attention sequence). They're plain text: edit, save, done.
-- To compare the old bubble font, add `?font=geist` to the address.
+- The bubble uses Press Start 2P. To compare, add `?font=geist` or `?font=bytesized` to the address.

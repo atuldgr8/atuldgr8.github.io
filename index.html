@@ -95,7 +95,8 @@
   .work, .resume, .ats { text-decoration: none; }
   .ats { grid-column: 12; grid-row: 1; justify-self: start; align-self: end; translate: 0 100%;
          color: var(--mute); opacity: 0; pointer-events: none; transition: opacity .25s; padding-top: .2em; white-space: nowrap; }
-  .resume:hover ~ .ats, .ats:hover, .ats.found { opacity: 1; pointer-events: auto; }
+  /* the plain resume stays hidden until the bulb's light finds it (no hover shortcut: that's the reward) */
+  .ats.found { opacity: 1; pointer-events: auto; }
   .bar.stuck .ats.found:not(:hover) { opacity: 0; pointer-events: none; }   /* found ones tuck away once you scroll on */
   .ats:hover { color: var(--fg); }
   .bar .resume { translate: 0 calc(var(--ah, 0px) * (1 - var(--as, 1))); }
@@ -246,8 +247,9 @@
   /* an old-videogame dialog box: square pixel corners, a stepped tail, a quiet pixel font */
   @font-face { font-family: 'Geist Pixel'; src: url(assets/fonts/GeistPixel-Square.woff2) format('woff2'); font-display: swap; }
   @font-face { font-family: 'Bytesized'; src: url(assets/fonts/Bytesized.woff2) format('woff2'); font-display: swap; }
-  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 34px); max-width: min(620px, 80vw);
-          padding: 8px 14px 10px; font: 400 var(--psst-size, 32px)/1.15 var(--psst-font, 'Bytesized'), 'Geist Pixel', ui-monospace, monospace;
+  @font-face { font-family: 'Press Start 2P'; src: url(assets/fonts/PressStart2P.woff2) format('woff2'); font-display: swap; }
+  .psst { --pc: color-mix(in srgb, var(--mute) 65%, var(--bg)); position: fixed; z-index: 14; left: var(--gutter); bottom: calc(24px + 34px); max-width: min(30em, 80vw);
+          padding: .8em 1em .7em; font: 400 var(--psst-size, max(10px, calc(var(--size) * .55)))/1.6 var(--psst-font, 'Press Start 2P'), 'Geist Pixel', ui-monospace, monospace;
           transition: opacity .15s steps(2), left .25s, bottom .25s;
           color: var(--pc); background: var(--bg); pointer-events: none;
           /* a 1px pixel border with its corners knocked out */
@@ -798,8 +800,10 @@ const HINTS = [
 if (document.querySelector('.bar .ats').hidden) TOPICS.splice(TOPICS.findIndex(t => /resume/.test(t.dark[0])), 1);
 
 const psst = document.querySelector('.psst');
-// compare fonts: add ?font=geist to the address to see the old bubble font
-if (/[?&]font=geist/.test(location.search)) { psst.style.setProperty('--psst-font', "'Geist Pixel'"); psst.style.setProperty('--psst-size', '24px'); }
+// compare fonts: add ?font=geist or ?font=bytesized to the address
+const FONTS = { geist: ["'Geist Pixel'", '20px'], bytesized: ["'Bytesized'", '32px'] };
+const fq = (location.search.match(/[?&]font=(\w+)/) || [])[1];
+if (FONTS[fq]) { psst.style.setProperty('--psst-font', FONTS[fq][0]); psst.style.setProperty('--psst-size', FONTS[fq][1]); }
 const mode = () => isDark() ? 'dark' : 'light';
 const pick = l => l[Math.floor(Math.random() * l.length)];
 let topic = 0, step = 0, psstT, autoT, hideT;
