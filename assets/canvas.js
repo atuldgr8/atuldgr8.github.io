@@ -165,9 +165,30 @@ window.Canvas = (() => {
         break;
       }
       case 'group': {
-        if ((it.children || []).length && it.children.every(c => c.type === 'text')) pos.classList.add('textonly');
+        // words only (thin rules between them are fine): on phones these stack in reading order instead of shrinking
+        const kids = it.children || [], thin = c => c.type === 'box' && c.text == null && Math.min(c.w, c.h) <= 3;
+        const stack = kids.some(c => c.type === 'text') && kids.every(c => c.type === 'text' || thin(c));
+        const ord = new Map();
+        if (stack) {
+          pos.classList.add('textonly');
+          const rows = [];
+          for (const c of [...kids].sort((a, b) => (a.y - b.y) || (a.x - b.x))) {
+            const mid = c.y + (c.h || 0) / 2, r = rows.find(r => Math.abs(r.mid - mid) < 10);
+            if (r) r.items.push(c); else rows.push({ mid, items: [c] });
+          }
+          let n = 0;
+          for (const r of rows) {
+            r.items.sort((a, b) => a.x - b.x);
+            const ruled = r.items.length > 1 && r.items.some(thin);      // "this ——— that" stays on one line
+            for (const c of r.items) ord.set(c, { n: n++, row: ruled, vert: thin(c) && c.h > c.w });
+          }
+        }
         const g = h('div', 'grp', inner);
-        for (const c of it.children || []) g.appendChild(item(c, o, depth));
+        for (const c of kids) {
+          const el = item(c, o, depth), k = ord.get(c);
+          if (k) { el.style.setProperty('--ord', k.n); if (k.row) el.classList.add('inrow'); if (k.vert) el.classList.add('vert'); }
+          g.appendChild(el);
+        }
         break;
       }
       case 'button': {

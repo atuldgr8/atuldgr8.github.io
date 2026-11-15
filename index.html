@@ -87,6 +87,12 @@
     .work   { grid-column: 3; }
     .resume { grid-column: 4; }
     .intro, .note { grid-column: 1 / -1; }
+    :root { --size: 16px; }     /* a size you can read at arm's length */
+    .bar .work, .bar .resume, .bar .ats { padding: .9em .7em; margin: -.9em -.7em; }   /* bigger places to put a thumb */
+    #theme { padding: .8em .9em .8em 0; margin: -.8em 0; }
+    /* the hidden paragraphs run a little smaller and the figure a little shorter, so they don't sit on each other */
+    .ink { font-size: .875em; }
+    #thing .fig { height: 40vh; }
     /* no room beside the name, so the pronunciation appears just below it */
     .name-line .say { position: absolute; left: 0; top: 100%; margin: .35em 0 0; }
   }
@@ -100,7 +106,7 @@
   .bar.stuck .ats.found:not(:hover) { opacity: 0; pointer-events: none; }   /* found ones tuck away once you scroll on */
   .ats:hover { color: var(--fg); }
   .bar .resume { translate: 0 calc(var(--ah, 0px) * (1 - var(--as, 1))); }
-  @media (max-width: 700px) { .ats { grid-column: 4; } }
+  @media (max-width: 700px) { .ats { grid-column: 3 / span 2; justify-self: end; } }
 
 
   /* ---------- name, cursor, pronunciation ---------- */
@@ -369,6 +375,7 @@
 <section id="tldr" class="tl-sec" aria-label="TL;DR">
   <div class="tl-stage"></div>
   <div class="tl-cap"><a class="t"></a><span class="sum"></span><span class="n"></span></div>
+  <button class="tl-big" type="button">see it bigger</button>
 </section>
 
 <button id="theme" type="button"><svg class="bulb" viewBox="0 0 15 14" aria-hidden="true"><g fill="currentColor"><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="11" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="9" y="10" width="1" height="1"/><rect x="5" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="9" y="11" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="6" y="12" width="1" height="1"/><rect x="7" y="12" width="1" height="1"/><rect x="8" y="12" width="1" height="1"/><rect x="9" y="12" width="1" height="1"/><rect x="6" y="13" width="1" height="1"/><rect x="7" y="13" width="1" height="1"/><rect x="8" y="13" width="1" height="1"/></g><g class="glow"><rect x="7" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="13" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/></g></svg><span class="label"></span></button>
@@ -837,8 +844,10 @@ function show(text, ms) {             // put words in the bubble (near the bulb,
   if (btn.classList.contains('dragging')) {
     // being carried around: sit just below and to the right of the bulb, out of the light's way
     const w = psst.offsetWidth || 300, right = b.right + 18 + w > innerWidth - 8;
-    psst.style.left = (right ? b.left - 18 - w : b.right + 18) + 'px';
-    psst.style.top = Math.min(innerHeight - psst.offsetHeight - 8, b.bottom + 18) + 'px'; psst.style.bottom = 'auto';
+    const touch = matchMedia('(pointer: coarse)').matches;      // a finger hides what's under it: go above instead
+    const x = touch ? b.left + b.width / 2 - w / 2 : (right ? b.left - 18 - w : b.right + 18);
+    psst.style.left = Math.max(8, Math.min(innerWidth - w - 8, x)) + 'px';
+    psst.style.top = (touch ? Math.max(8, b.top - psst.offsetHeight - 56) : Math.min(innerHeight - psst.offsetHeight - 8, b.bottom + 18)) + 'px'; psst.style.bottom = 'auto';
   } else {
     psst.style.top = 'auto';
     psst.style.left = Math.max(8, Math.min(innerWidth - 260, b.left - 4)) + 'px';

@@ -23,7 +23,7 @@ window.Kickups = (() => {
 
   // what it says (DRAFT: change freely)
   const SAY = {
-    start: 'your turn next. click the ball before it lands',
+    start: `your turn next. ${matchMedia('(pointer: coarse)').matches ? 'tap' : 'click'} the ball before it lands`,
     count: (n, best) => `${n} touch${n === 1 ? '' : 'es'}${best ? ' · best ' + best : ''}`,
     lost: n => n === 0 ? ['not even one?', 'that’s a hire-me in any league.']
                        : [`dropped it after ${n}.`, 'house rules say whoever drops it hires the other one.'],
@@ -57,7 +57,9 @@ window.Kickups = (() => {
     function placeSay() {
       const main = document.querySelector('main'), intro = document.querySelector('.intro');
       const mr = main.getBoundingClientRect(), pr = parseFloat(getComputedStyle(main).paddingRight) || 0;
-      const top = intro ? intro.getBoundingClientRect().top : innerHeight * .4;
+      const ir = intro && intro.getBoundingClientRect();
+      // phones: no room beside the intro, so the words go under it
+      const top = !ir ? innerHeight * .4 : innerWidth <= 700 ? ir.bottom + parseFloat(getComputedStyle(root).fontSize) * 1.2 : ir.top;
       say.style.right = Math.max(8, innerWidth - (mr.right - pr)) + 'px';
       say.style.top = Math.max(8, top) + 'px';
     }
@@ -75,11 +77,14 @@ window.Kickups = (() => {
       }
       placeSay();
     }
-    words([SAY.count(0, best), 'esc to stop']);
+    // no Esc key on a phone: there, "stop" is something to tap
+    const touchy = matchMedia('(pointer: coarse)').matches;
+    const playing = n => touchy ? words([SAY.count(n, best)], [['stop', () => close()]]) : words([SAY.count(n, best), 'esc to stop']);
+    playing(0);
 
     // a friendly size for the figure, standing on the floor to the right of the middle
     const W = () => innerWidth, H = () => innerHeight;
-    const figH = () => Math.max(240, Math.min(H() * .46, 520));
+    const figH = () => W() <= 700 ? Math.max(180, Math.min(H() * .3, W() * .75)) : Math.max(240, Math.min(H() * .46, 520));
     const floor = () => H() - 10;
     const figBox = () => { const fh = figH(), fw = fh / 3; return { left: W() * .6 - fw / 2, top: floor() - fh, h: fh }; };
     const set = (el, r) => Object.assign(el.style, { left: r.left + 'px', top: r.top + 'px', height: r.h + 'px' });
@@ -126,11 +131,11 @@ window.Kickups = (() => {
       if (slips && Math.random() < .07) { state = 'slip'; b.vx = rnd(-80, 80); b.vy = 160; return; }
       state = 'you';
       launch(rnd(W() * .1, W() * .44), rnd(H() * .16, H() * .38));
-      if (touches === 0) words([SAY.count(0, best), SAY.start]);
+      if (touches === 0) words([SAY.count(0, best), SAY.start], touchy ? [['stop', () => close()]] : undefined);
     }
     function youKick() {
       touches++;
-      words([SAY.count(touches, best), 'esc to stop']);
+      playing(touches);
       if (touches >= 8) slips = true;
       // the room changes colour with every touch; the words go dark so they stay readable
       colour = (colour + 1 + Math.floor(Math.random() * (PAL.length - 1))) % PAL.length;
@@ -150,6 +155,9 @@ window.Kickups = (() => {
     function step(now) {
       const dt = Math.min(.033, (now - (last || now)) / 1000); last = now;
       b.vy += g * dt; b.x += b.vx * dt; b.y += b.vy * dt; b.spin += b.vx * dt * .8;
+      // the sides of the screen are walls: on a narrow phone the ball would otherwise fly out of reach
+      const r = R();
+      if ((b.x < r && b.vx < 0) || (b.x > W() - r && b.vx > 0)) { b.vx = -b.vx * .7; b.x = Math.min(W() - r, Math.max(r, b.x)); squash(90); }
       if (state === 'figure' && b.vy > 0 && b.y >= kickY()) figureKick();
       else if (b.y >= floor() - R()) {
         b.y = floor() - R(); draw();
@@ -168,10 +176,14 @@ window.Kickups = (() => {
     function hit(e) {
       if (state !== 'you') return;
       if (Math.hypot(e.clientX - b.x, e.clientY - b.y) < Math.max(R() * 2.4, 44)) {
-        e.preventDefault(); e.stopPropagation(); youKick();
+        e.preventDefault(); e.stopPropagation(); youKick(); swallow = performance.now();
       }
     }
+    // the click that follows a kick belongs to the ball, not to whatever word happens to be under it
+    let swallow = -1;
+    function eat(e) { if (performance.now() - swallow < 600) { e.preventDefault(); e.stopPropagation(); swallow = -1; } }
     addEventListener('pointerdown', hit, true);
+    addEventListener('click', eat, true);
 
     // the ring turns into the ball and drops to the feet
     setTimeout(() => {
@@ -213,7 +225,7 @@ window.Kickups = (() => {
     function close() {
       if (!on) return; on = false;
       cancelAnimationFrame(raf);
-      removeEventListener('keydown', key); removeEventListener('resize', place); removeEventListener('pointerdown', hit, true);
+      removeEventListener('keydown', key); removeEventListener('resize', place); removeEventListener('pointerdown', hit, true); removeEventListener('click', eat, true);
       ov.classList.remove('in'); say.remove();
       VARS.forEach(v => before[v] ? root.style.setProperty(v, before[v]) : root.style.removeProperty(v));
       root.style.overflow = wasOverflow;

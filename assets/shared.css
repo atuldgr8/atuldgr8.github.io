@@ -13,6 +13,8 @@
   --lh-read: 1.42;      /* paragraphs: room between lines so they read easily */
   --ls-read: -0.025em;  /* and a little less squeeze between letters */
 }
+/* phones: a size you can read at arm's length (the desktop size scales with the window; this one doesn't) */
+@media (max-width: 700px) { :root { --size: 16px; } }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --red: #ff5a52;  --blue: #7ea6ff;  --green: #43d99a; --yellow: #ffd23f;

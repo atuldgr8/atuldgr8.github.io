@@ -172,7 +172,34 @@ window.Home = (() => {
     };
     show(0);
     const side = e => { const r = stage.getBoundingClientRect(); return e.clientX - r.left < r.width / 3 ? -1 : 1; };
-    stage.addEventListener('click', e => show(at + side(e)));
+    stage.addEventListener('click', e => { if (swiped) { swiped = false; return; } show(at + side(e)); });
+    // phones: swipe sideways to move, and a full-screen view turned on its side
+    let sx = null, swiped = false;
+    stage.addEventListener('touchstart', e => { sx = e.touches[0].clientX; swiped = false; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      if (sx == null) return;
+      const dx = e.changedTouches[0].clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) { swiped = true; show(at + (dx < 0 ? 1 : -1)); setTimeout(() => { swiped = false; }, 400); }
+    }, { passive: true });
+    const big = $('.tl-big');
+    if (big) big.addEventListener('click', () => {
+      const ov = document.createElement('div'); ov.className = 'tl-full';
+      const im = document.createElement('img'), k = document.createElement('span'), x = document.createElement('button');
+      k.className = 'k'; x.className = 'x'; x.type = 'button'; x.textContent = 'close';
+      ov.append(im, k, x); document.body.appendChild(ov);
+      const root = document.documentElement, was = root.style.overflow; root.style.overflow = 'hidden';
+      const paint = () => { const s = slides[at]; im.src = s.src || ''; im.alt = s.caption || ''; k.textContent = `${at + 1} / ${slides.length}`; };
+      const shut = () => { ov.remove(); root.style.overflow = was; removeEventListener('keydown', key); };
+      const key = e => { if (e.key === 'Escape') shut(); else setTimeout(paint); };
+      addEventListener('keydown', key);
+      x.addEventListener('click', e => { e.stopPropagation(); shut(); });
+      // turned on its side, "back" is the top of the screen and "on" is the bottom
+      ov.addEventListener('click', e => {
+        const tall = innerHeight > innerWidth, p = tall ? e.clientY / innerHeight : e.clientX / innerWidth;
+        show(at + (p < 1 / 3 ? -1 : 1)); paint();
+      });
+      paint();
+    });
     stage.addEventListener('pointermove', e => { stage.style.cursor = side(e) < 0 ? 'w-resize' : 'e-resize'; });
     // the shadow leans away from the cursor, like a light following your hand
     addEventListener('pointermove', e => {

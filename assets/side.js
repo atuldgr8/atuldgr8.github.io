@@ -91,6 +91,7 @@ window.SideNav = (() => {
     nav.setAttribute('aria-label', 'Sections of this page');
     const ul = h('ul', '', nav);
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const phone = matchMedia('(max-width: 700px)');      // there the list is one line under the top bar
     for (const s of secs) {
       const li = h('li', '', ul), a = h('a', '', li, s.label);
       a.href = s.el ? '#' + s.el.id : '#'; a.dataset.dock = '';
@@ -98,7 +99,8 @@ window.SideNav = (() => {
         e.preventDefault();
         if (edit) return;
         // measure where the section really starts: a pinned section name is drawn lower than where it sits
-        const y = s.el ? s.el.getBoundingClientRect().top - (s.el._pin || 0) + scrollY - innerHeight * .2 : 0;
+        const head = phone.matches ? nav.getBoundingClientRect().bottom + 20 : innerHeight * .2;
+        const y = s.el ? s.el.getBoundingClientRect().top - (s.el._pin || 0) + scrollY - head : 0;
         scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
       });
       s.a = a;
@@ -111,6 +113,11 @@ window.SideNav = (() => {
       secs.forEach((s, i) => { if (s.el && restTop(s.el) < innerHeight * .4) at = i; });
       if (scrollY + innerHeight >= document.documentElement.scrollHeight - 4) at = secs.length - 1;
       secs.forEach((s, i) => s.a.classList.toggle('on', i === at));
+      // on phones, keep the current section's name in view in the strip
+      if (phone.matches && nav._at !== at) {
+        const a = secs[at].a, first = nav._at == null; nav._at = at;
+        ul.scrollTo({ left: a.offsetLeft - (ul.clientWidth - a.offsetWidth) / 2, behavior: first || reduce ? 'auto' : 'smooth' });
+      }
     };
     // section names that are words (not pictures or invisible markers) stay pinned level with the
     // top bar while you're in their section, and get pushed up when the next one arrives

@@ -42,10 +42,17 @@ button { font: inherit; letter-spacing: inherit; color: inherit; background: non
 .top .nav-resume { grid-column: 12; justify-self: start; }
 .top [aria-current] { text-decoration: line-through; }
 @media (max-width: 700px) {
-  .top { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .top { grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--bg); padding-bottom: .7em; }
   .top .me { grid-column: 1 / span 2; }
   .top .nav-work { grid-column: 3; }
   .top .nav-resume { grid-column: 4; }
+  /* phones: the bar is a solid strip, so the page slides under it instead of through it */
+  .top.blend { color: var(--fg); mix-blend-mode: normal; }
+  .top::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 1.2em; pointer-events: none;
+    background: linear-gradient(to bottom, var(--bg), transparent); }
+  body.has-side .top::after { display: none; }
+  /* bigger places to put a thumb, without moving the words */
+  .top a { padding: .9em .7em; margin: -.9em -.7em; }
 }
 
 /* ---------- work list: a left-justified block in the middle of the screen ---------- */
@@ -169,11 +176,23 @@ a.lnk { display: block; width: 100%; height: 100%; color: inherit; text-decorati
 .cv.flow { --tk: 1; display: flex; flex-direction: column; gap: var(--step); padding: calc(var(--gutter) * 5) var(--gutter) var(--step); }
 .cv.flow > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; height: auto !important; }
 .cv.flow > .it:not(.t-text):not(.textonly) { aspect-ratio: var(--ar); }
+/* a box with words in it grows to fit them (phone text is bigger than the desktop layout allowed for) */
+.cv.flow > .it.t-box:has(.has-text) { aspect-ratio: auto; }
+.cv.flow > .it.t-box:has(.has-text) > .ly { height: auto; }
 /* a group of only words (a fact, a number, a step) just stacks, at the normal size */
-.cv.flow > .it.textonly .grp { display: flex; flex-direction: column; gap: .25em; height: auto; }
-.cv.flow > .it.textonly .grp > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; }
-.cv.flow > .it.textonly .txt { font-size: calc(var(--size) * min(var(--sz), 1.7)) !important; }
-.cv.flow > .it.t-group .it .txt, .cv.flow > .it.t-instance .it .txt { font-size: max(11px, calc(var(--u) * 13.67 * var(--sz))); }
+.cv.flow > .it.textonly .grp { display: flex; flex-flow: row wrap; align-items: baseline; gap: .25em .7em; height: auto; }
+.cv.flow > .it.textonly .grp > .it { position: relative; left: auto !important; top: auto !important; width: auto !important; height: auto !important;
+  order: var(--ord, 0); flex: 1 0 100%; }
+/* "this ——— that": the two words and the rule between them share a line */
+.cv.flow > .it.textonly .grp > .it.inrow { flex: 0 1 auto; }
+.cv.flow > .it.textonly .grp > .it.t-box { height: 1px !important; align-self: center; }
+.cv.flow > .it.textonly .grp > .it.t-box.inrow { flex: 1 1 1.5em; }
+.cv.flow > .it.textonly .grp > .it.t-box.vert { display: none; }
+/* words on phones follow the phone text size (big headings a little calmer so long words still fit) */
+.cv.flow > .it > .ly .txt, .cv.flow > .it > .ly .btn { font-size: calc(var(--size) * clamp(.85, var(--sz), 1.9)); }
+.cv.flow .it > .cap { font-size: calc(var(--size) * .8125); }
+.cv.flow > .it.textonly .txt { font-size: calc(var(--size) * clamp(.85, var(--sz), 1.7)) !important; }
+.cv.flow > .it.t-group .it .txt, .cv.flow > .it.t-instance .it .txt { font-size: max(12px, calc(var(--u) * 13.67 * var(--sz))); }
 
 /* ---------- side nav (project pages) ----------
    Fixed in the bottom-left corner. The page keeps that strip free, so
@@ -195,9 +214,22 @@ nav.side a {
 nav.side a.on { color: var(--accent, var(--fg)); }   /* the section you're in, in the project's colour */
 nav.side a.near, nav.side a:hover, nav.side a.hc { color: var(--accent, var(--c, var(--hc, var(--fg)))) !important; }   /* the project's colour, current and pointed-at */
 nav.side .side-empty { color: var(--faint); font-size: 12px; letter-spacing: 0; }
+/* phones: the sections become one line under the top bar; swipe it sideways, tap to jump */
 @media (max-width: 700px) {
-  nav.side { display: none; }
+  nav.side { left: 0; right: 0; bottom: auto; width: auto; z-index: 49; background: var(--bg);
+    top: calc(var(--gutter) + var(--size) * var(--lh) + .7em - 1px); }
+  nav.side::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 1.2em; pointer-events: none;
+    background: linear-gradient(to bottom, var(--bg), transparent); }
+  nav.side ul { flex-direction: row; gap: 0; overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+    padding: 0 calc(var(--gutter) - .6em);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 1.2em, #000 calc(100% - 2.4em), transparent);
+            mask-image: linear-gradient(to right, transparent, #000 1.2em, #000 calc(100% - 2.4em), transparent); }
+  nav.side ul::-webkit-scrollbar { display: none; }
+  nav.side li { flex: none; }
+  nav.side a { padding: .7em .6em; transform: none; }
   body.has-side .stage, body.has-side .next { margin-left: 0; }
+  .next a { padding: .8em 0; margin: -.8em 0; }   /* a bigger place to put a thumb */
+  body.has-side .cv.flow { padding-top: calc(var(--gutter) * 6); }
 }
 
 /* ---------- next project ---------- */

@@ -74,6 +74,16 @@ main { position: relative; z-index: 2; }
 .tl-cap .sum { grid-column: 7 / span 5; color: var(--mute); }
 .tl-cap .n { grid-column: 12; text-align: right; color: var(--mute); }
 @media (max-width: 700px) {
+  /* thumbs: each name gets a taller row, and the note sits under TL;DR instead of squeezing beside it */
+  .list { gap: 0; }
+  .wk { padding: .55em 0; }
+  .fun-open { padding: .55em 0; }
+  .tldr-open { right: 0; padding-top: .8em; }
+  .tldr-open .note { display: block; margin: .35em 0 0; max-width: 26em; line-height: 1.3; letter-spacing: var(--ls-read); }
+  /* TL;DR: the slide gets the whole width, and a way to see it big */
+  .tl-sec { height: auto; min-height: 0; display: block; padding: var(--step) 0 calc(var(--gutter) * 6); }
+  .tl-stage { aspect-ratio: 16 / 9; }
+  .tl-sec .tl-big { display: block; margin-top: calc(var(--step) / 2); color: var(--mute); padding: .6em 0; text-align: left; }
   .tl-cap { grid-template-columns: 1fr auto; row-gap: .3em; }
   .tl-cap .t { grid-column: 1; } .tl-cap .n { grid-column: 2; }
   .tl-cap .sum { grid-column: 1 / -1; grid-row: 2; }
@@ -83,3 +93,16 @@ main { position: relative; z-index: 2; }
 /* the light switch belongs to the landing: it bows out once you scroll on */
 #theme { transition: opacity .3s; }
 body.past #theme { opacity: 0; pointer-events: none; }
+
+/* phones: a slide, full screen and turned on its side so it's as big as the phone allows */
+.tl-big { display: none; }
+.tl-full { position: fixed; inset: 0; z-index: 90; background: var(--bg); touch-action: none; }
+.tl-full img { position: absolute; left: 50%; top: 50%; width: 100dvh; height: 100vw; object-fit: contain;
+  transform: translate(-50%, -50%) rotate(90deg); user-select: none; -webkit-user-select: none; }
+.tl-full .x { position: absolute; right: 0; bottom: 0; padding: 1.2em 1.3em; color: var(--fg); writing-mode: vertical-rl; }
+.tl-full .k { position: absolute; right: 0; top: 0; padding: 1.2em 1.3em; color: var(--mute); writing-mode: vertical-rl; }
+@media (orientation: landscape) {
+  .tl-full img { width: 100vw; height: 100dvh; transform: translate(-50%, -50%); }
+  .tl-full .x, .tl-full .k { writing-mode: horizontal-tb; }
+  .tl-full .x { bottom: auto; top: 0; } .tl-full .k { top: auto; bottom: 0; }
+}
