@@ -94,15 +94,11 @@ main { position: relative; z-index: 2; }
 #theme { transition: opacity .3s; }
 body.past #theme { opacity: 0; pointer-events: none; }
 
-/* phones: a slide, full screen and turned on its side so it's as big as the phone allows */
+/* "see it bigger": the slide full screen; pinch to zoom */
 .tl-big { display: none; }
-.tl-full { position: fixed; inset: 0; z-index: 90; background: var(--bg); touch-action: none; }
-.tl-full img { position: absolute; left: 50%; top: 50%; width: 100dvh; height: 100vw; object-fit: contain;
-  transform: translate(-50%, -50%) rotate(90deg); user-select: none; -webkit-user-select: none; }
-.tl-full .x { position: absolute; right: 0; bottom: 0; padding: 1.2em 1.3em; color: var(--fg); writing-mode: vertical-rl; }
-.tl-full .k { position: absolute; right: 0; top: 0; padding: 1.2em 1.3em; color: var(--mute); writing-mode: vertical-rl; }
-@media (orientation: landscape) {
-  .tl-full img { width: 100vw; height: 100dvh; transform: translate(-50%, -50%); }
-  .tl-full .x, .tl-full .k { writing-mode: horizontal-tb; }
-  .tl-full .x { bottom: auto; top: 0; } .tl-full .k { top: auto; bottom: 0; }
-}
+.tl-full { position: fixed; inset: 0; z-index: 90; background: var(--bg); touch-action: none; overflow: hidden; }
+.tl-full img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform-origin: 0 0;
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.tl-full.zoomed { cursor: grab; }
+.tl-full .x { position: absolute; right: 0; top: 0; padding: 1.1em var(--gutter); color: var(--fg); background: none; }
+.tl-full .k { position: absolute; left: var(--gutter); bottom: 0; padding: 1.1em 0; color: var(--mute); }

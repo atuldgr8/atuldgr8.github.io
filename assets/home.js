@@ -173,7 +173,7 @@ window.Home = (() => {
     show(0);
     const side = e => { const r = stage.getBoundingClientRect(); return e.clientX - r.left < r.width / 3 ? -1 : 1; };
     stage.addEventListener('click', e => { if (swiped) { swiped = false; return; } show(at + side(e)); });
-    // phones: swipe sideways to move, and a full-screen view turned on its side
+    // phones: swipe sideways to move
     let sx = null, swiped = false;
     stage.addEventListener('touchstart', e => { sx = e.touches[0].clientX; swiped = false; }, { passive: true });
     stage.addEventListener('touchend', e => {
@@ -181,23 +181,71 @@ window.Home = (() => {
       const dx = e.changedTouches[0].clientX - sx; sx = null;
       if (Math.abs(dx) > 40) { swiped = true; show(at + (dx < 0 ? 1 : -1)); setTimeout(() => { swiped = false; }, 400); }
     }, { passive: true });
+    // "see it bigger": the slide full screen. Pinch (or double-tap) to zoom, drag to look around,
+    // swipe or tap the sides to move on. Turning the phone sideways just gives it more room.
     const big = $('.tl-big');
     if (big) big.addEventListener('click', () => {
       const ov = document.createElement('div'); ov.className = 'tl-full';
       const im = document.createElement('img'), k = document.createElement('span'), x = document.createElement('button');
-      k.className = 'k'; x.className = 'x'; x.type = 'button'; x.textContent = 'close';
+      k.className = 'k'; x.className = 'x'; x.type = 'button'; x.textContent = 'close'; im.draggable = false;
       ov.append(im, k, x); document.body.appendChild(ov);
       const root = document.documentElement, was = root.style.overflow; root.style.overflow = 'hidden';
-      const paint = () => { const s = slides[at]; im.src = s.src || ''; im.alt = s.caption || ''; k.textContent = `${at + 1} / ${slides.length}`; };
-      const shut = () => { ov.remove(); root.style.overflow = was; removeEventListener('keydown', key); };
+      let z = 1, tx = 0, ty = 0;
+      const W = () => ov.clientWidth, H = () => ov.clientHeight;
+      const apply = () => {
+        z = Math.min(6, Math.max(1, z));
+        tx = Math.min(0, Math.max(W() - W() * z, tx)); ty = Math.min(0, Math.max(H() - H() * z, ty));
+        if (z === 1) tx = ty = 0;
+        im.style.transform = `translate(${tx}px, ${ty}px) scale(${z})`;
+        ov.classList.toggle('zoomed', z > 1);
+      };
+      const zoomAt = (nz, px, py) => { nz = Math.min(6, Math.max(1, nz)); tx = px - (px - tx) * nz / z; ty = py - (py - ty) * nz / z; z = nz; apply(); };
+      const paint = () => { const s = slides[at]; im.src = s.src || ''; im.alt = s.caption || ''; k.textContent = `${at + 1} / ${slides.length}`; z = 1; apply(); };
+      const step = d => { show(at + d); paint(); };
+      const shut = () => { ov.remove(); root.style.overflow = was; removeEventListener('keydown', key); removeEventListener('resize', apply); };
       const key = e => { if (e.key === 'Escape') shut(); else setTimeout(paint); };
-      addEventListener('keydown', key);
+      addEventListener('keydown', key); addEventListener('resize', apply);
       x.addEventListener('click', e => { e.stopPropagation(); shut(); });
-      // turned on its side, "back" is the top of the screen and "on" is the bottom
-      ov.addEventListener('click', e => {
-        const tall = innerHeight > innerWidth, p = tall ? e.clientY / innerHeight : e.clientX / innerWidth;
-        show(at + (p < 1 / 3 ? -1 : 1)); paint();
+      // fingers: one finger pans (or swipes when not zoomed), two fingers pinch
+      const pts = new Map(); let pinch = null, start = null, moved = false, lastTap = 0;
+      ov.addEventListener('pointerdown', e => {
+        if (e.target === x) return;
+        ov.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
+        if (pts.size === 1) { start = { x: e.clientX, y: e.clientY, tx, ty, t: performance.now() }; moved = false; }
+        if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), z, mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, tx, ty }; moved = true; }
       });
+      ov.addEventListener('pointermove', e => {
+        if (!pts.has(e.pointerId)) return;
+        pts.set(e.pointerId, [e.clientX, e.clientY]);
+        if (pinch && pts.size >= 2) {
+          const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+          const nz = Math.min(6, Math.max(1, pinch.z * d / pinch.d)), mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+          tx = mx - (pinch.mx - pinch.tx) * nz / pinch.z; ty = my - (pinch.my - pinch.ty) * nz / pinch.z; z = nz; apply();
+        } else if (start) {
+          const dx = e.clientX - start.x, dy = e.clientY - start.y;
+          if (Math.hypot(dx, dy) > 8) moved = true;
+          if (z > 1) { tx = start.tx + dx; ty = start.ty + dy; apply(); }
+        }
+      });
+      const up = e => {
+        if (!pts.has(e.pointerId)) return;
+        pts.delete(e.pointerId);
+        if (pts.size < 2) pinch = null;
+        if (pts.size || !start) { if (pts.size === 1) { const [p] = [...pts.values()]; start = { x: p[0], y: p[1], tx, ty, t: performance.now() }; } return; }
+        const dx = e.clientX - start.x, now = performance.now();
+        if (!moved) {
+          if (now - lastTap < 300) { lastTap = 0; z > 1 ? (z = 1, apply()) : zoomAt(2.5, e.clientX, e.clientY); }   // double tap
+          else {
+            lastTap = now;
+            const cx = e.clientX, w = W();
+            if (z === 1 && (cx < w / 4 || cx > w * 3 / 4)) setTimeout(() => { if (lastTap === now) step(cx < w / 4 ? -1 : 1); }, 300);
+          }
+        } else if (z === 1 && Math.abs(dx) > 50 && now - start.t < 600) step(dx < 0 ? 1 : -1);   // swipe
+        start = null;
+      };
+      ov.addEventListener('pointerup', up); ov.addEventListener('pointercancel', up);
+      // mouse wheel / trackpad pinch on laptops
+      ov.addEventListener('wheel', e => { e.preventDefault(); zoomAt(z * Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .002)), e.clientX, e.clientY); }, { passive: false });
       paint();
     });
     stage.addEventListener('pointermove', e => { stage.style.cursor = side(e) < 0 ? 'w-resize' : 'e-resize'; });
