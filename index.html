@@ -841,7 +841,7 @@ let topic = 0, step = 0, psstT, autoT, hideT;
 function show(text, ms) {             // put words in the bubble (near the bulb, wherever it is)
   clearTimeout(psstT); clearTimeout(hideT);
   const b = bulb.getBoundingClientRect();
-  psst.textContent = text;
+  psst.textContent = matchMedia('(hover: none) and (pointer: coarse)').matches ? text.replace(/\bclick\b/g, 'tap').replace(/click-happy/g, 'tap-happy') : text;
   if (btn.classList.contains('dragging')) {
     // being carried around: sit just below and to the right of the bulb, out of the light's way
     const w = psst.offsetWidth || 300, right = b.right + 18 + w > innerWidth - 8;

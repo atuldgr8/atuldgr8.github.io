@@ -362,8 +362,17 @@ window.Canvas = (() => {
     cv.classList.toggle('editing', !!o.edit);
     cv.dataset.intro = doc.intro || 'intro';     // the name of the first section (everything above the first named one)
     for (const it of doc.items) cv.appendChild(item(it, o));
+    if (!o.edit) tapWords(cv);
     layout(cv);
     return cv;
+  }
+  // On a touch screen nobody clicks: "Click to enlarge" reads "Tap to enlarge". (The page file keeps "click", and the editor shows it.)
+  const touch = matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const tapped = s => s.replace(/\bclick(s|ed|ing)?\b/gi, (m, x) => { const w = 'tap' + (x ? (x === 's' ? 's' : x === 'ed' ? 'ped' : 'ping') : ''); return m[0] === 'C' ? w[0].toUpperCase() + w.slice(1) : w; });
+  function tapWords(root) {
+    if (!touch) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (let n; (n = w.nextNode());) if (/click/i.test(n.nodeValue)) n.nodeValue = tapped(n.nodeValue);
   }
 
   function layout(cv) {

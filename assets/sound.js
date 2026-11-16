@@ -1,12 +1,11 @@
 /* The site's sounds. Everything is made in the browser (no files to load).
    Atul's picks: tick = wood tick, tap = pop, go = chime, light = bulb hum, talk = murmur, kick = boing.
    Usage from other scripts:  Sound.play('talk')   Sound.play('light', true)  (true = lights on)   Sound.play('kick', touchCount)
-   Browsers keep a page silent until the visitor first taps something, so the very first tap is quiet. */
+   Always on (no mute button, on purpose). Browsers keep a page silent until the visitor first taps something, so the very first tap is quiet. */
 (() => {
   if (/[?&](edit|review)\b/.test(location.search)) { window.Sound = { play() {}, muted: true }; return; }
   const VOL = .5;
   let ac = null, out = null, noise = null, muted = false;
-  try { muted = localStorage.getItem('sound') === 'off'; } catch (e) {}
 
   function ctx() {
     if (!ac) {
@@ -60,13 +59,12 @@
   document.addEventListener('pointerover', e => {
     if (e.pointerType !== 'mouse') return;
     const el = e.target.closest && e.target.closest(LIVE);
-    if (el && el !== over && !el.closest('.sound-btn, #theme, .rv-ui')) play('tick');
+    if (el && el !== over && !el.closest('#theme, .rv-ui')) play('tick');
     over = el;
   }, true);
   document.addEventListener('pointerdown', () => ctx(), true);   // wake the sound up on the first touch
   document.addEventListener('click', e => {
     const el = e.target.closest && e.target.closest(LIVE); if (!el || el.closest('#theme, .rv-ui')) return;
-    if (el.classList.contains('sound-btn')) return;
     const a = el.closest('a[href]') || el.querySelector && el.querySelector('a[href]');
     if (isGo(a) && !(e.metaKey || e.ctrlKey || a.target === '_blank')) { play('tap'); try { sessionStorage.setItem('arrive', String(Date.now())); } catch (x) {} }
     else play('tap');
@@ -77,24 +75,4 @@
     if (t && Date.now() - t < 4000) addEventListener('load', () => { if (muted) return; ctx(); setTimeout(() => { if (ac && ac.state === 'running') play('go'); }, 80); });
   } catch (e) {}
 
-  // ---- a quiet on/off at the bottom right ----
-  const b = document.createElement('button');
-  b.type = 'button'; b.className = 'sound-btn'; b.setAttribute('aria-label', 'Sound on or off');
-  const label = () => { b.textContent = muted ? 'sound off' : 'sound on'; };
-  label();
-  b.addEventListener('click', () => {
-    muted = !muted; try { localStorage.setItem('sound', muted ? 'off' : 'on'); } catch (e) {}
-    label(); if (!muted) { ctx(); SOUNDS.tap(); }
-  });
-  const css = document.createElement('style');
-  css.textContent = `.sound-btn { position: fixed; right: var(--gutter, 24px); bottom: 24px; z-index: 13; font: inherit; font-size: var(--size, 14px); letter-spacing: inherit;
-    color: var(--mute, #8c8c8c); background: var(--bg, #fff); border: 0; padding: .35em .5em; border-radius: 4px; cursor: pointer; }
-    .sound-btn::before { content: ''; position: absolute; inset: -.5em -.4em; }   /* a bigger place to put a thumb */
-    .sound-btn:hover { color: var(--fg, #111); }
-    body.past .sound-btn { opacity: 0; pointer-events: none; } @media print { .sound-btn { display: none; } }`;
-  // on Atul's laptop the blue "edit" buttons sit in this corner; stay clear of them
-  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) css.textContent += ' .sound-btn { bottom: 60px; }';
-  document.head.appendChild(css);
-  const add = () => document.body.appendChild(b);
-  document.body ? add() : addEventListener('DOMContentLoaded', add);
 })();
