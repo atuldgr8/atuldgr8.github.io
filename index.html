@@ -924,15 +924,24 @@ function hintAt(x, y) {
 }
 
 /* ---------- getting your attention ----------
-   Left alone on the landing: a slow glow and a "psst" at 4s, two blinks at 10s,
-   faster brighter blinks at 16s, and at 24s the whole room flickers. It talks each time.
+   Left alone on the landing: it glows on and off and talks every few seconds, at 30s the whole room flickers,
+   it keeps on glowing, and at 90s the room flickers once more. It talks each time.
    Pointing at it or picking it up stops it; it starts over on the next visit
    unless you actually clicked or dragged it. With "reduce motion" on: glows and words, no flicker. */
+// (DRAFT lines.) First it only glows, on and off, and talks. At 30s with no one touching it the whole page flickers once.
+// It keeps glowing after that, and flickers the page once more at 90s.
 const CALLS = [
   { at: 4000,  kind: 'glow',  dark: 'psst', light: 'psst' },
-  { at: 10000, kind: 'blink', n: 2, dark: 'down here', light: 'down here' },
-  { at: 16000, kind: 'blink', n: 4, dark: 'hello?', light: 'hello? bottom left' },
-  { at: 24000, kind: 'flash', dark: 'sorry. had to', light: 'sorry. had to' },
+  { at: 9000,  kind: 'glow',  dark: 'down here', light: 'down here' },
+  { at: 14000, kind: 'glow',  dark: 'hello?', light: 'hello? bottom left' },
+  { at: 19000, kind: 'glow',  dark: 'i can see you scrolling past', light: 'i can see you looking' },
+  { at: 25000, kind: 'glow',  dark: 'last chance', light: 'last chance' },
+  { at: 30000, kind: 'flash', dark: 'sorry. had to', light: 'sorry. had to' },
+  { at: 42000, kind: 'glow',  dark: 'still here', light: 'still here' },
+  { at: 56000, kind: 'glow',  dark: 'i can do this all day', light: 'i can do this all day' },
+  { at: 70000, kind: 'glow',  dark: 'psst', light: 'psst' },
+  { at: 82000, kind: 'glow',  dark: 'ok one more', light: 'ok one more' },
+  { at: 90000, kind: 'flash', dark: 'sorry. had to. again', light: 'sorry. had to. again' },
 ];
 let nudged = false;
 try { nudged = !!sessionStorage.getItem('bulb-met'); } catch (e) {}
@@ -957,7 +966,7 @@ function call(c, k) {
   }
   show(c[mode()], 2400);
 }
-if (!nudged) CALLS.forEach((c, i) => nudgeT.push(setTimeout(() => call(c, i + 1), c.at)));
+if (!nudged) CALLS.forEach((c, i) => nudgeT.push(setTimeout(() => call(c, Math.min(i + 1, 5)), c.at)));
 </script>
 <script src="assets/sound.js"></script>
 <script src="assets/side.js"></script>

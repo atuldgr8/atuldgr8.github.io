@@ -1,5 +1,5 @@
 /* The site's sounds. Everything is made in the browser (no files to load).
-   Atul's picks: tick = wood tick, tap = pop, go = chime, light = bulb hum, talk = murmur, kick = boing.
+   Atul's picks: tick = wood tick, tap = pop, (project open/close = silent), light = bulb hum, talk = murmur, kick = boing.
    Usage from other scripts:  Sound.play('talk')   Sound.play('light', true)  (true = lights on)   Sound.play('kick', touchCount)
    Always on (no mute button, on purpose). Browsers keep a page silent until the visitor first taps something, so the very first tap is quiet. */
 (() => {
@@ -36,8 +36,7 @@
   const SOUNDS = {
     tick: () => { tone({ f: 1250, to: 950, peak: .22, decay: .018 }); hiss({ kind: 'highpass', f: 5000, peak: .12, decay: .002 }); },   // wood tick
     tap: () => { tone({ f: 640, to: 330, peak: .42, decay: .055 }); },                                                                  // pop
-    go: () => { tone({ f: 1319, peak: .14, decay: .5 }); tone({ f: 2637, peak: .03, decay: .3 }); },                                    // chime
-    light: on => { hiss({ f: 2600, q: 2, peak: .5, decay: .004 });                                                                      // bulb hum
+        light: on => { hiss({ f: 2600, q: 2, peak: .5, decay: .004 });                                                                      // bulb hum
       if (on) tone({ type: 'sawtooth', f: 120, peak: .035, attack: .02, decay: .45 });
       else tone({ type: 'sawtooth', f: 120, to: 60, peak: .03, attack: .005, decay: .18 }); },
     talk: () => { for (let i = 0; i < 4; i++) tone({ type: 'square', f: 600 + Math.random() * 500, peak: .045, decay: .035, at: i * .055 }); },   // murmur
@@ -65,14 +64,8 @@
   document.addEventListener('pointerdown', () => ctx(), true);   // wake the sound up on the first touch
   document.addEventListener('click', e => {
     const el = e.target.closest && e.target.closest(LIVE); if (!el || el.closest('#theme, .rv-ui')) return;
-    const a = el.closest('a[href]') || el.querySelector && el.querySelector('a[href]');
-    if (isGo(a) && !(e.metaKey || e.ctrlKey || a.target === '_blank')) { play('tap'); try { sessionStorage.setItem('arrive', String(Date.now())); } catch (x) {} }
-    else play('tap');
+    const a = el.closest('a[href]') || (el.querySelector && el.querySelector('a[href]'));
+    if (isGo(a)) return;      // opening or leaving a project is silent
+    play('tap');
   }, true);
-  // the chime plays when the next page has arrived (a page that's leaving would cut it off)
-  try {
-    const t = +sessionStorage.getItem('arrive'); sessionStorage.removeItem('arrive');
-    if (t && Date.now() - t < 4000) addEventListener('load', () => { if (muted) return; ctx(); setTimeout(() => { if (ac && ac.state === 'running') play('go'); }, 80); });
-  } catch (e) {}
-
 })();
