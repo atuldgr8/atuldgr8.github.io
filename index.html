@@ -630,7 +630,8 @@ function lightsOn() {
 let dragged = false;
 btn.addEventListener('click', () => {
   if (dragged) { dragged = false; return; }        // that was a drag, not a click
-  if (isDark()) { lightsOn(); glimpse(); return; } // lights just came on: did you see that?
+  if (isDark()) { Sound.play('light', true); lightsOn(); glimpse(); return; } // lights just came on: did you see that?
+  Sound.play('light', false);
   root.dataset.theme = 'dark';
   try { localStorage.setItem('theme', 'dark'); } catch (e) {}
   apply();
@@ -853,6 +854,7 @@ function show(text, ms) {             // put words in the bubble (near the bulb,
     psst.style.left = Math.max(8, Math.min(innerWidth - 260, b.left - 4)) + 'px';
     psst.style.bottom = Math.max(8, innerHeight - b.top + 12) + 'px';
   }
+  if (!psst.classList.contains('on')) Sound.play('talk');
   psst.classList.add('on');
   if (ms) hideT = setTimeout(hush, ms);
 }
@@ -957,6 +959,7 @@ function call(c, k) {
 }
 if (!nudged) CALLS.forEach((c, i) => nudgeT.push(setTimeout(() => call(c, i + 1), c.at)));
 </script>
+<script src="assets/sound.js"></script>
 <script src="assets/side.js"></script>
 <script src="assets/home.js"></script>
 <i id="home-ready" hidden></i>
